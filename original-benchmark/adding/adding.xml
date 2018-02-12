@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="puzzle" status="ok" classification="toy">
+  <short-description>Concurrent adding puzzle</short-description>
+  <long-description>Let us consider two process P, Q running in parallel. P =
+    loop { x=c; x=x+c; c=x;} and Q = loop { y=c; y=y+c; c=y;}. Initial value
+    of c is 1. The claim is that c can possibly contain any natural value. With
+    model checker we cannot prove this, but for any value, we can try to find
+    it.</long-description>
+  <author>Radek</author>
+  <source>Unknown</source>
+  
+    <parameter-description>
+      <par-name>MAX</par-name>
+      <par-description>Bound on value of variables (this is needed to make it
+      finite state).</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>VAL</par-name>
+      <par-description>The value of c that we want to reach.</par-description>
+    </parameter-description>
+  <ap  parametrized="yes">
+    <ap-name>solved</ap-name>
+    <ap-expression>c==VAL</ap-expression>
+  </ap>
+  <property id="1" prop-type="reachability">
+    <formula>solved</formula>
+    <description>Variable c equals the selected value.</description>
+  </property>
+    <instance id="1">
+      <parameters>MAX=20, VAL=17</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>MAX=200, VAL=500</parameters>
+    </instance>
+  <instance id="3">
+      <parameters>MAX=300, VAL=637</parameters>
+    </instance>
+  <instance id="4">
+      <parameters>MAX=400, VAL=749</parameters>
+    </instance>
+  <instance id="5">
+      <parameters>MAX=500, VAL=849</parameters>
+    </instance>
+  <instance id="6">
+      <parameters>MAX=600, VAL=949</parameters>
+    </instance>
+
+</model>

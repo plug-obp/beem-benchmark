@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="extinction" id="1">
+<reach-time complete="yes">1.1</reach-time>
+<states>8993</states>
+<state-size>46</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="extinction" id="2">
+<reach-time complete="yes">1.3</reach-time>
+<states>10061</states>
+<state-size>67</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="extinction" id="3">
+<reach-time complete="yes">96.8</reach-time>
+<states>751930</states>
+<state-size>57</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="99"/>
+<ltl-prob prop-id="2" answer="no" length="99"/>
+</instance>
+
+<instance name="extinction" id="4">
+<reach-time complete="yes">328.7</reach-time>
+<states>2001372</states>
+<state-size>57</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="26"/>
+</instance>
+
+</instance-list>

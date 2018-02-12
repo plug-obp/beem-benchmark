@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="msmie" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>2334</states>
+<state-size>16</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="msmie" id="2">
+<reach-time complete="yes">0.9</reach-time>
+<states>10558</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="14"/>
+</instance>
+
+<instance name="msmie" id="3">
+<reach-time complete="yes">8.5</reach-time>
+<states>134844</states>
+<state-size>33</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="msmie" id="4">
+<reach-time complete="yes">778.8</reach-time>
+<states>7125441</states>
+<state-size>48</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+</instance-list>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="ok" classification="simple">
+  <short-description>Elevator controller</short-description>
+  <long-description>Just some variation on the popular elevator
+  theme.</long-description>
+
+  <author>Radek</author>
+  <source>Own model.</source>
+  
+  <parameter-description>
+      <par-name>Floors</par-name>
+      <par-description>Number of floors</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>Persons</par-name>
+      <par-description>Number of users</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>Strategy</par-name>
+      <par-description>Strategy used by the controller (0,1)</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>in_elevator1</ap-name>
+    <ap-expression>Person_1.in_elevator</ap-expression>
+  </ap>  
+  <ap>
+    <ap-name>waiting0</ap-name>
+    <ap-expression>Person_0.waiting</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>in_elevator0</ap-name>
+    <ap-expression>Person_0.in_elevator</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>out0</ap-name>
+    <ap-expression>Person_0.out</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>in_elevator0 &amp;&amp; in_elevator1</formula>
+    <description>Person0 and Person1 are in the elevator concurrently.</description>
+  </property>
+  
+    <property id="2" prop-type="LTL">
+    <formula> G(waiting0 ->(F in_elevator0))</formula>
+    <description> If a person is waiting, he/she will be served eventually. </description>
+  </property>
+    <property id="3" prop-type="LTL">
+    <formula> G(in_elevator0 ->(F out0))</formula>
+    <description> If a person is in elevator, he/she will get out eventually. </description>
+  </property>  
+  
+    <instance id="1">
+      <parameters>Floors=5, Persons=2, Strategy=0</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>Floors=4, Persons=2, Strategy=1</parameters>
+    </instance>  
+  <instance id="3">
+      <parameters>Floors=6, Persons=3, Strategy=1</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>Floors=4, Persons=4, Strategy=0</parameters>
+    </instance>
+    <instance id="5">
+      <parameters>Floors=6, Persons=5, Strategy=1</parameters>
+    </instance>
+
+ 
+</model>

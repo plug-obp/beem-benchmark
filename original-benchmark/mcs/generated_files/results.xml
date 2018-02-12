@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="mcs" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>7963</states>
+<state-size>16</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="8"/>
+<ltl-prob prop-id="3" answer="no" length="8"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="mcs" id="2">
+<reach-time complete="yes">0.4</reach-time>
+<states>1408</states>
+<state-size>16</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="8"/>
+<ltl-prob prop-id="3" answer="no" length="8"/>
+<ltl-prob prop-id="4" answer="no" length="8"/>
+</instance>
+
+<instance name="mcs" id="3">
+<reach-time complete="yes">11.7</reach-time>
+<states>571459</states>
+<state-size>21</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="8"/>
+<ltl-prob prop-id="3" answer="no" length="8"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="mcs" id="4">
+<reach-time complete="yes">0.7</reach-time>
+<states>16384</states>
+<state-size>21</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="8"/>
+<ltl-prob prop-id="3" answer="no" length="8"/>
+<ltl-prob prop-id="4" answer="no" length="8"/>
+</instance>
+
+<instance name="mcs" id="5">
+<reach-time complete="yes">1421.8</reach-time>
+<states>60556519</states>
+<state-size>26</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="mcs" id="6">
+<reach-time complete="yes">7.2</reach-time>
+<states>332544</states>
+<state-size>26</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="8"/>
+<ltl-prob prop-id="3" answer="no" length="8"/>
+<ltl-prob prop-id="4" answer="no" length="8"/>
+</instance>
+
+</instance-list>

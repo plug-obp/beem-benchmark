@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="pgm_protocol" id="1">
+<reach-time complete="yes">1.7</reach-time>
+<states>10175</states>
+<state-size>131</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="yes" length="107"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="pgm_protocol" id="2">
+<reach-time complete="yes">2.5</reach-time>
+<states>17096</states>
+<state-size>130</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="no" length="0"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="pgm_protocol" id="3">
+<reach-time complete="yes">24.8</reach-time>
+<states>200453</states>
+<state-size>132</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="yes" length="325"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="pgm_protocol" id="4">
+<reach-time complete="yes">5.2</reach-time>
+<states>39832</states>
+<state-size>130</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="no" length="0"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="pgm_protocol" id="5">
+<reach-time complete="yes">46.6</reach-time>
+<states>382731</states>
+<state-size>132</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="yes" length="272"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="pgm_protocol" id="6">
+<reach-time complete="yes">347.0</reach-time>
+<states>2659550</states>
+<state-size>134</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="yes" length="297"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="pgm_protocol" id="7">
+<reach-time complete="yes">39.1</reach-time>
+<states>322585</states>
+<state-size>132</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="no" length="0"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="pgm_protocol" id="8">
+<reach-time complete="yes">396.9</reach-time>
+<states>3069390</states>
+<state-size>135</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="5" answer="yes" length="296"/>
+<reach-goal prop-id="6" answer="no" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+</instance-list>

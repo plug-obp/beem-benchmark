@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="ps" status="ok" classification="simple">
+    <short-description>Model of a city team game</short-description>
+    <long-description>"EXIT" is a game for teams of 3-5 people. The game takes
+    place in a city of Brno a lasts for 5 hours. During the game teams have to
+    solve different tasks (e.g., ciphers) at different places. The game is
+    highly parallel and distributed and there are quite complex prerequisities
+    among different tasks. The goal of the game is to get into a "modul" before
+    certain time limit. This is a simplified model of the game.
+    </long-description>
+
+    <author>Radek</author>
+    <source>Inspired by the Exit game (see http://exit.gdi.cz)</source>
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of persons in a team</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>MAX</par-name>
+      <par-description>Time limit</par-description>
+   </parameter-description>
+  <ap parametrized="yes">
+    <ap-name>finished</ap-name>
+    <ap-expression>at_modul==N</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>finished</formula>
+    <description>Team can get into the "modul" in a given time limit.</description>
+  </property>
+
+  <instance id="1">
+    <parameters>N=1,MAX=24</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>N=2,MAX=6</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>N=2,MAX=10</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>N=2,MAX=24</parameters>
+  </instance>
+  <instance id="5">
+    <parameters>N=3,MAX=6</parameters>
+  </instance>
+  
+</model>

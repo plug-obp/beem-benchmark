@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="anderson" id="1">
+<reach-time complete="yes">4.1</reach-time>
+<states>347039</states>
+<state-size>9</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="14"/>
+<ltl-prob prop-id="2" answer="no" length="15"/>
+<ltl-prob prop-id="3" answer="no" length="15"/>
+<ltl-prob prop-id="4" answer="no" length="15"/>
+</instance>
+
+<instance name="anderson" id="2">
+<reach-time complete="yes">0.4</reach-time>
+<states>1459</states>
+<state-size>13</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="17"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="anderson" id="3">
+<reach-time complete="yes">1179.6</reach-time>
+<states>75573925</states>
+<state-size>13</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="anderson" id="4">
+<reach-time complete="yes">0.9</reach-time>
+<states>29641</states>
+<state-size>17</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="22"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="anderson" id="5">
+<reach-time complete="no">982.7</reach-time>
+<states>28143673</states>
+<state-size>21</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="17"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="anderson" id="6">
+<reach-time complete="yes">378.6</reach-time>
+<states>18206917</states>
+<state-size>25</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="anderson" id="7">
+<reach-time complete="no">859.2</reach-time>
+<states>28558175</states>
+<state-size>25</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="18"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="anderson" id="8">
+<reach-time complete="no">1054.5</reach-time>
+<states>27858852</states>
+<state-size>29</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

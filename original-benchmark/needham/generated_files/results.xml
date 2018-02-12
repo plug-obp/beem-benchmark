@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="needham" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>497</states>
+<state-size>23</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<reach-goal prop-id="2" answer="yes" length="6"/>
+<reach-goal prop-id="3" answer="yes" length="6"/>
+<reach-goal prop-id="4" answer="yes" length="7"/>
+</instance>
+
+<instance name="needham" id="2">
+<reach-time complete="yes">9.1</reach-time>
+<states>54976</states>
+<state-size>37</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="no" length="0"/>
+<reach-goal prop-id="4" answer="yes" length="7"/>
+</instance>
+
+<instance name="needham" id="3">
+<reach-time complete="yes">36.1</reach-time>
+<states>206925</states>
+<state-size>43</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="no" length="0"/>
+<reach-goal prop-id="4" answer="yes" length="7"/>
+</instance>
+
+<instance name="needham" id="4">
+<reach-time complete="yes">1488.6</reach-time>
+<states>6525019</states>
+<state-size>51</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<reach-goal prop-id="2" answer="unknown" length="0"/>
+<reach-goal prop-id="3" answer="unknown" length="0"/>
+<reach-goal prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="phils" id="1">
+<reach-time complete="yes">0.4</reach-time>
+<states>80</states>
+<state-size>12</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="no" length="5"/>
+<ltl-prob prop-id="2" answer="no" length="5"/>
+<ltl-prob prop-id="3" answer="no" length="5"/>
+</instance>
+
+<instance name="phils" id="2">
+<reach-time complete="yes">0.4</reach-time>
+<states>581</states>
+<state-size>16</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="no" length="3"/>
+<ltl-prob prop-id="2" answer="no" length="3"/>
+<ltl-prob prop-id="3" answer="no" length="3"/>
+</instance>
+
+<instance name="phils" id="3">
+<reach-time complete="yes">0.4</reach-time>
+<states>729</states>
+<state-size>18</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="no" length="5"/>
+<ltl-prob prop-id="2" answer="no" length="5"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="phils" id="4">
+<reach-time complete="yes">9.5</reach-time>
+<states>340789</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="no" length="3"/>
+<ltl-prob prop-id="2" answer="no" length="3"/>
+<ltl-prob prop-id="3" answer="no" length="3"/>
+</instance>
+
+<instance name="phils" id="5">
+<reach-time complete="yes">13.9</reach-time>
+<states>531440</states>
+<state-size>36</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="no" length="5"/>
+<ltl-prob prop-id="2" answer="no" length="5"/>
+<ltl-prob prop-id="3" answer="no" length="5"/>
+</instance>
+
+<instance name="phils" id="6">
+<reach-time complete="yes">589.7</reach-time>
+<states>14348906</states>
+<state-size>45</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+<instance name="phils" id="7">
+<reach-time complete="no">1210.8</reach-time>
+<states>19548203</states>
+<state-size>40</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+<instance name="phils" id="8">
+<reach-time complete="no">1018.4</reach-time>
+<states>20328500</states>
+<state-size>48</state-size>
+<prediction>0</prediction>
+<ltl-prob prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

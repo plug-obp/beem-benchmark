@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="mutex" status="ok" classification="simple">
+  <short-description>Mutual exclusion of processes accessing several resources</short-description>
+  <long-description>todo</long-description>
+  <author>Jiri Simsa</author>
+  <source> Motivated by the model described in "The Driving
+Philosophers" by S. Baehmi, R. Baldoni, R. Guerraoui and B. Pochon.</source>
+  <comment>Add long description; future work - parameter FAIR ??, add
+  interesting instances</comment>
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of processes</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>K</par-name>
+    <par-description>Number of resources</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>MUTEX</par-name>
+    <par-description>0 = no mutual exclusion; 1 = mutual exclusion</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>FAIR</par-name>
+    <par-description>0 = precesses can starve, 1 = no starvation (future work)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>R</par-name>
+    <par-description>Number of rounds (meaningful only if FAIR == 1)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>DELTA</par-name>
+    <par-description>Upper bound for starving (meaningful only if FAIR == 1) </par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>a00</ap-name>
+    <ap-expression>res0[0] != -1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>a10</ap-name>
+    <ap-expression>res1[0] != -1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>share00</ap-name>
+    <ap-expression>res0[0] == res0[1]</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>share01</ap-name>
+    <ap-expression>res0[0] == res1[1]</ap-expression>
+  </ap>
+  
+  <ap>
+    <ap-name>ac0</ap-name>
+    <ap-expression>acquiring[0] != -1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>gr0</ap-name>
+    <ap-expression>acquiring[0] == -1</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>share00 || share01</formula>
+    <description>Processes 0,1 share  a resource (an error)</description>
+  </property>
+  
+  
+  <property id="2" prop-type="LTL">
+    <formula>G(ac0 -> F gr0)</formula>
+    <description> If process 0 requests a resource it will be granted to him eventually</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>GF ac0</formula>
+    <description>Process 0 is granted a resource infinitely many times</description>
+  </property>
+  
+  
+  <instance id="1">
+    <parameters>N=2, K=1, MUTEX=1 </parameters>
+  </instance>
+
+  <instance id="2">
+    <parameters>N=3, K=1, MUTEX=0</parameters>
+  </instance>
+
+  <instance id="3">
+    <parameters>N=3, K=1, MUTEX=1,FAIR=1, R=15, DELTA=5</parameters>
+  </instance>
+
+  <instance id="4">
+    <parameters>N=3, K=2, MUTEX=1</parameters>
+  </instance>
+
+  <instance id="5">
+    <parameters>N=3, K=2, MUTEX=0, FAIR=1, DELTA=3</parameters>
+  </instance>
+
+  
+  
+</model>

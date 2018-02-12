@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="telephony" id="1">
+<reach-time complete="yes">0.4</reach-time>
+<states>1280</states>
+<state-size>16</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="22"/>
+</instance>
+
+<instance name="telephony" id="2">
+<reach-time complete="yes">1.6</reach-time>
+<states>51826</states>
+<state-size>18</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="telephony" id="3">
+<reach-time complete="yes">21.1</reach-time>
+<states>765379</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="20"/>
+</instance>
+
+<instance name="telephony" id="4">
+<reach-time complete="yes">558.1</reach-time>
+<states>12291552</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="telephony" id="5">
+<reach-time complete="no">1802.6</reach-time>
+<states>21128662</states>
+<state-size>32</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+<instance name="telephony" id="6">
+<reach-time complete="no">1801.5</reach-time>
+<states>23825732</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="20"/>
+</instance>
+
+<instance name="telephony" id="7">
+<reach-time complete="yes">1017.2</reach-time>
+<states>21960308</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+<instance name="telephony" id="8">
+<reach-time complete="no">1802.6</reach-time>
+<states>22380334</states>
+<state-size>32</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

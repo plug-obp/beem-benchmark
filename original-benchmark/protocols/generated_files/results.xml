@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="protocols" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>2430</states>
+<state-size>19</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+<ltl-prob prop-id="4" answer="no" length="74"/>
+</instance>
+
+<instance name="protocols" id="2">
+<reach-time complete="yes">0.6</reach-time>
+<states>11286</states>
+<state-size>20</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<ltl-prob prop-id="2" answer="no" length="6"/>
+<ltl-prob prop-id="3" answer="no" length="6"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="protocols" id="3">
+<reach-time complete="yes">0.5</reach-time>
+<states>2817</states>
+<state-size>22</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="29"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="protocols" id="4">
+<reach-time complete="yes">8.5</reach-time>
+<states>439245</states>
+<state-size>22</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="71"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="protocols" id="5">
+<reach-time complete="yes">20.0</reach-time>
+<states>996345</states>
+<state-size>22</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+<ltl-prob prop-id="2" answer="no" length="86"/>
+<ltl-prob prop-id="3" answer="no" length="86"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+</instance-list>

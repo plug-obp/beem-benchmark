@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="hanoi" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>6561</states>
+<state-size>42</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="128"/>
+</instance>
+
+<instance name="hanoi" id="2">
+<reach-time complete="yes">9.5</reach-time>
+<states>531441</states>
+<state-size>54</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="2048"/>
+</instance>
+
+<instance name="hanoi" id="3">
+<reach-time complete="yes">254.0</reach-time>
+<states>14348907</states>
+<state-size>63</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="16384"/>
+</instance>
+
+<instance name="hanoi" id="4">
+<reach-time complete="no">432.6</reach-time>
+<states>18890396</states>
+<state-size>69</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

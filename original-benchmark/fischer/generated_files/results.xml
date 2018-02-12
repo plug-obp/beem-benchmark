@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="fischer" id="1">
+<reach-time complete="yes">0.4</reach-time>
+<states>634</states>
+<state-size>12</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="2"/>
+<ltl-prob prop-id="3" answer="no" length="2"/>
+<ltl-prob prop-id="4" answer="no" length="2"/>
+</instance>
+
+<instance name="fischer" id="2">
+<reach-time complete="yes">0.8</reach-time>
+<states>21733</states>
+<state-size>15</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="15"/>
+<ltl-prob prop-id="2" answer="no" length="2"/>
+<ltl-prob prop-id="3" answer="no" length="2"/>
+<ltl-prob prop-id="4" answer="no" length="2"/>
+</instance>
+
+<instance name="fischer" id="3">
+<reach-time complete="yes">67.9</reach-time>
+<states>2896705</states>
+<state-size>21</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="15"/>
+<ltl-prob prop-id="2" answer="no" length="2"/>
+<ltl-prob prop-id="3" answer="no" length="2"/>
+<ltl-prob prop-id="4" answer="no" length="2"/>
+</instance>
+
+<instance name="fischer" id="4">
+<reach-time complete="yes">32.1</reach-time>
+<states>1272254</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="2"/>
+<ltl-prob prop-id="3" answer="no" length="2"/>
+<ltl-prob prop-id="4" answer="no" length="2"/>
+</instance>
+
+<instance name="fischer" id="5">
+<reach-time complete="no">1249.7</reach-time>
+<states>31077246</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="17"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="fischer" id="6">
+<reach-time complete="yes">226.5</reach-time>
+<states>8321728</states>
+<state-size>27</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="2"/>
+<ltl-prob prop-id="3" answer="no" length="2"/>
+<ltl-prob prop-id="4" answer="no" length="2"/>
+</instance>
+
+<instance name="fischer" id="7">
+<reach-time complete="no">1105.6</reach-time>
+<states>28113001</states>
+<state-size>27</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="15"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

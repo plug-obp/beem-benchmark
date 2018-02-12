@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="sokoban" id="1">
+<reach-time complete="yes">2.2</reach-time>
+<states>91453</states>
+<state-size>69</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="113"/>
+</instance>
+
+<instance name="sokoban" id="2">
+<reach-time complete="yes">15.4</reach-time>
+<states>761633</states>
+<state-size>65</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="88"/>
+</instance>
+
+<instance name="sokoban" id="3">
+<reach-time complete="no">177.2</reach-time>
+<states>7034432</states>
+<state-size>214</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model type="puzzle" status="ok" classification="toy">
+      <short-description>A sliding block puzzle</short-description>
+    <long-description>"Rush hour" is a sliding block puzzles usually played on
+6x6 game plan. The goal of the puzzle is to move cars in such a way that a
+distinguished red car can escape the trafic jam. </long-description>
+      <author>Radek</author>
+    <source>A popular commercial puzzle, see e.g.,
+http://www.puzzles.com/products/rushhour.htm</source>
+    <parameter-description>
+      <par-name>VERSION</par-name>
+      <par-description>Version of the puzzle (the model contains several
+      predefined game plans).</par-description>
+    </parameter-description>
+  <ap>
+    <ap-name>solved</ap-name>
+    <ap-expression>Red_car.out</ap-expression>
+  </ap>
+  <property id="1" prop-type="reachability">
+    <formula>solved</formula>
+    <description>The puzzle is solved (red car is out of the traffic jam).</description>
+  </property>
+    <instance id="1">
+      <parameters>VERSION=2</parameters>
+    <instance-comment>One of the classical instancies of the puzzle.</instance-comment>
+    </instance>
+    <instance id="2">
+      <parameters>VERSION=3</parameters>
+    <instance-comment>Another classical.</instance-comment>
+    </instance>
+    <instance id="3">
+      <parameters>VERSION=4</parameters>
+    <instance-comment>Artificially created instance with larger state space. </instance-comment>
+    </instance>
+      <instance id="4">
+      <parameters>VERSION=5</parameters>
+    </instance>
+
+</model>

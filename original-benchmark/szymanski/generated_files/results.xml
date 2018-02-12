@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="szymanski" id="1">
+<reach-time complete="yes">0.8</reach-time>
+<states>20264</states>
+<state-size>18</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="26"/>
+<ltl-prob prop-id="3" answer="no" length="26"/>
+<ltl-prob prop-id="4" answer="no" length="26"/>
+</instance>
+
+<instance name="szymanski" id="2">
+<reach-time complete="yes">1.0</reach-time>
+<states>31875</states>
+<state-size>18</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="33"/>
+<ltl-prob prop-id="2" answer="no" length="26"/>
+<ltl-prob prop-id="3" answer="no" length="26"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="szymanski" id="3">
+<reach-time complete="yes">25.9</reach-time>
+<states>1128424</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="30"/>
+<ltl-prob prop-id="3" answer="no" length="30"/>
+<ltl-prob prop-id="4" answer="no" length="30"/>
+</instance>
+
+<instance name="szymanski" id="4">
+<reach-time complete="yes">57.2</reach-time>
+<states>2313863</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="35"/>
+<ltl-prob prop-id="2" answer="no" length="30"/>
+<ltl-prob prop-id="3" answer="no" length="30"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="szymanski" id="5">
+<reach-time complete="no">1742.5</reach-time>
+<states>29555064</states>
+<state-size>30</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

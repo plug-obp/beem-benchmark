@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="leader-election" status="modelbug" classification="simple">
+  <short-description>Leader election algorithm for arbitrary networks</short-description>
+  <long-description>Leader election algorithm for arbitrary networks based on
+    echo wave algorithm and extinction technique. The model uses a fixed
+    topology.</long-description>
+
+  <author>Radek</author>
+  <source>Introduction to distributed algorithm (Gerard Tel)</source>
+  <comment>There is some bug in the model: on the topology 2 it gives more then
+  one leader.</comment>
+
+  
+  <parameter-description>
+    <par-name>TOPOLOGY</par-name>
+    <par-description>The topology of the network (1 = line with 3 nodes, 2=
+      line with 4 nodes, 3 = network of 4 nodes)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>K</par-name>
+    <par-description>Size of communication buffers</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>collision</ap-name>
+    <ap-expression>leaders_num>1</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>elected</ap-name>
+    <ap-expression>leaders_num>0</ap-expression>
+  </ap>
+
+  
+  <property id="1" prop-type="reachability">
+    <formula>collision</formula>
+
+    <description>There can be two or more leaders. (this corresponds to error)</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>F elected</formula>
+    <description>Eventually leader will be elected.</description>
+  </property>
+
+  
+  <instance id="1">
+    <parameters>TOPOLOGY=1, K=3</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>TOPOLOGY=1, K=10</parameters>
+  </instance>
+
+  <instance id="3">
+    <parameters>TOPOLOGY=2, K=2</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>TOPOLOGY=3, K=2</parameters>
+  </instance>
+
+
+</model>

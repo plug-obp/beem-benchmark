@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="mutex" status="ok" classification="simple">
+    <short-description>Fisher's mutual exclusion algorithm</short-description>
+    <long-description>Situations, where two or more processes are reading
+    and/or writing some shared data and the final result depends on who runs
+    precisely when, are called race conditions. Code sections containing race
+    conditions can be regarded as "critical", because such code can lead to
+    inconsistent data. To avoid inconsistence in critical sections, exclusive
+    access to shared data must be granted. This is called mutual exclusion,
+    because if two processes compete for access then they have to exclude each
+    other mutually.
+
+    This model is a discrete time simulation of the Fischer's real time
+    mutual exclusion protocol.</long-description>
+
+    <author>Radek</author>
+    <source>Classical example</source>
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of processes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>K1</par-name>
+      <par-description>The 1st constant of the protocol</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>K2</par-name>
+      <par-description>The 2nd constant of the protocol</par-description>
+    </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>collision</ap-name>
+    <ap-expression>myloop(i,0,decr(N), `P_`'i.CS', ` + ') > 1 </ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>someoneincs</ap-name>
+    <ap-expression> myloop(i,0,decr(N), `P_`'i.CS', ` + ') == 1</ap-expression>
+  </ap>
+  
+  <ap>
+    <ap-name>wait0</ap-name>
+    <ap-expression>P_0.try</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>cs0</ap-name>
+    <ap-expression>P_0.CS</ap-expression>
+  </ap>
+
+  
+  <property id="1" prop-type="reachability">
+    <formula>collision</formula>
+      <description>Mutual exclusion (more than one process in
+      critical section) is not violated.</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>G (wait0 -> F (cs0) )</formula>
+    <description>If P_0 waits for CS then it will eventually get there.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G((!cs0) -> F cs0)</formula>
+    <description>If P_0 isn't in CS then it will eventually reach it.</description>
+  </property>
+  
+  <property id="4" prop-type="LTL">
+    <formula>GF someoneincs</formula>
+    <description>Infinitely many times someone in critical section.</description>
+  </property>
+
+  
+  <instance id="1">
+    <parameters>N=3,K1=2,K2=3</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>N=4,K1=3,K2=3</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>N=6,K1=3,K2=3</parameters>
+  </instance>  
+  <instance id="4">
+    <parameters>N=7,K1=2,K2=3</parameters>
+  </instance>
+  <instance id="5">
+    <parameters>N=7,K1=4,K2=4</parameters>
+  </instance>
+  <instance id="6">
+    <parameters>N=8,K1=2,K2=3</parameters>
+  </instance>
+  <instance id="7">
+    <parameters>N=8,K1=3,K2=3</parameters>
+  </instance>
+  
+</model>

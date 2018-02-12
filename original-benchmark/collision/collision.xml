@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="ok"  classification="simple">
+  <short-description>Collision avoidance protocol</short-description>
+  <long-description>We assume that a number of stations are connected on an
+    Ethernet-like medium. On top of this basic protocol we want to design a
+    protocol without collisions. This is a simle solution with a dedicated
+    master station, which in turn asks the other statios if they want to
+    transmit data to another station. The provided model is rather simple,
+    because it does not take the time aspects into consideration.
+    </long-description>
+  
+  <author>Radek</author>
+  <source>@misc{ jensen96modelling,
+  author = "H. Jensen and K. Larsen and A. Skou",
+  title = "Modelling and Analysis of a Collision Avoidance Protocol Using SPIN and
+    UPPAAL",
+  text = "H.E. Jensen, K.G. Larsen, and A. Skou. Modelling and Analysis of a Collision
+    Avoidance Protocol Using SPIN and UPPAAL. In The Second Workshop on the
+    SPIN Verification System, volume 32 of DIMACS, Series in Discrete Mathematics
+    and Theoretical Computer Science. American Mathematical Society, 1996.",
+  year = "1996",
+  url = "citeseer.ist.psu.edu/jensen96modelling.html" }
+</source>
+    
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of slave stations</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>ERROR</par-name>
+    <par-description>An (artifical) error in the model (0/1)</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>collision</ap-name>
+    <ap-expression>Medium.collision</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>collision</formula>
+    <description>A collision can occur.</description>
+  </property>
+    
+  <instance id="1">
+    <parameters>N=2</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>N=2,ERROR=1</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>N=3</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>N=4</parameters>
+  </instance>
+  <instance id="5">
+    <parameters>N=4,ERROR=1</parameters>
+  </instance>
+  <instance id="6">
+    <parameters>N=5</parameters>
+  </instance>
+
+  
+</model>

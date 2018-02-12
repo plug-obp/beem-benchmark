@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model type="mutex" status="ok" classification="toy">
+      <short-description>Dining philosophers problem</short-description>
+    <long-description>Imagine that five philosophers who spend their lives just
+    thinking and easting. In the middle of the dining room is a circular table
+    with five chairs. The table has a big plate of spaghetti. However, there
+    are only five chopsticks available, as shown in the following figure. Each
+    philosopher thinks. When he gets hungry, he sits down and picks up the two
+    chopsticks that are closest to him. If a philosopher can pick up both
+    chopsticks, he eats for a while. After a philosopher finishes eating, he
+    puts down the chopsticks and starts to think.</long-description>
+  <author>Radek</author>
+  <source>Classical example (by E. W. Dijkstra)</source>
+  <parameter-description>
+	<par-name>N</par-name>
+	<par-description>Number of philosophers</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>LEFT</par-name>
+    <par-description>One philosopher is left handed (0/1)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>ROOM</par-name>
+    <par-description>Before eating philosophers have to enter room with the
+	given capacity</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>eat0</ap-name>
+    <ap-expression>phil_0.eat</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>one0</ap-name>
+    <ap-expression>phil_0.one</ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>someoneeats</ap-name>
+    <ap-expression> myloop(i,0,decr(N), `phil_`'i.eat', ` + ') >0</ap-expression>
+  </ap>
+  <property id="1" prop-type="LTL">
+    <formula> GF eat0</formula>
+    <description>Philosopher 0 eats infinitely many times.</description>
+  </property>
+  <property id="2" prop-type="LTL">
+    <formula> G (one0 -> F eat0)</formula>
+    <description>If philosopher 0 takes first fork he will eat eventually.</description>
+  </property>
+  <property id="3" prop-type="LTL">
+    <formula> GF someoneeats</formula>
+    <description>Infinitely many times someone eats.</description>
+  </property>
+  
+  <instance id="1">
+   <parameters>N=4</parameters>
+  </instance>
+  <instance id="2">
+   <parameters>N=5,ROOM=3</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>N=6,LEFT=1</parameters>
+  </instance>    
+  <instance id="4">
+    <parameters>N=9,ROOM=7</parameters>
+  </instance>
+  <instance id="5">
+    <parameters>N=12</parameters>
+  </instance>
+  <instance id="6">
+    <parameters>N=15</parameters>
+  </instance>
+  <instance id="7">
+    <parameters>N=13,ROOM=9</parameters>
+  </instance>
+  <instance id="8">
+    <parameters>N=16</parameters>
+  </instance>
+
+</model>

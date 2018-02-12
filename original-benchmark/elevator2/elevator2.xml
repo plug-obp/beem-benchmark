@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="ok" classification="toy">
+  <short-description>Another elevator controller</short-description>
+  <long-description>Motivated by elevator promela model from the SPIN
+  distribution, but actually implements LEGO elevator model built in the
+  Paradise laboratory. Naive controller chooses the next floor to be served
+  randomly, clever controller chooses the next floor to be served to be the
+  next requested one in the direction of the last cab movement, if there is no
+  such floor then in direction oposite to the direction of the last cab
+  movement.
+</long-description>
+  <author>Jiri Barnat</author>
+  <source>Own model</source>
+
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>A number of served floors.</par-description>
+  </parameter-description>
+
+  <parameter-description>
+    <par-name>CONTROL</par-name>
+    <par-description>Control algorithm (naive, clever).</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>r0</ap-name>
+    <ap-expression>req[0]==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>r1</ap-name>
+    <ap-expression>req[0]==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>r2</ap-name>
+    <ap-expression>req[0]==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>p0</ap-name>
+    <ap-expression>p==0</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>p1</ap-name>
+    <ap-expression>p==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>p2</ap-name>
+    <ap-expression>p==2</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>co</ap-name>
+    <ap-expression>cabin.open</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="LTL">
+    <formula> G(r1->(F(p1 &amp;&amp; co)))</formula>
+    <description> If level 1 is requested, it is served eventually. </description>
+  </property>
+  <property id="2" prop-type="LTL">
+    <formula>G(r1->(!p1U(p1U(p1&amp;&amp; co))))</formula>
+    <description>If level 1 is requested, it is served as soon as the cab passes
+the level 1.</description>
+  </property>
+  <property id="3" prop-type="LTL">
+    <formula>G(r1->(!p1U(p1U(!p1U(p1U(p1&amp;&amp;co))))))</formula>
+    <description> If level 1 is requested, the cab passes the level without serving it
+at most once.</description>
+  </property>
+    <property id="4" prop-type="LTL">
+    <formula>G(r0->(!p0U(p0U(!p0U(p0U(p0&amp;&amp;co))))))</formula>
+    <description> If level 0 is requested, the cab passes the level without serving it
+at most once.</description>
+  </property>
+
+  <property id="5" prop-type="LTL">
+    <formula> F(G p1)</formula>
+    <description>The cab will remain at level 1 forever from some moment.</description>
+  </property>
+  
+  <instance id="1">
+    <parameters>CONTROL=clever, N=4</parameters>
+  </instance>
+
+  <instance id="2">
+    <parameters>CONTROL=naive, N=10</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>CONTROL=clever, N=13</parameters>
+  </instance>
+
+</model>

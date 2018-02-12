@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="leader-election" status="ok" classification="simple">
+    <short-description>Leader election algorithm based on filters</short-description>
+    <long-description>A filter is a piece of code that satisfy the following
+    conditions: a) if m processes enter the filter, then at most m/2 processes
+    exit; b) if some process enter the filter, then at least one of them exits.
+    This model is leader election algorithm based on
+    filters.</long-description>
+  <author>Radek</author>
+      <source>Filters are due to Choy and Singh; model is according to
+@article{966040,
+ author = {James H. Anderson and Yong-Jik Kim and Ted Herman},
+ title = {Shared-memory mutual exclusion: major research trends since 1986},
+ journal = {Distrib. Comput.},
+ volume = {16},
+ number = {2-3},
+ year = {2003},
+ issn = {0178-2770},
+ pages = {75--110},
+ doi = {http://dx.doi.org/10.1007/s00446-003-0088-6},
+ publisher = {Springer-Verlag},
+}</source>
+
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of processes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>ERROR</par-name>
+      <par-description>Presence of an (artifical) error (0/1/2)</par-description>
+    </parameter-description>
+
+  
+  <ap parametrized="yes">
+    <ap-name>collision</ap-name>
+    <ap-expression>myloop(i,0,decr(N), `P_`'i.elected', ` + ') > 1</ap-expression>
+  </ap>
+
+  <ap parametrized="yes">
+    <ap-name>leader</ap-name>
+    <ap-expression>myloop(i,0,decr(N), `P_`'i.elected', ` or ') </ap-expression>
+  </ap>
+  
+  <property id="1" prop-type="reachability">
+    <formula>collision</formula>
+    <description>There can be two or more leaders. (this corresponds to error)</description>    
+  </property>
+  
+  <property id="2" prop-type="LTL">
+    <formula>F leader</formula>
+    <description>Eventually leader will be elected.</description>
+  </property>
+
+    <instance id="1">
+      <parameters>N=3</parameters>
+    </instance>
+
+      <instance id="2">
+      <parameters>N=3,ERROR=1</parameters>
+    </instance>
+
+  <instance id="3">
+      <parameters>N=4</parameters>
+    </instance>
+
+  <instance id="4">
+      <parameters>N=4,ERROR=2</parameters>
+    </instance>
+
+    <instance id="5">
+      <parameters>N=5</parameters>
+    </instance>
+
+  <instance id="6">
+      <parameters>N=5,ERROR=1</parameters>
+    </instance>
+
+     <instance id="7">
+      <parameters>N=6</parameters>
+    </instance>
+
+  
+</model>

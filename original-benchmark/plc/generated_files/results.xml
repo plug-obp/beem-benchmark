@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="plc" id="1">
+<reach-time complete="yes">2.1</reach-time>
+<states>7444</states>
+<state-size>93</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<ltl-prob prop-id="1" answer="no" length="521"/>
+<ltl-prob prop-id="3" answer="no" length="521"/>
+</instance>
+
+<instance name="plc" id="2">
+<reach-time complete="yes">14.8</reach-time>
+<states>130777</states>
+<state-size>93</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<ltl-prob prop-id="1" answer="no" length="521"/>
+<ltl-prob prop-id="3" answer="no" length="521"/>
+</instance>
+
+<instance name="plc" id="3">
+<reach-time complete="yes">124.7</reach-time>
+<states>1268968</states>
+<state-size>93</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<ltl-prob prop-id="1" answer="no" length="521"/>
+<ltl-prob prop-id="3" answer="no" length="521"/>
+</instance>
+
+<instance name="plc" id="4">
+<reach-time complete="yes">380.3</reach-time>
+<states>3763999</states>
+<state-size>93</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<ltl-prob prop-id="1" answer="no" length="521"/>
+<ltl-prob prop-id="3" answer="no" length="521"/>
+</instance>
+
+</instance-list>

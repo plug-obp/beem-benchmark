@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="mutex" status="ok" classification="simple">
+    <short-description>Lann leader election algorithm for token ring</short-description>
+    <long-description>N nodes are connected by a token ring. The token is used
+    to guarantee mutual exclusion access to shared resource. The communications
+    link are unreliable, i.e., token can get lost. The leader election
+    algorithm is used for sending of a new token after the timeout.
+    </long-description>
+  <author>Radek</author>
+  <source>The model is due to: Specification and Verification of Various
+    Distributed Leader Election Algorithms for Unidirectional Ring Networks;
+    Hubert Garavel and Laurent Mounier; Science of Computer Programming, volume
+    29, number 1-2, pages 171-197, July 1997; Full version available as INRIA Research Report RR-2986.
+</source>
+
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of nodes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>RELIABLE</par-name>
+      <par-description>Links are reliable (0/1)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>CR</par-name>
+      <par-description>The algorithm implements Chang and Roberts's
+      optimalization (0/1)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>PRECEDENCE</par-name>
+      <par-description>The algorithm uses the precedence rule (0/1)</par-description>
+    </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>collision</ap-name>
+    <ap-expression>myloop(i,0,decr(N), `P_`'i.CS', ` + ') > 1 </ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>someoneincs</ap-name>
+    <ap-expression> myloop(i,0,decr(N), `P_`'i.CS', ` + ') == 1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>cs0</ap-name>
+    <ap-expression>P_0.CS</ap-expression>
+  </ap>
+  
+  <property id="1" prop-type="reachability">
+    <formula>collision</formula>
+    <description>Collision in critical section can occur.</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>GF someoneincs</formula>
+    <description>Infinitely many times someone in critical section.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>GF cs0</formula>
+    <description>Infinitely many times process 0 in critical section.</description>
+  </property>
+
+  
+  <instance id="1">
+      <parameters>N=3,RELIABLE=1,CR=0,PRECEDENCE=0</parameters>
+    </instance>
+
+    <instance id="2">
+      <parameters>N=4,RELIABLE=1,CR=1,PRECEDENCE=1</parameters>
+    </instance>
+
+    <instance id="3">
+      <parameters>N=4,RELIABLE=0,CR=1,PRECEDENCE=0</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>N=5,RELIABLE=1,CR=0,PRECEDENCE=1</parameters>
+    </instance>
+
+  <instance id="5">
+      <parameters>N=6,RELIABLE=1,CR=1,PRECEDENCE=1</parameters>
+    </instance>
+    <instance id="6">
+      <parameters>N=4,RELIABLE=0,CR=0,PRECEDENCE=0</parameters>
+    </instance>  
+    <instance id="7">
+      <parameters>N=5,RELIABLE=0,CR=1,PRECEDENCE=0</parameters>
+    </instance>
+    <instance id="8">
+      <parameters>N=5,RELIABLE=0,CR=0,PRECEDENCE=0</parameters>
+    </instance>
+
+  
+</model>

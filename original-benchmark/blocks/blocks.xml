@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="ps" status="ok" classification="toy">
+    <short-description>Blocks world</short-description>
+    <long-description>Popular example from planning community. There is a set
+    of blocks on infinite table and the goal is to put blocks into a certain
+    configuration.</long-description>
+
+  <author>Radek</author>
+  <source>AIPS 2000 planning contest</source>
+
+  <parameter-description>
+    <par-name>VERSION</par-name>
+    <par-description>Version of the problem.</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>done</ap-name>
+    <ap-expression>Hand.done</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>done</formula>
+    <description>The given goal state is reached. </description>
+  </property>
+  
+    <instance id="2">
+      <parameters>VERSION=60</parameters>
+    </instance>
+  <instance id="3">
+      <parameters>VERSION=8</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>VERSION=100</parameters>
+    </instance>
+
+
+</model>

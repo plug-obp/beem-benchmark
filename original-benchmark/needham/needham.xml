@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other-protocol" status="ok" classification="complex">
+  <short-description>Needham-Schroeder public key authentication protocol</short-description>
+  <long-description>The aim of the protocol is to establish mutual
+    authentication between an initiator and responder, after which some session
+    involving the exchange of messages between them can take place. </long-description>
+  <author>Radek</author>
+  <source>@inproceedings{672224,
+ author = {Paolo Maggi and Riccardo Sisto},
+ title = {Using SPIN to Verify Security Properties of Cryptographic Protocols},
+ booktitle = {Proceedings of the 9th International SPIN Workshop on Model Checking of Software},
+ year = {2002},
+ isbn = {3-540-43477-1},
+ pages = {187--204},
+ publisher = {Springer-Verlag},
+ }</source>
+  <external-source-code>needham2_original.pm, needham2_fixed.pm</external-source-code>
+
+  <parameter-description>
+    <par-name>I</par-name>
+    <par-description>Number of initiator processes (at most 3)</par-description>
+  </parameter-description>
+
+  <parameter-description>
+    <par-name>R</par-name>
+    <par-description>Number of responder processes (at most 3)</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>i0f</ap-name>
+    <ap-expression>initiator_0.finished</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>r0f</ap-name>
+    <ap-expression>responder_0.finished</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>ikna</ap-name>
+    <ap-expression>intruder->kNa==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>iknb</ap-name>
+    <ap-expression>intruder->kNb==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>ibparty</ap-name>
+    <ap-expression>responder_0->party==7</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>i0f &amp;&amp; r0f</formula>
+    <description>Initiator and responder can reach finish the protocol.</description>
+  </property>
+
+  <property id="2" prop-type="reachability">
+    <formula>ikna</formula>
+    <description>Intruder knows initiator's nonce</description>
+  </property>
+
+  <property id="3" prop-type="reachability">
+    <formula>ikna</formula>
+    <description>Intruder knows responder's nonce</description>
+  </property>
+
+  <property id="4" prop-type="reachability">
+    <formula>r0f &amp;&amp; ibparty</formula>
+    <description>Responder is finished and have intruder as a party.</description>
+  </property>
+  
+  <instance id="1">
+    <parameters>I=1, R=1</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>I=2, R=2</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>I=3, R=2</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>I=3, R=3</parameters>
+  </instance>
+
+
+</model>

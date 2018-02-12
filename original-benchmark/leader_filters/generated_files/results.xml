@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="leader_filters" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>4966</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_filters" id="2">
+<reach-time complete="yes">0.8</reach-time>
+<states>29284</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="23"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_filters" id="3">
+<reach-time complete="yes">1.8</reach-time>
+<states>91093</states>
+<state-size>27</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_filters" id="4">
+<reach-time complete="yes">1.2</reach-time>
+<states>50025</states>
+<state-size>27</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_filters" id="5">
+<reach-time complete="yes">27.4</reach-time>
+<states>1572886</states>
+<state-size>33</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_filters" id="6">
+<reach-time complete="no">802.1</reach-time>
+<states>28480454</states>
+<state-size>33</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="23"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+</instance>
+
+<instance name="leader_filters" id="7">
+<reach-time complete="yes">546.6</reach-time>
+<states>26302351</states>
+<state-size>36</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

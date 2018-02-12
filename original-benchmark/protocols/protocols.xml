@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="ok" classification="toy">
+
+      <short-description>Simple communication protocols</short-description>
+    <long-description>Simple model of some basic  protocol for communication
+    over loosy channel (some simple faulty ones, alternating bit protocol, and
+    simple version of bounded retransmission protocol).</long-description>
+    <author>Radek</author>
+    <source>Classical example</source>
+  <external-source-code>abp.pm</external-source-code>
+  
+    <parameter-description>
+      <par-name>B</par-name>
+      <par-description>If the parameter is defined then the medium looses at
+      most B messages in row (otherwise it can loose all messages).</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>Strategy</par-name>
+      <par-description>Selects the protocol (0=naive, 1=ABP, 2=BRP, 3=simple)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>MAX</par-name>
+      <par-description>Maximal number of retransmissions for BRP.</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>consume0</ap-name>
+    <ap-expression>Consumer.consume0</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>consume1</ap-name>
+    <ap-expression>Consumer.consume1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>cready</ap-name>
+    <ap-expression>Consumer.ready || Consumer.got_msg</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>pready</ap-name>
+    <ap-expression>Producer.ready</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>produce0</ap-name>
+    <ap-expression>Producer.produce0</ap-expression>
+  </ap>
+  
+  
+  <property id="1" prop-type="reachability">
+    <formula>consume0 || consume1</formula>
+    <description>Consumer can get message</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>F (consume0 || consume1)</formula>
+    <description>Consumer will  eventually get message</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G F (consume0 || consume1)</formula>
+    <description>Consumer will get message infinitely often</description>
+  </property>
+
+  <property id="4" prop-type="LTL">
+    <formula>(pready U produce0) -> ((cready U consume0) || G cready)</formula>
+    <description>If the first produced value is 0, then the first consumed
+    value is 0 </description>
+  </property>
+  
+    <instance id="1">
+      <parameters>Strategy=0,B=3</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>Strategy=1</parameters>
+    <instance-comment>ABP version</instance-comment>
+    </instance>
+    <instance id="3">
+      <parameters>Strategy=2,B=0,MAX=5</parameters>
+    </instance>
+  <instance id="4">
+      <parameters>Strategy=2,B=20,MAX=30</parameters>
+    <instance-comment>BRP version with large parameter values</instance-comment>
+    </instance>
+
+    <instance id="5">
+      <parameters>Strategy=2,B=40,MAX=40</parameters>
+    <instance-comment>BRP version with large parameter values</instance-comment>
+    </instance>
+
+
+</model>

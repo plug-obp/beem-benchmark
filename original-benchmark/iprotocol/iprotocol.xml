@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="ok"  classification="complex">
+  <short-description>Optimized sliding window protocol</short-description>
+  <long-description>The i-protocol is a part of protocol stack; its purpose
+    is to ensure ordered reliable duplex communication between sites. At its
+    lower interface it assumes unreliable (lossy) packet-based FIFO
+    connectivity. To its upper interface it provides reliable packet-based FIFO
+    connectivity. A distinguished feature of the i-protocol is the rather
+    sophisticated manner in which it attempts to minimize control-messages and
+    retransmission overhead.</long-description>
+  <author>Jitka Zidkova</author>
+  <source>Popular verification examples, see e.g.,
+@inproceedings{ dong99fighting,
+    author = "Yifei Dong and Xiaoqun Du and Y. S. Ramakrishna and
+ C. R.  Ramakrishnan and I. V. Ramakrishnan and Scott A. Smolka and
+ Oleg Sokolsky and Eugene W. Stark and David Scott Warren",
+    title = "Fighting Livelock in the i-Protocol: A Comparative Study of Verification Tools",
+    booktitle = "Tools and Algorithms for Construction and Analysis of Systems",
+    pages = "74-88",
+    year = "1999",
+    url = "citeseer.ist.psu.edu/dong99fighting.html" }</source>
+  <external-source-code>iprotocol.pm</external-source-code>
+  
+  <parameter-description>
+    <par-name>W</par-name>
+    <par-description>Size of a window</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>SEQ</par-name>
+    <par-description>How many numbers are used to distinguish packets</par-description>
+  </parameter-description>
+
+    <ap>
+    <ap-name>consume</ap-name>
+    <ap-expression>Consumer.consume</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>dataok</ap-name>
+    <ap-expression>Medium.dataOk</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>nakok</ap-name>
+    <ap-expression>Medium.nakOk</ap-expression>
+  </ap>
+
+  
+  <property id="1" prop-type="reachability">
+    <formula>consume</formula>
+    <description>The consumer can get message</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>F consume</formula>
+    <description>The consumer will  eventually get message</description>
+  </property>
+  
+  <property id="3" prop-type="LTL">
+    <formula>G F consume</formula>
+    <description>The consumer will get message infinitely often</description>
+  </property>
+
+
+  <property id="4" prop-type="LTL">
+    <formula>((G F dataok) &amp;&amp; (G F nakok)) -> (G F consume)</formula>
+    <description>If the medium transmits both data and acknowledgement
+    correctly infinitelly often then the consumer will get message infinitely
+    often</description>
+  </property>
+
+  
+  <instance id="1">
+    <parameters>W=2,SEQ=3</parameters>
+    </instance>
+  <instance id="2">
+    <parameters>W=2,SEQ=4</parameters>
+    </instance>
+  <instance id="3">
+      <parameters>W=3,SEQ=6</parameters>
+  </instance>
+  <instance id="4">
+      <parameters>W=4,SEQ=8</parameters>
+  </instance>
+  <instance id="5">
+      <parameters>W=5,SEQ=10</parameters>
+  </instance>
+  <instance id="6">
+      <parameters>W=3,SEQ=10</parameters>
+  </instance>  
+
+  <instance id="7">
+      <parameters>W=4,SEQ=12</parameters>
+  </instance>  
+
+
+</model>

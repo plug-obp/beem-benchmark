@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="peg_solitaire" id="1">
+<reach-time complete="yes">2.7</reach-time>
+<states>32181</states>
+<state-size>19</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="15"/>
+</instance>
+
+<instance name="peg_solitaire" id="2">
+<reach-time complete="no">3601.8</reach-time>
+<states>13264450</states>
+<state-size>52</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+<instance name="peg_solitaire" id="3">
+<reach-time complete="no">3601.9</reach-time>
+<states>5439599</states>
+<state-size>52</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+<instance name="peg_solitaire" id="4">
+<reach-time complete="yes">78.9</reach-time>
+<states>873326</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="peg_solitaire" id="5">
+<reach-time complete="yes">14.9</reach-time>
+<states>84191</states>
+<state-size>52</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="16"/>
+</instance>
+
+<instance name="peg_solitaire" id="6">
+<reach-time complete="no">1802.6</reach-time>
+<states>7330153</states>
+<state-size>39</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

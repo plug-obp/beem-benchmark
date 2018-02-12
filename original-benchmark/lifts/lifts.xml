@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="ok" classification="complex">
+    <short-description>Distributed system for lifting trucks</short-description>
+    <long-description>The system consists of an arbitrary number of lifts. Each
+    lift supports one wheel of a vehicle. The system is operated by means of
+    buttons on the lifts. Lifts are connected by a bus. The model describes the
+    startup phase and the up/down synchronization mechanism.</long-description>
+    
+  <author>Radek</author>
+    <source>Analysis of a distributed system for lifting trucks; J.F. Groote;
+    J. Pang; A.G. Wouters; 2001, SEN-R0111, ISSN 1386-369X
+http://db.cwi.nl/rapporten/abstract.php?abstractnr=1069
+</source>
+  <comment>Update properties</comment>
+  
+    <parameter-description>    
+      <par-name>N</par-name>
+      <par-description>Number of lifts</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>ENV</par-name>
+      <par-description>Environment (0= just three commands (init, up, down); 1=
+      init command followed by arbitrary up/down commands, 2=arbitrary commands)</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>werror</ap-name>
+    <ap-expression>Wheels.error_state</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>moveup</ap-name>
+    <ap-expression>Wheels.moving_up</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>pressedup0</ap-name>
+    <ap-expression>Environment.pressed_up_0</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>werror</formula>
+    <description>The system can get into an error state.</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>(GF pressedup0) -> (GF moveup)</formula>
+    <description>Button pressed infinitely often implies moving up infinitely often... satisfied only for ENV=0</description>
+  </property>
+
+    <property id="3" prop-type="LTL">
+    <formula>G (pressedup0 -> F moveup)</formula>
+    <description>response property... not satisfied; nice counterexample for ENV=0 (for others there is a trivial cycle)
+</description>
+  </property>
+
+    <property id="4" prop-type="LTL">
+    <formula> ((! moveup) U pressedup0) || G (! moveup)</formula>
+    <description>precedence property</description>
+  </property>
+
+    <instance id="1">
+      <parameters>N=2,ENV=1</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>N=2,ENV=2</parameters>
+    </instance>
+    <instance id="3">
+      <parameters>N=3,ENV=0</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>N=3,ENV=1</parameters>
+    <instance-comment>Basic version.</instance-comment>
+    </instance>
+    <instance id="5">
+      <parameters>N=3,ENV=2</parameters>
+    <instance-comment>More general environment.</instance-comment>
+    </instance>
+    <instance id="6">
+      <parameters>N=4,ENV=0</parameters>
+    <instance-comment>More lifts, but restricted environment.</instance-comment>
+    </instance>
+    <instance id="7">
+        <parameters>N=4,ENV=1</parameters>
+    </instance>
+    <instance id="8">
+        <parameters>N=4,ENV=2</parameters>
+    </instance>
+
+
+
+</model>

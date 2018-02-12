@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="lamport" id="1">
+<reach-time complete="yes">0.9</reach-time>
+<states>29242</states>
+<state-size>14</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="lamport" id="2">
+<reach-time complete="yes">2.1</reach-time>
+<states>110920</states>
+<state-size>14</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="30"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="no" length="10"/>
+</instance>
+
+<instance name="lamport" id="3">
+<reach-time complete="yes">1.0</reach-time>
+<states>38067</states>
+<state-size>14</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="23"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="no" length="10"/>
+</instance>
+
+<instance name="lamport" id="5">
+<reach-time complete="yes">20.6</reach-time>
+<states>1066800</states>
+<state-size>18</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="yes" length="0"/>
+</instance>
+
+<instance name="lamport" id="6">
+<reach-time complete="yes">181.1</reach-time>
+<states>8717688</states>
+<state-size>18</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="31"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="no" length="10"/>
+</instance>
+
+<instance name="lamport" id="7">
+<reach-time complete="yes">1001.1</reach-time>
+<states>38717846</states>
+<state-size>22</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="lamport" id="8">
+<reach-time complete="yes">1503.1</reach-time>
+<states>62669317</states>
+<state-size>22</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

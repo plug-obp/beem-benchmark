@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="firewire_link" id="1">
+<reach-time complete="yes">1.1</reach-time>
+<states>1724</states>
+<state-size>44</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="firewire_link" id="2">
+<reach-time complete="yes">23.0</reach-time>
+<states>55887</states>
+<state-size>46</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="firewire_link" id="3">
+<reach-time complete="no">3601.8</reach-time>
+<states>5683833</states>
+<state-size>45</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="firewire_link" id="4">
+<reach-time complete="yes">23.6</reach-time>
+<states>24330</states>
+<state-size>62</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="firewire_link" id="5">
+<reach-time complete="no">3601.8</reach-time>
+<states>3371219</states>
+<state-size>66</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="firewire_link" id="6">
+<reach-time complete="no">3601.9</reach-time>
+<states>3076225</states>
+<state-size>63</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="firewire_link" id="7">
+<reach-time complete="yes">641.4</reach-time>
+<states>399598</states>
+<state-size>80</state-size>
+<prediction>0</prediction>
+</instance>
+
+</instance-list>

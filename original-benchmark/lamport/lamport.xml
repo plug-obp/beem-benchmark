@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="mutex" status="ok" classification="simple">
+    <short-description>Lamport's fast mutual exclusion algorithm</short-description>
+    <long-description>A mutual exclusion algorithm, which is optimized for a
+    number of read/write operations. </long-description>
+    <author>Radek</author>
+    <source>@article{ lamport87fast,
+    author = "Leslie Lamport",
+    title = "A Fast Mutual Exclusion Algorithm",
+    journal = "ACM Transactions on Computer Systems",
+    volume = "5",
+    number = "1",
+    pages = "1--11",
+    year = "1987",
+    url = "citeseer.ist.psu.edu/lamport86fast.html" }</source>
+
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of processes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>ERROR</par-name>
+      <par-description>Presence of an (artifical) error (0/1/2)</par-description>
+    </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>collision</ap-name>
+    <ap-expression>myloop(i,0,decr(N), `P_`'i.CS', ` + ') > 1 </ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>someoneincs</ap-name>
+    <ap-expression> myloop(i,0,decr(N), `P_`'i.CS', ` + ') == 1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>wait0</ap-name>
+    <ap-expression>P_0.q1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>cs0</ap-name>
+    <ap-expression>P_0.CS</ap-expression>
+  </ap>
+  
+  <property id="1"  prop-type="reachability">
+    <formula>collision</formula>
+    <description>Violation of mutual exclusion (more than one process in critical section)</description>    
+  </property>
+
+    <property id="2" prop-type="LTL">
+    <formula>G (wait0 -> F (cs0) )</formula>
+    <description>If P_0 waits for CS then it will eventually get there.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G((!cs0) -> F cs0)</formula>
+    <description>If P_0 isn't in CS then it will eventually reach it.</description>
+  </property>
+  
+  <property id="4" prop-type="LTL">
+    <formula>GF someoneincs</formula>
+    <description>Infinitely many times someone in critical section.</description>
+  </property>
+
+
+  
+  <instance id="1">
+      <parameters>N=3</parameters>
+    </instance>
+  <instance id="2">
+      <parameters>N=3,ERROR=1</parameters>
+    </instance>
+  <instance id="3">
+      <parameters>N=3,ERROR=2</parameters>
+    </instance>
+
+  <instance id="5">
+      <parameters>N=4</parameters>
+    </instance>
+  <instance id="6">
+      <parameters>N=4,ERROR=1</parameters>
+    </instance>
+
+  <instance id="7">
+      <parameters>N=5</parameters>
+    </instance>
+    <instance id="8">
+      <parameters>N=5,ERROR=2</parameters>
+    </instance>
+
+
+</model>

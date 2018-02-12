@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="brp" id="1">
+<reach-time complete="yes">1.1</reach-time>
+<states>18928</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="26"/>
+<ltl-prob prop-id="3" answer="no" length="26"/>
+</instance>
+
+<instance name="brp" id="2">
+<reach-time complete="yes">1.6</reach-time>
+<states>29188</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="24"/>
+<ltl-prob prop-id="2" answer="no" length="34"/>
+<ltl-prob prop-id="3" answer="no" length="34"/>
+</instance>
+
+<instance name="brp" id="3">
+<reach-time complete="yes">43.2</reach-time>
+<states>996627</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="24"/>
+<ltl-prob prop-id="2" answer="no" length="54"/>
+<ltl-prob prop-id="3" answer="no" length="54"/>
+</instance>
+
+<instance name="brp" id="4">
+<reach-time complete="yes">564.5</reach-time>
+<states>12068447</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="24"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+<instance name="brp" id="5">
+<reach-time complete="yes">818.2</reach-time>
+<states>17740267</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="24"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+<instance name="brp" id="6">
+<reach-time complete="yes">2192.7</reach-time>
+<states>42728113</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="frogs" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>5094</states>
+<state-size>25</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="82"/>
+</instance>
+
+<instance name="frogs" id="2">
+<reach-time complete="yes">0.7</reach-time>
+<states>18207</states>
+<state-size>23</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="24"/>
+</instance>
+
+<instance name="frogs" id="3">
+<reach-time complete="yes">13.2</reach-time>
+<states>760789</states>
+<state-size>39</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="257"/>
+</instance>
+
+<instance name="frogs" id="4">
+<reach-time complete="yes">363.8</reach-time>
+<states>17443219</states>
+<state-size>33</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="49"/>
+</instance>
+
+<instance name="frogs" id="5">
+<reach-time complete="no">561.8</reach-time>
+<states>20311538</states>
+<state-size>38</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

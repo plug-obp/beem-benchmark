@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="ps" status="ok" classification="simple">
+    <short-description>Krebs cycle</short-description>
+    <long-description>The Krebs cycle is a series of chemical reactions of
+    central importance in all living cells that utilize oxygen as part of
+    cellular respiration. In these aerobic organisms, the citric acid cycle is
+    a metabolic pathway that forms part of the break down of carbohydrates,
+    fats and proteins into carbon dioxide and water in order to generate
+    energy. It is the second of three metabolic pathways that are involved in
+    fuel molecule catabolism and ATP production. This model is a scheduling problem
+    inspired by the Krebs cycle. </long-description>
+
+    <author>Radek</author>
+    <source>Biology textbooks</source>
+
+    <parameter-description>
+      <par-name>GLUKOSA</par-name>
+      <par-description>Number of glukosa molecules at the beginning</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>KREBS</par-name>
+      <par-description>Number of "Krebs cycles" (i.e., number of oxalacetrat
+      molecules) at the beginning</par-description>
+    </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>energyabovelimit</ap-name>
+    <ap-expression>energy > X</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>energyabovelimit</formula>
+    <description>It is  possible to create more then X units of "energy".</description>
+  </property>
+  
+    <instance id="1">
+      <parameters>GLUKOSA=2,KREBS=1,X=5</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>GLUKOSA=3,KREBS=2,X=20</parameters>
+    </instance>
+    <instance id="3">
+      <parameters>GLUKOSA=10,KREBS=2,X=50</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>GLUKOSA=15,KREBS=3,X=80</parameters>
+    </instance>
+
+
+</model>

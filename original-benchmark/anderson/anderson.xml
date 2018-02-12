@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="mutex" status="ok" classification="simple">
+    <short-description>Andersons queue lock mutual exclusion algorithm</short-description>
+    <long-description>Situations, where two or more processes are reading
+    and/or writing some shared data and the final result depends on who runs
+    precisely when, are called race conditions. Code sections containing race
+    conditions can be regarded as "critical", because such code can lead to
+    inconsistent data. To avoid inconsistence in critical sections, exclusive
+    access to shared data must be granted. This is called mutual exclusion,
+    because if two processes compete for access then they have to exclude each
+    other mutually.
+
+See also other mutex examples.
+ </long-description>
+    <author>Radek</author>
+    <source>Anderson (The performance of spin lock alternatives for
+    shared-memory synchronization), model according to
+@article{966040,
+ author = {James H. Anderson and Yong-Jik Kim and Ted Herman},
+ title = {Shared-memory mutual exclusion: major research trends since 1986},
+ journal = {Distrib. Comput.},
+ volume = {16},
+ number = {2-3},
+ year = {2003},
+ issn = {0178-2770},
+ pages = {75--110},
+ doi = {http://dx.doi.org/10.1007/s00446-003-0088-6},
+ publisher = {Springer-Verlag},
+ }</source>
+  <comment>Add more properties (parametrized, with fairness)</comment>
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of processes</par-description>
+    </parameter-description>  
+    <parameter-description>
+      <par-name>ERROR</par-name>
+      <par-description>Presence of an (artifical) error (0/1)</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>wait0</ap-name>
+    <ap-expression>P_0.p1 or P_0.p2 or P_0.p3</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>cs0</ap-name>
+    <ap-expression>P_0.CS</ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>collision</ap-name>
+    <ap-expression>myloop(i,0,decr(N), `P_`'i.CS', ` + ') > 1 </ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>someoneincs</ap-name>
+    <ap-expression> myloop(i,0,decr(N), `P_`'i.CS', ` + ') == 1</ap-expression>
+  </ap>
+  
+  <property id="1"  prop-type="reachability">
+    <formula>collision</formula>
+    <description>Violation of mutual exclusion (more than one process in critical section)</description>    
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>G (wait0 -> F (cs0) )</formula>
+    <description>If P_0 waits for CS then it will eventually get there.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G((!cs0) -> F cs0)</formula>
+    <description>If P_0 isn't in CS then it will eventually reach it.</description>
+  </property>
+  
+  <property id="4" prop-type="LTL">
+    <formula>GF someoneincs</formula>
+    <description>Infinitely many times someone critical section.</description>
+  </property>
+
+
+  <instance id="1">
+    <parameters>N=2, ERROR=1</parameters>
+  </instance>
+
+  <instance id="2">
+    <parameters>N=3</parameters>
+  </instance>
+  
+  <instance id="3">
+    <parameters>N=3, ERROR=1</parameters>
+  </instance>
+
+  <instance id="4">
+    <parameters>N=4</parameters>
+  </instance>
+  
+  <instance id="5">
+    <parameters>N=5, ERROR=1</parameters>
+  </instance>
+
+  <instance id="6">
+    <parameters>N=6</parameters>
+  </instance>
+
+  <instance id="7">
+    <parameters>N=6, ERROR=1</parameters>
+  </instance>
+  
+  <instance id="8">
+    <parameters>N=7</parameters>
+  </instance>
+
+  
+</model>

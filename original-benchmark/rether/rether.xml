@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="ok" classification="simple">
+    <short-description>Real-time Ethernet protocol</short-description>
+    <long-description>Software-based, real-time Ethernet protocol developed at
+    SUNY. Its purpose is to provide guaranteed bandwidth and deterministic,
+    periodic network access to multimedia applications over commodity Ethernet
+    hardware. It is a contention-free token bus protocol for the datalink layer
+    of the ISO protocol stack.</long-description>
+        <author>Radek</author>
+    <source>@Article{rether,
+  author = 	 {X. Du and S. Smolka and R. Cleaveland},
+  title = 	 {Local Model Checking and Protocol Analysis},
+  journal = 	 {Software Tools for Technology Transfer (STTT)},
+  year = 	 {1999},
+  OPTkey = 	 {},
+  volume = 	 {2},
+  number = 	 {3},
+  pages = 	 {219-241},
+  month = 	 {November},
+  OPTnote = 	 {},
+  OPTannote = 	 {}
+}</source>
+    
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of nodes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>Slots</par-name>
+      <par-description>Number of slots (a bandwidth)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>RT_slots</par-name>
+      <par-description>Maximal number of slots for real-time transmission
+      (should be smaller than Slots)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>ERROR</par-name>
+      <par-description>A modelling error (ommission of synchronization which
+      leads to tricky error)</par-description>
+    </parameter-description>
+  <ap>
+    <ap-name>n0error</ap-name>
+    <ap-expression>Node_0.error_st</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>want0</ap-name>
+    <ap-expression>Node_0.want_RT</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>res0</ap-name>
+    <ap-expression>Node_0.reserved</ap-expression>
+  </ap>
+    <ap>
+    <ap-name>cend</ap-name>
+    <ap-expression>Token.cycle_end</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>rt0</ap-name>
+    <ap-expression>Node_0.RT_action</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>nact0</ap-name>
+    <ap-expression>Node_0.NRT_action</ap-expression>
+  </ap>
+  <property id="1" prop-type="reachability">
+    <formula> n0error</formula>
+    <description>Node 0 can get into an error state.</description>
+  </property>
+  <property id="2" prop-type="LTL">
+    <formula> G(res0 -> (! cend U (cend U (!cend &amp;&amp; (rt0 R !cend)))))</formula>
+    <description> reservation => granted in next cycle</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula> G (want0 -> (! cend U (cend U (!cend &amp;&amp; (rt0 R !cend)))))</formula>
+    <description>want => granted in next cycle</description>
+  </property>
+
+    <property id="4" prop-type="LTL">
+    <formula> G (res0 ->  (rt0 R !cend))</formula>
+    <description>reservation => granted in this cycle</description>
+  </property>
+
+    <property id="5" prop-type="LTL">
+    <formula> GF nact0</formula>
+    <description> always some more NRT action of Node 0</description>
+  </property>
+
+  <property id="6" prop-type="LTL">
+    <formula> GF rt0</formula>
+    <description> always some more RT action of Node 0</description>
+  </property>
+  
+    <instance id="1">
+      <parameters>N=3,Slots=5,RT_Slots=3</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>N=4,Slots=4,RT_Slots=2</parameters>
+    <instance-comment>Basic instance of the protocol.</instance-comment>
+    </instance>
+    <instance id="3">
+      <parameters>N=7,Slots=3,RT_Slots=2</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>N=9,Slots=5,RT_Slots=3,ERROR=1</parameters>
+    </instance>
+    <instance id="5">
+      <parameters>N=10,Slots=4,RT_Slots=3</parameters>
+    </instance>
+    <instance id="6">
+      <parameters>N=11,Slots=5,RT_Slots=2,ERROR=1</parameters>
+    </instance>
+    <instance id="7">
+      <parameters>N=12,Slots=6,RT_Slots=3</parameters>
+    </instance>
+
+
+</model>

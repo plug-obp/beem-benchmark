@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other" status="ok" classification="simple">
+  <short-description>Sharing SRAM and CAM by lookup processors</short-description>
+  <long-description>
+Our model consists of N+1 synchronous modules - N lookup processors and
+a "timer". The "timer" counts time slots (each is 10 ns long in reality)
+modulo N in variable "time". Lookup processors "lup0", "lup1", "lup2", etc. simulate N lookup processors sharing CAM and SRAM. Each lookup processor
+can be in one of six states; a processor can change state only
+when the variable "time" is equal to its rank. Meaning and behavior
+of each state is as follows:
+
+The "sleep" state simulates behavior of a processor with empty input buffer.
+Subsequent state depends on whether any packet comes and whether CAM is not
+in use by another machine. If no packet comes then the lookup processor
+remains in "sleep" else lookup processor changes to "wait" or "load_data"
+state. The choice of "wait" or "load_data" depends on whether CAM is in use
+by another machine or not.
+
+The processor is in "wait" state if it wants to start processing of a packet
+but CAM is busy. Remaining in "wait" depends on availability of CAM. If CAM
+is free, the next state is "load_data".
+
+The "load_data" state represents the critical section of CAM sharing -
+loading data into CAM. The next state is "latency1".
+
+States "latency1" and "latency2" represent only waiting for result. In
+addition, "latency2" includes the finishing SRAM time slot. "Latency2" is
+followed by a sequence of "comp" states.
+
+The "comp" states simulate computation using SRAM. A "comp" state
+corresponds to performing one instruction; in the end of the processing SRAM
+is accessed. The number of instructions is not limited. It is obvious that
+the next states are "comp", "sleep", "wait", and "load_data".
+
+We abstract away from the emptiness of the input buffer and the number of
+instructions in computation using SRAM. It means that each decision based on
+that features is replaced by a non-deterministic choice. There are no
+restrictions on the choice. The described (and verified) model is therefore
+a bit more general than reality. It allows the input buffer to be empty
+forever or even to stay in "comp" states infinitely.
+</long-description>
+
+  <author>Vojtech Rehak</author>
+  <source>@InProceedings{ICN2004,
+  author = {D. {A}nto\v{s} and V. {\v{R}}eh\'ak and J. {K}o\v{r}enek},
+  title = {{Hardware Router's Lookup Machine and its Formal Verification}},
+  booktitle = {ICN'2004 Conference Proceedings. Gosier, Guadeloupe, French Caribbean},
+  pages = {1002-1007},
+  year = {2004},
+  ISBN = {ISBN 0-86341-325-0},
+}
+</source>
+  <comment>Add parametrized properties?</comment>
+
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of lookup processors</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>ld0</ap-name>
+    <ap-expression>lup0.load_data</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>ld1</ap-name>
+    <ap-expression>lup1.load_data</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>w0</ap-name>
+    <ap-expression>lup0.wait</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>w1</ap-name>
+    <ap-expression>lup1.wait</ap-expression>
+  </ap>
+  <property id="1" prop-type="reachability">
+    <formula>ld0 &amp;&amp; ld1</formula>
+    <description>Collision of processor 0, 1 on CAM</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>G (w0 -> F ld0)</formula>
+    <description>Response property for processor 0</description>
+  </property>
+  
+  
+  <instance id="1">
+    <parameters>N=4</parameters>
+  </instance>
+
+  <instance id="2">
+    <parameters>N=8</parameters>
+  </instance>
+
+    <instance id="3">
+    <parameters>N=9</parameters>
+  </instance>
+
+  <instance id="4">
+    <parameters>N=10</parameters>
+  </instance>
+
+</model>

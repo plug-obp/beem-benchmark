@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="leader_election" id="1">
+<reach-time complete="yes">1.8</reach-time>
+<states>14252</states>
+<state-size>101</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_election" id="2">
+<reach-time complete="yes">3.1</reach-time>
+<states>28720</states>
+<state-size>101</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_election" id="3">
+<reach-time complete="yes">12.7</reach-time>
+<states>101360</states>
+<state-size>133</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_election" id="4">
+<reach-time complete="yes">119.0</reach-time>
+<states>746240</states>
+<state-size>169</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="111"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_election" id="5">
+<reach-time complete="yes">984.6</reach-time>
+<states>4803952</states>
+<state-size>209</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="124"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="leader_election" id="6">
+<reach-time complete="no">1682.3</reach-time>
+<states>5672319</states>
+<state-size>253</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

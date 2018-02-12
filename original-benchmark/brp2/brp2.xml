@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model type="communication-protocol" status="ok" classification="simple">
+  <short-description>Bounded retransmission protocol (with timing)</short-description>
+  <long-description>The Bounded Retransmission Protocol is a protocol used in
+    one of the Philips' products. It is based on the well-known alternating bit
+    protocol. It allows only bounded number of retransmissions of each frame
+    (piece of a file). This model includes timing aspects (discrete time). </long-description>
+  <author>Nikola Benes</author>
+  <source>@inproceedings{DArKRT97,
+	author =	{P.R. D{'A}rgenio and J.-P. Katoen and T.C. Ruys
+			and J. Tretmans},	
+	title =		{The bounded retransmission protocol must be on time!},
+	pages =		{416--431},
+	booktitle =	{Proceedings of the Third Workshop on Tools and
+			Algorithms for the Construction and Analysis of Systems,
+			{\rm Enschede, The Netherlands}},
+	editor =	{E. Brinksma},
+	series =	{Lecture Notes in Computer Science},
+	volume =	1217,
+	publisher =	{Springer-Verlag},
+	year =		1997,
+} </source>
+
+  <parameter-description>
+    <par-name>MAX</par-name>
+    <par-description>Maximal number of retransmissions</par-description>
+  </parameter-description>
+
+  <parameter-description>
+    <par-name>TD</par-name>
+    <par-description>Maximal time of a transmission through a channel</par-description>
+  </parameter-description>
+
+  <parameter-description>
+    <par-name>T1</par-name>
+    <par-description>Sender's time limit (default value 2*TD + 1)</par-description>
+  </parameter-description>
+
+  <parameter-description>
+    <par-name>TR</par-name>
+    <par-description>Receiver's time limit (default value  2 * MAX * T1 + 3 * TD)</par-description>
+  </parameter-description>
+
+   <ap>
+    <ap-name>rb1</ap-name>
+    <ap-expression>(Receiver->triple &amp; 4) == 4</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>rfsf</ap-name>
+    <ap-expression>Receiver.first_safe_frame</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>serr</ap-name>
+    <ap-expression>Sender.error</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>xsync</ap-name>
+    <ap-expression>X == SYNC</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>rnf</ap-name>
+    <ap-expression>Receiver.new_file</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>filesame</ap-name>
+    <ap-expression>File == SAME</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>scok</ap-name>
+    <ap-expression>SClient.ok</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>rcok</ap-name>
+    <ap-expression>RClient.ok</ap-expression>
+  </ap>
+    <ap>
+    <ap-name>scnok</ap-name>
+    <ap-expression>SClient.nok</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>rcnok</ap-name>
+    <ap-expression>RClient.nok</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula> rfsf &amp;&amp; (not rb1)</formula>
+    <description>Receiver's time limit is not sufficient.  </description>
+  </property>
+ 
+  <property id="2" prop-type="reachability">
+    <formula>serr &amp;&amp; xsync &amp;&amp; (not rnf)</formula>
+    <description>Sender starts a new transmission before Receiver's reaction.</description>
+  </property>
+
+    <property id="3" prop-type="reachability">
+    <formula> filesame &amp;&amp; ((scok &amp;&amp; rcnok) || (rcok &amp;&amp; scnok))</formula>
+    <description>There is a discrepancy between status of Sender/Receiver clients. </description>
+  </property>
+
+  
+  <instance id="1">
+    <parameters>MAX=3,TD=2</parameters>
+  </instance>
+
+  <instance id="2">
+    <parameters>MAX=2,TD=2,T1=4</parameters>
+  </instance>
+
+  <instance id="3">
+    <parameters>MAX=3,TD=2,TR=30</parameters>
+  </instance>
+
+  <instance id="4">
+    <parameters>MAX=3,TD=5</parameters>
+  </instance>
+
+  <instance id="5">
+    <parameters>MAX=7,TD=2</parameters>
+  </instance>
+
+  <instance id="6">
+    <parameters>MAX=7,TD=5</parameters>
+  </instance>
+
+  
+</model>

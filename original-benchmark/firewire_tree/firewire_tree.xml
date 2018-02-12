@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="leader-election" status="modelbug" classification="complex">
+    <short-description>Firewire (IEEE 1394) tree identification protocol</short-description>
+    <long-description>
+The tree identify process of IEEE 1394 is a leader election protocol which takes place after a bus reset in the network (i.e. when a node is added to, or removed from, the network). Immediately after a bus reset all nodes in the network have equal status, and know only to which nodes they are directly connected. A leader (root) needs to be chosen to act as the manager of the bus for subsequent phases of the 1394. The protocol is designed for use on connected networks, will correctly elect a leader if the network is acyclic, and will report an error if a cycle is detected.
+</long-description>
+  <author>Radek</author>
+    <source> Formal Aspects of Computing (volume 14, num 3); particularly the
+    paper Muffy Calder, Alice Miller:
+Using SPIN to Analyse the Tree Identification Phase of the IEEE 1394 High-Performance Serial Bus (FireWire) Protocol. 247-266</source>
+  
+    <comment>This model is not completely correct (the behaviour of the model
+    does not correspond exactly to the behaviour described in the source paper).</comment>
+    
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of nodes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>T</par-name>
+      <par-description>Topology: 1 = line with N nodes, 2 = fixed acyclic
+      topology with 6 nodes, 3 = fixed cyclic topology with 6 nodes </par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>twoleaders</ap-name>
+    <ap-expression>elected_num == 2</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>elected0</ap-name>
+    <ap-expression>elected == 0</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>elected1</ap-name>
+    <ap-expression>elected == 1</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>twoleaders</formula>
+    <description>More then one node is elected.</description>
+  </property>
+
+  <property id="2" prop-type="reachability">
+    <formula>elected0</formula>
+    <description>Node 0 can be elected.</description>
+  </property>
+
+    <property id="3" prop-type="reachability">
+    <formula>elected1</formula>
+    <description>Node 1 can be elected.</description>
+  </property>
+
+    <instance id="1">
+    <parameters>T=2</parameters>
+  </instance>
+    <instance id="2">
+      <parameters>T=0,N=4</parameters>
+    </instance>
+  <instance id="3">
+    <parameters>T=1</parameters>
+  </instance>
+    <instance id="4">
+    <parameters>T=0,N=7</parameters>
+    </instance>
+    <instance id="5">
+    <parameters>T=0,N=10</parameters>
+    </instance>
+
+</model>

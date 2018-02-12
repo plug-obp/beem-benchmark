@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="collision" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>5593</states>
+<state-size>26</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="collision" id="2">
+<reach-time complete="yes">0.7</reach-time>
+<states>12661</states>
+<state-size>26</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="13"/>
+</instance>
+
+<instance name="collision" id="3">
+<reach-time complete="yes">18.8</reach-time>
+<states>434530</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="collision" id="4">
+<reach-time complete="yes">2727.9</reach-time>
+<states>41465543</states>
+<state-size>42</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+<instance name="collision" id="5">
+<reach-time complete="no">1802.5</reach-time>
+<states>19473613</states>
+<state-size>42</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="15"/>
+</instance>
+
+<instance name="collision" id="6">
+<reach-time complete="no">1802.5</reach-time>
+<states>18845059</states>
+<state-size>50</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="ok" classification="complex">
+  <short-description>PLC control schedule</short-description>
+  <long-description>Model of a PLC (programable logic controler) program for
+    experimental chemical plant. The plant consist of seven batches, heater,
+    coolers, pumps. The model is a discrete abstraction. </long-description>
+  <author>Pavel Moravec</author>
+  <source>@inproceedings{672087,
+ author = {Ed Brinksma and Angelika Mader},
+ title = {Verification and Optimization of a PLC Control Schedule},
+ booktitle = {Proceedings of the 7th International SPIN Workshop on SPIN Model Checking and Software Verification},
+ year = {2000},
+ isbn = {3-540-41030-9},
+ pages = {73--92},
+ publisher = {Springer-Verlag},
+ }</source>
+  <comment>Revize vlastnosti, prijdou mi podezrele </comment>
+
+  <parameter-description>
+    <par-name>MAXTIME</par-name>
+    <par-description>Maximal time of progress of the plant</par-description>
+  </parameter-description>
+
+  
+  <ap>
+    <ap-name>b3sol</ap-name>
+    <ap-expression>B3 == sol70C</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>b3empty</ap-name>
+    <ap-expression>B3 == cempty</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>end</ap-name>
+    <ap-expression>time >= maxtime</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>nrbatches</ap-name>
+    <ap-expression> batches >= 5</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="LTL">
+    <formula> GF(b3sol || end) &amp;&amp; GF(b3empty || end) </formula>
+    <description> Container B3 is infinitely often full and infinitely often empty.</description>
+  </property>
+
+  <property id="2" prop-type="reachability">
+    <formula>nrbatches</formula>
+    <description>Number of manufactured batches can be larger than 4.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>F end</formula>
+    <description> The time is still progressing (??)</description>
+  </property>
+
+  
+  <instance id="1">
+    <parameters>MAXTIME=100</parameters>
+  </instance>
+
+  <instance id="2">
+    <parameters>MAXTIME=300</parameters>
+  </instance>
+
+  <instance id="3">
+    <parameters>MAXTIME=500</parameters>
+  </instance>
+
+  <instance id="4">
+    <parameters>MAXTIME=600</parameters>
+  </instance>
+
+
+</model>

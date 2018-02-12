@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="cambridge" id="1">
+<reach-time complete="yes">1.2</reach-time>
+<states>11339</states>
+<state-size>26</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+</instance>
+
+<instance name="cambridge" id="2">
+<reach-time complete="yes">1.7</reach-time>
+<states>15940</states>
+<state-size>26</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="14"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+</instance>
+
+<instance name="cambridge" id="3">
+<reach-time complete="yes">1.7</reach-time>
+<states>18138</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+</instance>
+
+<instance name="cambridge" id="4">
+<reach-time complete="yes">5.1</reach-time>
+<states>60463</states>
+<state-size>30</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+</instance>
+
+<instance name="cambridge" id="5">
+<reach-time complete="yes">59.8</reach-time>
+<states>698912</states>
+<state-size>40</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+</instance>
+
+<instance name="cambridge" id="6">
+<reach-time complete="yes">268.0</reach-time>
+<states>3354295</states>
+<state-size>50</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="15"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+</instance>
+
+<instance name="cambridge" id="7">
+<reach-time complete="yes">1108.7</reach-time>
+<states>11465015</states>
+<state-size>60</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<reach-goal prop-id="2" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

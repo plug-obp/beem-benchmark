@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other-protocol" status="ok" classification="complex">
+  <short-description>Publish/subscribe notification protocol</short-description>
+  <long-description>Abstract specification (model) of the groupware protocol underlying thinkteam augmented with a publish/subscribe notification service.</long-description>
+
+  <author>Vladimir Lapacek</author>
+  <source>@InProceedings{
+  author =      {Maurice H. ter Beek and M. Massink and D. Latella and S. Gnesi
+and A. Forghieri and M. Sebastianis},
+  title =       {{M}odel {C}hecking {P}ublish/{S}ubscribe {N}otification for thinkteam},
+  series =      {ENTCS},
+}
+</source>
+  <comment>Check properties, add more (see divine/examples2/ps)</comment>
+
+  <parameter-description>
+    <par-name>numUsers</par-name>
+    <par-description>Number of users</par-description>
+  </parameter-description>
+
+  <parameter-description>
+    <par-name>numFiles</par-name>
+    <par-description>Number of files</par-description>
+  </parameter-description>
+
+<ap><ap-name>cc_co</ap-name><ap-expression>CC.doneCheckOut</ap-expression></ap>
+<ap><ap-name>cc_cdo</ap-name><ap-expression>CC.doneCheckedOut</ap-expression></ap>
+<ap><ap-name>cc_na</ap-name><ap-expression>CC.doneNotAvailable</ap-expression></ap>
+<ap><ap-name>cc_ci</ap-name><ap-expression>CC.doneCheckIn</ap-expression></ap>
+<ap><ap-name>cc_unco</ap-name><ap-expression>CC.doneUnCheckOut</ap-expression></ap>
+<ap><ap-name>u_get</ap-name><ap-expression>User_0.doneGet</ap-expression></ap>
+<ap><ap-name>u_reg</ap-name><ap-expression>User_0.doneRegister</ap-expression></ap>
+<ap><ap-name>ua_not</ap-name><ap-expression>UserAdmin_0.doneNotify</ap-expression></ap>
+<ap><ap-name>u_unreg</ap-name><ap-expression>User_0.doneUnRegister</ap-expression></ap>
+
+  
+  <property id="1" prop-type="LTL">
+    <formula>G(cc_co -> F(cc_cdo || cc_na))</formula>
+    <description>Whenever the CC has received a lock request on file by a user through
+a checkOut, then it eventually responds to this user by either sendig the
+user a checkedOut or a notAvailable.</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula> G(cc_cdo -> F(cc_ci || cc_unco))</formula>
+    <description> Whenever the CC has granted a lock on file 0 to a user through a
+checkedOut, then this user eventually releases this lock by sending the CC
+a checkIn or an unCheckOut.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula> !(!(u_get || u_reg) U ua_not) &amp;&amp; G(u_unreg -> !(!(u_get || u_reg) U ua_not))
+</formula>
+    <description>Can it happen, that a user receives a notify without currently being
+registered for the file this notify refers to?</description>
+  </property>
+
+  <instance id="1">
+    <parameters>numUsers=1, numFiles=3</parameters>
+  </instance>
+  
+  <instance id="2">
+    <parameters>numUsers=2, numFiles=1</parameters>
+  </instance>
+
+  <instance id="3">
+    <parameters>numUsers=2, numFiles=2</parameters>
+  </instance>
+
+  <instance id="4">
+    <parameters>numUsers=2, numFiles=3</parameters>
+  </instance>
+  
+  <instance id="5">
+    <parameters>numUsers=3, numFiles=1</parameters>
+  </instance>
+
+
+  
+</model>

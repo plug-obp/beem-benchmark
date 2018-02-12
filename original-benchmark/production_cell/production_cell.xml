@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="ok" classification="simple">
+    <short-description>Production cell case study</short-description>
+    <long-description>The task of the production cell case study was to develop
+    control software for a realistic industrial production cell, comprising
+    several machines (e.g., a robot, a press, two conveyor belts). This
+    software had to fulfill certain safety and liveness requirements (e.g.,
+    never close the press while a robot arm is inside it). The example was
+    taken from real world (a metal processing plant in Germany), but was at the
+    same time of managable complexity. This model captures just the basic
+    structure of the problem.</long-description>
+
+
+  <author>Radek</author>
+    <source>C. Lewerentz, T. Lindner: "Case Study Production Cell -- A Comparative Study in Formal Software Development", LNCS, Springer-Verlag, 1994.</source>
+  
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of plates</par-description>
+    </parameter-description>
+  <parameter-description>
+    <par-name>MAX</par-name>
+    <par-description>Number of plates to process. (0=not specified)</par-description>
+  </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>finished</ap-name>
+    <ap-expression>done==MAX</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>finished</formula>
+    <description>The requested number of plates has been porcessed. (meaningful
+    only for MAX != 0)</description>
+  </property>
+  
+    <instance id="1">
+      <parameters>N=3,MAX=0</parameters>
+    </instance>
+
+    <instance id="2">
+      <parameters>N=2,MAX=5</parameters>
+    </instance>
+
+    <instance id="3">
+      <parameters>N=6,MAX=0</parameters>
+    </instance>
+
+    <instance id="4">
+      <parameters>N=4,MAX=4</parameters>
+    </instance>
+
+  
+  <instance id="5">
+    <parameters>N=8,MAX=0</parameters>
+  </instance>
+  <instance id="6">
+    <parameters>N=10,MAX=0</parameters>
+  </instance>
+
+
+</model>

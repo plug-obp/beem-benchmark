@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="propmissing" classification="complex">
+    <short-description>Layer link protocol of the IEEE-1394</short-description>
+    <long-description>This is model of the "FireWire" high performance serial
+    bus defined in the IEEE-1394 Standard. The bus involves n nodes
+    (addressable entities that run their own part of the protocol) connected by
+    a serial line. On each node the IEEE-1394 protocol consists of three stacke
+    layers: the transaction layer, the link layer, and th physical layer. The
+    protocol implemented by the link layer is designed to transmit data packets
+    over an unreliable medium to a specific node or to all nodes (broadcast).
+    The transmission can be performed synchronously or
+    asynchronously.</long-description>
+    <author>Radek</author>
+    <source>@Article{firewire,
+  author = 	 { M. Sighireanu and R. Mateescu},
+  title = 	 {Verification of the Link Layer Protocol of the IEEE-1394 Serial Bus (FireWire)},
+  journal = 	 {Software Tools for Technology Transfer (STTT)},
+  year = 	 {1998},
+  volume = 	 {2},
+  number = 	 {1},
+  pages = 	 {68-88},
+  month = 	 {November},
+}
+
+More information:
+http://www.inrialpes.fr/vasy/cadp/case-studies/97-b-firewire.html  (including
+source code)
+</source>
+  <comment>In the source paper, the properties for this problem are expressed
+  in action based temporal logic. In order to express these properties in state
+  based formalism, it would be necessary to do some changes in the model.</comment>
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of nodes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>APPLICATION</par-name>
+      <par-description>Which actions are performed by application layer (0 =
+      only one message is send, 1= each node sends one message to the following
+      node, 2= unrestricted use)</par-description>
+    </parameter-description>
+    <instance id="1">
+      <parameters>N=2,APPLICATION=0</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>N=2,APPLICATION=1</parameters>
+    </instance>
+    <instance id="3">
+      <parameters>N=2,APPLICATION=2</parameters>
+    <instance-comment>The basic version of the model with two nodes.</instance-comment>
+    </instance>
+    <instance id="4">
+      <parameters>N=3,APPLICATION=0</parameters>
+    </instance>
+      <instance id="5">
+      <parameters>N=3,APPLICATION=1</parameters>
+    </instance>
+    <instance id="6">
+      <parameters>N=3,APPLICATION=2</parameters>
+    </instance>
+    <instance id="7">
+      <parameters>N=4,APPLICATION=0</parameters>
+    </instance>
+
+
+</model>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="lamport_nonatomic" id="1">
+<reach-time complete="yes">3.8</reach-time>
+<states>20434</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="no" length="10"/>
+</instance>
+
+<instance name="lamport_nonatomic" id="2">
+<reach-time complete="yes">2.6</reach-time>
+<states>12958</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="13"/>
+<ltl-prob prop-id="3" answer="no" length="9"/>
+<ltl-prob prop-id="4" answer="no" length="9"/>
+</instance>
+
+<instance name="lamport_nonatomic" id="3">
+<reach-time complete="yes">6.2</reach-time>
+<states>36983</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="17"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="no" length="10"/>
+</instance>
+
+<instance name="lamport_nonatomic" id="4">
+<reach-time complete="yes">553.0</reach-time>
+<states>1257304</states>
+<state-size>32</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="10"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+<ltl-prob prop-id="4" answer="no" length="10"/>
+</instance>
+
+<instance name="lamport_nonatomic" id="5">
+<reach-time complete="no">3601.8</reach-time>
+<states>3488300</states>
+<state-size>40</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="leader-election" status="ok" classification="simple">
+    <short-description>Leader election algorithm on unidirectional ring</short-description>
+    <long-description>The algorithm operates on a ring of N processes. Each
+    process is assigned a unique number. The puspose of this algorithm is to
+    find the largest number assigned to a process. </long-description>
+
+  <author>Radek</author>
+    <source>Dolev, Klawe, Rodeh. An O(n log n) unidirectional distributed
+    algorithm for extrema finding in a circle. Journal of Algorithms 3:245-260.
+    The model was created by manual translation of Promela source (from SPIN distribution).</source>
+  <external-source-code>leader.pm</external-source-code>
+  <comment>Add properties (?)</comment>
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of nodes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>K</par-name>
+      <par-description>Size of communication buffers (should be larger or equal
+      to 2*N)</par-description>
+    </parameter-description>
+      <parameter-description>
+      <par-name>ERROR</par-name>
+      <par-description>Presence of an (artifical) error (0/1)</par-description>
+    </parameter-description>
+
+
+  <ap>
+    <ap-name>collision</ap-name>
+    <ap-expression>nr_leaders>1</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>elected</ap-name>
+    <ap-expression>nr_leaders>0</ap-expression>
+  </ap>
+
+  
+  <property id="1" prop-type="reachability">
+    <formula>collision</formula>
+    <description>There can be two or more leaders. (this corresponds to error)</description>
+  </property>
+
+    <property id="2" prop-type="LTL">
+    <formula>F elected</formula>
+    <description>Eventually leader will be elected.</description>
+  </property>
+
+  
+     <instance id="1">
+      <parameters>N=5</parameters>
+    </instance>
+   <instance id="2">
+      <parameters>N=5, ERROR=1</parameters>
+    </instance>
+
+    <instance id="3">    
+      <parameters>N=6,ERROR=2</parameters>
+    </instance>
+      <instance id="4">
+      <parameters>N=7</parameters>
+    </instance>
+      <instance id="5">
+      <parameters>N=8</parameters>
+    </instance>
+
+      <instance id="6">
+      <parameters>N=9</parameters>
+    </instance>
+
+
+</model>

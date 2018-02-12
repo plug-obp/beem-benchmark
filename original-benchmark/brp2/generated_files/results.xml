@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="brp2" id="1">
+<reach-time complete="yes">1.8</reach-time>
+<states>42285</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="no" length="0"/>
+</instance>
+
+<instance name="brp2" id="2">
+<reach-time complete="yes">2.4</reach-time>
+<states>61464</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="yes" length="78"/>
+</instance>
+
+<instance name="brp2" id="3">
+<reach-time complete="yes">1.7</reach-time>
+<states>40184</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="no" length="0"/>
+</instance>
+
+<instance name="brp2" id="4">
+<reach-time complete="yes">21.9</reach-time>
+<states>679993</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="no" length="0"/>
+</instance>
+
+<instance name="brp2" id="5">
+<reach-time complete="yes">10.1</reach-time>
+<states>298111</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="no" length="0"/>
+</instance>
+
+<instance name="brp2" id="6">
+<reach-time complete="yes">196.0</reach-time>
+<states>5742313</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<reach-goal prop-id="2" answer="no" length="0"/>
+<reach-goal prop-id="3" answer="no" length="0"/>
+</instance>
+
+</instance-list>

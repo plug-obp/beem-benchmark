@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="ok" classification="complex">
+  <short-description>Pragmatic General Multicast (PGM)
+  protocol</short-description>
+  
+  <long-description>Pragmatic General Multicast (PGM) is a reliable transport
+protocol for applications that require ordered or unordered, duplicate-free,
+multicast data delivery from multiple sources to multiple receivers. PGM is
+specifically intended as a workable solution for multicast applications with
+basic reliability requirements rather than as a comprehensive solution for
+multicast applications with sophisticated ordering, agreement, and robustness
+requirements. Its central design goal is simplicity of operation with due
+regard for scalability and network efficiency. </long-description>
+
+  <author>Peter Bezdek</author>
+  <source>Marc Boyer, Mihaela Sighireanu. Synthesis and verification of constraints in the PGM protocol. In K.Araki, S.Gnesi, D.Mandrioli, editors, FME 2003, LNCS 2805, pp. 264-281, 2003.</source>
+
+  <parameter-description>
+    <par-name>MAX_BUFFER</par-name>
+    <par-description>Size of communication buffers (default 7)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>DELAY</par-name>
+    <par-description>Delay of communication buffers (default 2)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>MAX_LOSS</par-name>
+    <par-description>Maximal number of lost messages (default 1)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>TXW_SIZE</par-name>
+    <par-description>Sender's window size (default 4)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>RXW_SIZE</par-name>
+    <par-description>Receiver's window size (default TXW_SIZE)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>MAX_DATA</par-name>
+    <par-description>Total number of sended packets (default 9)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>DATA_PER_SPM</par-name>
+    <par-description>Period of sender's administration packets (default 3)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>DATA_PERIOD</par-name>
+    <par-description>Period of sender's data packets (default 9)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>RS_SIZE</par-name>
+    <par-description>Size of acknowledgements buffer (default MAX_LOSS + 1)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>DATA_RCV</par-name>
+    <par-description>Parameter for property 5.</par-description>
+  </parameter-description>
+  
+  <ap parametrized="yes">
+    <ap-name>over_max_txw_window</ap-name>
+    <ap-expression>TXW_LEAD - TXW_TRAIL + 1 &gt; TXW_SIZE</ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>over_max_rxw_window</ap-name>
+    <ap-expression>RXW_LEAD - RXW_TRAIL + 1 &gt; RXW_SIZE</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>loss3</ap-name>
+    <ap-expression> receiver.r4 &amp;&amp; RXW_LEAD + 1 == 3</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>nak3</ap-name>
+    <ap-expression>sender.s1 &amp;&amp; packet==3</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>dataout1</ap-name>
+    <ap-expression>sender.s0_1 &amp;&amp; TXW_LEAD==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>datain1</ap-name>
+    <ap-expression>element.e1 &amp;&amp; element->seq==1 &amp;&amp; x==DELAY</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>zero_time</ap-name>
+    <ap-expression>x==0</ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>ok_time</ap-name>
+    <ap-expression>x &lt;= DELAY</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>loss_detected</ap-name>
+    <ap-expression>receiver.r4</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>full_rn</ap-name>
+    <ap-expression>RN_size>=7</ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>datarcv</ap-name>
+    <ap-expression>receiver->outdata &gt;= DATA_RCV</ap-expression>
+  </ap>
+  
+  <property id="1" prop-type="reachability">
+    <formula>over_max_txw_window</formula>
+    <description>Size of transmition window does not exceed TXW_SIZE</description>
+  </property>
+
+  <property id="2" prop-type="reachability">
+    <formula>over_max_rxw_window</formula>
+    <description>Size of receiver's window does not exceed RXW_SIZE</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G (loss3 -> F (nak3))</formula>
+    <description>If the receiver signalize lost of a packet 3, then sender
+    receives negative acknowledgement.</description>
+  </property>
+
+  <property id="4" prop-type="LTL">
+    <formula>G( dataout1 -> ( zero_time &amp;&amp; ( ok_time U datain1) ) )</formula>
+    <description>If the sender sends 1. packet, then the network element
+    receives the packet after DELAY time units. </description>
+  </property>
+
+  <property id="5" prop-type="reachability">
+    <formula>datarcv</formula>
+    <description>Receiver receives at least DATA_RCV data</description>
+  </property>
+  
+  <property id="6" prop-type="reachability">
+    <formula>loss_detected &amp;&amp; full_rn</formula>
+    <description>Reachability of an RN channel overflow. </description>
+  </property>
+  
+  <instance id="1">
+    <parameters>MAX_LOSS=3,TXW_SIZE=3, MAX_DATA=4,DATA_RCV=3</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>MAX_LOSS=1,MAX_DATA=6,DATA_RCV=7</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>MAX_LOSS=3,TXW_SIZE=4, MAX_DATA=9,DATA_RCV=9</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>TXW_SIZE=4,DELAY=3, MAX_DATA=7,DATA_RCV=9</parameters>
+  </instance>
+  <instance id="5">
+    <parameters>MAX_LOSS=3,DATA_PERIOD=3, MAX_DATA=9,DATA_RCV=9</parameters>
+  </instance>
+  <instance id="6">
+    <parameters>MAX_LOSS=4,TXW_SIZE=5,DATA_PERIOD=3, DATA_PER_SPM=2,MAX_DATA=9,DATA_RCV=9</parameters>
+  </instance>
+
+  <instance id="7">
+    <parameters>TXW_SIZE=6, DATA_PERIOD=4, DATA_PER_SPM=2, MAX_DATA=9,DATA_RCV=12</parameters>
+  </instance>
+  <instance id="8">
+    <parameters>DELAY=3,MAX_LOSS=5,TXW_SIZE=5,DATA_PERIOD=5,MAX_DATA=12,DATA_RCV=9</parameters>
+  </instance>
+ 
+  
+</model>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other-protocol" status="ok" classification="toy">
+  <short-description>Readers-writers problem</short-description>
+  <long-description>Simple protocol for coordination of readers and writers
+  accessing shared resource. Several readers can read concurrently, writers
+  require exclusive access. </long-description>
+  <author>Radek</author>
+  <source>Classical example; this models is inspired specifically by
+http://laser.cs.umass.edu/verification-examples/reader_writer/rw.html
+ </source>
+  <parameter-description>
+    <par-name>R</par-name>
+    <par-description>Number of readers</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>W</par-name>
+    <par-description>Number of writers</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>ERROR</par-name>
+    <par-description>Presence of an artificial error (0/1)</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>error</ap-name>
+    <ap-expression>control.q_error</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>error</formula>
+    <description>Reachability of an errorneous situation (wrong readers/writers
+    coordination).</description>
+  </property>
+  
+  <instance id="1">
+    <parameters>R=7,W=9,ERROR=1</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>R=12,W=7</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>R=14,W=14,ERROR=1</parameters>
+  </instance>
+  
+  
+</model>

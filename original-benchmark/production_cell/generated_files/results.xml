@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="production_cell" id="1">
+<reach-time complete="yes">0.8</reach-time>
+<states>14586</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="1"/>
+</instance>
+
+<instance name="production_cell" id="2">
+<reach-time complete="yes">0.6</reach-time>
+<states>9003</states>
+<state-size>26</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="107"/>
+</instance>
+
+<instance name="production_cell" id="3">
+<reach-time complete="yes">46.7</reach-time>
+<states>822612</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="1"/>
+</instance>
+
+<instance name="production_cell" id="4">
+<reach-time complete="yes">14.9</reach-time>
+<states>340685</states>
+<state-size>30</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="86"/>
+</instance>
+
+<instance name="production_cell" id="5">
+<reach-time complete="yes">291.3</reach-time>
+<states>4211856</states>
+<state-size>38</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="1"/>
+</instance>
+
+<instance name="production_cell" id="6">
+<reach-time complete="yes">1273.4</reach-time>
+<states>14520700</states>
+<state-size>42</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

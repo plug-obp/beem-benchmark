@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="rushhour" id="1">
+<reach-time complete="yes">0.4</reach-time>
+<states>1048</states>
+<state-size>71</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="51"/>
+</instance>
+
+<instance name="rushhour" id="2">
+<reach-time complete="yes">0.5</reach-time>
+<states>2242</states>
+<state-size>76</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="58"/>
+</instance>
+
+<instance name="rushhour" id="3">
+<reach-time complete="yes">10.8</reach-time>
+<states>156723</states>
+<state-size>114</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+<instance name="rushhour" id="4">
+<reach-time complete="yes">22.1</reach-time>
+<states>327675</states>
+<state-size>114</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+</instance>
+
+</instance-list>

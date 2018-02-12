@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other-protocol" status="propmissing" classification="simple">
+    <short-description>Telecommunication service</short-description>
+    <long-description>Model of a telecommunication service with some features
+    (call forward when busy, ring back when free).</long-description>
+
+  <author>Radek</author>
+  <source>@inproceedings{380935,
+ author = {Muffy Calder and Alice Miller},
+ title = {Using SPIN for feature interaction analysis\?a case study},
+ booktitle = {Proceedings of the 8th international SPIN workshop on Model checking of software},
+ year = {2001},
+ isbn = {3-540-42124-6},
+ pages = {143--162},
+ location = {Toronto, Ontario, Canada},
+ publisher = {Springer-Verlag New York, Inc.},
+ }</source>
+  
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of users</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>FORWARD</par-name>
+      <par-description>Enable forward when busy feature (0/1)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>BACK</par-name>
+      <par-description>Enable ring back when free feature (0/1)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>ERROR</par-name>
+      <par-description>An artifical error (0/1)</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>uerror</ap-name>
+    <ap-expression>User_0.error_state</ap-expression>
+  </ap>
+  
+  <property id="1" prop-type="reachability">
+    <formula>uerror</formula>
+    <description>User can get into an error state.</description>
+  </property>
+  
+  
+  <instance id="1">
+      <parameters>N=2,FORWARD=1,BACK=1,ERROR=1</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>N=3,FORWARD=0,BACK=0,ERROR=0</parameters>
+    </instance>
+    <instance id="3">
+      <parameters>N=3,FORWARD=1,BACK=1,ERROR=1</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>N=4,FORWARD=0,BACK=0,ERROR=0</parameters>
+    </instance> 
+    <instance id="5">
+      <parameters>N=4,FORWARD=1,BACK=1,ERROR=0</parameters>
+    </instance>
+   <instance id="6">
+      <parameters>N=4,FORWARD=0,BACK=1,ERROR=1</parameters>
+    </instance>
+   <instance id="7">
+      <parameters>N=4,FORWARD=1,BACK=0,ERROR=1</parameters>
+    </instance>
+   <instance id="8">
+      <parameters>N=4,FORWARD=1,BACK=1,ERROR=1</parameters>
+    </instance>
+
+
+</model>

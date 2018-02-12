@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="rether" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>2458</states>
+<state-size>24</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="83"/>
+<ltl-prob prop-id="4" answer="no" length="83"/>
+<ltl-prob prop-id="5" answer="yes" length="0"/>
+<ltl-prob prop-id="6" answer="no" length="83"/>
+</instance>
+
+<instance name="rether" id="2">
+<reach-time complete="yes">1.0</reach-time>
+<states>9278</states>
+<state-size>29</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="26"/>
+<ltl-prob prop-id="4" answer="no" length="26"/>
+<ltl-prob prop-id="5" answer="yes" length="0"/>
+<ltl-prob prop-id="6" answer="no" length="26"/>
+</instance>
+
+<instance name="rether" id="3">
+<reach-time complete="yes">33.0</reach-time>
+<states>305334</states>
+<state-size>44</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="163"/>
+<ltl-prob prop-id="4" answer="no" length="163"/>
+<ltl-prob prop-id="5" answer="yes" length="0"/>
+<ltl-prob prop-id="6" answer="no" length="163"/>
+</instance>
+
+<instance name="rether" id="4">
+<reach-time complete="yes">154.4</reach-time>
+<states>1157052</states>
+<state-size>54</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="72"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="299"/>
+<ltl-prob prop-id="4" answer="no" length="299"/>
+<ltl-prob prop-id="5" answer="no" length="299"/>
+<ltl-prob prop-id="6" answer="no" length="299"/>
+</instance>
+
+<instance name="rether" id="5">
+<reach-time complete="yes">634.0</reach-time>
+<states>3017044</states>
+<state-size>59</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="152"/>
+<ltl-prob prop-id="4" answer="no" length="152"/>
+<ltl-prob prop-id="5" answer="yes" length="0"/>
+<ltl-prob prop-id="6" answer="no" length="152"/>
+</instance>
+
+<instance name="rether" id="6">
+<reach-time complete="yes">1239.3</reach-time>
+<states>5919694</states>
+<state-size>64</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+<ltl-prob prop-id="5" answer="unknown" length="0"/>
+<ltl-prob prop-id="6" answer="unknown" length="0"/>
+</instance>
+
+<instance name="rether" id="7">
+<reach-time complete="yes">1607.2</reach-time>
+<states>4789409</states>
+<state-size>69</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+<ltl-prob prop-id="5" answer="unknown" length="0"/>
+<ltl-prob prop-id="6" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

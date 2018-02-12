@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="schedule_world" id="1">
+<reach-time complete="yes">1.2</reach-time>
+<states>23061</states>
+<state-size>23</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="7"/>
+</instance>
+
+<instance name="schedule_world" id="2">
+<reach-time complete="yes">75.7</reach-time>
+<states>1570340</states>
+<state-size>29</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="3"/>
+</instance>
+
+<instance name="schedule_world" id="3">
+<reach-time complete="no">1508.2</reach-time>
+<states>14420303</states>
+<state-size>35</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="2"/>
+</instance>
+
+</instance-list>

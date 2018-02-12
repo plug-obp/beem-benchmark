@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="lifts" id="1">
+<reach-time complete="yes">0.8</reach-time>
+<states>2661</states>
+<state-size>27</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="26"/>
+<ltl-prob prop-id="3" answer="no" length="26"/>
+<ltl-prob prop-id="4" answer="no" length="26"/>
+</instance>
+
+<instance name="lifts" id="2">
+<reach-time complete="yes">0.8</reach-time>
+<states>2664</states>
+<state-size>27</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="26"/>
+<ltl-prob prop-id="3" answer="no" length="26"/>
+<ltl-prob prop-id="4" answer="no" length="26"/>
+</instance>
+
+<instance name="lifts" id="3">
+<reach-time complete="yes">7.6</reach-time>
+<states>30772</states>
+<state-size>35</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="49"/>
+<ltl-prob prop-id="4" answer="no" length="49"/>
+</instance>
+
+<instance name="lifts" id="4">
+<reach-time complete="yes">25.0</reach-time>
+<states>112792</states>
+<state-size>35</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="49"/>
+<ltl-prob prop-id="3" answer="no" length="49"/>
+<ltl-prob prop-id="4" answer="no" length="49"/>
+</instance>
+
+<instance name="lifts" id="5">
+<reach-time complete="yes">42.1</reach-time>
+<states>191567</states>
+<state-size>35</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="64"/>
+<ltl-prob prop-id="2" answer="no" length="49"/>
+<ltl-prob prop-id="3" answer="no" length="49"/>
+<ltl-prob prop-id="4" answer="no" length="49"/>
+</instance>
+
+<instance name="lifts" id="6">
+<reach-time complete="yes">98.6</reach-time>
+<states>333649</states>
+<state-size>43</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="77"/>
+<ltl-prob prop-id="4" answer="no" length="77"/>
+</instance>
+
+<instance name="lifts" id="7">
+<reach-time complete="yes">1772.5</reach-time>
+<states>5126781</states>
+<state-size>43</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="lifts" id="8">
+<reach-time complete="no">3601.8</reach-time>
+<states>9582787</states>
+<state-size>43</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="mutex" status="ok" classification="simple">
+    <short-description>Alur-Taubenfeld mutual exclusion algorithm</short-description>
+    <long-description>Dicrete time model of Alur-Taubenfeld fast timing-based
+    mutual exclusion algorithm.</long-description>
+  <author>Radek</author>
+    <source>Alur and TAu (Fast timing-based algorithms), model is according to
+@article{966040,
+ author = {James H. Anderson and Yong-Jik Kim and Ted Herman},
+ title = {Shared-memory mutual exclusion: major research trends since 1986},
+ journal = {Distrib. Comput.},
+ volume = {16},
+ number = {2-3},
+ year = {2003},
+ issn = {0178-2770},
+ pages = {75--110},
+ doi = {http://dx.doi.org/10.1007/s00446-003-0088-6},
+ publisher = {Springer-Verlag},
+} </source>
+
+  <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of processes</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>K1</par-name>
+      <par-description>Time needed to perform write/read operation</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>K2</par-name>
+      <par-description>Delay parameter of the algorithm (to ensure mutual
+      exclusion K2 must be larger than 2*K1)</par-description>
+    </parameter-description>
+
+    <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of processes</par-description>
+  </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>collision</ap-name>
+    <ap-expression>myloop(i,0,decr(N), `P_`'i.CS', ` + ') > 1 </ap-expression>
+  </ap>
+  <ap parametrized="yes">
+    <ap-name>someoneincs</ap-name>
+    <ap-expression> myloop(i,0,decr(N), `P_`'i.CS', ` + ') == 1</ap-expression>
+  </ap>
+  
+  <ap>
+    <ap-name>wait0</ap-name>
+    <ap-expression>P_0.p3</ap-expression>
+  </ap>
+
+    <ap>
+    <ap-name>cs0</ap-name>
+    <ap-expression>P_0.CS</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>cs1</ap-name>
+    <ap-expression>P_1.CS</ap-expression>
+  </ap>
+  
+  <property id="1"  prop-type="reachability">
+    <formula>collision</formula>
+    <description>Violation of mutual exclusion (more than one process in critical section)</description>    
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>G (wait0 -> F (cs0) )</formula>
+    <description>If P_0 waits for CS then it will eventually get there.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G((!cs0) -> F cs0)</formula>
+    <description>If P_0 isn't in CS then it will eventually reach it.</description>
+  </property>
+  
+  <property id="4" prop-type="LTL">
+    <formula>GF someoneincs</formula>
+    <description>Infinitely many times someone critical section.</description>
+  </property>
+
+  
+    <instance id="1">
+      <parameters>N=3, K1=2, K2=5</parameters>
+    <instance-comment>Small, correct.</instance-comment>
+    </instance>
+    <instance id="2">    
+      <parameters>N=3, K1=2, K2=3</parameters>
+    <instance-comment>Smaller Errorneous one.</instance-comment>
+    </instance>
+    <instance id="3">
+      <parameters>N=4, K1=2, K2=4</parameters>
+    <instance-comment>Large errorneous one.</instance-comment>
+    </instance>
+    <instance id="4">
+      <parameters>N=5, K1=1, K2=3</parameters>
+    </instance>
+    <instance id="5">
+      <parameters>N=5, K1=2, K2=5</parameters>
+    </instance>
+    <instance id="6">
+      <parameters>N=5, K1=3, K2=5</parameters>
+    </instance>
+  <instance id="7">
+      <parameters>N=6, K1=2, K2=5</parameters>
+    </instance>
+
+
+</model>

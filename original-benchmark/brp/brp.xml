@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="ok" classification="simple">
+  <short-description>Bounded retransmission protocol</short-description>
+  <long-description>The Bounded Retransmission Protocol is a protocol used in
+    one of the Philips' products. It is based on the well-known alternating bit
+    protocol. It allows only bounded number of retransmissions of each frame
+    (piece of a file). This model does not include timing aspects. </long-description>
+
+  <author>Radek</author>
+  <source>@inproceedings{DArKRT97,
+	author =	{P.R. D{'A}rgenio and J.-P. Katoen and T.C. Ruys
+			and J. Tretmans},	
+	title =		{The bounded retransmission protocol must be on time!},
+	pages =		{416--431},
+	booktitle =	{Proceedings of the Third Workshop on Tools and
+			Algorithms for the Construction and Analysis of Systems,
+			{\rm Enschede, The Netherlands}},
+	editor =	{E. Brinksma},
+	series =	{Lecture Notes in Computer Science},
+	volume =	1217,
+	publisher =	{Springer-Verlag},
+	year =		1997,
+} </source>
+  
+  <parameter-description>
+    <par-name>REPEAT</par-name>
+    <par-description>Maximal number of retransmissions</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>MAX_FRAMES</par-name>
+    <par-description>Maximal number of frames (pieces of file)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>ERROR</par-name>
+    <par-description>Version with an error (which I have done during
+      modelling) (0/1)</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>cerror</ap-name>
+    <ap-expression>Consumer.st_error</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>wait</ap-name>
+    <ap-expression>Producer.wait_result</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>check</ap-name>
+    <ap-expression>Producer.check</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>ready</ap-name>
+    <ap-expression>Producer.ready</ap-expression>
+  </ap>
+  
+  <property id="1" prop-type="reachability">
+    <formula>cerror</formula>
+    <description>Consumer gets a wrong number of frames (an error)</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>G (wait -> F check)</formula>
+    <description>If the producer sends message, it will eventually get some
+    acknowledgement from the Sender process.</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G (wait -> F ready)</formula>
+    <description>If the producer sends message, it will eventually get positive
+    acknowledgement (=send ok) from the Sender process.</description>
+  </property>
+
+  
+  <instance id="1">
+    <parameters>REPEAT=3,MAX_FRAMES=5</parameters>
+  </instance>
+
+  <instance id="2">
+    <parameters>REPEAT=5,MAX_FRAMES=3,ERROR=1</parameters>
+  </instance>
+
+  
+  <instance id="3">
+    <parameters>REPEAT=10,MAX_FRAMES=10,ERROR=1</parameters>
+  </instance>  
+
+  <instance id="4">
+    <parameters>REPEAT=20,MAX_FRAMES=20,ERROR=0</parameters>
+  </instance>  
+
+  <instance id="5">
+    <parameters>REPEAT=30,MAX_FRAMES=20,ERROR=1</parameters>
+  </instance>  
+
+  <instance id="6">
+    <parameters>REPEAT=23,MAX_FRAMES=30,ERROR=1</parameters>
+  </instance>  
+
+  
+</model>

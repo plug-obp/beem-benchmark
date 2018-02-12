@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="lup" id="1">
+<reach-time complete="yes">0.6</reach-time>
+<states>1404</states>
+<state-size>11</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="lup" id="2">
+<reach-time complete="yes">128.2</reach-time>
+<states>495720</states>
+<state-size>19</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="lup" id="3">
+<reach-time complete="yes">647.5</reach-time>
+<states>1948617</states>
+<state-size>21</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+</instance>
+
+<instance name="lup" id="4">
+<reach-time complete="no">3601.8</reach-time>
+<states>6618725</states>
+<state-size>23</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

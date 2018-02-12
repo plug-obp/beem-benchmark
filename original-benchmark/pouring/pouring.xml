@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="puzzle" status="ok" classification="toy">
+    <short-description>Water pouring puzzle</short-description>
+    <long-description>You are given several containers of different sizes
+    (e.g., 8, 5, and 3 liters) and your task is to measure exactly a given
+    content (e.g., 4 liters) in the first bottle.</long-description>
+
+      <author>Radek</author>
+    <source>Classical puzzle, see. e.g., http://www.creativepuzzels.nl/spel/speel1/speel2/water2.htm</source>
+  
+    <parameter-description>
+      <par-name>VERSION</par-name>
+      <par-description>Version of the puzzle</par-description>
+    </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>done</ap-name>
+    <ap-expression>Bottle_1.q`'X</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>done</formula>
+    <description>The puzzle is solved (there are X liters in the first bottle).</description>
+  </property>
+  
+    <instance id="1">
+      <parameters>VERSION=2,X=4</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>VERSION=4,X=4</parameters>
+    </instance>
+
+  
+
+</model>

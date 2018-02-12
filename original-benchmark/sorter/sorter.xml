@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="propmissing" classification="simple">
+  <short-description>Lego brick sorter</short-description>
+  
+  <long-description>The example is a model of a sorter of bricks built using a Lego
+  Mindstorms systems. The Sorter  consists of the following parts:
+ 2 belts which are used to transport bricks, a light sensor which can detect passing bricks, an arm which can kick bricks from the belt, a button which is used to "order" bricks for processing.
+The intended behaviour of the system is the following. Bricks are placed by
+the user on the first belt. Bricks which are too long (length
+is detected with the use of light sensor) are kicked out from the belt by the
+arm. Short bricks are transported to the second belt. The second belt
+transports them either to a "processing" side or to a "not-processing" side
+depending on whether a brick has been ordered by pressing the button.
+Although the system is rather simple and artificial, it has several features
+typical for embedded systems. The model is discrete time.</long-description>
+
+  <author>Radek</author>
+
+  <source>@PhdThesis{phd-thesis,
+  author = 	 {R. Pel\'anek},
+  title = 	 {Reduction and Abstraction Techniques for Model Checking},
+  school =       {Faculty of Informatics, Masaryk University, Brno},
+  year = 	 {2006},
+}
+</source>
+  <comment>Redo, add properties</comment>
+  
+  <parameter-description>
+    <par-name>SCENARIO</par-name>
+    <par-description>The model includes five scenarios (different combinations
+    of short and long bricks which are inserted on the belt).</par-description>
+  </parameter-description>
+
+  <instance id="1">
+    <parameters>SCENARIO=1</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>SCENARIO=2</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>SCENARIO=3</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>SCENARIO=4</parameters>
+  </instance>
+  <instance id="5">
+    <parameters>SCENARIO=5</parameters>
+  </instance>
+
+  
+</model>

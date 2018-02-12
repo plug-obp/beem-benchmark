@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other-protocol" status="ok" classification="toy">
+  <short-description>Milner's cyclic scheduler</short-description>
+  <long-description>The system describe a scheduler for N concurrent processes.
+  The processes are scheduled in cyclic fashion so that the first process is
+  reactivated after the Nth process has been activated.</long-description>
+  <author>Radek</author>
+  <source>The original idea is from R. Milner, A Calculus of Communicating
+  Systems, 1980; this specific model is inspired by
+http://laser.cs.umass.edu/counterexamplesearch/</source>
+
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of processes</par-description>
+  </parameter-description>
+
+  <parameter-description>
+    <par-name>ERROR</par-name>
+    <par-description>Presence of an artificial error </par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>error</ap-name>
+    <ap-expression>customer_0.q_error</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>error</formula>
+    <description>Procces can be started for the second time without being
+    finished in the meantime. </description>
+  </property>
+  
+  <instance id="1">
+    <parameters>N=8</parameters>
+  </instance>
+
+    <instance id="2">
+    <parameters>N=5,ERROR=1</parameters>
+  </instance>
+
+  <instance id="3">
+    <parameters>N=13</parameters>
+  </instance>
+
+  <instance id="4">
+    <parameters>N=9,ERROR=1</parameters>
+  </instance>
+
+  
+</model>

@@ -1,0 +1,61 @@
+
+default(N,3)
+define(BOTTOM,100)
+// to bottom tam potrebuju kvuli tomu, ze nemame liny vyhodnocovani a ono by mi to podlizalo... a pada mi to pak nooo...
+
+byte a[incr(N)] = { BOTTOM, myloop(x,0,decr(N), N - x, `,')  };
+byte a_act = incr(N);
+define(a_size, incr(N))
+
+byte b[incr(N)] = { BOTTOM, myloop(x,0,decr(N), 0, `,')  };
+byte b_act = 1;
+define(b_size, incr(N))
+
+byte c[incr(N)] = { BOTTOM, myloop(x,0,decr(N), 0, `,')  };
+byte c_act = 1;
+define(c_size, incr(N))
+
+
+process AtoB {
+state q;
+init q;
+trans
+ q->q { guard top(a) < top(b); effect push(b, top(a)), pop(a);};
+}
+
+process AtoC {
+state q;
+init q;
+trans
+ q->q { guard top(a) < top(c); effect push(c, top(a)), pop(a);};
+}
+
+process BtoA {
+state q;
+init q;
+trans
+ q->q { guard top(b) < top(a); effect push(a, top(b)), pop(b);};
+}
+
+process BtoC {
+state q;
+init q;
+trans
+ q->q { guard top(b) < top(c); effect push(c, top(b)), pop(b);};
+}
+
+process CtoA {
+state q;
+init q;
+trans
+ q->q { guard top(c) < top(a); effect push(a, top(c)), pop(c);};
+}
+
+process CtoB {
+state q;
+init q;
+trans
+ q->q { guard top(c) < top(b); effect push(b, top(c)), pop(c);};
+}
+
+system async;

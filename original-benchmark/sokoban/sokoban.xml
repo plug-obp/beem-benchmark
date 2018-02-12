@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="puzzle" status="ok" classification="toy">
+  <short-description>Sokoban sliding block puzzle</short-description>
+  <long-description>A well-known computer game. The object of Sokoban is to
+  push all stones (or boxes) in a maze, such as the one to the right, to the
+  designated goal areas. The player controls the man and the "man" can only
+  push stones and only one at a time. </long-description>
+
+  <author>Radek</author>
+  <source>Classical problem, see e.g. http://www.cs.ualberta.ca/~games/Sokoban/ </source>
+  
+  <parameter-description>
+    <par-name>VERSION</par-name>
+    <par-description>Version of the puzzle.</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>done</ap-name>
+    <ap-expression>done==1</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>done</formula>
+    <description>The puzzle is solved.</description>
+  </property>
+  
+  <instance id="1">
+    <parameters>VERSION=3</parameters>
+    <instance-comment>Small but tricky.</instance-comment>
+  </instance>
+  <instance id="2">
+    <parameters>VERSION=4</parameters>
+    <instance-comment>Another small but tricky.</instance-comment>
+  </instance>
+  <instance id="3">
+    <parameters>VERSION=2</parameters>
+    <instance-comment>Classical sokoban example.</instance-comment>
+  </instance>
+
+
+</model>

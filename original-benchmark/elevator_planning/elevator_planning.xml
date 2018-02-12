@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="ps" status="ok" classification="toy">
+    <short-description>Planning of elevator strategy under several constraints</short-description>
+    <long-description>Example from AIPS: the goal is to serve pasanger, there
+    are several restricting constraints (capacity of the elevator, conflicts
+    between pasangers, etc.)</long-description>
+  <author>Radek</author>
+    <source>AIPS 2000 contest: http://www.cs.toronto.edu/aips2000/</source>
+
+  
+  <parameter-description>
+    <par-name>VERSION</par-name>
+    <par-description>Version of the problem.</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>done</ap-name>
+    <ap-expression>Elevator.done</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>done</formula>
+    <description>All passengers are at the 0. floor.</description>
+  </property>
+  
+    <instance id="1">
+      <parameters>VERSION=2</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>VERSION=3</parameters>
+    </instance>
+  <instance id="3">
+      <parameters>VERSION=44</parameters>
+    </instance>
+
+
+</model>

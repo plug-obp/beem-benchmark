@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="puzzle" status="ok" classification="toy">
+    <short-description>Sam Lloyd's fifteen puzzle</short-description>
+    <long-description>The "15 puzzle" is a sliding square puzzle introduced by Sam Lloyd in 1878.
+It consists of 15 squares numbered from 1 to 15 which are placed in a box
+leaving one position out of the 16 empty. The goal is to reposition the
+squares from a given arbitrary starting arrangement by sliding them one
+at a time into a configuration, where the squares are ordered by their
+numbers. For more details see:
+http://mathworld.wolfram.com/15Puzzle.html.
+
+Because the 'fifteen' version has too big state space, we consider smaller
+    instances as well. The goal, expressed by the reachability property below,
+    is to reverse the order of pieces. </long-description>
+    <author>Radek</author>
+    <source>Sam Lloyd :-)</source>
+
+    <parameter-description>
+      <par-name>COLS</par-name>
+      <par-description>Number of columns</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>ROWS</par-name>
+      <par-description>Number of rows</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>done</ap-name>
+    <ap-expression>Check.done</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>done</formula>
+    <description>The puzzle is solved.</description>
+  </property>
+    
+
+  
+    <instance id="1">
+      <parameters>COLS=2, ROWS=3</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>COLS=3, ROWS=3</parameters>
+    </instance>
+    <instance id="3">
+      <parameters>COLS=4,ROWS=3</parameters>
+    </instance>
+
+  
+
+</model>

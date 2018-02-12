@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="train-gate" id="1">
+<reach-time complete="yes">0.4</reach-time>
+<states>1020</states>
+<state-size>21</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="46"/>
+<ltl-prob prop-id="2" answer="no" length="234"/>
+</instance>
+
+<instance name="train-gate" id="2">
+<reach-time complete="yes">1.5</reach-time>
+<states>22076</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="772"/>
+</instance>
+
+<instance name="train-gate" id="3">
+<reach-time complete="yes">1.5</reach-time>
+<states>22496</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="54"/>
+<ltl-prob prop-id="2" answer="no" length="772"/>
+</instance>
+
+<instance name="train-gate" id="4">
+<reach-time complete="yes">51.6</reach-time>
+<states>789808</states>
+<state-size>41</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="1662"/>
+</instance>
+
+<instance name="train-gate" id="5">
+<reach-time complete="yes">51.6</reach-time>
+<states>803458</states>
+<state-size>41</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="62"/>
+<ltl-prob prop-id="2" answer="no" length="1662"/>
+</instance>
+
+<instance name="train-gate" id="6">
+<reach-time complete="yes">476.2</reach-time>
+<states>5904140</states>
+<state-size>46</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="2244"/>
+</instance>
+
+<instance name="train-gate" id="7">
+<reach-time complete="no">3601.8</reach-time>
+<states>34562600</states>
+<state-size>51</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

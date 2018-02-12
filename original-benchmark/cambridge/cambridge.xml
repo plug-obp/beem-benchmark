@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="communication-protocol" status="ok"  classification="complex">
+
+    <short-description>Cambridge ring protocol</short-description>
+    <long-description>Protocol for communication between two sides (sender and
+    receiver) over (loosy) medium.</long-description>
+
+    <author>Radek</author>
+    <source>R.M. Needham, A.J. Herbert, The Cambridge Distributed Computing
+    System, Addison-Wesley Publ., London, 1982, p. 154; the model was created
+    by translation of Promela model (from SPIN distribution)</source>
+  <external-source-code>cambridge.pm</external-source-code>
+  
+  
+    <parameter-description>
+      <par-name>K</par-name>
+      <par-description>Size of buffers</par-description>
+    </parameter-description>
+  
+    <parameter-description>
+      <par-name>LOSS</par-name>
+      <par-description>Channels can loose messages (0/1)</par-description>
+    </parameter-description>
+
+  <parameter-description>
+    <par-name>ERROR</par-name>
+    <par-description>Introduces an error into a model (0 = correct, 1,2,3 =
+    different errors) </par-description>
+  </parameter-description>
+  
+  <ap>
+    <ap-name>serror</ap-name>
+    <ap-expression>Sender.q_error</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>rerror</ap-name>
+    <ap-expression>Receiver.q_error</ap-expression>
+  </ap>
+ 
+  <property id="1" prop-type="reachability">
+    <formula>serror</formula>
+    <description>Sender can get into an error state.</description>
+  </property>
+  <property id="2" prop-type="reachability">
+    <formula>rerror</formula>
+    <description>Receiver can get into an error state.</description>
+  </property>
+
+  
+    <instance id="1">
+      <parameters>K=3,LOSS=0,ERROR=0</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>K=3,LOSS=1,ERROR=1</parameters>
+    </instance>
+  <instance id="3">
+      <parameters>K=4,LOSS=0,ERROR=2</parameters>
+    </instance>
+  <instance id="4">
+      <parameters>K=5,LOSS=0,ERROR=3</parameters>
+    </instance>
+
+    <instance id="5">
+      <parameters>K=10,LOSS=1,ERROR=0</parameters>
+    </instance>
+
+  <instance id="6">
+    <parameters>K=15,LOSS=0,ERROR=1</parameters>
+  </instance>
+  
+  <instance id="7">
+    <parameters>K=20,LOSS=1,ERROR=1</parameters>
+  </instance>
+
+
+</model>

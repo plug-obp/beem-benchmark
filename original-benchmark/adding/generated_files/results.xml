@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="adding" id="1">
+<reach-time complete="yes">0.5</reach-time>
+<states>7372</states>
+<state-size>10</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="16"/>
+</instance>
+
+<instance name="adding" id="2">
+<reach-time complete="yes">7.4</reach-time>
+<states>836838</states>
+<state-size>10</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="34"/>
+</instance>
+
+<instance name="adding" id="3">
+<reach-time complete="yes">19.1</reach-time>
+<states>1894376</states>
+<state-size>10</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="37"/>
+</instance>
+
+<instance name="adding" id="4">
+<reach-time complete="yes">28.3</reach-time>
+<states>3370680</states>
+<state-size>10</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="37"/>
+</instance>
+
+<instance name="adding" id="5">
+<reach-time complete="yes">52.3</reach-time>
+<states>5271456</states>
+<state-size>10</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="37"/>
+</instance>
+
+<instance name="adding" id="6">
+<reach-time complete="yes">64.8</reach-time>
+<states>7609684</states>
+<state-size>10</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="40"/>
+</instance>
+
+</instance-list>

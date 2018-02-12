@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="sorter" id="1">
+<reach-time complete="yes">0.9</reach-time>
+<states>20544</states>
+<state-size>30</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="sorter" id="2">
+<reach-time complete="yes">0.6</reach-time>
+<states>7592</states>
+<state-size>30</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="sorter" id="3">
+<reach-time complete="yes">41.0</reach-time>
+<states>1288478</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="sorter" id="4">
+<reach-time complete="yes">421.0</reach-time>
+<states>12958752</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+</instance>
+
+<instance name="sorter" id="5">
+<reach-time complete="yes">9.7</reach-time>
+<states>296148</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+</instance>
+
+</instance-list>

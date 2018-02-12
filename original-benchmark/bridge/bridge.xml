@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model type="puzzle" status="ok" classification="toy">
+      <short-description>Puzzle about men crossing a bridge</short-description>    
+    <long-description> Four men have to cross a bridge at night. The bridge is
+  old and dilapidated and can hold at most two people at a time. There are no
+  railings, and the men have only one flashlight. Any party who crosses, either
+  one or two men, must carry the flashlight with them. The flashlight must be
+  walked back and forth; it cannot be thrown, etc. Each man walks at a
+  different speed. One takes 5 minute to cross, another 10 minutes, another 20,
+  and the last 25 minutes. If two men cross together, they must walk at the
+  slower man's pace. Can they get to the other side in 60 minutes? (The model
+  is generalized to larger number of men.)
+  </long-description>
+      <author>Radek</author>
+    <source>Classical puzzle</source>
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of men</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>MAX</par-name>
+      <par-description>The maximum time for crossing</par-description>
+    </parameter-description>
+  <ap parametrized="yes">
+    <ap-name>allsafe</ap-name>
+    <ap-expression>on_right==N</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>allsafe</formula>
+    <description>All men are on the other side of the bridge.</description>
+  </property>
+      <instance id="1">
+      <parameters>N=4, MAX=60</parameters>
+    <instance-comment>The classical instance of the puzzle.</instance-comment>
+    </instance>
+
+      <instance id="2">
+      <parameters>N=6, MAX=140</parameters>
+    </instance>
+
+  <instance id="3">
+      <parameters>N=8, MAX=200</parameters>
+    <instance-comment>An artificially larger instance.</instance-comment>
+    </instance>
+</model>

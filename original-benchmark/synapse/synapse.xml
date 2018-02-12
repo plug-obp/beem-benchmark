@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other-protocol" status="ok" classification="complex">
+    <short-description>Synapse cache coherence protocol</short-description>
+    <long-description>Synapse cache coherence protocol: several caches are
+    connected by a bus, the goal of the protocol is to keep the content of the
+    caches coherent. </long-description>
+
+    <author>Radek</author>
+    <source>Manualy translated from Promela source code (included in SPIN distribution)</source>
+  
+    <parameter-description>
+      <par-name>Lines</par-name>
+      <par-description>Number of lines in a cache</par-description>
+    </parameter-description>
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of applications and caches</par-description>
+  </parameter-description>
+  
+  <ap>
+    <ap-name>cerror</ap-name>
+    <ap-expression>Cache_0.error_st</ap-expression>
+  </ap>
+  
+  <ap>
+    <ap-name>write11</ap-name>
+    <ap-expression>written_line == 1 &amp;&amp; written_value == 1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>write10</ap-name>
+    <ap-expression>written_line == 1 &amp;&amp; written_value == 0</ap-expression>
+  </ap>
+ 
+  <ap>
+    <ap-name>read11</ap-name>
+    <ap-expression>read_line == 1 &amp;&amp; read_value == 1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>read10</ap-name>
+    <ap-expression>read_line == 1 &amp;&amp; read_value == 0</ap-expression>
+  </ap>
+
+  
+  <property id="1" prop-type="reachability">
+    <formula>cerror</formula>
+    <description>Cache gets into an error state.</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula> (G ! write11) -> (G ! read11)  </formula>
+    <description>If we never write 1 to line 1 then we never read 1 from
+    line 1. </description>
+  </property>
+  
+  <property id="3" prop-type="LTL">
+    <formula> G (write11 -> ((G ! write10) || ((! read10) U (write10)) ))  </formula>
+    <description>If we write 1 to line 1 and do not override it until next reading then the next reading from this line is 1. </description>
+  </property>
+  
+  <instance id="1">
+      <parameters>Lines=2,ERROR=1</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>Lines=3</parameters>
+    </instance>
+
+  <instance id="3">
+      <parameters>Lines=4</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>Lines=5</parameters>
+    </instance>
+  <instance id="5">
+      <parameters>Lines=1,N=3,ERROR=1</parameters>
+    </instance>
+  <instance id="6">
+      <parameters>Lines=2,N=3</parameters>
+    </instance>
+
+  <instance id="7">
+      <parameters>Lines=3,N=3</parameters>
+    </instance>
+
+
+</model>

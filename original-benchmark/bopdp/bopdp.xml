@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="ok" classification="complex">
+  <short-description>Audio/Video Power Controller</short-description>
+    <long-description>This protocol controls the transitions between stand-by
+    mode and power on mode in the company's new series of products, where power
+    consumption minimization is an important feature. (The model is manual
+    translation of the Uppaal model; currently without time)
+    </long-description>
+
+  <author>Radek</author>
+    <source>
+Formal Verification of a Power Controller Using the Real-Time Model Checker
+Uppaal. Klaus Havelund, Kim G. Larsen and Arne Skou. Accepted for presentation
+at 5th International AMAST Workshop on Real-Time and Probabilistic Systems.
+</source>
+
+  <parameter-description>
+      <par-name>MAX_AP_INTS</par-name>
+      <par-description>Maximal number of aplication interrupts (255=unbounded)</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>MAX_LSL_INTS</par-name>
+      <par-description>Maximal number of LSL interrupts (255=unbounded)</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>sleeping0</ap-name>
+    <ap-expression>sleeping==0</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>sleepop0</ap-name>
+    <ap-expression>sleep_op==0</ap-expression>
+  </ap>
+
+  <ap>
+    <ap-name>active</ap-name>
+    <ap-expression>IOP.active</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>standby</ap-name>
+    <ap-expression>IOP.stand_by</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>noise</ap-name>
+    <ap-expression>IOP.noise</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>interrupton</ap-name>
+    <ap-expression>lsl_interrupt==1 || ap_interrupt==1</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>apactivesend</ap-name>
+    <ap-expression>IOP.now_wait || IOP.back_to_active </ap-expression>
+  </ap>
+  
+  <property id="1" prop-type="LTL">
+    <formula>G ( (sleeping0 &amp;&amp; sleepop0) -> ((! sleepop0) R (sleeping0 || (! sleepop0))) )</formula>
+    <description>sleeping must not change from 0 to 1 while sleep op has the value 0. (The IOP must
+   not go to sleep if there has been an interrupt.)
+</description>
+  </property>
+
+  <property id="2" prop-type="LTL">
+    <formula>G (active -> (standby R ( (! noise) || standby))) </formula>
+    <description>Every path from active to noise must pass through stand by (The IOP must have
+been asleep before reaching the noise state where it on its way up due to an interrupt
+discovers that the interrupt is "false", and hence caused by noise only.)</description>
+  </property>
+
+  <property id="3" prop-type="LTL">
+    <formula>G ( (sleeping0 &amp;&amp; interrupton) -> ((! interrupton) R (sleeping0 || (! interrupton))) )</formula>
+    <description>The variable sleeping must not change from 0 to 1 while lsl interrupt is 1 or
+ap interrupt is 1 (The IOP must not go to sleep as long as there is an untreated interrupt.)</description>
+  </property>
+
+  <property id="4" prop-type="LTL">
+    <formula>G (standby -> (apactivesend R ( (! active) || apactivesend)))</formula>    
+    <description> It should not be possible to come from the node stand by to
+    the node active without synchronizing on the channel ap active (The IOP
+    cannot get from stand by mode to active mode without activating the AP.)
+ </description>
+  </property>
+  
+  <instance id="1">
+    <parameters>MAX_AP_INTS=1, MAX_LSL_INTS=2</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>MAX_AP_INTS=255, MAX_LSL_INTS=255</parameters>
+  </instance>  
+  <instance id="3">
+    <parameters>MAX_AP_INTS=7, MAX_LSL_INTS=7</parameters>
+  </instance>
+
+</model>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other" status="ok" classification="simple">
+  <short-description>Model of a system for testing the quality of the cables</short-description>
+  <long-description> These three modeled systems simulates
+real complex system for testing the quality of the cables using in some Czech factories.
+
+One device is intended for accurate
+measuring of resistance on cables. The other device generates high voltage and this
+device is in safety cage together with long cabels (for example 10 km) containing
+several wires. One computer maintains all other systems - access to safety cage,safety lights, measuring of resistance, high voltage, results processing, etc.
+Real situation is rough-casted in model.png or model.svg file.
+
+ * Algorithm simulates software for controlling all devices.
+ * Device_state shows the states in whitch the hardware for measuring resistance is.
+ * Measuring simulates the process of measuring resistance.
+
+The software finds how are several wires conneted in cable using low voltage and
+resistance measuring, but this functionality is not critical and therefore not modeled.
+
+The modeled Algorithm have to find the best range for the most accurate measuring.
+The Algorithm system asks the Measuring system for actual_resistance using synchronization "m?".
+Then the Algorithm have to test the state of the Device_state system (using qstate channel).
+When the state is "Err7" (the measured resistance is out of the range for sure), the
+Algorithm and Device_state used "err" synchronization. When the state is ok, the"ok" synchronization is used.
+</long-description>
+
+  <author>Tomas Kratochvila</author>
+  <source>Own model</source>
+  <comment>Add more properties (?)</comment>
+  
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of measuring processes</par-description>
+  </parameter-description>
+  
+<ap><ap-name>measure_is_in_progress</ap-name><ap-expression>Measuring_0.measure_in_progress==1</ap-expression></ap>
+<ap><ap-name>cage_is_safe</ap-name><ap-expression>cage_safe==1</ap-expression></ap>
+<ap><ap-name>very_small_resistance</ap-name><ap-expression>Algorithm.too_small_resistance==1</ap-expression></ap>
+<ap><ap-name>very_large_resistance</ap-name><ap-expression>Algorithm.too_large_resistance==1</ap-expression></ap>
+<ap><ap-name>min_range</ap-name><ap-expression>range==0</ap-expression></ap>
+<ap><ap-name>max_range</ap-name><ap-expression>range==5</ap-expression></ap>
+<ap><ap-name>is_correct_value</ap-name><ap-expression>Algorithm.correct_value==1</ap-expression></ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>measure_is_in_progress &amp;&amp; !cage_is_safe</formula>
+    <description> When system Measuring is in the state measure_in_progress the system is under the high voltage. There should never happen that cage is not safe (it should be opened) and the system is under high voltage at the same time.</description>
+  </property>
+
+  <property id="2" prop-type="reachability">
+    <formula>very_small_resistance &amp;&amp; !min_range</formula>
+    <description> The system Algorithm in too_small_resistance state only when all possible ranges are tested the range==0 is a minimum.</description>
+  </property>
+
+  <property id="3" prop-type="reachability">
+    <formula>very_large_resistance &amp;&amp; !max_range</formula>
+    <description> The system Algorithm in too_large_resistance state only when all possible ranges are tested the range==5 is a maximum.</description>
+  </property>
+
+  <property id="4" prop-type="LTL">
+    <formula>G (F is_correct_value)</formula>
+    <description> Algorithm finds the value of resistance correct eventually.</description>
+  </property>
+  
+  <instance id="1">
+    <parameters>N=1</parameters>
+    <instance-comment>The basic instance</instance-comment>
+  </instance>
+  <instance id="2">
+    <parameters>N=2</parameters>
+  </instance>
+  
+</model>

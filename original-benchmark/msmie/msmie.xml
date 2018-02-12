@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="other-protocol" status="ok" classification="simple">
+    <short-description>Multiprocessor Shared-Memory Information Exchange protocol</short-description>
+    <long-description>Multiprocessor Shared-Memory Information Exchange (MSMIE)
+    is a protocol for communication between processors in a real-time control
+    system. The processors are classified as either masters, which perform
+    application-related tasks, or slaves, which provide dedicated functions.
+    This protocol is an extension of readers (masters)/writers (slaves) problem.</long-description>
+
+    <author>Radek</author>
+    <source>"Gaining Assurance with Formal Methods" Bruns, Anderson (in
+    Applications of Formal Methods, Michael G. Hinchey and Jonathan P. Bowen
+    (eds.), Prentice Hall, 1995)</source>
+  
+    <parameter-description>
+      <par-name>S</par-name>
+      <par-description>Number of slaves</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>M</par-name>
+      <par-description>Number of masters</par-description>
+    </parameter-description>
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Size of buffer</par-description>
+    </parameter-description>
+
+  <ap>
+    <ap-name>serror</ap-name>
+    <ap-expression>slave_1.error_state</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>serror</formula>
+    <description>Slave can get into an error state (holds if N>2).</description>
+  </property>
+  
+    <instance id="1">
+      <parameters>M=3,S=2,N=3</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>M=6,S=7,N=2</parameters>
+    </instance>
+    <instance id="3">
+      <parameters>M=6,S=7,N=4</parameters>
+    </instance>
+      <instance id="4">
+      <parameters>M=10,S=10,N=5</parameters>
+    </instance>
+
+</model>

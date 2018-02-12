@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="controller" status="ok" classification="complex">
+    <short-description>Gear Controller</short-description>
+  
+    <long-description> The gear controller is a component in the real-time
+   embedded system that operates in a modern vehicle. The gear-requests from
+   the driver are delivered over a communication network to the gear
+   controller. The controller implements the actual gear change by actuating
+   the lower level components of the system, such as the clutch, the engine and
+   the gear-box.</long-description>
+  
+    <author>Radek</author>
+    <source>@article{,
+  author = 	 {Magnus Lindahl and Paul Pettersson and Wang Yi},
+  title = 	 {{Formal Design and Analysis of a Gearbox Controller}},
+  journal = 	 {Springer International Journal of Software Tools for Technology Transfer (STTT)},
+  year = 	 {2001},
+  volume = 	 {3},
+  number = 	 {3},
+  pages = 	 {353--368}
+}</source>
+
+  <ap parametrized="yes">
+    <ap-name>maxgear</ap-name>
+    <ap-expression>currentGear == MAX</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>erroropen</ap-name>
+    <ap-expression>Clutch.error_open</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>errorclose</ap-name>
+    <ap-expression>Clutch.error_close</ap-expression>
+  </ap>
+  <ap>
+    <ap-name>errorspeed</ap-name>
+    <ap-expression>Engine.error_speed</ap-expression>
+  </ap>
+
+  
+  <property id="1" prop-type="reachability">
+    <formula>maxgear</formula>
+    <description>It is possible use MAX gear.</description>
+  </property>
+
+  <property id="2" prop-type="reachability">
+    <formula>erroropen</formula>
+    <description>Clutch open error.</description>
+  </property>
+
+  <property id="3" prop-type="reachability">
+    <formula>errorclose</formula>
+    <description>Clutch close error.</description>
+  </property>
+
+  <property id="4" prop-type="reachability">
+    <formula>errorspeed</formula>
+    <description>Clutch speed error.</description>
+  </property>
+
+  
+  <parameter-description>
+      <par-name>MAX</par-name>
+      <par-description>Maximal gear</par-description>
+    </parameter-description>
+
+    <instance id="1">
+      <parameters>MAX=5</parameters>
+    </instance>
+
+    <instance id="2">
+      <parameters>MAX=30</parameters>
+    </instance>
+  
+</model>

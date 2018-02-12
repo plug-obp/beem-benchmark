@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="lann" id="1">
+<reach-time complete="yes">1.1</reach-time>
+<states>18424</states>
+<state-size>21</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="15"/>
+<ltl-prob prop-id="2" answer="no" length="97"/>
+<ltl-prob prop-id="3" answer="no" length="50"/>
+</instance>
+
+<instance name="lann" id="2">
+<reach-time complete="yes">1.0</reach-time>
+<states>12784</states>
+<state-size>32</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="lann" id="3">
+<reach-time complete="yes">88.1</reach-time>
+<states>1832139</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="23"/>
+<ltl-prob prop-id="2" answer="no" length="12"/>
+<ltl-prob prop-id="3" answer="no" length="12"/>
+</instance>
+
+<instance name="lann" id="4">
+<reach-time complete="yes">60.9</reach-time>
+<states>966855</states>
+<state-size>40</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="40"/>
+<ltl-prob prop-id="3" answer="no" length="38"/>
+</instance>
+
+<instance name="lann" id="5">
+<reach-time complete="yes">62.4</reach-time>
+<states>993914</states>
+<state-size>48</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="41"/>
+<ltl-prob prop-id="3" answer="no" length="41"/>
+</instance>
+
+<instance name="lann" id="6">
+<reach-time complete="no">3601.8</reach-time>
+<states>57120827</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+<instance name="lann" id="7">
+<reach-time complete="no">3601.8</reach-time>
+<states>52237514</states>
+<state-size>35</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+<instance name="lann" id="8">
+<reach-time complete="no">3601.8</reach-time>
+<states>45091872</states>
+<state-size>35</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

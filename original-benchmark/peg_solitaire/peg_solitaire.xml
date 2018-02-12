@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="puzzle" status="ok" classification="simple">
+  <short-description>Peg solitaire</short-description>
+  <long-description>Peg solitaire is an old board game for one player. The
+    basic rules are the following: A game board with 33 holes in cross form is given. 32 pegs are in. The centre
+    hole is empty. You have to remove the pegs one after the other by jumping
+    horizontally or vertically over one. In the end one peg should be left. We
+    can of course consider different variants (different boards, allow crossway
+    jumps).</long-description>
+  <author>Radek</author>
+  <source>Classical game, see e.g., http://www.mathematische-basteleien.de/solitaire.htm</source>
+  
+  <parameter-description>
+    <par-name>VERSION</par-name>
+    <par-description>The version of the game (1=square board NxN, 2=cross
+      board, 3=cross board with pyramid pattern)</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Size of the board</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>CROSSWAYS</par-name>
+    <par-description>Allow crossway jumps (0/1)</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>onepeg</ap-name>
+    <ap-expression>peg_count==1</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>onepeg</formula>
+    <description>There is only one peg left.</description>
+  </property>
+  
+  <instance id="1">
+    <parameters>VERSION=1,N=4,CROSSWAYS=1</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>VERSION=2,CROSSWAYS=0</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>VERSION=2,CROSSWAYS=1</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>VERSION=1,N=5,CROSSWAYS=0</parameters>
+  </instance>
+  <instance id="5">
+    <parameters>VERSION=3,CROSSWAYS=0</parameters>
+  </instance>
+  <instance id="6">
+    <parameters>VERSION=1,N=6,CROSSWAYS=0</parameters>
+  </instance>
+</model>

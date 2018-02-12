@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="iprotocol" id="1">
+<reach-time complete="yes">0.6</reach-time>
+<states>6814</states>
+<state-size>29</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="6"/>
+<ltl-prob prop-id="2" answer="no" length="6"/>
+<ltl-prob prop-id="3" answer="no" length="6"/>
+<ltl-prob prop-id="4" answer="no" length="6"/>
+</instance>
+
+<instance name="iprotocol" id="2">
+<reach-time complete="yes">1.4</reach-time>
+<states>29994</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="6"/>
+<ltl-prob prop-id="2" answer="no" length="6"/>
+<ltl-prob prop-id="3" answer="no" length="6"/>
+<ltl-prob prop-id="4" answer="no" length="6"/>
+</instance>
+
+<instance name="iprotocol" id="3">
+<reach-time complete="yes">29.8</reach-time>
+<states>1013456</states>
+<state-size>35</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="6"/>
+<ltl-prob prop-id="2" answer="no" length="6"/>
+<ltl-prob prop-id="3" answer="no" length="6"/>
+<ltl-prob prop-id="4" answer="no" length="6"/>
+</instance>
+
+<instance name="iprotocol" id="4">
+<reach-time complete="yes">91.2</reach-time>
+<states>3290916</states>
+<state-size>39</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="6"/>
+<ltl-prob prop-id="2" answer="no" length="6"/>
+<ltl-prob prop-id="3" answer="no" length="6"/>
+<ltl-prob prop-id="4" answer="no" length="6"/>
+</instance>
+
+<instance name="iprotocol" id="5">
+<reach-time complete="yes">918.4</reach-time>
+<states>31071582</states>
+<state-size>43</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="6"/>
+<ltl-prob prop-id="2" answer="no" length="6"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="iprotocol" id="6">
+<reach-time complete="yes">1210.3</reach-time>
+<states>41387484</states>
+<state-size>43</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+<instance name="iprotocol" id="7">
+<reach-time complete="no">1216.6</reach-time>
+<states>24673777</states>
+<state-size>47</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="6"/>
+<ltl-prob prop-id="2" answer="no" length="6"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+<ltl-prob prop-id="4" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

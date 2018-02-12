@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="puzzle" status="ok" classification="toy">
+    <short-description>Tower of Hanoi puzzle</short-description>
+    <long-description>The Tower of Hanoi (sometimes referred to as the Tower of
+    Brahma or the End of the World Puzzle) was invented by the French
+    mathematician, Edouard Lucas, in 1883. He was inspired by a legend that
+    tells of a Hindu temple where the pyramid puzzle might have been used for
+    the mental discipline of young priests. Legend says that at the beginning
+    of time the priests in the temple were given a stack of 64 gold disks, each
+    one a little smaller than the one beneath it. Their assignment was to
+    transfer the 64 disks from one of the three poles to another, with one
+    important proviso that a large disk could never be placed on top of a
+    smaller one. The priests worked very efficiently, day and night. When they
+    finished their work, the myth said, the temple would crumble into dust and
+    the world would vanish.</long-description>
+    <author>Radek</author>
+    <source>Classical puzzle</source>
+  
+    <parameter-description>
+      <par-name>N</par-name>
+      <par-description>Number of discs</par-description>
+    </parameter-description>
+
+  <ap parametrized="yes">
+    <ap-name>finished</ap-name>
+    <ap-expression>c_act==N</ap-expression>
+  </ap>
+  <property id="1" prop-type="reachability">
+    <formula>finished</formula>
+    <description>All discs can be moved to the final pole.</description>
+  </property>
+  
+    <instance id="1">
+      <parameters>N=8</parameters>
+    </instance>
+    <instance id="2">
+      <parameters>N=12</parameters>
+    </instance>
+    <instance id="3">
+      <parameters>N=15</parameters>
+    </instance>
+    <instance id="4">
+      <parameters>N=17</parameters>
+    </instance>
+
+  </model>
+

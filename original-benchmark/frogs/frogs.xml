@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE model SYSTEM "../model.dtd">
+
+<model  type="puzzle" status="ok" classification="toy">
+  <short-description>2D Toads and Frogs puzzle</short-description>
+  <long-description>The Toads And Frogs Puzzle is also known under the names
+    of Hares and Tortoise and Sheep and Goats, Traffic Jam, or Black and White
+    stones. This is 2D variant of the puzzle. It takes place on NxM board.
+Toads move righward and downward; toads move leftward and upward.
+Every move is either a Slide to the nearby square or a Jump over one position,
+    which is allowed only if the latter is occupied by a fellow of a different
+    kind. In any case, no two animals are allowed in the same square.
+The goal is to switch positions of toads and frogs.</long-description>
+
+  <author>Radek</author>
+  <source>http://www.cut-the-knot.org/SimpleGames/FrogsAndToads.shtml</source>
+
+  
+  <parameter-description>
+    <par-name>N</par-name>
+    <par-description>Number of columns</par-description>
+  </parameter-description>
+  <parameter-description>
+    <par-name>M</par-name>
+    <par-description>Number of rows</par-description>
+  </parameter-description>
+
+  <ap>
+    <ap-name>done</ap-name>
+    <ap-expression>Check.done</ap-expression>
+  </ap>
+
+  <property id="1" prop-type="reachability">
+    <formula>done</formula>
+    <description>The puzzle is solved.</description>
+  </property>
+
+  
+  <instance id="1">
+    <parameters>N=1,M=17</parameters>
+  </instance>
+  <instance id="2">
+    <parameters>N=5,M=3</parameters>
+  </instance>
+  <instance id="3">
+    <parameters>N=1,M=31</parameters>
+  </instance>
+  <instance id="4">
+    <parameters>N=5,M=5</parameters>
+  </instance>  
+  <instance id="5">
+    <parameters>N=6,M=5</parameters>
+  </instance>  
+
+</model>

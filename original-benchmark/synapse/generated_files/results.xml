@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="synapse" id="1">
+<reach-time complete="yes">10.2</reach-time>
+<states>46756</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="22"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="no" length="10"/>
+</instance>
+
+<instance name="synapse" id="2">
+<reach-time complete="yes">14.9</reach-time>
+<states>61048</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="synapse" id="3">
+<reach-time complete="yes">102.7</reach-time>
+<states>390317</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="synapse" id="4">
+<reach-time complete="yes">849.9</reach-time>
+<states>2292286</states>
+<state-size>34</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="synapse" id="5">
+<reach-time complete="yes">22.7</reach-time>
+<states>83263</states>
+<state-size>45</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="yes" length="27"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="synapse" id="6">
+<reach-time complete="yes">218.6</reach-time>
+<states>625175</states>
+<state-size>45</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="synapse" id="7">
+<reach-time complete="no">3601.8</reach-time>
+<states>6465201</states>
+<state-size>45</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>

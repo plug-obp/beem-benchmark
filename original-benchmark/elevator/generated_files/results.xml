@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE instance-list SYSTEM "../instance_list.dtd">
+
+<instance-list>
+<instance name="elevator" id="1">
+<reach-time complete="yes">0.7</reach-time>
+<states>8543</states>
+<state-size>31</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="elevator" id="2">
+<reach-time complete="yes">0.5</reach-time>
+<states>2825</states>
+<state-size>28</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="32"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="elevator" id="3">
+<reach-time complete="yes">23.2</reach-time>
+<states>416935</states>
+<state-size>43</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="no" length="48"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="elevator" id="4">
+<reach-time complete="yes">43.1</reach-time>
+<states>888053</states>
+<state-size>42</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="no" length="0"/>
+<ltl-prob prop-id="2" answer="yes" length="0"/>
+<ltl-prob prop-id="3" answer="yes" length="0"/>
+</instance>
+
+<instance name="elevator" id="5">
+<reach-time complete="no">1802.5</reach-time>
+<states>14082548</states>
+<state-size>61</state-size>
+<prediction>0</prediction>
+<reach-goal prop-id="1" answer="unknown" length="0"/>
+<ltl-prob prop-id="2" answer="unknown" length="0"/>
+<ltl-prob prop-id="3" answer="unknown" length="0"/>
+</instance>
+
+</instance-list>
