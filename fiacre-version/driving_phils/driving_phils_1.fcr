@@ -1,0 +1,343 @@
+type byte is 0..255
+
+process _round_about (&_res1: array 2 of int, &_res0: array 2 of int, &_fire: byte, &_resources: array 2 of byte, &_entryRound: read int, &_request: write array 2 of byte, &_starvers: write array 2 of byte, &_phase: write byte, &_acquiring: write array 2 of int) is
+states _reset, _begin0, _begin1, _begin2, _begin3, _action, _end0, _end1, _end2
+var 
+	_i: int := 0 
+init to _reset
+
+from _reset
+	case (_i < 2) of
+	true -> null
+	end case;
+	_res0[_i] := (- 1);
+	_res1[_i] := (- 1);
+	_acquiring[_i] := (- 1);
+	_i := (_i + 1);
+	to _reset
+
+from _reset
+	case (_i = 2) of
+	true -> null
+	end case;
+	_i := 0;
+	_phase := 0;
+	to _begin0
+
+from _begin0
+	case (_i < 2) of
+	true -> null
+	end case;
+	_resources[_i] := 0;
+	_i := (_i + 1);
+	to _begin0
+
+from _begin0
+	case (_i = 2) of
+	true -> null
+	end case;
+	_i := 0;
+	to _begin1
+
+from _begin1
+	case ((_i < 2) and (_res0[_i] <> (- 1))) of
+	true -> null
+	end case;
+	_resources[(_res0[_i] * 2)] := _entryRound;
+	_resources[((_res0[_i] * 2) + 1)] := _i;
+	_i := (_i + 1);
+	to _begin1
+
+from _begin1
+	case ((_i < 2) and (_res0[_i] = (- 1))) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _begin1
+
+from _begin1
+	case (_i = 2) of
+	true -> null
+	end case;
+	_i := 0;
+	to _begin2
+
+from _begin2
+	case ((_i < 2) and (_res1[_i] <> (- 1))) of
+	true -> null
+	end case;
+	_resources[(_res1[_i] * 2)] := _entryRound;
+	_resources[((_res1[_i] * 2) + 1)] := _i;
+	_i := (_i + 1);
+	to _begin2
+
+from _begin2
+	case ((_i < 2) and (_res1[_i] = (- 1))) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _begin2
+
+from _begin2
+	case (_i = 2) of
+	true -> null
+	end case;
+	_i := 0;
+	_phase := 1;
+	_fire := 0;
+	to _action
+
+from _action
+	case (_fire = 2) of
+	true -> null
+	end case;
+	_fire := 0;
+	_phase := 2;
+	to _end0
+
+from _end0
+	case ((_i < 1) and (_resources[(2 * _i)] <> 0)) of
+	true -> null
+	end case;
+	_request[((1 * _resources[((2 * _i) + 1)]) + _i)] := 0;
+	_starvers[((1 * _resources[((2 * _i) + 1)]) + _i)] := 0;
+	_i := (_i + 1);
+	to _end0
+
+from _end0
+	case ((_i < 1) and (_resources[(2 * _i)] = 0)) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _end0
+
+from _end0
+	case (_i = 1) of
+	true -> null
+	end case;
+	_i := 0;
+	to _end1
+
+from _end1
+	case (_i < 2) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _end1
+
+from _end1
+	case ((_i = 2) and (_fire = 2)) of
+	true -> null
+	end case;
+	_phase := 0;
+	_i := 0;
+	to _begin0
+
+
+process _phil_0 (&_res1: array 2 of int, &_res0: array 2 of int, &_fire: byte, &_acquiring: array 2 of int, &_phase: read byte, &_entryRound: read int, &_request: write array 2 of byte, &_resources: write array 2 of byte) is
+states _action, _end, _mutex
+var 
+	_i: int := 0 
+init to _action
+
+from _action
+	case ((_phase = 1) and (_res0[0] <> (- 1))) of
+	true -> null
+	end case;
+	_resources[_res0[0]] := 0;
+	_resources[(_res0[0] + 1)] := 0;
+	_res0[0] := _res1[0];
+	_res1[0] := (- 1);
+	_fire := (_fire + 1);
+	to _end
+
+from _action
+	case (((_phase = 1) and (_res1[0] = (- 1))) and (_acquiring[0] = (- 1))) of
+	true -> null
+	end case;
+	_acquiring[0] := 0;
+	_fire := (_fire + 1);
+	_request[((0 * 1) + 0)] := _entryRound;
+	to _end
+
+from _action
+	case (_phase = 1) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	to _end
+
+from _end
+	case ((_phase = 2) and (_acquiring[0] = (- 1))) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	to _action
+
+from _end
+	case (((_phase = 2) and (_acquiring[0] <> (- 1))) and (_fire = 0)) of
+	true -> null
+	end case;
+	to _mutex
+
+from _mutex
+	case (((_i < 2) and (_res0[_i] <> _acquiring[0])) and (_res1[_i] <> _acquiring[0])) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _mutex
+
+from _mutex
+	case ((_i < 2) and ((_res0[_i] = _acquiring[0]) or (_res1[_i] = _acquiring[0]))) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	_i := (_i + 1);
+	to _action
+
+from _mutex
+	case ((_i = 2) and (_res0[0] = (- 1))) of
+	true -> null
+	end case;
+	_res0[0] := _acquiring[0];
+	_acquiring[0] := (- 1);
+	_fire := (_fire + 1);
+	_i := 0;
+	to _action
+
+from _mutex
+	case ((_i = 2) and (_res0[0] <> (- 1))) of
+	true -> null
+	end case;
+	_res1[0] := _acquiring[0];
+	_acquiring[0] := (- 1);
+	_fire := (_fire + 1);
+	_i := 0;
+	to _action
+
+from _end
+	case ((_phase = 2) and (_acquiring[0] <> (- 1))) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	to _action
+
+
+process _phil_1 (&_res1: array 2 of int, &_res0: array 2 of int, &_fire: byte, &_acquiring: array 2 of int, &_phase: read byte, &_entryRound: read int, &_request: write array 2 of byte, &_resources: write array 2 of byte) is
+states _action, _end, _mutex
+var 
+	_i: int := 0 
+init to _action
+
+from _action
+	case ((_phase = 1) and (_res0[1] <> (- 1))) of
+	true -> null
+	end case;
+	_resources[_res0[1]] := 0;
+	_resources[(_res0[1] + 1)] := 0;
+	_res0[1] := _res1[1];
+	_res1[1] := (- 1);
+	_fire := (_fire + 1);
+	to _end
+
+from _action
+	case (((_phase = 1) and (_res1[1] = (- 1))) and (_acquiring[1] = (- 1))) of
+	true -> null
+	end case;
+	_acquiring[1] := 0;
+	_fire := (_fire + 1);
+	_request[((1 * 1) + 0)] := _entryRound;
+	to _end
+
+from _action
+	case (_phase = 1) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	to _end
+
+from _end
+	case ((_phase = 2) and (_acquiring[1] = (- 1))) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	to _action
+
+from _end
+	case (((_phase = 2) and (_acquiring[1] <> (- 1))) and (_fire = 1)) of
+	true -> null
+	end case;
+	to _mutex
+
+from _mutex
+	case (((_i < 2) and (_res0[_i] <> _acquiring[1])) and (_res1[_i] <> _acquiring[1])) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _mutex
+
+from _mutex
+	case ((_i < 2) and ((_res0[_i] = _acquiring[1]) or (_res1[_i] = _acquiring[1]))) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	_i := (_i + 1);
+	to _action
+
+from _mutex
+	case ((_i = 2) and (_res0[1] = (- 1))) of
+	true -> null
+	end case;
+	_res0[1] := _acquiring[1];
+	_acquiring[1] := (- 1);
+	_fire := (_fire + 1);
+	_i := 0;
+	to _action
+
+from _mutex
+	case ((_i = 2) and (_res0[1] <> (- 1))) of
+	true -> null
+	end case;
+	_res1[1] := _acquiring[1];
+	_acquiring[1] := (- 1);
+	_fire := (_fire + 1);
+	_i := 0;
+	to _action
+
+from _end
+	case ((_phase = 2) and (_acquiring[1] <> (- 1))) of
+	true -> null
+	end case;
+	_fire := (_fire + 1);
+	to _action
+
+
+component sys is
+var 
+	
+	_request: array 2 of byte, 
+	
+	_starvers: array 2 of byte, 
+	
+	_resources: array 2 of byte, 
+	
+	_res0: array 2 of int, 
+	
+	_res1: array 2 of int, 
+	
+	_acquiring: array 2 of int, 
+	
+	_entryRound: int := 1, 
+	
+	_phase: byte := 0, 
+	
+	_fire: byte := 0
+
+par 
+	_round_about(&_res1, &_res0, &_fire, &_resources, &_entryRound, &_request, &_starvers, &_phase, &_acquiring) 
+	 || _phil_0(&_res1, &_res0, &_fire, &_acquiring, &_phase, &_entryRound, &_request, &_resources) 
+	 || _phil_1(&_res1, &_res0, &_fire, &_acquiring, &_phase, &_entryRound, &_request, &_resources) 
+end par
+
+
+sys

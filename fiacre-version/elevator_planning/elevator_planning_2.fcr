@@ -1,0 +1,225 @@
+type byte is 0..255
+
+process _Elevator (&_alone: byte, &_inB: byte, &_person: array 7 of byte, &_in: byte, &_at: byte, &_inA: byte, &_conflictA: read array 7 of byte, &_conflictB: read array 7 of byte, &_not_alone: read array 7 of byte) is
+states _q, _done
+
+init to _q
+
+from _q
+	case (((((((_person[0] = 0) and (_person[1] = 0)) and (_person[2] = 0)) and (_person[3] = 0)) and (_person[4] = 0)) and (_person[5] = 0)) and (_person[6] = 0)) of
+	true -> null
+	end case;
+	to _done
+
+from _q
+	case (((((_person[0] = _at) and (_in < 3)) and ((_conflictA[0] = 0) or (_inB = 0))) and ((_conflictB[0] = 0) or (_inA = 0))) and ((_not_alone[0] = 0) or (_in > 0))) of
+	true -> null
+	end case;
+	_person[0] := 255;
+	_in := (_in + 1);
+	_inA := (_inA + _conflictA[0]);
+	_inB := (_inB + _conflictB[0]);
+	_alone := (_alone + _not_alone[0]);
+	to _q
+
+from _q
+	case (((((_person[1] = _at) and (_in < 3)) and ((_conflictA[1] = 0) or (_inB = 0))) and ((_conflictB[1] = 0) or (_inA = 0))) and ((_not_alone[1] = 0) or (_in > 0))) of
+	true -> null
+	end case;
+	_person[1] := 255;
+	_in := (_in + 1);
+	_inA := (_inA + _conflictA[1]);
+	_inB := (_inB + _conflictB[1]);
+	_alone := (_alone + _not_alone[1]);
+	to _q
+
+from _q
+	case (((((_person[2] = _at) and (_in < 3)) and ((_conflictA[2] = 0) or (_inB = 0))) and ((_conflictB[2] = 0) or (_inA = 0))) and ((_not_alone[2] = 0) or (_in > 0))) of
+	true -> null
+	end case;
+	_person[2] := 255;
+	_in := (_in + 1);
+	_inA := (_inA + _conflictA[2]);
+	_inB := (_inB + _conflictB[2]);
+	_alone := (_alone + _not_alone[2]);
+	to _q
+
+from _q
+	case (((((_person[3] = _at) and (_in < 3)) and ((_conflictA[3] = 0) or (_inB = 0))) and ((_conflictB[3] = 0) or (_inA = 0))) and ((_not_alone[3] = 0) or (_in > 0))) of
+	true -> null
+	end case;
+	_person[3] := 255;
+	_in := (_in + 1);
+	_inA := (_inA + _conflictA[3]);
+	_inB := (_inB + _conflictB[3]);
+	_alone := (_alone + _not_alone[3]);
+	to _q
+
+from _q
+	case (((((_person[4] = _at) and (_in < 3)) and ((_conflictA[4] = 0) or (_inB = 0))) and ((_conflictB[4] = 0) or (_inA = 0))) and ((_not_alone[4] = 0) or (_in > 0))) of
+	true -> null
+	end case;
+	_person[4] := 255;
+	_in := (_in + 1);
+	_inA := (_inA + _conflictA[4]);
+	_inB := (_inB + _conflictB[4]);
+	_alone := (_alone + _not_alone[4]);
+	to _q
+
+from _q
+	case (((((_person[5] = _at) and (_in < 3)) and ((_conflictA[5] = 0) or (_inB = 0))) and ((_conflictB[5] = 0) or (_inA = 0))) and ((_not_alone[5] = 0) or (_in > 0))) of
+	true -> null
+	end case;
+	_person[5] := 255;
+	_in := (_in + 1);
+	_inA := (_inA + _conflictA[5]);
+	_inB := (_inB + _conflictB[5]);
+	_alone := (_alone + _not_alone[5]);
+	to _q
+
+from _q
+	case (((((_person[6] = _at) and (_in < 3)) and ((_conflictA[6] = 0) or (_inB = 0))) and ((_conflictB[6] = 0) or (_inA = 0))) and ((_not_alone[6] = 0) or (_in > 0))) of
+	true -> null
+	end case;
+	_person[6] := 255;
+	_in := (_in + 1);
+	_inA := (_inA + _conflictA[6]);
+	_inB := (_inB + _conflictB[6]);
+	_alone := (_alone + _not_alone[6]);
+	to _q
+
+from _q
+	case ((_person[0] = 255) and ((_in > 2) or ((_alone - _not_alone[0]) = 0))) of
+	true -> null
+	end case;
+	_person[0] := _at;
+	_in := (_in - 1);
+	_inA := (_inA - _conflictA[0]);
+	_inB := (_inB - _conflictB[0]);
+	_alone := (_alone - _not_alone[0]);
+	to _q
+
+from _q
+	case ((_person[1] = 255) and ((_in > 2) or ((_alone - _not_alone[1]) = 0))) of
+	true -> null
+	end case;
+	_person[1] := _at;
+	_in := (_in - 1);
+	_inA := (_inA - _conflictA[1]);
+	_inB := (_inB - _conflictB[1]);
+	_alone := (_alone - _not_alone[1]);
+	to _q
+
+from _q
+	case ((_person[2] = 255) and ((_in > 2) or ((_alone - _not_alone[2]) = 0))) of
+	true -> null
+	end case;
+	_person[2] := _at;
+	_in := (_in - 1);
+	_inA := (_inA - _conflictA[2]);
+	_inB := (_inB - _conflictB[2]);
+	_alone := (_alone - _not_alone[2]);
+	to _q
+
+from _q
+	case ((_person[3] = 255) and ((_in > 2) or ((_alone - _not_alone[3]) = 0))) of
+	true -> null
+	end case;
+	_person[3] := _at;
+	_in := (_in - 1);
+	_inA := (_inA - _conflictA[3]);
+	_inB := (_inB - _conflictB[3]);
+	_alone := (_alone - _not_alone[3]);
+	to _q
+
+from _q
+	case ((_person[4] = 255) and ((_in > 2) or ((_alone - _not_alone[4]) = 0))) of
+	true -> null
+	end case;
+	_person[4] := _at;
+	_in := (_in - 1);
+	_inA := (_inA - _conflictA[4]);
+	_inB := (_inB - _conflictB[4]);
+	_alone := (_alone - _not_alone[4]);
+	to _q
+
+from _q
+	case ((_person[5] = 255) and ((_in > 2) or ((_alone - _not_alone[5]) = 0))) of
+	true -> null
+	end case;
+	_person[5] := _at;
+	_in := (_in - 1);
+	_inA := (_inA - _conflictA[5]);
+	_inB := (_inB - _conflictB[5]);
+	_alone := (_alone - _not_alone[5]);
+	to _q
+
+from _q
+	case ((_person[6] = 255) and ((_in > 2) or ((_alone - _not_alone[6]) = 0))) of
+	true -> null
+	end case;
+	_person[6] := _at;
+	_in := (_in - 1);
+	_inA := (_inA - _conflictA[6]);
+	_inB := (_inB - _conflictB[6]);
+	_alone := (_alone - _not_alone[6]);
+	to _q
+
+from _q
+	_at := 0;
+	to _q
+
+from _q
+	_at := 1;
+	to _q
+
+from _q
+	_at := 2;
+	to _q
+
+from _q
+	_at := 3;
+	to _q
+
+from _q
+	_at := 4;
+	to _q
+
+from _q
+	_at := 5;
+	to _q
+
+from _q
+	_at := 6;
+	to _q
+
+
+component sys is
+var 
+	
+	_person: array 7 of byte := [0, 1, 2, 3, 4, 0, 3], 
+	
+	_conflictA: array 7 of byte := [1, 0, 0, 1, 1, 0, 0], 
+	
+	_conflictB: array 7 of byte := [0, 1, 1, 0, 0, 1, 0], 
+	
+	_not_alone: array 7 of byte := [1, 1, 0, 0, 0, 0, 0], 
+	
+	_at: byte := 0, 
+	
+	_inA: byte := 0, 
+	
+	_inB: byte := 0, 
+	
+	_in: byte := 0, 
+	
+	_alone: byte := 0, 
+	
+	_i: byte := 0
+
+par 
+	_Elevator(&_alone, &_inB, &_person, &_in, &_at, &_inA, &_conflictA, &_conflictB, &_not_alone) 
+end par
+
+
+sys

@@ -1,0 +1,115 @@
+type byte is 0..255
+
+process _Toad (&_x: byte, &_a: array 15 of byte, &_y: byte) is
+states _q
+
+init to _q
+
+from _q
+	case ((_x > 0) and (_a[(((_y * 5) + _x) - 1)] = 1)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 1;
+	_a[(((_y * 5) + _x) - 1)] := 0;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case ((_y > 0) and (_a[(((_y - 1) * 5) + _x)] = 1)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 1;
+	_a[(((_y - 1) * 5) + _x)] := 0;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_x > 1) and (_a[(((_y * 5) + _x) - 1)] = 2)) and (_a[(((_y * 5) + _x) - 2)] = 1)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 1;
+	_a[(((_y * 5) + _x) - 2)] := 0;
+	_x := (_x - 2);
+	to _q
+
+from _q
+	case (((_y > 1) and (_a[(((_y - 1) * 5) + _x)] = 2)) and (_a[(((_y - 2) * 5) + _x)] = 1)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 1;
+	_a[(((_y - 2) * 5) + _x)] := 0;
+	_y := (_y - 2);
+	to _q
+
+
+process _Frog (&_x: byte, &_a: array 15 of byte, &_y: byte) is
+states _q
+
+init to _q
+
+from _q
+	case ((_x < (5 - 1)) and (_a[(((_y * 5) + _x) + 1)] = 2)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 2;
+	_a[(((_y * 5) + _x) + 1)] := 0;
+	_x := (_x + 1);
+	to _q
+
+from _q
+	case ((_y < (3 - 1)) and (_a[(((_y + 1) * 5) + _x)] = 2)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 2;
+	_a[(((_y + 1) * 5) + _x)] := 0;
+	_y := (_y + 1);
+	to _q
+
+from _q
+	case (((_x < (5 - 2)) and (_a[(((_y * 5) + _x) + 1)] = 1)) and (_a[(((_y * 5) + _x) + 2)] = 2)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 2;
+	_a[(((_y * 5) + _x) + 2)] := 0;
+	_x := (_x + 2);
+	to _q
+
+from _q
+	case (((_y < (3 - 2)) and (_a[(((_y + 1) * 5) + _x)] = 1)) and (_a[(((_y + 2) * 5) + _x)] = 2)) of
+	true -> null
+	end case;
+	_a[((_y * 5) + _x)] := 2;
+	_a[(((_y + 2) * 5) + _x)] := 0;
+	_y := (_y + 2);
+	to _q
+
+
+process _Check (&_a: read array 15 of byte) is
+states _not_done, _done
+
+init to _not_done
+
+from _not_done
+	case ((((((((((((((_a[0] = 2) and (_a[1] = 2)) and (_a[2] = 2)) and (_a[3] = 2)) and (_a[4] = 2)) and (_a[5] = 2)) and (_a[6] = 2)) and (_a[8] = 1)) and (_a[9] = 1)) and (_a[10] = 1)) and (_a[11] = 1)) and (_a[12] = 1)) and (_a[13] = 1)) and (_a[14] = 1)) of
+	true -> null
+	end case;
+	to _done
+
+
+component sys is
+var 
+	
+	_a: array 15 of byte := [1, 1, 1, 1, 1, 1, 1, 0, 2, 2, 2, 2, 2, 2, 2], 
+	
+	_x: byte := 2, 
+	
+	_y: byte := 1
+
+par 
+	_Toad(&_x, &_a, &_y) 
+	 || _Frog(&_x, &_a, &_y) 
+	 || _Check(&_a) 
+end par
+
+
+sys

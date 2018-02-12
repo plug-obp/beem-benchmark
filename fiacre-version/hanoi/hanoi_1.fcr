@@ -1,0 +1,124 @@
+type byte is 0..255
+
+process _AtoB (&_a_act: byte, &_b: array 9 of byte, &_a: array 9 of byte, &_b_act: byte) is
+states _q
+
+init to _q
+
+from _q
+	case (_a[(_a_act - 1)] < _b[(_b_act - 1)]) of
+	true -> null
+	end case;
+	_b[_b_act] := _a[(_a_act - 1)];
+	_b_act := (_b_act + 1);
+	_a[(_a_act - 1)] := 0;
+	_a_act := (_a_act - 1);
+	to _q
+
+
+process _AtoC (&_a_act: byte, &_c_act: byte, &_a: array 9 of byte, &_c: array 9 of byte) is
+states _q
+
+init to _q
+
+from _q
+	case (_a[(_a_act - 1)] < _c[(_c_act - 1)]) of
+	true -> null
+	end case;
+	_c[_c_act] := _a[(_a_act - 1)];
+	_c_act := (_c_act + 1);
+	_a[(_a_act - 1)] := 0;
+	_a_act := (_a_act - 1);
+	to _q
+
+
+process _BtoA (&_a_act: byte, &_b: array 9 of byte, &_a: array 9 of byte, &_b_act: byte) is
+states _q
+
+init to _q
+
+from _q
+	case (_b[(_b_act - 1)] < _a[(_a_act - 1)]) of
+	true -> null
+	end case;
+	_a[_a_act] := _b[(_b_act - 1)];
+	_a_act := (_a_act + 1);
+	_b[(_b_act - 1)] := 0;
+	_b_act := (_b_act - 1);
+	to _q
+
+
+process _BtoC (&_b: array 9 of byte, &_c_act: byte, &_c: array 9 of byte, &_b_act: byte) is
+states _q
+
+init to _q
+
+from _q
+	case (_b[(_b_act - 1)] < _c[(_c_act - 1)]) of
+	true -> null
+	end case;
+	_c[_c_act] := _b[(_b_act - 1)];
+	_c_act := (_c_act + 1);
+	_b[(_b_act - 1)] := 0;
+	_b_act := (_b_act - 1);
+	to _q
+
+
+process _CtoA (&_a_act: byte, &_c_act: byte, &_a: array 9 of byte, &_c: array 9 of byte) is
+states _q
+
+init to _q
+
+from _q
+	case (_c[(_c_act - 1)] < _a[(_a_act - 1)]) of
+	true -> null
+	end case;
+	_a[_a_act] := _c[(_c_act - 1)];
+	_a_act := (_a_act + 1);
+	_c[(_c_act - 1)] := 0;
+	_c_act := (_c_act - 1);
+	to _q
+
+
+process _CtoB (&_b: array 9 of byte, &_c_act: byte, &_c: array 9 of byte, &_b_act: byte) is
+states _q
+
+init to _q
+
+from _q
+	case (_c[(_c_act - 1)] < _b[(_b_act - 1)]) of
+	true -> null
+	end case;
+	_b[_b_act] := _c[(_c_act - 1)];
+	_b_act := (_b_act + 1);
+	_c[(_c_act - 1)] := 0;
+	_c_act := (_c_act - 1);
+	to _q
+
+
+component sys is
+var 
+	
+	_a: array 9 of byte := [100, (8 - 0), (8 - 1), (8 - 2), (8 - 3), (8 - 4), (8 - 5), (8 - 6), (8 - 7)], 
+	
+	_a_act: byte := 9, 
+	
+	_b: array 9 of byte := [100, 0, 0, 0, 0, 0, 0, 0, 0], 
+	
+	_b_act: byte := 1, 
+	
+	_c: array 9 of byte := [100, 0, 0, 0, 0, 0, 0, 0, 0], 
+	
+	_c_act: byte := 1
+
+par 
+	_AtoB(&_a_act, &_b, &_a, &_b_act) 
+	 || _AtoC(&_a_act, &_c_act, &_a, &_c) 
+	 || _BtoA(&_a_act, &_b, &_a, &_b_act) 
+	 || _BtoC(&_b, &_c_act, &_c, &_b_act) 
+	 || _CtoA(&_a_act, &_c_act, &_a, &_c) 
+	 || _CtoB(&_b, &_c_act, &_c, &_b_act) 
+end par
+
+
+sys

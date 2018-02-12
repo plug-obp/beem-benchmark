@@ -1,0 +1,189 @@
+type byte is 0..255
+
+process _Measuring_0 [_m: out none] (&_cage_safe: int, &_actual_resistance: int) is
+states _measure_in_progress, _measure_done, _cage_opened, _initial
+
+init to _initial
+
+from _measure_in_progress
+	case (_cage_safe = 1) of
+	true -> null
+	end case;
+	_m;
+	to _measure_done
+
+from _measure_done
+	case (_cage_safe = 1) of
+	true -> null
+	end case;
+	to _measure_in_progress
+
+from _measure_in_progress
+	case ((_actual_resistance < 6200) and (_cage_safe = 1)) of
+	true -> null
+	end case;
+	_actual_resistance := (_actual_resistance + 1);
+	to _measure_in_progress
+
+from _cage_opened
+	_cage_safe := 1;
+	_actual_resistance := (_actual_resistance - 1);
+	to _measure_in_progress
+
+from _measure_in_progress
+	_cage_safe := 0;
+	_actual_resistance := (_actual_resistance - 1);
+	to _cage_opened
+
+from _measure_done
+	case (_cage_safe = 0) of
+	true -> null
+	end case;
+	to _cage_opened
+
+from _initial
+	_cage_safe := 1;
+	to _measure_in_progress
+
+
+process _Algorithm [_m: in none, _err: in none, _ok: in none, _qstate: out none] (&_range: int, &_actual_resistance: int) is
+states _measured, _new_range, _small_resistance, _correct_value, _large_resistance, _too_small_resistance, _too_large_resistance, _start, _finished_measuring, _S1, _S2
+
+init to _start
+
+from _measured
+	case ((_actual_resistance > 999) and (_actual_resistance < 5999)) of
+	true -> null
+	end case;
+	_actual_resistance := 0;
+	to _correct_value
+
+from _measured
+	case (_actual_resistance < 1000) of
+	true -> null
+	end case;
+	_actual_resistance := 0;
+	to _small_resistance
+
+from _measured
+	case (_actual_resistance > 5800) of
+	true -> null
+	end case;
+	_actual_resistance := 0;
+	to _large_resistance
+
+from _small_resistance
+	case (_range > 0) of
+	true -> null
+	end case;
+	_range := (_range - 1);
+	to _new_range
+
+from _large_resistance
+	case (_range < 5) of
+	true -> null
+	end case;
+	_range := (_range + 1);
+	to _new_range
+
+from _start
+	_range := 3;
+	to _new_range
+
+from _small_resistance
+	case (_range = 0) of
+	true -> null
+	end case;
+	to _too_small_resistance
+
+from _large_resistance
+	case (_range = 5) of
+	true -> null
+	end case;
+	to _too_large_resistance
+
+from _too_small_resistance
+	to _finished_measuring
+
+from _too_large_resistance
+	to _finished_measuring
+
+from _correct_value
+	to _finished_measuring
+
+from _finished_measuring
+	to _start
+
+from _new_range
+	_m;
+	to _S1
+
+from _S1
+	_qstate;
+	to _S2
+
+from _S2
+	_ok;
+	to _measured
+
+from _S2
+	_err;
+	to _large_resistance
+
+
+process _Device_state [_qstate: in none, _err: out none, _ok: out none] (&_cage_safe: write int) is
+states _state_request, _state0, _err7, _initial, _state1
+
+init to _initial
+
+from _state_request
+	to _state0
+
+from _state_request
+	to _err7
+
+from _state0
+	_cage_safe := 1;
+	to _state1
+
+from _initial
+	_qstate;
+	to _state_request
+
+from _state0
+	to _err7
+
+from _err7
+	_err;
+	to _initial
+
+from _state1
+	_ok;
+	to _initial
+
+
+component sys is
+var 
+	
+	_cage_safe: int, 
+	
+	_actual_resistance: int, 
+	
+	_voltage: int, 
+	
+	_range: int
+
+port 
+	_m: none, 
+	_qstate: none, 
+	_ok: none, 
+	_err: none
+
+par 
+	_Measuring_0(&_cage_safe, &_actual_resistance) 
+	 || _Algorithm(&_range, &_actual_resistance) 
+	 || _Device_state(&_cage_safe) 
+end par
+
+
+sys

@@ -1,0 +1,598 @@
+type byte is 0..255
+
+process _NonatomicVar_0 [_write_0: in none, _done_0: out none, _read_0: out none] is
+states _q, _r
+var 
+	_x: byte, 
+	_v: byte 
+init to _q
+
+from _q
+	_read_0! _x;
+	to _q
+
+from _q
+	_write_0? _v;
+	to _r
+
+from _r
+	_done_0;
+	_x := _v;
+	to _q
+
+from _r
+	_read_0! 0;
+	to _r
+
+from _r
+	_read_0! 1;
+	to _r
+
+
+process _NonatomicVar_1 [_write_1: in none, _read_1: out none, _done_1: out none] is
+states _q, _r
+var 
+	_x: byte, 
+	_v: byte 
+init to _q
+
+from _q
+	_read_1! _x;
+	to _q
+
+from _q
+	_write_1? _v;
+	to _r
+
+from _r
+	_done_1;
+	_x := _v;
+	to _q
+
+from _r
+	_read_1! 0;
+	to _r
+
+from _r
+	_read_1! 1;
+	to _r
+
+
+process _NonatomicVar_2 [_write_2: in none, _done_2: out none, _read_2: out none] is
+states _q, _r
+var 
+	_x: byte, 
+	_v: byte 
+init to _q
+
+from _q
+	_read_2! _x;
+	to _q
+
+from _q
+	_write_2? _v;
+	to _r
+
+from _r
+	_done_2;
+	_x := _v;
+	to _q
+
+from _r
+	_read_2! 0;
+	to _r
+
+from _r
+	_read_2! 1;
+	to _r
+
+
+process _P_0 [_read_1: in none, _done_0: in none, _read_2: in none, _read_0: in none, _write_0: out none] is
+states _NCS, _w1, _p3, _p8, _p4, _p5, _p6, _p61, _w2, _p9, _CS, _w3
+var 
+	_i: byte, 
+	_v: byte 
+init to _NCS
+
+from _NCS
+	_write_0! 1;
+	to _w1
+
+from _w1
+	_done_0;
+	_i := 0;
+	to _p3
+
+from _p3
+	case (_i = 0) of
+	true -> null
+	end case;
+	_i := (0 + 1);
+	to _p8
+
+from _p3
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p4
+
+from _p3
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p4
+
+from _p3
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p4
+
+from _p4
+	case (_v = 0) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _p3
+
+from _p4
+	case (_v = 1) of
+	true -> null
+	end case;
+	to _p5
+
+from _p5
+	case (_v = 1) of
+	true -> null
+	end case;
+	to _p6
+
+from _p5
+	case (_v = 0) of
+	true -> null
+	end case;
+	to _NCS
+
+from _p6
+	_write_0! 0;
+	to _w2
+
+from _w2
+	_done_0;
+	to _p61
+
+from _p61
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p5
+
+from _p61
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p5
+
+from _p61
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p5
+
+from _p8
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p9
+
+from _p8
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p9
+
+from _p8
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 0)) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 1)) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 2)) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p9
+
+from _p9
+	case (_v = 0) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _p8
+
+from _p8
+	case (_i = 3) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_write_0! 0;
+	to _w3
+
+from _w3
+	_done_0;
+	to _NCS
+
+
+process _P_1 [_done_1: in none, _read_1: in none, _read_2: in none, _read_0: in none, _write_1: out none] is
+states _NCS, _w1, _p3, _p8, _p4, _p5, _p6, _p61, _w2, _p9, _CS, _w3
+var 
+	_i: byte, 
+	_v: byte 
+init to _NCS
+
+from _NCS
+	_write_1! 1;
+	to _w1
+
+from _w1
+	_done_1;
+	_i := 0;
+	to _p3
+
+from _p3
+	case (_i = 1) of
+	true -> null
+	end case;
+	_i := (1 + 1);
+	to _p8
+
+from _p3
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p4
+
+from _p3
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p4
+
+from _p3
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p4
+
+from _p4
+	case (_v = 0) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _p3
+
+from _p4
+	case (_v = 1) of
+	true -> null
+	end case;
+	to _p5
+
+from _p5
+	case (_v = 1) of
+	true -> null
+	end case;
+	to _p6
+
+from _p5
+	case (_v = 0) of
+	true -> null
+	end case;
+	to _NCS
+
+from _p6
+	_write_1! 0;
+	to _w2
+
+from _w2
+	_done_1;
+	to _p61
+
+from _p61
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p5
+
+from _p61
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p5
+
+from _p61
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p5
+
+from _p8
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p9
+
+from _p8
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p9
+
+from _p8
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 0)) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 1)) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 2)) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p9
+
+from _p9
+	case (_v = 0) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _p8
+
+from _p8
+	case (_i = 3) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_write_1! 0;
+	to _w3
+
+from _w3
+	_done_1;
+	to _NCS
+
+
+process _P_2 [_done_2: in none, _read_1: in none, _read_2: in none, _read_0: in none, _write_2: out none] is
+states _NCS, _w1, _p3, _p8, _p4, _p5, _p6, _p61, _w2, _p9, _CS, _w3
+var 
+	_i: byte, 
+	_v: byte 
+init to _NCS
+
+from _NCS
+	_write_2! 1;
+	to _w1
+
+from _w1
+	_done_2;
+	_i := 0;
+	to _p3
+
+from _p3
+	case (_i = 2) of
+	true -> null
+	end case;
+	_i := (2 + 1);
+	to _p8
+
+from _p3
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p4
+
+from _p3
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p4
+
+from _p3
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p4
+
+from _p4
+	case (_v = 0) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _p3
+
+from _p4
+	case (_v = 1) of
+	true -> null
+	end case;
+	to _p5
+
+from _p5
+	case (_v = 1) of
+	true -> null
+	end case;
+	to _p6
+
+from _p5
+	case (_v = 0) of
+	true -> null
+	end case;
+	to _NCS
+
+from _p6
+	_write_2! 0;
+	to _w2
+
+from _w2
+	_done_2;
+	to _p61
+
+from _p61
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p5
+
+from _p61
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p5
+
+from _p61
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p5
+
+from _p8
+	case (_i = 0) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p9
+
+from _p8
+	case (_i = 1) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p9
+
+from _p8
+	case (_i = 2) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 0)) of
+	true -> null
+	end case;
+	_read_0? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 1)) of
+	true -> null
+	end case;
+	_read_1? _v;
+	to _p9
+
+from _p9
+	case ((_v = 1) and (_i = 2)) of
+	true -> null
+	end case;
+	_read_2? _v;
+	to _p9
+
+from _p9
+	case (_v = 0) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _p8
+
+from _p8
+	case (_i = 3) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_write_2! 0;
+	to _w3
+
+from _w3
+	_done_2;
+	to _NCS
+
+
+component sys is
+port 
+	_read_0: none, 
+	_write_0: none, 
+	_done_0: none, 
+	_read_1: none, 
+	_write_1: none, 
+	_done_1: none, 
+	_read_2: none, 
+	_write_2: none, 
+	_done_2: none
+
+par 
+	_NonatomicVar_0
+	 || _NonatomicVar_1
+	 || _NonatomicVar_2
+	 || _P_0
+	 || _P_1
+	 || _P_2
+end par
+
+
+sys

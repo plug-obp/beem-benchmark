@@ -1,0 +1,508 @@
+type byte is 0..255
+
+process _P_0 (&_w: array 3 of byte, &_a: array 3 of byte, &_s: array 3 of byte) is
+states _NCS, _p2, _p3, _p4, _p5, _p6, _p61, _p64, _p7, _p71, _p8, _p9, _CS
+var 
+	_j: byte 
+init to _NCS
+
+from _NCS
+	_a[0] := 1;
+	_j := 0;
+	to _p2
+
+from _p2
+	case ((_j < 3) and (_s[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p2
+
+from _p2
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_w[0] := 1;
+	_a[0] := 0;
+	to _p4
+
+from _p4
+	case (_s[0] = 1) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p9
+
+from _p4
+	case (_s[0] = 0) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p5
+
+from _p5
+	case ((_j < 3) and (_a[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p5
+
+from _p5
+	case (not ((_j < 3) and (_a[_j] = 0))) of
+	true -> null
+	end case;
+	to _p6
+
+from _p6
+	case (_j < 3) of
+	true -> null
+	end case;
+	to _p7
+
+from _p6
+	case (_j = 3) of
+	true -> null
+	end case;
+	_s[0] := 1;
+	_j := 0;
+	to _p61
+
+from _p61
+	case ((_j < 3) and (_a[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p61
+
+from _p61
+	case ((_j < 3) and (_a[_j] = 1)) of
+	true -> null
+	end case;
+	_s[0] := 0;
+	to _p7
+
+from _p61
+	case (_j = 3) of
+	true -> null
+	end case;
+	_w[0] := 0;
+	_j := 0;
+	to _p64
+
+from _p64
+	case ((_j < 3) and (_w[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p64
+
+from _p64
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p7
+
+from _p7
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p8
+
+from _p7
+	case (_j < 3) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p71
+
+from _p71
+	case ((_j < 3) and ((_w[_j] = 1) or (_s[_j] = 0))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p71
+
+from _p71
+	case (not ((_j < 3) and ((_w[_j] = 1) or (_s[_j] = 0)))) of
+	true -> null
+	end case;
+	to _p8
+
+from _p8
+	case ((_j <> 0) and (_j < 3)) of
+	true -> null
+	end case;
+	_s[0] := 1;
+	_w[0] := 0;
+	to _p4
+
+from _p8
+	case (not ((_j <> 0) and (_j < 3))) of
+	true -> null
+	end case;
+	to _p4
+
+from _p9
+	case (((_j < 0) and (_w[_j] = 0)) and (_s[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p9
+
+from _p9
+	case (_j = 0) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_s[0] := 0;
+	to _NCS
+
+
+process _P_1 (&_w: array 3 of byte, &_a: array 3 of byte, &_s: array 3 of byte) is
+states _NCS, _p2, _p3, _p4, _p5, _p6, _p61, _p64, _p7, _p71, _p8, _p9, _CS
+var 
+	_j: byte 
+init to _NCS
+
+from _NCS
+	_a[1] := 1;
+	_j := 0;
+	to _p2
+
+from _p2
+	case ((_j < 3) and (_s[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p2
+
+from _p2
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_w[1] := 1;
+	_a[1] := 0;
+	to _p4
+
+from _p4
+	case (_s[1] = 1) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p9
+
+from _p4
+	case (_s[1] = 0) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p5
+
+from _p5
+	case ((_j < 3) and (_a[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p5
+
+from _p5
+	case (not ((_j < 3) and (_a[_j] = 0))) of
+	true -> null
+	end case;
+	to _p6
+
+from _p6
+	case (_j < 3) of
+	true -> null
+	end case;
+	to _p7
+
+from _p6
+	case (_j = 3) of
+	true -> null
+	end case;
+	_s[1] := 1;
+	_j := 0;
+	to _p61
+
+from _p61
+	case ((_j < 3) and (_a[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p61
+
+from _p61
+	case ((_j < 3) and (_a[_j] = 1)) of
+	true -> null
+	end case;
+	_s[1] := 0;
+	to _p7
+
+from _p61
+	case (_j = 3) of
+	true -> null
+	end case;
+	_w[1] := 0;
+	_j := 0;
+	to _p64
+
+from _p64
+	case ((_j < 3) and (_w[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p64
+
+from _p64
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p7
+
+from _p7
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p8
+
+from _p7
+	case (_j < 3) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p71
+
+from _p71
+	case ((_j < 3) and ((_w[_j] = 1) or (_s[_j] = 0))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p71
+
+from _p71
+	case (not ((_j < 3) and ((_w[_j] = 1) or (_s[_j] = 0)))) of
+	true -> null
+	end case;
+	to _p8
+
+from _p8
+	case ((_j <> 1) and (_j < 3)) of
+	true -> null
+	end case;
+	_s[1] := 1;
+	_w[1] := 0;
+	to _p4
+
+from _p8
+	case (not ((_j <> 1) and (_j < 3))) of
+	true -> null
+	end case;
+	to _p4
+
+from _p9
+	case (((_j < 1) and (_w[_j] = 0)) and (_s[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p9
+
+from _p9
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_s[1] := 0;
+	to _NCS
+
+
+process _P_2 (&_w: array 3 of byte, &_a: array 3 of byte, &_s: array 3 of byte) is
+states _NCS, _p2, _p3, _p4, _p5, _p6, _p61, _p64, _p7, _p71, _p8, _p9, _CS
+var 
+	_j: byte 
+init to _NCS
+
+from _NCS
+	_a[2] := 1;
+	_j := 0;
+	to _p2
+
+from _p2
+	case ((_j < 3) and (_s[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p2
+
+from _p2
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_w[2] := 1;
+	_a[2] := 0;
+	to _p4
+
+from _p4
+	case (_s[2] = 1) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p9
+
+from _p4
+	case (_s[2] = 0) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p5
+
+from _p5
+	case ((_j < 3) and (_a[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p5
+
+from _p5
+	case (not ((_j < 3) and (_a[_j] = 0))) of
+	true -> null
+	end case;
+	to _p6
+
+from _p6
+	case (_j < 3) of
+	true -> null
+	end case;
+	to _p7
+
+from _p6
+	case (_j = 3) of
+	true -> null
+	end case;
+	_s[2] := 1;
+	_j := 0;
+	to _p61
+
+from _p61
+	case ((_j < 3) and (_a[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p61
+
+from _p61
+	case ((_j < 3) and (_a[_j] = 1)) of
+	true -> null
+	end case;
+	_s[2] := 0;
+	to _p7
+
+from _p61
+	case (_j = 3) of
+	true -> null
+	end case;
+	_w[2] := 0;
+	_j := 0;
+	to _p64
+
+from _p64
+	case ((_j < 3) and (_w[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p64
+
+from _p64
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p7
+
+from _p7
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _p8
+
+from _p7
+	case (_j < 3) of
+	true -> null
+	end case;
+	_j := 0;
+	to _p71
+
+from _p71
+	case ((_j < 3) and ((_w[_j] = 1) or (_s[_j] = 0))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p71
+
+from _p71
+	case (not ((_j < 3) and ((_w[_j] = 1) or (_s[_j] = 0)))) of
+	true -> null
+	end case;
+	to _p8
+
+from _p8
+	case ((_j <> 2) and (_j < 3)) of
+	true -> null
+	end case;
+	_s[2] := 1;
+	_w[2] := 0;
+	to _p4
+
+from _p8
+	case (not ((_j <> 2) and (_j < 3))) of
+	true -> null
+	end case;
+	to _p4
+
+from _p9
+	case (((_j < 2) and (_w[_j] = 0)) and (_s[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _p9
+
+from _p9
+	case (_j = 2) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_s[2] := 0;
+	to _NCS
+
+
+component sys is
+var 
+	
+	_a: array 3 of byte, 
+	
+	_w: array 3 of byte, 
+	
+	_s: array 3 of byte
+
+par 
+	_P_0(&_w, &_a, &_s) 
+	 || _P_1(&_w, &_a, &_s) 
+	 || _P_2(&_w, &_a, &_s) 
+end par
+
+
+sys

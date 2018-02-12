@@ -1,0 +1,314 @@
+type byte is 0..255
+
+process _torch [_wanna_go: in none, _lets_go: out none] (&_where_is_torch: byte, &_total_time: byte) is
+states _free, _one, _two, _going
+var 
+	_time1: byte, 
+	_time2: byte 
+init to _free
+
+from _free
+	_wanna_go? _time1;
+	to _one
+
+from _one
+	_wanna_go? _time2;
+	to _two
+
+from _one
+	to _going
+
+from _two
+	case (_time1 >= _time2) of
+	true -> null
+	end case;
+	_lets_go;
+	to _going
+
+from _two
+	case (_time1 < _time2) of
+	true -> null
+	end case;
+	_lets_go;
+	_time1 := _time2;
+	_time2 := 0;
+	to _going
+
+from _going
+	case ((_total_time + _time1) <= 200) of
+	true -> null
+	end case;
+	_lets_go;
+	_total_time := (_total_time + _time1);
+	_time1 := 0;
+	_where_is_torch := (1 - _where_is_torch);
+	to _free
+
+
+process _soldier_1 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 5;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 5;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+process _soldier_2 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 10;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 10;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+process _soldier_3 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 20;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 20;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+process _soldier_4 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 25;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 25;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+process _soldier_5 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 30;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 30;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+process _soldier_6 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 30;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 30;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+process _soldier_7 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 40;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 40;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+process _soldier_8 [_lets_go: in none, _wanna_go: out none] (&_on_right: byte, &_where_is_torch: read byte) is
+states _left, _go_right, _right, _go_left
+
+init to _left
+
+from _left
+	case (_where_is_torch = 0) of
+	true -> null
+	end case;
+	_wanna_go! 45;
+	to _go_right
+
+from _go_right
+	_lets_go;
+	_on_right := (_on_right + 1);
+	to _right
+
+from _right
+	case (_where_is_torch = 1) of
+	true -> null
+	end case;
+	_wanna_go! 45;
+	_on_right := (_on_right - 1);
+	to _go_left
+
+from _go_left
+	_lets_go;
+	to _left
+
+
+component sys is
+var 
+	
+	_total_time: byte := 0, 
+	
+	_where_is_torch: byte := 0, 
+	
+	_on_right: byte := 0
+
+port 
+	_wanna_go: none, 
+	_lets_go: none
+
+par 
+	_torch(&_where_is_torch, &_total_time) 
+	 || _soldier_1(&_on_right, &_where_is_torch) 
+	 || _soldier_2(&_on_right, &_where_is_torch) 
+	 || _soldier_3(&_on_right, &_where_is_torch) 
+	 || _soldier_4(&_on_right, &_where_is_torch) 
+	 || _soldier_5(&_on_right, &_where_is_torch) 
+	 || _soldier_6(&_on_right, &_where_is_torch) 
+	 || _soldier_7(&_on_right, &_where_is_torch) 
+	 || _soldier_8(&_on_right, &_where_is_torch) 
+end par
+
+
+sys

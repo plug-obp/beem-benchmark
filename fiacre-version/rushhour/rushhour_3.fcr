@@ -1,0 +1,382 @@
+type byte is 0..255
+
+process _Red_car (&_A: array 49 of byte) is
+states _q, _out
+var 
+	_x: byte := 1, 
+	_y: byte := 2, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_x > 0) and (_A[(((_y * 7) + _x) - 1)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y * 7) + _x) + _length) - 1)] := 0;
+	_A[(((_y * 7) + _x) - 1)] := 1;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case (((_x + _length) < 7) and (_A[(((_y * 7) + _x) + _length)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y * 7) + _x) + _length)] := 1;
+	_x := (_x + 1);
+	to _q
+
+from _q
+	case (_x = 5) of
+	true -> null
+	end case;
+	to _out
+
+
+process _Car_hor_1 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 4, 
+	_y: byte := 0, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_x > 0) and (_A[(((_y * 7) + _x) - 1)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y * 7) + _x) + _length) - 1)] := 0;
+	_A[(((_y * 7) + _x) - 1)] := 1;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case (((_x + _length) < 7) and (_A[(((_y * 7) + _x) + _length)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y * 7) + _x) + _length)] := 1;
+	_x := (_x + 1);
+	to _q
+
+
+process _Car_hor_2 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 1, 
+	_y: byte := 4, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_x > 0) and (_A[(((_y * 7) + _x) - 1)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y * 7) + _x) + _length) - 1)] := 0;
+	_A[(((_y * 7) + _x) - 1)] := 1;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case (((_x + _length) < 7) and (_A[(((_y * 7) + _x) + _length)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y * 7) + _x) + _length)] := 1;
+	_x := (_x + 1);
+	to _q
+
+
+process _Car_hor_3 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 4, 
+	_y: byte := 4, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_x > 0) and (_A[(((_y * 7) + _x) - 1)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y * 7) + _x) + _length) - 1)] := 0;
+	_A[(((_y * 7) + _x) - 1)] := 1;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case (((_x + _length) < 7) and (_A[(((_y * 7) + _x) + _length)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y * 7) + _x) + _length)] := 1;
+	_x := (_x + 1);
+	to _q
+
+
+process _Car_hor_4 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 1, 
+	_y: byte := 5, 
+	_length: byte := 4 
+init to _q
+
+from _q
+	case ((_x > 0) and (_A[(((_y * 7) + _x) - 1)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y * 7) + _x) + _length) - 1)] := 0;
+	_A[(((_y * 7) + _x) - 1)] := 1;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case (((_x + _length) < 7) and (_A[(((_y * 7) + _x) + _length)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y * 7) + _x) + _length)] := 1;
+	_x := (_x + 1);
+	to _q
+
+
+process _Car_ver_1 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 0, 
+	_y: byte := 1, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+process _Car_ver_2 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 0, 
+	_y: byte := 4, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+process _Car_ver_3 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 2, 
+	_y: byte := 0, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+process _Car_ver_4 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 3, 
+	_y: byte := 1, 
+	_length: byte := 3 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+process _Car_ver_5 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 4, 
+	_y: byte := 1, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+process _Car_ver_6 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 5, 
+	_y: byte := 1, 
+	_length: byte := 3 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+process _Car_ver_7 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 6, 
+	_y: byte := 1, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+process _Car_ver_8 (&_A: array 49 of byte) is
+states _q
+var 
+	_x: byte := 6, 
+	_y: byte := 5, 
+	_length: byte := 2 
+init to _q
+
+from _q
+	case ((_y > 0) and (_A[(((_y - 1) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((((_y + _length) - 1) * 7) + _x)] := 0;
+	_A[(((_y - 1) * 7) + _x)] := 1;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_y + _length) < 7) and (_A[(((_y + _length) * 7) + _x)] = 0)) of
+	true -> null
+	end case;
+	_A[((_y * 7) + _x)] := 0;
+	_A[(((_y + _length) * 7) + _x)] := 1;
+	_y := (_y + 1);
+	to _q
+
+
+component sys is
+var 
+	
+	_A: array 49 of byte := [0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1]
+
+par 
+	_Red_car(&_A) 
+	 || _Car_hor_1(&_A) 
+	 || _Car_hor_2(&_A) 
+	 || _Car_hor_3(&_A) 
+	 || _Car_hor_4(&_A) 
+	 || _Car_ver_1(&_A) 
+	 || _Car_ver_2(&_A) 
+	 || _Car_ver_3(&_A) 
+	 || _Car_ver_4(&_A) 
+	 || _Car_ver_5(&_A) 
+	 || _Car_ver_6(&_A) 
+	 || _Car_ver_7(&_A) 
+	 || _Car_ver_8(&_A) 
+end par
+
+
+sys

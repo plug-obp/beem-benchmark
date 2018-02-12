@@ -1,0 +1,325 @@
+type byte is 0..255
+
+process _Hand (&_holding: byte, &_clear: array 10 of byte, &_on: array 10 of byte) is
+states _emptyhand, _fullhand, _done
+
+init to _emptyhand
+
+from _emptyhand
+	case (((((((((_on[3] = 2) and (_on[2] = 5)) and (_on[5] = 9)) and (_on[9] = 4)) and (_on[4] = 7)) and (_on[7] = 1)) and (_on[1] = 0)) and (_on[0] = 6)) and (_on[6] = 8)) of
+	true -> null
+	end case;
+	to _done
+
+from _emptyhand
+	case ((_clear[0] = 1) and (_on[0] = 254)) of
+	true -> null
+	end case;
+	_on[0] := 255;
+	_clear[0] := 0;
+	_holding := 0;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[1] = 1) and (_on[1] = 254)) of
+	true -> null
+	end case;
+	_on[1] := 255;
+	_clear[1] := 0;
+	_holding := 1;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[2] = 1) and (_on[2] = 254)) of
+	true -> null
+	end case;
+	_on[2] := 255;
+	_clear[2] := 0;
+	_holding := 2;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[3] = 1) and (_on[3] = 254)) of
+	true -> null
+	end case;
+	_on[3] := 255;
+	_clear[3] := 0;
+	_holding := 3;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[4] = 1) and (_on[4] = 254)) of
+	true -> null
+	end case;
+	_on[4] := 255;
+	_clear[4] := 0;
+	_holding := 4;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[5] = 1) and (_on[5] = 254)) of
+	true -> null
+	end case;
+	_on[5] := 255;
+	_clear[5] := 0;
+	_holding := 5;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[6] = 1) and (_on[6] = 254)) of
+	true -> null
+	end case;
+	_on[6] := 255;
+	_clear[6] := 0;
+	_holding := 6;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[7] = 1) and (_on[7] = 254)) of
+	true -> null
+	end case;
+	_on[7] := 255;
+	_clear[7] := 0;
+	_holding := 7;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[8] = 1) and (_on[8] = 254)) of
+	true -> null
+	end case;
+	_on[8] := 255;
+	_clear[8] := 0;
+	_holding := 8;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[9] = 1) and (_on[9] = 254)) of
+	true -> null
+	end case;
+	_on[9] := 255;
+	_clear[9] := 0;
+	_holding := 9;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[0] = 1) and (_on[0] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[0]] := 1;
+	_on[0] := 255;
+	_clear[0] := 0;
+	_holding := 0;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[1] = 1) and (_on[1] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[1]] := 1;
+	_on[1] := 255;
+	_clear[1] := 0;
+	_holding := 1;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[2] = 1) and (_on[2] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[2]] := 1;
+	_on[2] := 255;
+	_clear[2] := 0;
+	_holding := 2;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[3] = 1) and (_on[3] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[3]] := 1;
+	_on[3] := 255;
+	_clear[3] := 0;
+	_holding := 3;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[4] = 1) and (_on[4] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[4]] := 1;
+	_on[4] := 255;
+	_clear[4] := 0;
+	_holding := 4;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[5] = 1) and (_on[5] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[5]] := 1;
+	_on[5] := 255;
+	_clear[5] := 0;
+	_holding := 5;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[6] = 1) and (_on[6] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[6]] := 1;
+	_on[6] := 255;
+	_clear[6] := 0;
+	_holding := 6;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[7] = 1) and (_on[7] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[7]] := 1;
+	_on[7] := 255;
+	_clear[7] := 0;
+	_holding := 7;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[8] = 1) and (_on[8] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[8]] := 1;
+	_on[8] := 255;
+	_clear[8] := 0;
+	_holding := 8;
+	to _fullhand
+
+from _emptyhand
+	case ((_clear[9] = 1) and (_on[9] <> 254)) of
+	true -> null
+	end case;
+	_clear[_on[9]] := 1;
+	_on[9] := 255;
+	_clear[9] := 0;
+	_holding := 9;
+	to _fullhand
+
+from _fullhand
+	case (_clear[0] = 1) of
+	true -> null
+	end case;
+	_clear[0] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 0;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[1] = 1) of
+	true -> null
+	end case;
+	_clear[1] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 1;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[2] = 1) of
+	true -> null
+	end case;
+	_clear[2] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 2;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[3] = 1) of
+	true -> null
+	end case;
+	_clear[3] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 3;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[4] = 1) of
+	true -> null
+	end case;
+	_clear[4] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 4;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[5] = 1) of
+	true -> null
+	end case;
+	_clear[5] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 5;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[6] = 1) of
+	true -> null
+	end case;
+	_clear[6] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 6;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[7] = 1) of
+	true -> null
+	end case;
+	_clear[7] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 7;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[8] = 1) of
+	true -> null
+	end case;
+	_clear[8] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 8;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	case (_clear[9] = 1) of
+	true -> null
+	end case;
+	_clear[9] := 0;
+	_clear[_holding] := 1;
+	_on[_holding] := 9;
+	_holding := 253;
+	to _emptyhand
+
+from _fullhand
+	_clear[_holding] := 1;
+	_on[_holding] := 254;
+	_holding := 253;
+	to _emptyhand
+
+
+component sys is
+var 
+	
+	_on: array 10 of byte := [3, 6, 4, 8, 9, 254, 7, 0, 254, 1], 
+	
+	_clear: array 10 of byte := [0, 0, 1, 0, 0, 1, 0, 0, 0, 0], 
+	
+	_holding: byte := 253
+
+par 
+	_Hand(&_holding, &_clear, &_on) 
+end par
+
+
+sys

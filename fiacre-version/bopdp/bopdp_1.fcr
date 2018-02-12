@@ -1,0 +1,636 @@
+type byte is 0..255
+
+process _AP [_ap_down_nack: in none, _ap_down_ack: in none, _ap_active: in none, _ap_down: out none] (&_generated_ap_interrupt: write byte) is
+states _active, _prepare_ack, _stand_by
+var 
+	_no_ap_ints: byte 
+init to _active
+
+from _active
+	_ap_active;
+	to _active
+
+from _active
+	case (_no_ap_ints < 1) of
+	true -> null
+	end case;
+	_generated_ap_interrupt := 1;
+	_no_ap_ints := (_no_ap_ints + 1);
+	to _active
+
+from _active
+	_ap_down;
+	to _prepare_ack
+
+from _prepare_ack
+	_ap_down;
+	to _prepare_ack
+
+from _prepare_ack
+	_ap_down_nack;
+	to _active
+
+from _prepare_ack
+	_ap_down_ack;
+	to _stand_by
+
+from _stand_by
+	to _active
+
+from _stand_by
+	_ap_active;
+	to _active
+
+
+process _LSL_Interrupt_Handler (&_generated_lsl_interrupt: byte, &_sleeping: byte, &_enabled_lsl_interrupt: byte, &_sw_stand_by: byte, &_cur: byte, &_lsl_interrupt_ex: write byte, &_some_interrupt: write byte, &_sleep_op: write byte, &_lsl_interrupt: write byte) is
+states _lsl_int_service, _interrupt_received, _awake, _check_stand_by, _insert_noop, _clear_stand_by
+
+init to _lsl_int_service
+
+from _lsl_int_service
+	case (((_cur = 0) and (_enabled_lsl_interrupt = 1)) and (_generated_lsl_interrupt = 1)) of
+	true -> null
+	end case;
+	_cur := 1;
+	_lsl_interrupt_ex := 1;
+	to _interrupt_received
+
+from _interrupt_received
+	case ((_cur = 1) and (_sleeping = 0)) of
+	true -> null
+	end case;
+	to _awake
+
+from _interrupt_received
+	case ((_cur = 1) and (_sleeping = 1)) of
+	true -> null
+	end case;
+	_sleeping := 0;
+	to _awake
+
+from _awake
+	case (_cur = 1) of
+	true -> null
+	end case;
+	_enabled_lsl_interrupt := 0;
+	_generated_lsl_interrupt := 0;
+	_lsl_interrupt := 1;
+	_lsl_interrupt_ex := 0;
+	_some_interrupt := 1;
+	to _check_stand_by
+
+from _check_stand_by
+	case ((_cur = 1) and (_sw_stand_by = 0)) of
+	true -> null
+	end case;
+	_cur := 0;
+	to _lsl_int_service
+
+from _check_stand_by
+	case ((_cur = 1) and (_sw_stand_by = 1)) of
+	true -> null
+	end case;
+	to _insert_noop
+
+from _insert_noop
+	case (_cur = 1) of
+	true -> null
+	end case;
+	_sleep_op := 0;
+	to _clear_stand_by
+
+from _clear_stand_by
+	case (_cur = 1) of
+	true -> null
+	end case;
+	_sw_stand_by := 0;
+	_cur := 0;
+	to _lsl_int_service
+
+
+process _AP_Interrupt_Handler (&_sleeping: byte, &_generated_ap_interrupt: byte, &_sw_stand_by: byte, &_cur: byte, &_lsl_interrupt_ex: read byte, &_generated_lsl_interrupt: write byte, &_ap_interrupt: write byte, &_some_interrupt: write byte, &_enabled_lsl_interrupt: write byte, &_sleep_op: write byte) is
+states _ap_int_service, _set_cur, _interrupt_received, _awake, _check_stand_by, _reset_cur, _insert_noop, _clear_stand_by
+var 
+	_old_cur: byte 
+init to _ap_int_service
+
+from _ap_int_service
+	case ((_generated_ap_interrupt = 1) and (_lsl_interrupt_ex = 0)) of
+	true -> null
+	end case;
+	_generated_ap_interrupt := 0;
+	to _set_cur
+
+from _set_cur
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_old_cur := 0;
+	_cur := 2;
+	to _interrupt_received
+
+from _set_cur
+	case (_cur = 1) of
+	true -> null
+	end case;
+	_old_cur := 1;
+	_cur := 2;
+	to _interrupt_received
+
+from _interrupt_received
+	case (_sleeping = 0) of
+	true -> null
+	end case;
+	to _awake
+
+from _interrupt_received
+	case (_sleeping = 1) of
+	true -> null
+	end case;
+	_sleeping := 0;
+	to _awake
+
+from _awake
+	_enabled_lsl_interrupt := 0;
+	_generated_lsl_interrupt := 0;
+	_ap_interrupt := 1;
+	_some_interrupt := 1;
+	to _check_stand_by
+
+from _check_stand_by
+	case (_sw_stand_by = 0) of
+	true -> null
+	end case;
+	to _reset_cur
+
+from _check_stand_by
+	case (_sw_stand_by = 1) of
+	true -> null
+	end case;
+	to _insert_noop
+
+from _insert_noop
+	_sleep_op := 0;
+	to _clear_stand_by
+
+from _clear_stand_by
+	_sw_stand_by := 0;
+	to _reset_cur
+
+from _reset_cur
+	case (_old_cur = 0) of
+	true -> null
+	end case;
+	_cur := 0;
+	to _ap_int_service
+
+from _reset_cur
+	case (_old_cur = 1) of
+	true -> null
+	end case;
+	_cur := 1;
+	to _ap_int_service
+
+
+process _Interrupt_Generator (&_enabled_lsl_interrupt: read byte, &_generated_lsl_interrupt: write byte) is
+states _generate
+var 
+	_no_lsl_ints: byte 
+init to _generate
+
+from _generate
+	case ((_enabled_lsl_interrupt = 1) and (_no_lsl_ints < 2)) of
+	true -> null
+	end case;
+	_generated_lsl_interrupt := 1;
+	_no_lsl_ints := (_no_lsl_ints + 1);
+	to _generate
+
+
+process _LSL_Driver [_calc: out none] (&_lsl_command: byte, &_cur: read byte, &_lsl_running: write byte, &_some_running: write byte, &_some_data: write byte, &_lsl_data: write byte) is
+states _stand_by, _up_down_received, _react, _call
+
+init to _stand_by
+
+from _stand_by
+	case ((_cur = 0) and (_lsl_command = 3)) of
+	true -> null
+	end case;
+	_lsl_command := 0;
+	to _stand_by
+
+from _stand_by
+	case ((_cur = 0) and (_lsl_command = 1)) of
+	true -> null
+	end case;
+	_lsl_command := 0;
+	to _up_down_received
+
+from _stand_by
+	case ((_cur = 0) and (_lsl_command = 2)) of
+	true -> null
+	end case;
+	_lsl_command := 0;
+	to _up_down_received
+
+from _up_down_received
+	case (_cur = 0) of
+	true -> null
+	end case;
+	to _react
+
+from _react
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_running := 0;
+	_lsl_data := 0;
+	to _call
+
+from _react
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_running := 1;
+	_lsl_data := 1;
+	_some_running := 1;
+	_some_data := 1;
+	to _stand_by
+
+from _call
+	_calc;
+	to _stand_by
+
+
+process _Calc [_calc: in none] (&_lsl_running: read byte, &_lsl_data: read byte, &_some_running: write byte, &_some_data: write byte) is
+states _idle, _calc_data, _calc_running
+
+init to _idle
+
+from _idle
+	_calc;
+	to _calc_data
+
+from _calc_data
+	case (_lsl_data = 1) of
+	true -> null
+	end case;
+	to _calc_running
+
+from _calc_data
+	case (_lsl_data = 0) of
+	true -> null
+	end case;
+	_some_data := 0;
+	to _calc_running
+
+from _calc_running
+	case (_lsl_running = 1) of
+	true -> null
+	end case;
+	to _idle
+
+from _calc_running
+	case (_lsl_running = 0) of
+	true -> null
+	end case;
+	_some_running := 0;
+	to _idle
+
+
+process _IOP [_ap_down: in none, _ap_down_nack: out none, _ap_down_ack: out none, _ap_active: out none] (&_some_running: byte, &_some_data: byte, &_some_interrupt: byte, &_sleep_op: byte, &_cur: read byte, &_generated_lsl_interrupt: write byte, &_lsl_running: write byte, &_lsl_data: write byte, &_sw_stand_by: write byte, &_ap_interrupt: write byte, &_sleeping: write byte, &_lsl_command: write byte, &_enabled_lsl_interrupt: write byte, &_lsl_interrupt: write byte) is
+states _going_down, _clear_interrupts, _active, _enable_lsl_interrupt, _issue_down_lsl, _wait_for_down, _down_expected, _disable_lsl_interrupt, _down_verified, _down_received, _insert_noop, _set_stand_by, _check_interrupts, _check_noop, _w_stand_by, _wake_up, _stand_by, _clear_int, _issue_lsl_up, _wait_init_response, _data_expected, _noise, _s_active, _now_wait, _re_enable_lsl_interrupt, _re_issue_lsl_down, _wait_response, _observe_status, _clear_lsl_interrupt, _send_active_command, _back_to_active, _issue_active_commands, _send_nack, _enter_active
+
+init to _active
+
+from _active
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_ap_down;
+	to _down_received
+
+from _down_received
+	to _going_down
+
+from _going_down
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_data := 0;
+	_some_data := 0;
+	_lsl_running := 1;
+	_some_running := 1;
+	to _clear_interrupts
+
+from _clear_interrupts
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_ap_interrupt := 0;
+	_lsl_interrupt := 0;
+	_some_interrupt := 0;
+	to _enable_lsl_interrupt
+
+from _enable_lsl_interrupt
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_enabled_lsl_interrupt := 1;
+	_generated_lsl_interrupt := 0;
+	to _issue_down_lsl
+
+from _issue_down_lsl
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_command := 2;
+	to _wait_for_down
+
+from _wait_for_down
+	case ((_cur = 0) and (_some_running = 0)) of
+	true -> null
+	end case;
+	to _down_expected
+
+from _wait_for_down
+	case ((_cur = 0) and (_some_data = 1)) of
+	true -> null
+	end case;
+	to _down_expected
+
+from _down_expected
+	case ((_cur = 0) and (_some_data = 1)) of
+	true -> null
+	end case;
+	to _disable_lsl_interrupt
+
+from _down_expected
+	case ((_cur = 0) and (_some_data = 0)) of
+	true -> null
+	end case;
+	to _down_verified
+
+from _down_verified
+	_ap_down_ack;
+	to _insert_noop
+
+from _disable_lsl_interrupt
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_enabled_lsl_interrupt := 0;
+	_generated_lsl_interrupt := 0;
+	to _issue_active_commands
+
+from _issue_active_commands
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_command := 3;
+	to _send_nack
+
+from _send_nack
+	_ap_down_nack;
+	to _enter_active
+
+from _enter_active
+	case (_cur = 0) of
+	true -> null
+	end case;
+	to _active
+
+from _insert_noop
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_sleep_op := 1;
+	to _set_stand_by
+
+from _set_stand_by
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_sw_stand_by := 1;
+	to _check_interrupts
+
+from _check_interrupts
+	case ((_cur = 0) and (_some_interrupt = 0)) of
+	true -> null
+	end case;
+	to _check_noop
+
+from _check_interrupts
+	case ((_cur = 0) and (_some_interrupt = 1)) of
+	true -> null
+	end case;
+	to _wake_up
+
+from _check_noop
+	case ((_cur = 0) and (_sleep_op = 0)) of
+	true -> null
+	end case;
+	to _wake_up
+
+from _check_noop
+	case ((_cur = 0) and (_sleep_op = 1)) of
+	true -> null
+	end case;
+	_sleeping := 1;
+	to _w_stand_by
+
+from _w_stand_by
+	case (_cur = 0) of
+	true -> null
+	end case;
+	to _stand_by
+
+from _stand_by
+	case ((_cur = 0) and (_some_interrupt = 1)) of
+	true -> null
+	end case;
+	to _wake_up
+
+from _wake_up
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_sw_stand_by := 0;
+	_lsl_data := 0;
+	_some_data := 0;
+	_lsl_running := 1;
+	_some_running := 1;
+	to _clear_int
+
+from _clear_int
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_ap_interrupt := 0;
+	_lsl_interrupt := 0;
+	_some_interrupt := 0;
+	to _issue_lsl_up
+
+from _issue_lsl_up
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_command := 1;
+	to _wait_init_response
+
+from _wait_init_response
+	case ((_cur = 0) and (_some_running = 0)) of
+	true -> null
+	end case;
+	to _data_expected
+
+from _wait_init_response
+	case ((_cur = 0) and (_some_data = 1)) of
+	true -> null
+	end case;
+	to _data_expected
+
+from _data_expected
+	case ((_cur = 0) and (_some_data = 1)) of
+	true -> null
+	end case;
+	to _s_active
+
+from _s_active
+	_ap_active;
+	to _now_wait
+
+from _now_wait
+	case (_cur = 0) of
+	true -> null
+	end case;
+	to _active
+
+from _data_expected
+	case ((_cur = 0) and (_some_data = 0)) of
+	true -> null
+	end case;
+	to _noise
+
+from _noise
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_data := 0;
+	_some_data := 0;
+	_lsl_running := 1;
+	_some_running := 1;
+	to _re_enable_lsl_interrupt
+
+from _re_enable_lsl_interrupt
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_enabled_lsl_interrupt := 1;
+	to _re_issue_lsl_down
+
+from _re_issue_lsl_down
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_lsl_command := 2;
+	to _wait_response
+
+from _wait_response
+	case ((_cur = 0) and (_some_running = 0)) of
+	true -> null
+	end case;
+	to _observe_status
+
+from _wait_response
+	case ((_cur = 0) and (_some_data = 1)) of
+	true -> null
+	end case;
+	to _observe_status
+
+from _observe_status
+	case ((_cur = 0) and (_some_data = 0)) of
+	true -> null
+	end case;
+	to _insert_noop
+
+from _observe_status
+	case ((_cur = 0) and (_some_data = 1)) of
+	true -> null
+	end case;
+	to _clear_lsl_interrupt
+
+from _clear_lsl_interrupt
+	case (_cur = 0) of
+	true -> null
+	end case;
+	_enabled_lsl_interrupt := 0;
+	_generated_lsl_interrupt := 0;
+	to _send_active_command
+
+from _send_active_command
+	_ap_active;
+	_lsl_command := 3;
+	to _back_to_active
+
+from _back_to_active
+	case (_cur = 0) of
+	true -> null
+	end case;
+	to _active
+
+
+component sys is
+var 
+	
+	_cur: byte, 
+	
+	_sleeping: byte, 
+	
+	_sleep_op: byte, 
+	
+	_sw_stand_by: byte, 
+	
+	_generated_ap_interrupt: byte, 
+	
+	_lsl_command: byte, 
+	
+	_lsl_running: byte, 
+	
+	_lsl_data: byte, 
+	
+	_ap_interrupt: byte, 
+	
+	_enabled_lsl_interrupt: byte, 
+	
+	_lsl_interrupt: byte, 
+	
+	_lsl_interrupt_ex: byte, 
+	
+	_generated_lsl_interrupt: byte, 
+	
+	_some_running: byte, 
+	
+	_some_data: byte, 
+	
+	_some_interrupt: byte
+
+port 
+	_ap_down: none, 
+	_ap_active: none, 
+	_ap_down_ack: none, 
+	_ap_down_nack: none, 
+	_calc: none
+
+par 
+	_AP(&_generated_ap_interrupt) 
+	 || _LSL_Interrupt_Handler(&_generated_lsl_interrupt, &_sleeping, &_enabled_lsl_interrupt, &_sw_stand_by, &_cur, &_lsl_interrupt_ex, &_some_interrupt, &_sleep_op, &_lsl_interrupt) 
+	 || _AP_Interrupt_Handler(&_sleeping, &_generated_ap_interrupt, &_sw_stand_by, &_cur, &_lsl_interrupt_ex, &_generated_lsl_interrupt, &_ap_interrupt, &_some_interrupt, &_enabled_lsl_interrupt, &_sleep_op) 
+	 || _Interrupt_Generator(&_enabled_lsl_interrupt, &_generated_lsl_interrupt) 
+	 || _LSL_Driver(&_lsl_command, &_cur, &_lsl_running, &_some_running, &_some_data, &_lsl_data) 
+	 || _Calc(&_lsl_running, &_lsl_data, &_some_running, &_some_data) 
+	 || _IOP(&_some_running, &_some_data, &_some_interrupt, &_sleep_op, &_cur, &_generated_lsl_interrupt, &_lsl_running, &_lsl_data, &_sw_stand_by, &_ap_interrupt, &_sleeping, &_lsl_command, &_enabled_lsl_interrupt, &_lsl_interrupt) 
+end par
+
+
+sys

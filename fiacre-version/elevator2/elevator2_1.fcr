@@ -1,0 +1,130 @@
+type byte is 0..255
+
+process _cabin (&_v: byte, &_p: int, &_t: read int, &_req: write array 4 of byte) is
+states _idle, _mov, _open
+
+init to _idle
+
+from _idle
+	case (_v > 0) of
+	true -> null
+	end case;
+	to _mov
+
+from _mov
+	case (_t = _p) of
+	true -> null
+	end case;
+	to _open
+
+from _mov
+	case (_t < _p) of
+	true -> null
+	end case;
+	_p := (_p - 1);
+	to _mov
+
+from _mov
+	case (_t > _p) of
+	true -> null
+	end case;
+	_p := (_p + 1);
+	to _mov
+
+from _open
+	_req[_p] := 0;
+	_v := 0;
+	to _idle
+
+
+process _environment (&_req: array 4 of byte) is
+states _read
+
+init to _read
+
+from _read
+	case (_req[0] = 0) of
+	true -> null
+	end case;
+	_req[0] := 1;
+	to _read
+
+from _read
+	case (_req[1] = 0) of
+	true -> null
+	end case;
+	_req[1] := 1;
+	to _read
+
+from _read
+	case (_req[2] = 0) of
+	true -> null
+	end case;
+	_req[2] := 1;
+	to _read
+
+from _read
+	case (_req[3] = 0) of
+	true -> null
+	end case;
+	_req[3] := 1;
+	to _read
+
+
+process _controller (&_t: int, &_v: byte, &_req: read array 4 of byte) is
+states _wait, _work, _done
+var 
+	_ldir: byte 
+init to _wait
+
+from _wait
+	case (_v = 0) of
+	true -> null
+	end case;
+	_t := ((_t + (2 * _ldir)) - 1);
+	to _work
+
+from _work
+	case ((_t < 0) or (_t = 4)) of
+	true -> null
+	end case;
+	_ldir := (1 - _ldir);
+	to _wait
+
+from _work
+	case (((_t >= 0) and (_t < 4)) and (_req[_t] = 1)) of
+	true -> null
+	end case;
+	to _done
+
+from _work
+	case (((_t >= 0) and (_t < 4)) and (_req[_t] = 0)) of
+	true -> null
+	end case;
+	_t := ((_t + (2 * _ldir)) - 1);
+	to _work
+
+from _done
+	_v := 1;
+	to _wait
+
+
+component sys is
+var 
+	
+	_req: array 4 of byte, 
+	
+	_t: int, 
+	
+	_p: int, 
+	
+	_v: byte
+
+par 
+	_cabin(&_v, &_p, &_t, &_req) 
+	 || _environment(&_req) 
+	 || _controller(&_t, &_v, &_req) 
+end par
+
+
+sys

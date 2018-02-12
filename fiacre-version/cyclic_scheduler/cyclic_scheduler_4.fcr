@@ -1,0 +1,613 @@
+type byte is 0..255
+
+process _customer_0 [_start_0: in none, _finished_0: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_0;
+	to _running
+
+from _running
+	_finished_0;
+	to _finished
+
+from _running
+	_start_0;
+	to _q_error
+
+
+process _scheduler_0 [_finished_0: in none, _next_0: in none, _next_1: out none, _start_0: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _to_start
+
+from _init_state
+	_next_0;
+	to _to_start
+
+from _to_start
+	_start_0;
+	to _started
+
+from _started
+	_next_1;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_0;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_0;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_1 [_start_1: in none, _finished_1: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_1;
+	to _running
+
+from _running
+	_finished_1;
+	to _finished
+
+from _running
+	_start_1;
+	to _q_error
+
+
+process _scheduler_1 [_next_1: in none, _finished_1: in none, _next_2: out none, _start_1: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_1;
+	to _to_start
+
+from _to_start
+	_start_1;
+	to _started
+
+from _started
+	_next_2;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_1;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_1;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_2 [_start_2: in none, _finished_2: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_2;
+	to _running
+
+from _running
+	_finished_2;
+	to _finished
+
+from _running
+	_start_2;
+	to _q_error
+
+
+process _scheduler_2 [_next_2: in none, _finished_2: in none, _start_2: out none, _next_3: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_2;
+	to _to_start
+
+from _to_start
+	_start_2;
+	to _started
+
+from _started
+	_next_3;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_2;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_2;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_3 [_start_3: in none, _finished_3: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_3;
+	to _running
+
+from _running
+	_finished_3;
+	to _finished
+
+from _running
+	_start_3;
+	to _q_error
+
+
+process _scheduler_3 [_finished_3: in none, _next_3: in none, _start_3: out none, _next_4: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_3;
+	to _to_start
+
+from _to_start
+	_start_3;
+	to _started
+
+from _started
+	_next_4;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_3;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_3;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_4 [_start_4: in none, _finished_4: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_4;
+	to _running
+
+from _running
+	_finished_4;
+	to _finished
+
+from _running
+	_start_4;
+	to _q_error
+
+
+process _scheduler_4 [_next_4: in none, _finished_4: in none, _start_4: out none, _next_5: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_4;
+	to _to_start
+
+from _to_start
+	_start_4;
+	to _started
+
+from _started
+	_next_5;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_4;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_4;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_5 [_start_5: in none, _finished_5: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_5;
+	to _running
+
+from _running
+	_finished_5;
+	to _finished
+
+from _running
+	_start_5;
+	to _q_error
+
+
+process _scheduler_5 [_finished_5: in none, _next_5: in none, _next_6: out none, _start_5: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_5;
+	to _to_start
+
+from _to_start
+	_start_5;
+	to _started
+
+from _started
+	_next_6;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_5;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_5;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_6 [_start_6: in none, _finished_6: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_6;
+	to _running
+
+from _running
+	_finished_6;
+	to _finished
+
+from _running
+	_start_6;
+	to _q_error
+
+
+process _scheduler_6 [_next_6: in none, _finished_6: in none, _next_7: out none, _start_6: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_6;
+	to _to_start
+
+from _to_start
+	_start_6;
+	to _started
+
+from _started
+	_next_7;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_6;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_6;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_7 [_start_7: in none, _finished_7: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_7;
+	to _running
+
+from _running
+	_finished_7;
+	to _finished
+
+from _running
+	_start_7;
+	to _q_error
+
+
+process _scheduler_7 [_finished_7: in none, _next_7: in none, _next_8: out none, _start_7: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_7;
+	to _to_start
+
+from _to_start
+	_start_7;
+	to _started
+
+from _started
+	_next_8;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_7;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_7;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+process _customer_8 [_start_8: in none, _finished_8: out none] is
+states _finished, _running, _q_error
+
+init to _finished
+
+from _finished
+	_start_8;
+	to _running
+
+from _running
+	_finished_8;
+	to _finished
+
+from _running
+	_start_8;
+	to _q_error
+
+
+process _scheduler_8 [_finished_8: in none, _next_8: in none, _next_0: out none, _start_8: out none] is
+states _init_state, _to_start, _started, _wait
+var 
+	_done: byte := 0, 
+	_ready: byte := 0 
+init to _init_state
+
+from _init_state
+	_next_8;
+	to _to_start
+
+from _to_start
+	_start_8;
+	to _started
+
+from _started
+	_next_0;
+	_done := 0;
+	_ready := 0;
+	to _wait
+
+from _wait
+	case (_done = 0) of
+	true -> null
+	end case;
+	_finished_8;
+	_done := 1;
+	to _wait
+
+from _wait
+	case (_ready = 0) of
+	true -> null
+	end case;
+	_next_8;
+	_ready := 1;
+	to _wait
+
+from _wait
+	case (_ready = 1) of
+	true -> null
+	end case;
+	to _to_start
+
+
+component sys is
+port 
+	_start_0: none, 
+	_finished_0: none, 
+	_next_0: none, 
+	_start_1: none, 
+	_finished_1: none, 
+	_next_1: none, 
+	_start_2: none, 
+	_finished_2: none, 
+	_next_2: none, 
+	_start_3: none, 
+	_finished_3: none, 
+	_next_3: none, 
+	_start_4: none, 
+	_finished_4: none, 
+	_next_4: none, 
+	_start_5: none, 
+	_finished_5: none, 
+	_next_5: none, 
+	_start_6: none, 
+	_finished_6: none, 
+	_next_6: none, 
+	_start_7: none, 
+	_finished_7: none, 
+	_next_7: none, 
+	_start_8: none, 
+	_finished_8: none, 
+	_next_8: none
+
+par 
+	_customer_0
+	 || _scheduler_0
+	 || _customer_1
+	 || _scheduler_1
+	 || _customer_2
+	 || _scheduler_2
+	 || _customer_3
+	 || _scheduler_3
+	 || _customer_4
+	 || _scheduler_4
+	 || _customer_5
+	 || _scheduler_5
+	 || _customer_6
+	 || _scheduler_6
+	 || _customer_7
+	 || _scheduler_7
+	 || _customer_8
+	 || _scheduler_8
+end par
+
+
+sys

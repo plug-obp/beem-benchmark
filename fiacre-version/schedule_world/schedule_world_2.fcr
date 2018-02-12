@@ -1,0 +1,444 @@
+type byte is 0..255
+
+process _P (&_objscheduled: byte, &_surface: array 3 of byte, &_shape: array 3 of byte, &_scheduled: array 3 of byte, &_temperature: array 3 of byte, &_hashole: array 3 of byte, &_busy: array 8 of byte, &_painted: write array 3 of byte) is
+states _q, _done
+
+init to _q
+
+from _q
+	case (((((_shape[1] = 1) and (_surface[0] = 0)) and (_surface[1] = 0)) and (_hashole[1] = 1)) and (_shape[0] = 0)) of
+	true -> null
+	end case;
+	to _done
+
+from _q
+	case (((_busy[0] = 0) and (_scheduled[0] = 0)) and (_temperature[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[0] := 1;
+	_scheduled[0] := 1;
+	_surface[0] := 0;
+	to _q
+
+from _q
+	case (((_busy[0] = 0) and (_scheduled[1] = 0)) and (_temperature[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[0] := 1;
+	_scheduled[1] := 1;
+	_surface[1] := 0;
+	to _q
+
+from _q
+	case (((_busy[0] = 0) and (_scheduled[2] = 0)) and (_temperature[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[0] := 1;
+	_scheduled[2] := 1;
+	_surface[2] := 0;
+	to _q
+
+from _q
+	case ((_busy[1] = 0) and (_scheduled[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[1] := 1;
+	_scheduled[0] := 1;
+	_shape[0] := 0;
+	_temperature[0] := 1;
+	_painted[0] := 255;
+	_hashole[0] := 255;
+	_surface[0] := 255;
+	to _q
+
+from _q
+	case ((_busy[1] = 0) and (_scheduled[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[1] := 1;
+	_scheduled[1] := 1;
+	_shape[1] := 0;
+	_temperature[1] := 1;
+	_painted[1] := 255;
+	_hashole[1] := 255;
+	_surface[1] := 255;
+	to _q
+
+from _q
+	case ((_busy[1] = 0) and (_scheduled[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[1] := 1;
+	_scheduled[2] := 1;
+	_shape[2] := 0;
+	_temperature[2] := 1;
+	_painted[2] := 255;
+	_hashole[2] := 255;
+	_surface[2] := 255;
+	to _q
+
+from _q
+	case ((_busy[2] = 0) and (_scheduled[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[2] := 1;
+	_scheduled[0] := 1;
+	_surface[0] := 2;
+	_shape[0] := 0;
+	_painted[0] := 255;
+	to _q
+
+from _q
+	case ((_busy[2] = 0) and (_scheduled[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[2] := 1;
+	_scheduled[1] := 1;
+	_surface[1] := 2;
+	_shape[1] := 0;
+	_painted[1] := 255;
+	to _q
+
+from _q
+	case ((_busy[2] = 0) and (_scheduled[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[2] := 1;
+	_scheduled[2] := 1;
+	_surface[2] := 2;
+	_shape[2] := 0;
+	_painted[2] := 255;
+	to _q
+
+from _q
+	case ((_busy[3] = 0) and (_scheduled[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[3] := 1;
+	_scheduled[0] := 1;
+	_surface[0] := 1;
+	_painted[0] := 255;
+	to _q
+
+from _q
+	case ((_busy[3] = 0) and (_scheduled[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[3] := 1;
+	_scheduled[1] := 1;
+	_surface[1] := 1;
+	_painted[1] := 255;
+	to _q
+
+from _q
+	case ((_busy[3] = 0) and (_scheduled[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[3] := 1;
+	_scheduled[2] := 1;
+	_surface[2] := 1;
+	_painted[2] := 255;
+	to _q
+
+from _q
+	case ((((_busy[4] = 0) and (_scheduled[0] = 0)) and (_temperature[0] = 0)) and (_hashole[0] <> 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[4] := 1;
+	_scheduled[0] := 1;
+	_surface[0] := 2;
+	_hashole[0] := 0;
+	to _q
+
+from _q
+	case ((((_busy[4] = 0) and (_scheduled[1] = 0)) and (_temperature[1] = 0)) and (_hashole[1] <> 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[4] := 1;
+	_scheduled[1] := 1;
+	_surface[1] := 2;
+	_hashole[1] := 0;
+	to _q
+
+from _q
+	case ((((_busy[4] = 0) and (_scheduled[2] = 0)) and (_temperature[2] = 0)) and (_hashole[2] <> 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[4] := 1;
+	_scheduled[2] := 1;
+	_surface[2] := 2;
+	_hashole[2] := 0;
+	to _q
+
+from _q
+	case ((((_busy[4] = 0) and (_scheduled[0] = 0)) and (_temperature[0] = 0)) and (_hashole[0] <> 1)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[4] := 1;
+	_scheduled[0] := 1;
+	_surface[0] := 2;
+	_hashole[0] := 1;
+	to _q
+
+from _q
+	case ((((_busy[4] = 0) and (_scheduled[1] = 0)) and (_temperature[1] = 0)) and (_hashole[1] <> 1)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[4] := 1;
+	_scheduled[1] := 1;
+	_surface[1] := 2;
+	_hashole[1] := 1;
+	to _q
+
+from _q
+	case ((((_busy[4] = 0) and (_scheduled[2] = 0)) and (_temperature[2] = 0)) and (_hashole[2] <> 1)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[4] := 1;
+	_scheduled[2] := 1;
+	_surface[2] := 2;
+	_hashole[2] := 1;
+	to _q
+
+from _q
+	case ((((_busy[5] = 0) and (_scheduled[0] = 0)) and (_temperature[0] = 0)) and (_hashole[0] <> 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[5] := 1;
+	_scheduled[0] := 1;
+	_hashole[0] := 0;
+	to _q
+
+from _q
+	case ((((_busy[5] = 0) and (_scheduled[1] = 0)) and (_temperature[1] = 0)) and (_hashole[1] <> 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[5] := 1;
+	_scheduled[1] := 1;
+	_hashole[1] := 0;
+	to _q
+
+from _q
+	case ((((_busy[5] = 0) and (_scheduled[2] = 0)) and (_temperature[2] = 0)) and (_hashole[2] <> 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[5] := 1;
+	_scheduled[2] := 1;
+	_hashole[2] := 0;
+	to _q
+
+from _q
+	case ((((_busy[5] = 0) and (_scheduled[0] = 0)) and (_temperature[0] = 0)) and (_hashole[0] <> 1)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[5] := 1;
+	_scheduled[0] := 1;
+	_hashole[0] := 1;
+	to _q
+
+from _q
+	case ((((_busy[5] = 0) and (_scheduled[1] = 0)) and (_temperature[1] = 0)) and (_hashole[1] <> 1)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[5] := 1;
+	_scheduled[1] := 1;
+	_hashole[1] := 1;
+	to _q
+
+from _q
+	case ((((_busy[5] = 0) and (_scheduled[2] = 0)) and (_temperature[2] = 0)) and (_hashole[2] <> 1)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[5] := 1;
+	_scheduled[2] := 1;
+	_hashole[2] := 1;
+	to _q
+
+from _q
+	case (((_busy[6] = 0) and (_scheduled[0] = 0)) and (_temperature[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[6] := 1;
+	_scheduled[0] := 1;
+	_painted[0] := 0;
+	to _q
+
+from _q
+	case (((_busy[6] = 0) and (_scheduled[1] = 0)) and (_temperature[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[6] := 1;
+	_scheduled[1] := 1;
+	_painted[1] := 0;
+	to _q
+
+from _q
+	case (((_busy[6] = 0) and (_scheduled[2] = 0)) and (_temperature[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[6] := 1;
+	_scheduled[2] := 1;
+	_painted[2] := 0;
+	to _q
+
+from _q
+	case (((_busy[6] = 0) and (_scheduled[0] = 0)) and (_temperature[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[6] := 1;
+	_scheduled[0] := 1;
+	_painted[0] := 1;
+	to _q
+
+from _q
+	case (((_busy[6] = 0) and (_scheduled[1] = 0)) and (_temperature[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[6] := 1;
+	_scheduled[1] := 1;
+	_painted[1] := 1;
+	to _q
+
+from _q
+	case (((_busy[6] = 0) and (_scheduled[2] = 0)) and (_temperature[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[6] := 1;
+	_scheduled[2] := 1;
+	_painted[2] := 1;
+	to _q
+
+from _q
+	case ((_busy[7] = 0) and (_scheduled[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[7] := 1;
+	_scheduled[0] := 1;
+	_painted[0] := 0;
+	to _q
+
+from _q
+	case ((_busy[7] = 0) and (_scheduled[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[7] := 1;
+	_scheduled[1] := 1;
+	_painted[1] := 0;
+	to _q
+
+from _q
+	case ((_busy[7] = 0) and (_scheduled[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[7] := 1;
+	_scheduled[2] := 1;
+	_painted[2] := 0;
+	to _q
+
+from _q
+	case ((_busy[7] = 0) and (_scheduled[0] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[7] := 1;
+	_scheduled[0] := 1;
+	_painted[0] := 1;
+	to _q
+
+from _q
+	case ((_busy[7] = 0) and (_scheduled[1] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[7] := 1;
+	_scheduled[1] := 1;
+	_painted[1] := 1;
+	to _q
+
+from _q
+	case ((_busy[7] = 0) and (_scheduled[2] = 0)) of
+	true -> null
+	end case;
+	_objscheduled := 1;
+	_busy[7] := 1;
+	_scheduled[2] := 1;
+	_painted[2] := 1;
+	to _q
+
+from _q
+	case (_objscheduled = 1) of
+	true -> null
+	end case;
+	_scheduled[0] := 0;
+	_scheduled[1] := 0;
+	_scheduled[2] := 0;
+	_busy[0] := 0;
+	_busy[1] := 0;
+	_busy[2] := 0;
+	_busy[3] := 0;
+	_busy[4] := 0;
+	_busy[5] := 0;
+	_busy[6] := 0;
+	_busy[7] := 0;
+	_objscheduled := 0;
+	to _q
+
+
+component sys is
+var 
+	
+	_temperature: array 3 of byte := [0, 0, 0], 
+	
+	_surface: array 3 of byte := [0, 1, 2], 
+	
+	_shape: array 3 of byte := [0, 1, 1], 
+	
+	_painted: array 3 of byte := [0, 1, 1], 
+	
+	_hashole: array 3 of byte := [1, 1, 0], 
+	
+	_busy: array 8 of byte := [0, 0, 0, 0, 0, 0, 0, 0], 
+	
+	_scheduled: array 3 of byte := [0, 0, 0], 
+	
+	_objscheduled: byte := 0
+
+par 
+	_P(&_objscheduled, &_surface, &_shape, &_scheduled, &_temperature, &_hashole, &_busy, &_painted) 
+end par
+
+
+sys

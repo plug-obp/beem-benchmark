@@ -1,0 +1,386 @@
+type byte is 0..255
+
+process _Person_0 [_get_out_0: in none, _call_0: out none, _get_in_0: out none] is
+states _out, _waiting, _in_elevator
+var 
+	_at_floor: byte := 0 
+init to _out
+
+from _waiting
+	case (0 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_0! 0;
+	to _in_elevator
+
+from _waiting
+	case (1 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_0! 1;
+	to _in_elevator
+
+from _waiting
+	case (2 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_0! 2;
+	to _in_elevator
+
+from _waiting
+	case (3 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_0! 3;
+	to _in_elevator
+
+from _waiting
+	case (4 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_0! 4;
+	to _in_elevator
+
+from _in_elevator
+	_get_out_0? _at_floor;
+	to _out
+
+from _out
+	_call_0! _at_floor;
+	to _waiting
+
+
+process _Person_1 [_get_out_1: in none, _get_in_1: out none, _call_1: out none] is
+states _out, _waiting, _in_elevator
+var 
+	_at_floor: byte := 0 
+init to _out
+
+from _waiting
+	case (0 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_1! 0;
+	to _in_elevator
+
+from _waiting
+	case (1 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_1! 1;
+	to _in_elevator
+
+from _waiting
+	case (2 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_1! 2;
+	to _in_elevator
+
+from _waiting
+	case (3 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_1! 3;
+	to _in_elevator
+
+from _waiting
+	case (4 <> _at_floor) of
+	true -> null
+	end case;
+	_get_in_1! 4;
+	to _in_elevator
+
+from _in_elevator
+	_get_out_1? _at_floor;
+	to _out
+
+from _out
+	_call_1! _at_floor;
+	to _waiting
+
+
+process _Servis [_call_0: in none, _call_1: in none] (&_floor_queue_0_act: byte, &_floor_queue_1_act: byte, &_floor_queue_4_act: byte, &_floor_queue_2_act: byte, &_floor_queue_3_act: byte, &_floor_queue_2: write array 2 of byte, &_floor_queue_3: write array 2 of byte, &_floor_queue_4: write array 2 of byte, &_floor_queue_0: write array 2 of byte, &_floor_queue_1: write array 2 of byte) is
+states _q, _r
+var 
+	_floor: byte, 
+	_caller: byte 
+init to _q
+
+from _q
+	_call_0? _floor;
+	_caller := 0;
+	to _r
+
+from _q
+	_call_1? _floor;
+	_caller := 1;
+	to _r
+
+from _r
+	case (0 = _floor) of
+	true -> null
+	end case;
+	_floor_queue_0[_floor_queue_0_act] := _caller;
+	_floor_queue_0_act := (_floor_queue_0_act + 1);
+	to _q
+
+from _r
+	case (1 = _floor) of
+	true -> null
+	end case;
+	_floor_queue_1[_floor_queue_1_act] := _caller;
+	_floor_queue_1_act := (_floor_queue_1_act + 1);
+	to _q
+
+from _r
+	case (2 = _floor) of
+	true -> null
+	end case;
+	_floor_queue_2[_floor_queue_2_act] := _caller;
+	_floor_queue_2_act := (_floor_queue_2_act + 1);
+	to _q
+
+from _r
+	case (3 = _floor) of
+	true -> null
+	end case;
+	_floor_queue_3[_floor_queue_3_act] := _caller;
+	_floor_queue_3_act := (_floor_queue_3_act + 1);
+	to _q
+
+from _r
+	case (4 = _floor) of
+	true -> null
+	end case;
+	_floor_queue_4[_floor_queue_4_act] := _caller;
+	_floor_queue_4_act := (_floor_queue_4_act + 1);
+	to _q
+
+
+process _Elevator [_get_in_1: in none, _get_in_0: in none, _get_out_1: out none, _get_out_0: out none] (&_floor_queue_0_act: byte, &_floor_queue_1_act: byte, &_floor_queue_2: array 2 of byte, &_floor_queue_4_act: byte, &_floor_queue_2_act: byte, &_floor_queue_3_act: byte, &_floor_queue_3: array 2 of byte, &_current: byte, &_floor_queue_4: array 2 of byte, &_floor_queue_0: array 2 of byte, &_floor_queue_1: array 2 of byte) is
+states _choose_next, _move_next, _q, _transporting
+var 
+	_going_to: byte, 
+	_serving: byte := 0, 
+	_who: byte 
+init to _choose_next
+
+from _choose_next
+	case (((0 = _serving) and (_floor_queue_0_act = 0)) and (((((not (_floor_queue_0_act = 0)) or (not (_floor_queue_1_act = 0))) or (not (_floor_queue_2_act = 0))) or (not (_floor_queue_3_act = 0))) or (not (_floor_queue_4_act = 0)))) of
+	true -> null
+	end case;
+	_serving := ((_serving + 1) % 5);
+	to _choose_next
+
+from _choose_next
+	case (((1 = _serving) and (_floor_queue_1_act = 0)) and (((((not (_floor_queue_0_act = 0)) or (not (_floor_queue_1_act = 0))) or (not (_floor_queue_2_act = 0))) or (not (_floor_queue_3_act = 0))) or (not (_floor_queue_4_act = 0)))) of
+	true -> null
+	end case;
+	_serving := ((_serving + 1) % 5);
+	to _choose_next
+
+from _choose_next
+	case (((2 = _serving) and (_floor_queue_2_act = 0)) and (((((not (_floor_queue_0_act = 0)) or (not (_floor_queue_1_act = 0))) or (not (_floor_queue_2_act = 0))) or (not (_floor_queue_3_act = 0))) or (not (_floor_queue_4_act = 0)))) of
+	true -> null
+	end case;
+	_serving := ((_serving + 1) % 5);
+	to _choose_next
+
+from _choose_next
+	case (((3 = _serving) and (_floor_queue_3_act = 0)) and (((((not (_floor_queue_0_act = 0)) or (not (_floor_queue_1_act = 0))) or (not (_floor_queue_2_act = 0))) or (not (_floor_queue_3_act = 0))) or (not (_floor_queue_4_act = 0)))) of
+	true -> null
+	end case;
+	_serving := ((_serving + 1) % 5);
+	to _choose_next
+
+from _choose_next
+	case (((4 = _serving) and (_floor_queue_4_act = 0)) and (((((not (_floor_queue_0_act = 0)) or (not (_floor_queue_1_act = 0))) or (not (_floor_queue_2_act = 0))) or (not (_floor_queue_3_act = 0))) or (not (_floor_queue_4_act = 0)))) of
+	true -> null
+	end case;
+	_serving := ((_serving + 1) % 5);
+	to _choose_next
+
+from _choose_next
+	case ((0 = _serving) and (not (_floor_queue_0_act = 0))) of
+	true -> null
+	end case;
+	to _move_next
+
+from _choose_next
+	case ((1 = _serving) and (not (_floor_queue_1_act = 0))) of
+	true -> null
+	end case;
+	to _move_next
+
+from _choose_next
+	case ((2 = _serving) and (not (_floor_queue_2_act = 0))) of
+	true -> null
+	end case;
+	to _move_next
+
+from _choose_next
+	case ((3 = _serving) and (not (_floor_queue_3_act = 0))) of
+	true -> null
+	end case;
+	to _move_next
+
+from _choose_next
+	case ((4 = _serving) and (not (_floor_queue_4_act = 0))) of
+	true -> null
+	end case;
+	to _move_next
+
+from _move_next
+	case (_serving < _current) of
+	true -> null
+	end case;
+	_current := (_current - 1);
+	to _move_next
+
+from _move_next
+	case (_serving > _current) of
+	true -> null
+	end case;
+	_current := (_current + 1);
+	to _move_next
+
+from _move_next
+	case ((_serving = _current) and (0 = _current)) of
+	true -> null
+	end case;
+	_who := _floor_queue_0[0];
+	_floor_queue_0[0] := _floor_queue_0[1];
+	_floor_queue_0[1] := 0;
+	_floor_queue_0_act := (_floor_queue_0_act - 1);
+	to _q
+
+from _move_next
+	case ((_serving = _current) and (1 = _current)) of
+	true -> null
+	end case;
+	_who := _floor_queue_1[0];
+	_floor_queue_1[0] := _floor_queue_1[1];
+	_floor_queue_1[1] := 0;
+	_floor_queue_1_act := (_floor_queue_1_act - 1);
+	to _q
+
+from _move_next
+	case ((_serving = _current) and (2 = _current)) of
+	true -> null
+	end case;
+	_who := _floor_queue_2[0];
+	_floor_queue_2[0] := _floor_queue_2[1];
+	_floor_queue_2[1] := 0;
+	_floor_queue_2_act := (_floor_queue_2_act - 1);
+	to _q
+
+from _move_next
+	case ((_serving = _current) and (3 = _current)) of
+	true -> null
+	end case;
+	_who := _floor_queue_3[0];
+	_floor_queue_3[0] := _floor_queue_3[1];
+	_floor_queue_3[1] := 0;
+	_floor_queue_3_act := (_floor_queue_3_act - 1);
+	to _q
+
+from _move_next
+	case ((_serving = _current) and (4 = _current)) of
+	true -> null
+	end case;
+	_who := _floor_queue_4[0];
+	_floor_queue_4[0] := _floor_queue_4[1];
+	_floor_queue_4[1] := 0;
+	_floor_queue_4_act := (_floor_queue_4_act - 1);
+	to _q
+
+from _q
+	case (0 = _who) of
+	true -> null
+	end case;
+	_get_in_0? _going_to;
+	to _transporting
+
+from _q
+	case (1 = _who) of
+	true -> null
+	end case;
+	_get_in_1? _going_to;
+	to _transporting
+
+from _transporting
+	case ((0 = _who) and (_going_to = _current)) of
+	true -> null
+	end case;
+	_get_out_0! _current;
+	_going_to := 0;
+	_who := 0;
+	to _choose_next
+
+from _transporting
+	case ((1 = _who) and (_going_to = _current)) of
+	true -> null
+	end case;
+	_get_out_1! _current;
+	_going_to := 0;
+	_who := 0;
+	to _choose_next
+
+from _transporting
+	case (_going_to < _current) of
+	true -> null
+	end case;
+	_current := (_current - 1);
+	to _transporting
+
+from _transporting
+	case (_going_to > _current) of
+	true -> null
+	end case;
+	_current := (_current + 1);
+	to _transporting
+
+
+component sys is
+var 
+	
+	_floor_queue_0: array 2 of byte, 
+	
+	_floor_queue_0_act: byte := 0, 
+	
+	_floor_queue_1: array 2 of byte, 
+	
+	_floor_queue_1_act: byte := 0, 
+	
+	_floor_queue_2: array 2 of byte, 
+	
+	_floor_queue_2_act: byte := 0, 
+	
+	_floor_queue_3: array 2 of byte, 
+	
+	_floor_queue_3_act: byte := 0, 
+	
+	_floor_queue_4: array 2 of byte, 
+	
+	_floor_queue_4_act: byte := 0, 
+	
+	_current: byte := 0
+
+port 
+	_call_0: none, 
+	_get_in_0: none, 
+	_get_out_0: none, 
+	_call_1: none, 
+	_get_in_1: none, 
+	_get_out_1: none
+
+par 
+	_Person_0
+	 || _Person_1
+	 || _Servis(&_floor_queue_0_act, &_floor_queue_1_act, &_floor_queue_4_act, &_floor_queue_2_act, &_floor_queue_3_act, &_floor_queue_2, &_floor_queue_3, &_floor_queue_4, &_floor_queue_0, &_floor_queue_1) 
+	 || _Elevator(&_floor_queue_0_act, &_floor_queue_1_act, &_floor_queue_2, &_floor_queue_4_act, &_floor_queue_2_act, &_floor_queue_3_act, &_floor_queue_3, &_current, &_floor_queue_4, &_floor_queue_0, &_floor_queue_1) 
+end par
+
+
+sys

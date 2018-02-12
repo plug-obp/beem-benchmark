@@ -1,0 +1,454 @@
+type byte is 0..255
+
+process _User_0 [_ccToUser_0_out: in none, _userToCC: out none] is
+states _ready, _doneGet, _getCmdReceived, _doneRegister, _doneUnRegister, _editing, _cmdReceived
+var 
+	_cmd: byte, 
+	_edit: array 3 of byte, 
+	_registered: array 3 of byte, 
+	_waitingForCheckedOut: byte := 0 
+init to _ready
+
+from _ready
+	case (_waitingForCheckedOut = 0) of
+	true -> null
+	end case;
+	_userToCC! ((0 * 16) + 0);
+	to _doneGet
+
+from _doneGet
+	_ccToUser_0_out? _cmd;
+	to _getCmdReceived
+
+from _getCmdReceived
+	case (_cmd = 1) of
+	true -> null
+	end case;
+	_registered[0] := 1;
+	to _ready
+
+from _ready
+	case ((_registered[0] = 0) and (_edit[0] = 0)) of
+	true -> null
+	end case;
+	_userToCC! ((9 * 16) + 0);
+	_registered[0] := 1;
+	to _doneRegister
+
+from _doneRegister
+	to _ready
+
+from _ready
+	case ((_registered[0] = 1) and (_edit[0] = 0)) of
+	true -> null
+	end case;
+	_userToCC! ((10 * 16) + 0);
+	_registered[0] := 0;
+	to _doneUnRegister
+
+from _doneUnRegister
+	to _ready
+
+from _ready
+	case ((_edit[0] = 0) and (_waitingForCheckedOut = 0)) of
+	true -> null
+	end case;
+	_userToCC! ((2 * 16) + 0);
+	_waitingForCheckedOut := 1;
+	to _ready
+
+from _ready
+	case (_edit[0] = 1) of
+	true -> null
+	end case;
+	to _editing
+
+from _editing
+	_userToCC! ((5 * 16) + 0);
+	_edit[0] := 0;
+	to _ready
+
+from _editing
+	_userToCC! ((7 * 16) + 0);
+	_edit[0] := 0;
+	to _ready
+
+from _editing
+	_userToCC! ((8 * 16) + 0);
+	to _ready
+
+from _ready
+	_ccToUser_0_out? _cmd;
+	to _cmdReceived
+
+from _cmdReceived
+	case (_cmd = 3) of
+	true -> null
+	end case;
+	_edit[0] := 1;
+	_waitingForCheckedOut := 0;
+	to _ready
+
+from _cmdReceived
+	case (_cmd = 4) of
+	true -> null
+	end case;
+	_waitingForCheckedOut := 0;
+	to _ready
+
+
+process _UserAdmin_0 [_ccToUserAdmin_0: in none, _msgSync: out none] is
+states _ready, _cmdReceived, _doneNotify, _doneUpdate
+var 
+	_cmd: byte 
+init to _ready
+
+from _ready
+	_ccToUserAdmin_0? _cmd;
+	to _cmdReceived
+
+from _cmdReceived
+	case (_cmd = 12) of
+	true -> null
+	end case;
+	_msgSync;
+	to _doneNotify
+
+from _cmdReceived
+	case (_cmd = 11) of
+	true -> null
+	end case;
+	_msgSync;
+	to _doneUpdate
+
+from _doneNotify
+	to _ready
+
+from _doneUpdate
+	to _ready
+
+
+process _CC [_ccToVault: in out none, _userToCC: in none, _msgSync: in none, _vaultToCC: in none, _ccToUser_0_in: out none, _ccToUserAdmin_0: out none] is
+states _ready, _cmdReceived, _doneGet0, _doneRegister0, _doneUnRegister0, _doneCheckedOut0, _doneNotify0, _notifyCmdSent0, _updateCmdSent0, _doneUnCheckOut0, _doneCheckIn0, _doneCheckInOut0, _doneUpdate0, _get_step1, _get_step2, _get_step3, _doneCheckOut, _checkOut_step1, _checkOut_step2, _checkOut_step3, _checkOut_step4, _checkOut_step5, _doneNotAvailable, _doneCheckedOut, _doneUnCheckOut, _doneCheckIn, _checkIn_step1, _checkIn_step2, _doneCheckInOut, _checkInOut_step1, _checkInOut_step2, _Update, _checkWriteLockTrue, _checkWriteLockFalse, _update_cycle, _update_step1
+var 
+	_cmd: byte, 
+	_ID: byte, 
+	_registered: array 1 of byte, 
+	_writeLock: byte := 0 
+init to _ready
+
+from _ready
+	_userToCC? _cmd;
+	to _cmdReceived
+
+from _cmdReceived
+	case (((_cmd / 16) = 0) and ((_cmd % 16) = 0)) of
+	true -> null
+	end case;
+	to _doneGet0
+
+from _doneGet0
+	_registered[(_cmd % 16)] := 1;
+	to _get_step1
+
+from _get_step1
+	_ccToVault! _cmd;
+	to _get_step2
+
+from _get_step2
+	_vaultToCC? _cmd;
+	to _get_step3
+
+from _get_step3
+	case (((_cmd / 16) = 1) and ((_cmd % 16) = 0)) of
+	true -> null
+	end case;
+	_ccToUser_0_in! 1;
+	to _ready
+
+from _cmdReceived
+	case (((_cmd / 16) = 9) and ((_cmd % 16) = 0)) of
+	true -> null
+	end case;
+	to _doneRegister0
+
+from _doneRegister0
+	_registered[0] := 1;
+	to _ready
+
+from _cmdReceived
+	case (((_cmd / 16) = 10) and ((_cmd % 16) = 0)) of
+	true -> null
+	end case;
+	to _doneUnRegister0
+
+from _doneUnRegister0
+	_registered[0] := 0;
+	to _ready
+
+from _cmdReceived
+	case ((_cmd / 16) = 2) of
+	true -> null
+	end case;
+	to _doneCheckOut
+
+from _doneCheckOut
+	case (_writeLock = 0) of
+	true -> null
+	end case;
+	to _checkOut_step1
+
+from _checkOut_step1
+	_ccToVault! _cmd;
+	_writeLock := 1;
+	to _checkOut_step2
+
+from _checkOut_step2
+	_vaultToCC? _cmd;
+	to _checkOut_step3
+
+from _checkOut_step3
+	case (((_cmd / 16) = 3) and ((_cmd % 16) = 0)) of
+	true -> null
+	end case;
+	_ccToUser_0_in! 3;
+	to _doneCheckedOut
+
+from _doneCheckedOut
+	case ((_cmd % 16) = 0) of
+	true -> null
+	end case;
+	to _doneCheckedOut0
+
+from _doneCheckedOut0
+	_ID := 0;
+	to _checkOut_step4
+
+from _checkOut_step4
+	case (_ID < 1) of
+	true -> null
+	end case;
+	to _checkOut_step5
+
+from _checkOut_step5
+	case (((_ID = 0) and (_ID <> (_cmd % 16))) and (_registered[_ID] = 1)) of
+	true -> null
+	end case;
+	_ccToUserAdmin_0! 12;
+	to _notifyCmdSent0
+
+from _notifyCmdSent0
+	_msgSync;
+	to _doneNotify0
+
+from _doneNotify0
+	_ID := (_ID + 1);
+	to _checkOut_step4
+
+from _checkOut_step5
+	case ((_ID = (_cmd % 16)) or (_registered[_ID] = 0)) of
+	true -> null
+	end case;
+	_ID := (_ID + 1);
+	to _checkOut_step4
+
+from _checkOut_step4
+	case (_ID >= 1) of
+	true -> null
+	end case;
+	to _ready
+
+from _doneCheckOut
+	case ((_writeLock = 1) and ((_cmd % 16) = 0)) of
+	true -> null
+	end case;
+	_ccToUser_0_in! 4;
+	to _doneNotAvailable
+
+from _doneNotAvailable
+	to _ready
+
+from _cmdReceived
+	case ((_cmd / 16) = 5) of
+	true -> null
+	end case;
+	to _doneUnCheckOut
+
+from _doneUnCheckOut
+	case ((_cmd % 16) = 0) of
+	true -> null
+	end case;
+	to _doneUnCheckOut0
+
+from _doneUnCheckOut0
+	_writeLock := 0;
+	to _Update
+
+from _cmdReceived
+	case ((_cmd / 16) = 7) of
+	true -> null
+	end case;
+	to _doneCheckIn
+
+from _doneCheckIn
+	_ccToVault! _cmd;
+	_writeLock := 0;
+	to _checkIn_step1
+
+from _checkIn_step1
+	_ccToVault? _cmd;
+	to _checkIn_step2
+
+from _checkIn_step2
+	case ((_cmd % 16) = 0) of
+	true -> null
+	end case;
+	to _doneUnCheckOut0
+
+from _doneUnCheckOut0
+	to _Update
+
+from _cmdReceived
+	case ((_cmd / 16) = 8) of
+	true -> null
+	end case;
+	to _doneCheckInOut
+
+from _doneCheckInOut
+	_ccToVault! ((7 * 16) + (_cmd % 16));
+	to _checkInOut_step1
+
+from _checkInOut_step1
+	_vaultToCC? _cmd;
+	to _checkInOut_step2
+
+from _checkInOut_step2
+	case (((_cmd / 16) = 11) and ((_cmd % 16) = 0)) of
+	true -> null
+	end case;
+	to _doneCheckInOut0
+
+from _doneCheckInOut0
+	case (_writeLock = 1) of
+	true -> null
+	end case;
+	to _checkWriteLockTrue
+
+from _doneCheckInOut0
+	case (_writeLock = 0) of
+	true -> null
+	end case;
+	to _checkWriteLockFalse
+
+from _checkWriteLockTrue
+	to _Update
+
+from _checkWriteLockFalse
+	to _Update
+
+from _Update
+	_ID := 0;
+	to _update_cycle
+
+from _update_cycle
+	case (_ID < 1) of
+	true -> null
+	end case;
+	to _update_step1
+
+from _update_step1
+	case (((_ID = 0) and (_ID <> (_cmd % 16))) and (_registered[_ID] = 1)) of
+	true -> null
+	end case;
+	_ccToUserAdmin_0! 11;
+	to _updateCmdSent0
+
+from _updateCmdSent0
+	_msgSync;
+	to _doneUpdate0
+
+from _doneUpdate0
+	_ID := (_ID + 1);
+	to _update_cycle
+
+from _update_step1
+	case ((_ID = (_cmd % 16)) or (_registered[_ID] = 0)) of
+	true -> null
+	end case;
+	_ID := (_ID + 1);
+	to _update_cycle
+
+from _update_cycle
+	case (_ID >= 1) of
+	true -> null
+	end case;
+	to _ready
+
+
+process _Vault [_ccToVault: in none, _vaultToCC: out none] is
+states _ready, _cmdReceived
+var 
+	_cmd: byte 
+init to _ready
+
+from _ready
+	_ccToVault? _cmd;
+	to _cmdReceived
+
+from _cmdReceived
+	case ((_cmd / 16) = 0) of
+	true -> null
+	end case;
+	_vaultToCC! ((1 * 16) + (_cmd % 16));
+	to _ready
+
+from _cmdReceived
+	case ((_cmd / 16) = 2) of
+	true -> null
+	end case;
+	_vaultToCC! ((3 * 16) + (_cmd % 16));
+	to _ready
+
+from _cmdReceived
+	case ((_cmd / 16) = 7) of
+	true -> null
+	end case;
+	_vaultToCC! ((7 * 16) + (_cmd % 16));
+	to _ready
+
+
+process _channel_ccToUser_0 [_ccToUser_0_in: in none, _ccToUser_0_out: out none] is
+states _ready, _tr
+var 
+	_v: byte 
+init to _ready
+
+from _ready
+	_ccToUser_0_in? _v;
+	to _tr
+
+from _tr
+	_ccToUser_0_out! _v;
+	to _ready
+
+
+component sys is
+port 
+	_userToCC: none, 
+	_ccToUser_0_in: none, 
+	_ccToUser_0_out: none, 
+	_ccToUserAdmin_0: none, 
+	_ccToVault: none, 
+	_vaultToCC: none, 
+	_msgSync: none
+
+par 
+	_User_0
+	 || _UserAdmin_0
+	 || _CC
+	 || _Vault
+	 || _channel_ccToUser_0
+end par
+
+
+sys
