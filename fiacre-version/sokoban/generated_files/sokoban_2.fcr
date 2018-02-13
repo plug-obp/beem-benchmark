@@ -1,0 +1,96 @@
+type byte is 0..255
+
+process _P (&_a: array 60 of byte, &_done: byte, &_y: byte, &_x: byte) is
+states _q
+
+init to _q
+
+from _q
+	case ((((((_done = 0) and (_a[18] = 2)) and (_a[27] = 2)) and (_a[28] = 2)) and (_a[37] = 2)) and (_a[38] = 2)) of
+	true -> null
+	end case;
+	_done := 1;
+	to _q
+
+from _q
+	case ((_done = 0) and (_a[(((_y * 10) + _x) - 1)] = 0)) of
+	true -> null
+	end case;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case ((_done = 0) and (_a[(((_y * 10) + _x) + 1)] = 0)) of
+	true -> null
+	end case;
+	_x := (_x + 1);
+	to _q
+
+from _q
+	case ((_done = 0) and (_a[(((_y - 1) * 10) + _x)] = 0)) of
+	true -> null
+	end case;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case ((_done = 0) and (_a[(((_y + 1) * 10) + _x)] = 0)) of
+	true -> null
+	end case;
+	_y := (_y + 1);
+	to _q
+
+from _q
+	case (((_done = 0) and (_a[(((_y * 10) + _x) - 1)] = 2)) and (_a[(((_y * 10) + _x) - 2)] = 0)) of
+	true -> null
+	end case;
+	_a[(((_y * 10) + _x) - 2)] := 2;
+	_a[(((_y * 10) + _x) - 1)] := 0;
+	_x := (_x - 1);
+	to _q
+
+from _q
+	case (((_done = 0) and (_a[(((_y * 10) + _x) + 1)] = 2)) and (_a[(((_y * 10) + _x) + 2)] = 0)) of
+	true -> null
+	end case;
+	_a[(((_y * 10) + _x) + 2)] := 2;
+	_a[(((_y * 10) + _x) + 1)] := 0;
+	_x := (_x + 1);
+	to _q
+
+from _q
+	case (((_done = 0) and (_a[(((_y - 1) * 10) + _x)] = 2)) and (_a[(((_y - 2) * 10) + _x)] = 0)) of
+	true -> null
+	end case;
+	_a[(((_y - 2) * 10) + _x)] := 2;
+	_a[(((_y - 1) * 10) + _x)] := 0;
+	_y := (_y - 1);
+	to _q
+
+from _q
+	case (((_done = 0) and (_a[(((_y + 1) * 10) + _x)] = 2)) and (_a[(((_y + 2) * 10) + _x)] = 0)) of
+	true -> null
+	end case;
+	_a[(((_y + 2) * 10) + _x)] := 2;
+	_a[(((_y + 1) * 10) + _x)] := 0;
+	_y := (_y + 1);
+	to _q
+
+
+component sys is
+var 
+	
+	_a: array 60 of byte := [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0, 2, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 
+	
+	_x: byte := 1, 
+	
+	_y: byte := 1, 
+	
+	_done: byte := 0
+
+par 
+	_P(&_a, &_done, &_y, &_x) 
+end par
+
+
+sys

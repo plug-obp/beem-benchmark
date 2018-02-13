@@ -1,0 +1,718 @@
+type byte is 0..255
+
+process _Bus [_to_bus_1: in none, _to_bus_0: in none, _from_bus_1: out none, _from_bus_0: out none] (&_relay: read array 2 of byte, &_atomic: write byte) is
+states _wait, _send_up, _send_down
+var 
+	_sender: byte, 
+	_j: byte, 
+	_m: byte 
+init to _wait
+
+from _wait
+	_to_bus_0? _m;
+	_sender := 0;
+	_j := ((0 + 1) % 2);
+	_atomic := 1;
+	to _send_up
+
+from _wait
+	_to_bus_1? _m;
+	_sender := 1;
+	_j := ((1 + 1) % 2);
+	_atomic := 1;
+	to _send_up
+
+from _send_up
+	case (((_j = 0) and (_j <> _sender)) and (_relay[(((_j + 2) - 1) % 2)] = 1)) of
+	true -> null
+	end case;
+	_from_bus_0! _m;
+	_j := ((_j + 1) % 2);
+	to _send_up
+
+from _send_up
+	case (((_j = 1) and (_j <> _sender)) and (_relay[(((_j + 2) - 1) % 2)] = 1)) of
+	true -> null
+	end case;
+	_from_bus_1! _m;
+	_j := ((_j + 1) % 2);
+	to _send_up
+
+from _send_up
+	case (_j = _sender) of
+	true -> null
+	end case;
+	_atomic := 0;
+	to _wait
+
+from _send_up
+	case ((_j <> _sender) and (_relay[(((_j + 2) - 1) % 2)] = 0)) of
+	true -> null
+	end case;
+	_j := (((_sender + 2) - 1) % 2);
+	to _send_down
+
+from _send_down
+	case (((_j = 0) and (_j <> _sender)) and (_relay[_j] = 1)) of
+	true -> null
+	end case;
+	_from_bus_0! _m;
+	_j := (((_j + 2) - 1) % 2);
+	to _send_down
+
+from _send_down
+	case (((_j = 1) and (_j <> _sender)) and (_relay[_j] = 1)) of
+	true -> null
+	end case;
+	_from_bus_1! _m;
+	_j := (((_j + 2) - 1) % 2);
+	to _send_down
+
+from _send_down
+	case ((_j = _sender) or (_relay[_j] = 0)) of
+	true -> null
+	end case;
+	_atomic := 0;
+	to _wait
+
+
+process _Wheels [_move_down: in none, _move_up: in none] is
+states _staying, _moving_down, _moving_up, _error_state
+var 
+	_count: byte 
+init to _staying
+
+from _staying
+	_move_up;
+	_count := 1;
+	to _moving_up
+
+from _moving_up
+	case (_count < (2 - 1)) of
+	true -> null
+	end case;
+	_move_up;
+	_count := (_count + 1);
+	to _moving_up
+
+from _moving_up
+	case (_count = (2 - 1)) of
+	true -> null
+	end case;
+	_move_up;
+	to _staying
+
+from _moving_up
+	_move_down;
+	to _error_state
+
+from _staying
+	_move_down;
+	_count := 1;
+	to _moving_down
+
+from _moving_down
+	case (_count < (2 - 1)) of
+	true -> null
+	end case;
+	_move_down;
+	_count := (_count + 1);
+	to _moving_down
+
+from _moving_down
+	case (_count = (2 - 1)) of
+	true -> null
+	end case;
+	_move_down;
+	to _staying
+
+from _moving_down
+	_move_up;
+	to _error_state
+
+
+process _Lift_0 [_up_0: in none, _release_0: in none, _down_0: in none, _setref_0: in none, _from_bus_0: in none, _move_down: out none, _to_bus_0: out none, _move_up: out none] (&_atomic: read byte, &_relay: write array 2 of byte) is
+states _wait, _q1, _q2, _q3, _q4, _q5, _r1, _r2, _r3, _r4, _passive, _p_msg, _p_send, _active, _a_msg, _a_send, _error_state, _a_move
+var 
+	_pos: byte, 
+	_status: byte, 
+	_nos: byte, 
+	_m: byte, 
+	_count: byte 
+init to _wait
+
+from _wait
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_setref_0;
+	_pos := 0;
+	_relay[0] := 1;
+	_nos := 1;
+	to _q1
+
+from _q1
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_to_bus_0! ((4 * 8) + _pos);
+	to _q2
+
+from _q2
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_relay[0] := 0;
+	to _q3
+
+from _q3
+	_from_bus_0? _m;
+	to _q4
+
+from _q4
+	case ((_m / 8) = 4) of
+	true -> null
+	end case;
+	_nos := ((_m % 8) + 1);
+	to _q5
+
+from _q5
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_to_bus_0! ((0 * 8) + _pos);
+	to _passive
+
+from _wait
+	_from_bus_0? _m;
+	to _r1
+
+from _r1
+	case ((_atomic = 0) and ((_m / 8) = 4)) of
+	true -> null
+	end case;
+	_pos := ((_m % 8) + 1);
+	_nos := (_pos + 1);
+	_relay[0] := 1;
+	to _r2
+
+from _r2
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_to_bus_0! ((4 * 8) + _pos);
+	to _r3
+
+from _r3
+	_from_bus_0? _m;
+	to _r4
+
+from _r4
+	case ((_m / 8) = 4) of
+	true -> null
+	end case;
+	_nos := ((_m % 8) + 1);
+	to _r3
+
+from _r4
+	case (((_m / 8) = 0) and (_pos <> 1)) of
+	true -> null
+	end case;
+	to _passive
+
+from _r4
+	case (((_atomic = 0) and ((_m / 8) = 0)) and (_pos = 1)) of
+	true -> null
+	end case;
+	_to_bus_0! ((0 * 8) + _pos);
+	to _passive
+
+from _passive
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_up_0;
+	_status := 2;
+	_count := 1;
+	to _active
+
+from _passive
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_down_0;
+	_status := 1;
+	_count := 1;
+	to _active
+
+from _active
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_release_0;
+	_status := 0;
+	to _passive
+
+from _passive
+	_from_bus_0? _m;
+	to _p_msg
+
+from _p_msg
+	case (((_m / 8) <> 3) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_status := (_m / 8);
+	to _passive
+
+from _p_msg
+	case (((_m / 8) <> 3) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_status := (_m / 8);
+	to _p_send
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 2)) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_move_up;
+	to _passive
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 1)) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_move_down;
+	to _passive
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 2)) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_move_up;
+	to _p_send
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 1)) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_move_down;
+	to _p_send
+
+from _p_send
+	_to_bus_0! ((_status * 8) + _pos);
+	to _passive
+
+from _p_msg
+	case (((_atomic = 0) and ((_m / 8) = 3)) and (_status = 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _active
+	_from_bus_0? _m;
+	to _a_msg
+
+from _a_msg
+	case (((_m / 8) = 3) and (_status = 1)) of
+	true -> null
+	end case;
+	_move_down;
+	to _active
+
+from _a_msg
+	case (((_m / 8) = 3) and (_status = 2)) of
+	true -> null
+	end case;
+	_move_up;
+	to _active
+
+from _a_msg
+	case (((_m / 8) = _status) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _active
+
+from _a_msg
+	case (((_m / 8) <> _status) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	to _active
+
+from _a_msg
+	case (((_m / 8) = _status) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _a_send
+
+from _a_msg
+	case (((_m / 8) <> _status) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	to _a_send
+
+from _a_send
+	case (_count = _nos) of
+	true -> null
+	end case;
+	_to_bus_0! ((3 * 8) + _pos);
+	_count := 1;
+	to _a_move
+
+from _a_move
+	case (_status = 2) of
+	true -> null
+	end case;
+	_move_up;
+	to _active
+
+from _a_move
+	case (_status = 1) of
+	true -> null
+	end case;
+	_move_down;
+	to _active
+
+from _a_send
+	case (_count <> _nos) of
+	true -> null
+	end case;
+	_to_bus_0! ((_status * 8) + _pos);
+	_count := 1;
+	to _active
+
+
+process _Lift_1 [_from_bus_1: in none, _release_1: in none, _setref_1: in none, _up_1: in none, _down_1: in none, _to_bus_1: out none, _move_down: out none, _move_up: out none] (&_atomic: read byte, &_relay: write array 2 of byte) is
+states _wait, _q1, _q2, _q3, _q4, _q5, _r1, _r2, _r3, _r4, _passive, _p_msg, _p_send, _active, _a_msg, _a_send, _error_state, _a_move
+var 
+	_pos: byte, 
+	_status: byte, 
+	_nos: byte, 
+	_m: byte, 
+	_count: byte 
+init to _wait
+
+from _wait
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_setref_1;
+	_pos := 0;
+	_relay[1] := 1;
+	_nos := 1;
+	to _q1
+
+from _q1
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_to_bus_1! ((4 * 8) + _pos);
+	to _q2
+
+from _q2
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_relay[1] := 0;
+	to _q3
+
+from _q3
+	_from_bus_1? _m;
+	to _q4
+
+from _q4
+	case ((_m / 8) = 4) of
+	true -> null
+	end case;
+	_nos := ((_m % 8) + 1);
+	to _q5
+
+from _q5
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_to_bus_1! ((0 * 8) + _pos);
+	to _passive
+
+from _wait
+	_from_bus_1? _m;
+	to _r1
+
+from _r1
+	case ((_atomic = 0) and ((_m / 8) = 4)) of
+	true -> null
+	end case;
+	_pos := ((_m % 8) + 1);
+	_nos := (_pos + 1);
+	_relay[1] := 1;
+	to _r2
+
+from _r2
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_to_bus_1! ((4 * 8) + _pos);
+	to _r3
+
+from _r3
+	_from_bus_1? _m;
+	to _r4
+
+from _r4
+	case ((_m / 8) = 4) of
+	true -> null
+	end case;
+	_nos := ((_m % 8) + 1);
+	to _r3
+
+from _r4
+	case (((_m / 8) = 0) and (_pos <> 1)) of
+	true -> null
+	end case;
+	to _passive
+
+from _r4
+	case (((_atomic = 0) and ((_m / 8) = 0)) and (_pos = 1)) of
+	true -> null
+	end case;
+	_to_bus_1! ((0 * 8) + _pos);
+	to _passive
+
+from _passive
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_up_1;
+	_status := 2;
+	_count := 1;
+	to _active
+
+from _passive
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_down_1;
+	_status := 1;
+	_count := 1;
+	to _active
+
+from _active
+	case (_atomic = 0) of
+	true -> null
+	end case;
+	_release_1;
+	_status := 0;
+	to _passive
+
+from _passive
+	_from_bus_1? _m;
+	to _p_msg
+
+from _p_msg
+	case (((_m / 8) <> 3) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_status := (_m / 8);
+	to _passive
+
+from _p_msg
+	case (((_m / 8) <> 3) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_status := (_m / 8);
+	to _p_send
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 2)) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_move_up;
+	to _passive
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 1)) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_move_down;
+	to _passive
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 2)) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_move_up;
+	to _p_send
+
+from _p_msg
+	case ((((_m / 8) = 3) and (_status = 1)) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_move_down;
+	to _p_send
+
+from _p_send
+	_to_bus_1! ((_status * 8) + _pos);
+	to _passive
+
+from _p_msg
+	case (((_atomic = 0) and ((_m / 8) = 3)) and (_status = 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _active
+	_from_bus_1? _m;
+	to _a_msg
+
+from _a_msg
+	case (((_m / 8) = 3) and (_status = 1)) of
+	true -> null
+	end case;
+	_move_down;
+	to _active
+
+from _a_msg
+	case (((_m / 8) = 3) and (_status = 2)) of
+	true -> null
+	end case;
+	_move_up;
+	to _active
+
+from _a_msg
+	case (((_m / 8) = _status) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _active
+
+from _a_msg
+	case (((_m / 8) <> _status) and ((((_m % 8) + 1) % _nos) <> _pos)) of
+	true -> null
+	end case;
+	to _active
+
+from _a_msg
+	case (((_m / 8) = _status) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _a_send
+
+from _a_msg
+	case (((_m / 8) <> _status) and ((((_m % 8) + 1) % _nos) = _pos)) of
+	true -> null
+	end case;
+	to _a_send
+
+from _a_send
+	case (_count = _nos) of
+	true -> null
+	end case;
+	_to_bus_1! ((3 * 8) + _pos);
+	_count := 1;
+	to _a_move
+
+from _a_move
+	case (_status = 2) of
+	true -> null
+	end case;
+	_move_up;
+	to _active
+
+from _a_move
+	case (_status = 1) of
+	true -> null
+	end case;
+	_move_down;
+	to _active
+
+from _a_send
+	case (_count <> _nos) of
+	true -> null
+	end case;
+	_to_bus_1! ((_status * 8) + _pos);
+	_count := 1;
+	to _active
+
+
+process _Environment [_up_0: out none, _release_0: out none, _release_1: out none, _down_0: out none, _setref_0: out none, _setref_1: out none, _up_1: out none, _down_1: out none] is
+states _pressed_up_0, _pressed_down_0, _pressed_up_1, _pressed_down_1, _q
+
+init to _q
+
+from _q
+	_setref_0;
+	to _q
+
+from _q
+	_setref_1;
+	to _q
+
+from _q
+	_up_0;
+	to _pressed_up_0
+
+from _q
+	_up_1;
+	to _pressed_up_1
+
+from _pressed_up_0
+	_release_0;
+	to _q
+
+from _pressed_up_1
+	_release_1;
+	to _q
+
+from _q
+	_down_0;
+	to _pressed_down_0
+
+from _q
+	_down_1;
+	to _pressed_down_1
+
+from _pressed_down_0
+	_release_0;
+	to _q
+
+from _pressed_down_1
+	_release_1;
+	to _q
+
+
+component sys is
+var 
+	
+	_relay: array 2 of byte, 
+	
+	_atomic: byte
+
+port 
+	_to_bus_0: none, 
+	_from_bus_0: none, 
+	_setref_0: none, 
+	_up_0: none, 
+	_down_0: none, 
+	_release_0: none, 
+	_to_bus_1: none, 
+	_from_bus_1: none, 
+	_setref_1: none, 
+	_up_1: none, 
+	_down_1: none, 
+	_release_1: none, 
+	_move_up: none, 
+	_move_down: none
+
+par 
+	_Bus[_to_bus_1, _to_bus_0, _from_bus_1, _from_bus_0] (&_relay, &_atomic) 
+	 || _Wheels[_move_down, _move_up] 
+	 || _Lift_0[_up_0, _release_0, _down_0, _setref_0, _from_bus_0, _move_down, _to_bus_0, _move_up] (&_atomic, &_relay) 
+	 || _Lift_1[_from_bus_1, _release_1, _setref_1, _up_1, _down_1, _to_bus_1, _move_down, _move_up] (&_atomic, &_relay) 
+	 || _Environment[_up_0, _release_0, _release_1, _down_0, _setref_0, _setref_1, _up_1, _down_1] 
+end par
+
+
+sys

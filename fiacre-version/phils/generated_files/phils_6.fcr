@@ -1,0 +1,447 @@
+type byte is 0..255
+
+process _phil_0 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[0] = 0) of
+	true -> null
+	end case;
+	_fork[0] := 1;
+	to _one
+
+from _one
+	case (_fork[1] = 0) of
+	true -> null
+	end case;
+	_fork[1] := 1;
+	to _eat
+
+from _eat
+	_fork[0] := 0;
+	to _finish
+
+from _finish
+	_fork[1] := 0;
+	to _think
+
+
+process _phil_1 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[1] = 0) of
+	true -> null
+	end case;
+	_fork[1] := 1;
+	to _one
+
+from _one
+	case (_fork[2] = 0) of
+	true -> null
+	end case;
+	_fork[2] := 1;
+	to _eat
+
+from _eat
+	_fork[1] := 0;
+	to _finish
+
+from _finish
+	_fork[2] := 0;
+	to _think
+
+
+process _phil_2 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[2] = 0) of
+	true -> null
+	end case;
+	_fork[2] := 1;
+	to _one
+
+from _one
+	case (_fork[3] = 0) of
+	true -> null
+	end case;
+	_fork[3] := 1;
+	to _eat
+
+from _eat
+	_fork[2] := 0;
+	to _finish
+
+from _finish
+	_fork[3] := 0;
+	to _think
+
+
+process _phil_3 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[3] = 0) of
+	true -> null
+	end case;
+	_fork[3] := 1;
+	to _one
+
+from _one
+	case (_fork[4] = 0) of
+	true -> null
+	end case;
+	_fork[4] := 1;
+	to _eat
+
+from _eat
+	_fork[3] := 0;
+	to _finish
+
+from _finish
+	_fork[4] := 0;
+	to _think
+
+
+process _phil_4 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[4] = 0) of
+	true -> null
+	end case;
+	_fork[4] := 1;
+	to _one
+
+from _one
+	case (_fork[5] = 0) of
+	true -> null
+	end case;
+	_fork[5] := 1;
+	to _eat
+
+from _eat
+	_fork[4] := 0;
+	to _finish
+
+from _finish
+	_fork[5] := 0;
+	to _think
+
+
+process _phil_5 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[5] = 0) of
+	true -> null
+	end case;
+	_fork[5] := 1;
+	to _one
+
+from _one
+	case (_fork[6] = 0) of
+	true -> null
+	end case;
+	_fork[6] := 1;
+	to _eat
+
+from _eat
+	_fork[5] := 0;
+	to _finish
+
+from _finish
+	_fork[6] := 0;
+	to _think
+
+
+process _phil_6 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[6] = 0) of
+	true -> null
+	end case;
+	_fork[6] := 1;
+	to _one
+
+from _one
+	case (_fork[7] = 0) of
+	true -> null
+	end case;
+	_fork[7] := 1;
+	to _eat
+
+from _eat
+	_fork[6] := 0;
+	to _finish
+
+from _finish
+	_fork[7] := 0;
+	to _think
+
+
+process _phil_7 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[7] = 0) of
+	true -> null
+	end case;
+	_fork[7] := 1;
+	to _one
+
+from _one
+	case (_fork[8] = 0) of
+	true -> null
+	end case;
+	_fork[8] := 1;
+	to _eat
+
+from _eat
+	_fork[7] := 0;
+	to _finish
+
+from _finish
+	_fork[8] := 0;
+	to _think
+
+
+process _phil_8 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[8] = 0) of
+	true -> null
+	end case;
+	_fork[8] := 1;
+	to _one
+
+from _one
+	case (_fork[9] = 0) of
+	true -> null
+	end case;
+	_fork[9] := 1;
+	to _eat
+
+from _eat
+	_fork[8] := 0;
+	to _finish
+
+from _finish
+	_fork[9] := 0;
+	to _think
+
+
+process _phil_9 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[9] = 0) of
+	true -> null
+	end case;
+	_fork[9] := 1;
+	to _one
+
+from _one
+	case (_fork[10] = 0) of
+	true -> null
+	end case;
+	_fork[10] := 1;
+	to _eat
+
+from _eat
+	_fork[9] := 0;
+	to _finish
+
+from _finish
+	_fork[10] := 0;
+	to _think
+
+
+process _phil_10 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[10] = 0) of
+	true -> null
+	end case;
+	_fork[10] := 1;
+	to _one
+
+from _one
+	case (_fork[11] = 0) of
+	true -> null
+	end case;
+	_fork[11] := 1;
+	to _eat
+
+from _eat
+	_fork[10] := 0;
+	to _finish
+
+from _finish
+	_fork[11] := 0;
+	to _think
+
+
+process _phil_11 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[11] = 0) of
+	true -> null
+	end case;
+	_fork[11] := 1;
+	to _one
+
+from _one
+	case (_fork[12] = 0) of
+	true -> null
+	end case;
+	_fork[12] := 1;
+	to _eat
+
+from _eat
+	_fork[11] := 0;
+	to _finish
+
+from _finish
+	_fork[12] := 0;
+	to _think
+
+
+process _phil_12 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[12] = 0) of
+	true -> null
+	end case;
+	_fork[12] := 1;
+	to _one
+
+from _one
+	case (_fork[13] = 0) of
+	true -> null
+	end case;
+	_fork[13] := 1;
+	to _eat
+
+from _eat
+	_fork[12] := 0;
+	to _finish
+
+from _finish
+	_fork[13] := 0;
+	to _think
+
+
+process _phil_13 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[13] = 0) of
+	true -> null
+	end case;
+	_fork[13] := 1;
+	to _one
+
+from _one
+	case (_fork[14] = 0) of
+	true -> null
+	end case;
+	_fork[14] := 1;
+	to _eat
+
+from _eat
+	_fork[13] := 0;
+	to _finish
+
+from _finish
+	_fork[14] := 0;
+	to _think
+
+
+process _phil_14 (&_fork: array 15 of byte) is
+states _think, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_fork[14] = 0) of
+	true -> null
+	end case;
+	_fork[14] := 1;
+	to _one
+
+from _one
+	case (_fork[0] = 0) of
+	true -> null
+	end case;
+	_fork[0] := 1;
+	to _eat
+
+from _eat
+	_fork[14] := 0;
+	to _finish
+
+from _finish
+	_fork[0] := 0;
+	to _think
+
+
+component sys is
+var 
+	
+	_fork: array 15 of byte
+
+par 
+	_phil_0(&_fork) 
+	 || _phil_1(&_fork) 
+	 || _phil_2(&_fork) 
+	 || _phil_3(&_fork) 
+	 || _phil_4(&_fork) 
+	 || _phil_5(&_fork) 
+	 || _phil_6(&_fork) 
+	 || _phil_7(&_fork) 
+	 || _phil_8(&_fork) 
+	 || _phil_9(&_fork) 
+	 || _phil_10(&_fork) 
+	 || _phil_11(&_fork) 
+	 || _phil_12(&_fork) 
+	 || _phil_13(&_fork) 
+	 || _phil_14(&_fork) 
+end par
+
+
+sys

@@ -1,0 +1,849 @@
+type byte is 0..255
+
+process _Node_0 [_ch_0_out: in none, _ch_1_in: out none] (&_nr_leaders: byte) is
+states _start, _wait, _got_msg, _q1, _q1a, _q1n, _q2, _q2a, _q2n, _qw, _qwcheck
+var 
+	_max: byte := 24, 
+	_number: byte, 
+	_neigh: byte, 
+	_know: byte := 0, 
+	_active: byte := 1 
+init to _start
+
+from _start
+	_ch_1_in! ((1 * 30) + 24);
+	to _wait
+
+from _wait
+	_ch_0_out? _number;
+	to _got_msg
+
+from _got_msg
+	case ((_number / 30) = 1) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q1
+
+from _got_msg
+	case ((_number / 30) = 2) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q2
+
+from _got_msg
+	case ((_number / 30) = 0) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _qwcheck
+
+from _q1
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q1a
+
+from _q1
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q1n
+
+from _q1n
+	_ch_1_in! ((1 * 30) + _number);
+	to _wait
+
+from _q1a
+	case (_number <> _max) of
+	true -> null
+	end case;
+	_ch_1_in! ((2 * 30) + _number);
+	_neigh := _number;
+	to _wait
+
+from _q1a
+	case (_number = _max) of
+	true -> null
+	end case;
+	_ch_1_in! ((0 * 30) + _number);
+	_know := 1;
+	to _wait
+
+from _q2
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q2a
+
+from _q2
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q2n
+
+from _q2n
+	_ch_1_in! ((2 * 30) + _number);
+	to _wait
+
+from _q2a
+	case ((_neigh > _number) and (_neigh > _max)) of
+	true -> null
+	end case;
+	_ch_1_in! ((1 * 30) + _neigh);
+	_max := _neigh;
+	to _wait
+
+from _q2a
+	case (not ((_neigh > _number) and (_neigh > _max))) of
+	true -> null
+	end case;
+	_active := 0;
+	to _wait
+
+from _qwcheck
+	case (_number = 24) of
+	true -> null
+	end case;
+	_nr_leaders := (_nr_leaders + 1);
+	to _qw
+
+from _qwcheck
+	case (_number <> 24) of
+	true -> null
+	end case;
+	to _qw
+
+from _qw
+	case (_know <> 0) of
+	true -> null
+	end case;
+	to _wait
+
+from _qw
+	case (_know = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((0 * 30) + _number);
+	to _wait
+
+
+process _Node_1 [_ch_1_out: in none, _ch_2_in: out none] (&_nr_leaders: byte) is
+states _start, _wait, _got_msg, _q1, _q1a, _q1n, _q2, _q2a, _q2n, _qw, _qwcheck
+var 
+	_max: byte := 14, 
+	_number: byte, 
+	_neigh: byte, 
+	_know: byte := 0, 
+	_active: byte := 1 
+init to _start
+
+from _start
+	_ch_2_in! ((1 * 30) + 14);
+	to _wait
+
+from _wait
+	_ch_1_out? _number;
+	to _got_msg
+
+from _got_msg
+	case ((_number / 30) = 1) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q1
+
+from _got_msg
+	case ((_number / 30) = 2) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q2
+
+from _got_msg
+	case ((_number / 30) = 0) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _qwcheck
+
+from _q1
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q1a
+
+from _q1
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q1n
+
+from _q1n
+	_ch_2_in! ((1 * 30) + _number);
+	to _wait
+
+from _q1a
+	case (_number <> _max) of
+	true -> null
+	end case;
+	_ch_2_in! ((2 * 30) + _number);
+	_neigh := _number;
+	to _wait
+
+from _q1a
+	case (_number = _max) of
+	true -> null
+	end case;
+	_ch_2_in! ((0 * 30) + _number);
+	_know := 1;
+	to _wait
+
+from _q2
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q2a
+
+from _q2
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q2n
+
+from _q2n
+	_ch_2_in! ((2 * 30) + _number);
+	to _wait
+
+from _q2a
+	case ((_neigh > _number) and (_neigh > _max)) of
+	true -> null
+	end case;
+	_ch_2_in! ((1 * 30) + _neigh);
+	_max := _neigh;
+	to _wait
+
+from _q2a
+	case (not ((_neigh > _number) and (_neigh > _max))) of
+	true -> null
+	end case;
+	_active := 0;
+	to _wait
+
+from _qwcheck
+	case (_number = 14) of
+	true -> null
+	end case;
+	_nr_leaders := (_nr_leaders + 1);
+	to _qw
+
+from _qwcheck
+	case (_number <> 14) of
+	true -> null
+	end case;
+	to _qw
+
+from _qw
+	case (_know <> 0) of
+	true -> null
+	end case;
+	to _wait
+
+from _qw
+	case (_know = 0) of
+	true -> null
+	end case;
+	_ch_2_in! ((0 * 30) + _number);
+	to _wait
+
+
+process _Node_2 [_ch_2_out: in none, _ch_3_in: out none] (&_nr_leaders: byte) is
+states _start, _wait, _got_msg, _q1, _q1a, _q1n, _q2, _q2a, _q2n, _qw, _qwcheck
+var 
+	_max: byte := 6, 
+	_number: byte, 
+	_neigh: byte, 
+	_know: byte := 0, 
+	_active: byte := 1 
+init to _start
+
+from _start
+	_ch_3_in! ((1 * 30) + 6);
+	to _wait
+
+from _wait
+	_ch_2_out? _number;
+	to _got_msg
+
+from _got_msg
+	case ((_number / 30) = 1) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q1
+
+from _got_msg
+	case ((_number / 30) = 2) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q2
+
+from _got_msg
+	case ((_number / 30) = 0) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _qwcheck
+
+from _q1
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q1a
+
+from _q1
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q1n
+
+from _q1n
+	_ch_3_in! ((1 * 30) + _number);
+	to _wait
+
+from _q1a
+	case (_number <> _max) of
+	true -> null
+	end case;
+	_ch_3_in! ((2 * 30) + _number);
+	_neigh := _number;
+	to _wait
+
+from _q1a
+	case (_number = _max) of
+	true -> null
+	end case;
+	_ch_3_in! ((0 * 30) + _number);
+	_know := 1;
+	to _wait
+
+from _q2
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q2a
+
+from _q2
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q2n
+
+from _q2n
+	_ch_3_in! ((2 * 30) + _number);
+	to _wait
+
+from _q2a
+	case ((_neigh > _number) and (_neigh > _max)) of
+	true -> null
+	end case;
+	_ch_3_in! ((1 * 30) + _neigh);
+	_max := _neigh;
+	to _wait
+
+from _q2a
+	case (not ((_neigh > _number) and (_neigh > _max))) of
+	true -> null
+	end case;
+	_active := 0;
+	to _wait
+
+from _qwcheck
+	case (_number = 6) of
+	true -> null
+	end case;
+	_nr_leaders := (_nr_leaders + 1);
+	to _qw
+
+from _qwcheck
+	case (_number <> 6) of
+	true -> null
+	end case;
+	to _qw
+
+from _qw
+	case (_know <> 0) of
+	true -> null
+	end case;
+	to _wait
+
+from _qw
+	case (_know = 0) of
+	true -> null
+	end case;
+	_ch_3_in! ((0 * 30) + _number);
+	to _wait
+
+
+process _Node_3 [_ch_3_out: in none, _ch_4_in: out none] (&_nr_leaders: byte) is
+states _start, _wait, _got_msg, _q1, _q1a, _q1n, _q2, _q2a, _q2n, _qw, _qwcheck
+var 
+	_max: byte := 0, 
+	_number: byte, 
+	_neigh: byte, 
+	_know: byte := 0, 
+	_active: byte := 1 
+init to _start
+
+from _start
+	_ch_4_in! ((1 * 30) + 0);
+	to _wait
+
+from _wait
+	_ch_3_out? _number;
+	to _got_msg
+
+from _got_msg
+	case ((_number / 30) = 1) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q1
+
+from _got_msg
+	case ((_number / 30) = 2) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q2
+
+from _got_msg
+	case ((_number / 30) = 0) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _qwcheck
+
+from _q1
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q1a
+
+from _q1
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q1n
+
+from _q1n
+	_ch_4_in! ((1 * 30) + _number);
+	to _wait
+
+from _q1a
+	case (_number <> _max) of
+	true -> null
+	end case;
+	_ch_4_in! ((2 * 30) + _number);
+	_neigh := _number;
+	to _wait
+
+from _q1a
+	case (_number = _max) of
+	true -> null
+	end case;
+	_ch_4_in! ((0 * 30) + _number);
+	_know := 1;
+	to _wait
+
+from _q2
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q2a
+
+from _q2
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q2n
+
+from _q2n
+	_ch_4_in! ((2 * 30) + _number);
+	to _wait
+
+from _q2a
+	case ((_neigh > _number) and (_neigh > _max)) of
+	true -> null
+	end case;
+	_ch_4_in! ((1 * 30) + _neigh);
+	_max := _neigh;
+	to _wait
+
+from _q2a
+	case (not ((_neigh > _number) and (_neigh > _max))) of
+	true -> null
+	end case;
+	_active := 0;
+	to _wait
+
+from _qwcheck
+	case (_number = 0) of
+	true -> null
+	end case;
+	_nr_leaders := (_nr_leaders + 1);
+	to _qw
+
+from _qwcheck
+	case (_number <> 0) of
+	true -> null
+	end case;
+	to _qw
+
+from _qw
+	case (_know <> 0) of
+	true -> null
+	end case;
+	to _wait
+
+from _qw
+	case (_know = 0) of
+	true -> null
+	end case;
+	_ch_4_in! ((0 * 30) + _number);
+	to _wait
+
+
+process _Node_4 [_ch_4_out: in none, _ch_0_in: out none] (&_nr_leaders: byte) is
+states _start, _wait, _got_msg, _q1, _q1a, _q1n, _q2, _q2a, _q2n, _qw, _qwcheck
+var 
+	_max: byte := 23, 
+	_number: byte, 
+	_neigh: byte, 
+	_know: byte := 0, 
+	_active: byte := 1 
+init to _start
+
+from _start
+	_ch_0_in! ((1 * 30) + 23);
+	to _wait
+
+from _wait
+	_ch_4_out? _number;
+	to _got_msg
+
+from _got_msg
+	case ((_number / 30) = 1) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q1
+
+from _got_msg
+	case ((_number / 30) = 2) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _q2
+
+from _got_msg
+	case ((_number / 30) = 0) of
+	true -> null
+	end case;
+	_number := (_number % 30);
+	to _qwcheck
+
+from _q1
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q1a
+
+from _q1
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q1n
+
+from _q1n
+	_ch_0_in! ((1 * 30) + _number);
+	to _wait
+
+from _q1a
+	case (_number <> _max) of
+	true -> null
+	end case;
+	_ch_0_in! ((2 * 30) + _number);
+	_neigh := _number;
+	to _wait
+
+from _q1a
+	case (_number = _max) of
+	true -> null
+	end case;
+	_ch_0_in! ((0 * 30) + _number);
+	_know := 1;
+	to _wait
+
+from _q2
+	case (_active <> 0) of
+	true -> null
+	end case;
+	to _q2a
+
+from _q2
+	case (_active = 0) of
+	true -> null
+	end case;
+	to _q2n
+
+from _q2n
+	_ch_0_in! ((2 * 30) + _number);
+	to _wait
+
+from _q2a
+	case ((_neigh > _number) and (_neigh > _max)) of
+	true -> null
+	end case;
+	_ch_0_in! ((1 * 30) + _neigh);
+	_max := _neigh;
+	to _wait
+
+from _q2a
+	case (not ((_neigh > _number) and (_neigh > _max))) of
+	true -> null
+	end case;
+	_active := 0;
+	to _wait
+
+from _qwcheck
+	case (_number = 23) of
+	true -> null
+	end case;
+	_nr_leaders := (_nr_leaders + 1);
+	to _qw
+
+from _qwcheck
+	case (_number <> 23) of
+	true -> null
+	end case;
+	to _qw
+
+from _qw
+	case (_know <> 0) of
+	true -> null
+	end case;
+	to _wait
+
+from _qw
+	case (_know = 0) of
+	true -> null
+	end case;
+	_ch_0_in! ((0 * 30) + _number);
+	to _wait
+
+
+process _channel_ch_0 [_ch_0_in: in none, _ch_0_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_0_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_0_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+process _channel_ch_1 [_ch_1_in: in none, _ch_1_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_1_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_1_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+process _channel_ch_2 [_ch_2_in: in none, _ch_2_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_2_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_2_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+process _channel_ch_3 [_ch_3_in: in none, _ch_3_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_3_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_3_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+process _channel_ch_4 [_ch_4_in: in none, _ch_4_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_4_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_4_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+component sys is
+var 
+	
+	_nr_leaders: byte
+
+port 
+	_ch_0_in: none, 
+	_ch_0_out: none, 
+	_ch_1_in: none, 
+	_ch_1_out: none, 
+	_ch_2_in: none, 
+	_ch_2_out: none, 
+	_ch_3_in: none, 
+	_ch_3_out: none, 
+	_ch_4_in: none, 
+	_ch_4_out: none
+
+par 
+	_Node_0[_ch_0_out, _ch_1_in] (&_nr_leaders) 
+	 || _Node_1[_ch_1_out, _ch_2_in] (&_nr_leaders) 
+	 || _Node_2[_ch_2_out, _ch_3_in] (&_nr_leaders) 
+	 || _Node_3[_ch_3_out, _ch_4_in] (&_nr_leaders) 
+	 || _Node_4[_ch_4_out, _ch_0_in] (&_nr_leaders) 
+	 || _channel_ch_0[_ch_0_in, _ch_0_out] 
+	 || _channel_ch_1[_ch_1_in, _ch_1_out] 
+	 || _channel_ch_2[_ch_2_in, _ch_2_out] 
+	 || _channel_ch_3[_ch_3_in, _ch_3_out] 
+	 || _channel_ch_4[_ch_4_in, _ch_4_out] 
+end par
+
+
+sys

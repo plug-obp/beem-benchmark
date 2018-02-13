@@ -1,0 +1,630 @@
+type byte is 0..255
+
+process _Clock (&_x: byte, &_max_x_6: read byte, &_max_x_3: read byte, &_max_x_4: read byte, &_max_x_1: read byte, &_max_x_8: read byte, &_max_x_7: read byte, &_max_x_2: read byte, &_max_x_5: read byte) is
+states _S1
+
+init to _S1
+
+from _S1
+	case ((((((((_x <= _max_x_2) and (_x <= _max_x_3)) and (_x <= _max_x_4)) and (_x <= _max_x_5)) and (_x <= _max_x_6)) and (_x <= _max_x_7)) and (_x <= _max_x_8)) and (_x <= _max_x_1)) of
+	true -> null
+	end case;
+	_x := (_x + 1);
+	to _S1
+
+
+process _Gate [_appr: in none, _rem: in none, _is_empty: in none, _notempty: in none, _leave: in none, _add: out none, _stop: out none, _go: out none, _hd: out none] is
+states _S1, _S2, _S3, _S4, _S5, _S6, _Occ, _Free, _Send
+
+init to _Free
+
+from _Free
+	_notempty;
+	to _S5
+
+from _Free
+	_is_empty;
+	to _S4
+
+from _Occ
+	_appr;
+	to _S6
+
+from _Occ
+	_leave;
+	to _S1
+
+from _S6
+	_stop;
+	to _S2
+
+from _Send
+	_go;
+	to _Occ
+
+from _S5
+	_hd;
+	to _Send
+
+from _S4
+	_appr;
+	to _S3
+
+from _S3
+	_add;
+	to _Occ
+
+from _S2
+	_add;
+	to _Occ
+
+from _S1
+	_rem;
+	to _Free
+
+
+process _IntQueue [_add: in none, _hd: in none, _rem: out none, _is_empty: out none, _notempty: out none] (&_e: array 9 of byte) is
+states _Start, _Shiftdown
+var 
+	_list: array 9 of byte, 
+	_len: byte, 
+	_i: byte 
+init to _Start
+
+from _Shiftdown
+	case (_i < _len) of
+	true -> null
+	end case;
+	_list[_i] := _list[(_i + 1)];
+	_i := (_i + 1);
+	to _Shiftdown
+
+from _Shiftdown
+	case (_len = _i) of
+	true -> null
+	end case;
+	_list[_i] := 0;
+	_i := 0;
+	to _Start
+
+from _Start
+	case (_len >= 1) of
+	true -> null
+	end case;
+	_rem;
+	_len := (_len - 1);
+	_i := 0;
+	to _Shiftdown
+
+from _Start
+	case (_len = 0) of
+	true -> null
+	end case;
+	_is_empty;
+	to _Start
+
+from _Start
+	_add;
+	_list[_len] := _e;
+	_len := (_len + 1);
+	to _Start
+
+from _Start
+	_hd;
+	_e := _list[0];
+	to _Start
+
+from _Start
+	case (_len > 0) of
+	true -> null
+	end case;
+	_notempty;
+	to _Start
+
+
+process _Train_1 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_1: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_1 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 1)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_1 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 1;
+	_x := 0;
+	_max_x_1 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 1;
+	_x := 0;
+	_max_x_1 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_1 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 1) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_1 := 15;
+	to _Start
+
+
+process _Train_2 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_2: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_2 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 2)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_2 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 2;
+	_x := 0;
+	_max_x_2 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 2;
+	_x := 0;
+	_max_x_2 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_2 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 2) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_2 := 15;
+	to _Start
+
+
+process _Train_3 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_3: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_3 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 3)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_3 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 3;
+	_x := 0;
+	_max_x_3 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 3;
+	_x := 0;
+	_max_x_3 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_3 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 3) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_3 := 15;
+	to _Start
+
+
+process _Train_4 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_4: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_4 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 4)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_4 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 4;
+	_x := 0;
+	_max_x_4 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 4;
+	_x := 0;
+	_max_x_4 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_4 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 4) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_4 := 15;
+	to _Start
+
+
+process _Train_5 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_5: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_5 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 5)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_5 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 5;
+	_x := 0;
+	_max_x_5 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 5;
+	_x := 0;
+	_max_x_5 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_5 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 5) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_5 := 15;
+	to _Start
+
+
+process _Train_6 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_6: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_6 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 6)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_6 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 6;
+	_x := 0;
+	_max_x_6 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 6;
+	_x := 0;
+	_max_x_6 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_6 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 6) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_6 := 15;
+	to _Start
+
+
+process _Train_7 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_7: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_7 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 7)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_7 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 7;
+	_x := 0;
+	_max_x_7 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 7;
+	_x := 0;
+	_max_x_7 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_7 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 7) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_7 := 15;
+	to _Start
+
+
+process _Train_8 [_stop: in none, _go: in none, _appr: out none, _leave: out none] (&_x: byte, &_e: array 9 of byte, &_max_x_8: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_8 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 8)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_8 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 8;
+	_x := 0;
+	_max_x_8 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 8;
+	_x := 0;
+	_max_x_8 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 7) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_8 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 8) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_8 := 15;
+	to _Start
+
+
+component sys is
+var 
+	
+	_e: array 9 of byte, 
+	
+	_x: byte, 
+	
+	_max_x_1: byte, 
+	
+	_max_x_2: byte, 
+	
+	_max_x_3: byte, 
+	
+	_max_x_4: byte, 
+	
+	_max_x_5: byte, 
+	
+	_max_x_6: byte, 
+	
+	_max_x_7: byte, 
+	
+	_max_x_8: byte
+
+port 
+	_appr: none, 
+	_stop: none, 
+	_go: none, 
+	_leave: none, 
+	_is_empty: none, 
+	_notempty: none, 
+	_hd: none, 
+	_add: none, 
+	_rem: none
+
+par 
+	_Clock(&_x, &_max_x_6, &_max_x_3, &_max_x_4, &_max_x_1, &_max_x_8, &_max_x_7, &_max_x_2, &_max_x_5) 
+	 || _Gate[_appr, _rem, _is_empty, _notempty, _leave, _add, _stop, _go, _hd] 
+	 || _IntQueue[_add, _hd, _rem, _is_empty, _notempty] (&_e) 
+	 || _Train_1[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_1) 
+	 || _Train_2[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_2) 
+	 || _Train_3[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_3) 
+	 || _Train_4[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_4) 
+	 || _Train_5[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_5) 
+	 || _Train_6[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_6) 
+	 || _Train_7[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_7) 
+	 || _Train_8[_stop, _go, _appr, _leave] (&_x, &_e, &_max_x_8) 
+end par
+
+
+sys

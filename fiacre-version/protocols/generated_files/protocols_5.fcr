@@ -1,0 +1,186 @@
+type byte is 0..255
+
+process _channel_K [_K_in: in none, _K_out: out none] is
+states _ready, _tr, _data_lost
+var 
+	_v: byte, 
+	_lost: byte := 0 
+init to _ready
+
+from _ready
+	_K_in? _v;
+	to _tr
+
+from _tr
+	case (_lost < 40) of
+	true -> null
+	end case;
+	_lost := (_lost + 1);
+	to _ready
+
+from _tr
+	_K_out! _v;
+	_lost := 0;
+	to _ready
+
+
+process _channel_L [_L_in: in none, _L_out: out none] is
+states _ready, _tr, _dataOK
+var 
+	_v: byte, 
+	_lost: byte := 0 
+init to _ready
+
+from _ready
+	_L_in? _v;
+	to _tr
+
+from _tr
+	case (_lost < 40) of
+	true -> null
+	end case;
+	_lost := (_lost + 1);
+	to _ready
+
+from _tr
+	_L_out! _v;
+	_lost := 0;
+	to _ready
+
+
+process _Producer [_send: out none] is
+states _ready, _produce0, _produce1
+
+init to _ready
+
+from _ready
+	to _produce0
+
+from _ready
+	to _produce1
+
+from _produce0
+	_send! 0;
+	to _ready
+
+from _produce1
+	_send! 1;
+	to _ready
+
+
+process _Consumer [_receive: in none] is
+states _ready, _got_msg, _consume0, _consume1
+var 
+	_value: byte 
+init to _ready
+
+from _ready
+	_receive? _value;
+	to _got_msg
+
+from _got_msg
+	case (_value = 0) of
+	true -> null
+	end case;
+	to _consume0
+
+from _got_msg
+	case (_value = 1) of
+	true -> null
+	end case;
+	to _consume1
+
+from _consume0
+	to _ready
+
+from _consume1
+	to _ready
+
+
+process _Sender [_L_out: in none, _send: in none, _K_in: out none] is
+states _ready, _sending, _wait_ack, _failed
+var 
+	_value: byte, 
+	_sab: byte, 
+	_retry: byte 
+init to _ready
+
+from _ready
+	_send? _value;
+	_sab := (1 - _sab);
+	to _sending
+
+from _sending
+	_K_in! ((_value * 2) + _sab);
+	_retry := 1;
+	to _wait_ack
+
+from _wait_ack
+	case (_retry < 40) of
+	true -> null
+	end case;
+	_K_in! ((_value * 2) + _sab);
+	_retry := (_retry + 1);
+	to _wait_ack
+
+from _wait_ack
+	_L_out? _value;
+	to _ready
+
+from _wait_ack
+	case (_retry = 40) of
+	true -> null
+	end case;
+	to _failed
+
+
+process _Receiver [_K_out: in none, _L_in: out none, _receive: out none] is
+states _waiting, _got_msg, _send_ack
+var 
+	_value: byte, 
+	_rab: byte := 1 
+init to _waiting
+
+from _waiting
+	_K_out? _value;
+	to _got_msg
+
+from _got_msg
+	case ((_value % 2) <> _rab) of
+	true -> null
+	end case;
+	to _waiting
+
+from _got_msg
+	case ((_value % 2) = _rab) of
+	true -> null
+	end case;
+	_receive! (_value / 2);
+	to _send_ack
+
+from _send_ack
+	_L_in! 0;
+	_rab := (1 - _rab);
+	to _waiting
+
+
+component sys is
+port 
+	_K_in: none, 
+	_K_out: none, 
+	_L_in: none, 
+	_L_out: none, 
+	_send: none, 
+	_receive: none
+
+par 
+	_channel_K[_K_in, _K_out] 
+	 || _channel_L[_L_in, _L_out] 
+	 || _Producer[_send] 
+	 || _Consumer[_receive] 
+	 || _Sender[_L_out, _send, _K_in] 
+	 || _Receiver[_K_out, _L_in, _receive] 
+end par
+
+
+sys

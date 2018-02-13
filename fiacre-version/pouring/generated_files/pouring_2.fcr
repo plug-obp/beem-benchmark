@@ -1,0 +1,2623 @@
+type byte is 0..255
+
+process _Bottle_1 [_pour_full8: in out none, _pour_full4: in out none, _pour_empty2: in out none, _pour_empty5: in out none, _pour_empty7: in out none, _pour_empty8: in out none, _pour_full3: in out none, _pour_full2: in out none, _pour_empty6: in out none, _pour_empty9: in out none, _pour_full5: in out none, _pour_full10: in out none, _pour_full7: in out none, _pour_empty1: in out none, _pour_empty4: in out none, _pour_full1: in out none, _pour_full9: in out none, _pour_full6: in out none, _pour_empty3: in out none, _pour_empty10: in out none] is
+states _q0, _q1, _q2, _q3, _q4, _q5, _q6, _q7, _q8, _q9, _q10
+
+init to _q0
+
+from _q1
+	_pour_empty1;
+	to _q0
+
+from _q2
+	_pour_empty2;
+	to _q0
+
+from _q3
+	_pour_empty3;
+	to _q0
+
+from _q4
+	_pour_empty4;
+	to _q0
+
+from _q5
+	_pour_empty5;
+	to _q0
+
+from _q6
+	_pour_empty6;
+	to _q0
+
+from _q7
+	_pour_empty7;
+	to _q0
+
+from _q8
+	_pour_empty8;
+	to _q0
+
+from _q9
+	_pour_empty9;
+	to _q0
+
+from _q10
+	_pour_empty10;
+	to _q0
+
+from _q0
+	_pour_empty1;
+	to _q1
+
+from _q0
+	_pour_empty2;
+	to _q2
+
+from _q0
+	_pour_empty3;
+	to _q3
+
+from _q0
+	_pour_empty4;
+	to _q4
+
+from _q0
+	_pour_empty5;
+	to _q5
+
+from _q0
+	_pour_empty6;
+	to _q6
+
+from _q0
+	_pour_empty7;
+	to _q7
+
+from _q0
+	_pour_empty8;
+	to _q8
+
+from _q0
+	_pour_empty9;
+	to _q9
+
+from _q0
+	_pour_empty10;
+	to _q10
+
+from _q1
+	_pour_empty1;
+	to _q2
+
+from _q1
+	_pour_empty2;
+	to _q3
+
+from _q1
+	_pour_empty3;
+	to _q4
+
+from _q1
+	_pour_empty4;
+	to _q5
+
+from _q1
+	_pour_empty5;
+	to _q6
+
+from _q1
+	_pour_empty6;
+	to _q7
+
+from _q1
+	_pour_empty7;
+	to _q8
+
+from _q1
+	_pour_empty8;
+	to _q9
+
+from _q1
+	_pour_empty9;
+	to _q10
+
+from _q2
+	_pour_empty1;
+	to _q3
+
+from _q2
+	_pour_empty2;
+	to _q4
+
+from _q2
+	_pour_empty3;
+	to _q5
+
+from _q2
+	_pour_empty4;
+	to _q6
+
+from _q2
+	_pour_empty5;
+	to _q7
+
+from _q2
+	_pour_empty6;
+	to _q8
+
+from _q2
+	_pour_empty7;
+	to _q9
+
+from _q2
+	_pour_empty8;
+	to _q10
+
+from _q3
+	_pour_empty1;
+	to _q4
+
+from _q3
+	_pour_empty2;
+	to _q5
+
+from _q3
+	_pour_empty3;
+	to _q6
+
+from _q3
+	_pour_empty4;
+	to _q7
+
+from _q3
+	_pour_empty5;
+	to _q8
+
+from _q3
+	_pour_empty6;
+	to _q9
+
+from _q3
+	_pour_empty7;
+	to _q10
+
+from _q4
+	_pour_empty1;
+	to _q5
+
+from _q4
+	_pour_empty2;
+	to _q6
+
+from _q4
+	_pour_empty3;
+	to _q7
+
+from _q4
+	_pour_empty4;
+	to _q8
+
+from _q4
+	_pour_empty5;
+	to _q9
+
+from _q4
+	_pour_empty6;
+	to _q10
+
+from _q5
+	_pour_empty1;
+	to _q6
+
+from _q5
+	_pour_empty2;
+	to _q7
+
+from _q5
+	_pour_empty3;
+	to _q8
+
+from _q5
+	_pour_empty4;
+	to _q9
+
+from _q5
+	_pour_empty5;
+	to _q10
+
+from _q6
+	_pour_empty1;
+	to _q7
+
+from _q6
+	_pour_empty2;
+	to _q8
+
+from _q6
+	_pour_empty3;
+	to _q9
+
+from _q6
+	_pour_empty4;
+	to _q10
+
+from _q7
+	_pour_empty1;
+	to _q8
+
+from _q7
+	_pour_empty2;
+	to _q9
+
+from _q7
+	_pour_empty3;
+	to _q10
+
+from _q8
+	_pour_empty1;
+	to _q9
+
+from _q8
+	_pour_empty2;
+	to _q10
+
+from _q9
+	_pour_empty1;
+	to _q10
+
+from _q1
+	_pour_full1;
+	to _q0
+
+from _q2
+	_pour_full2;
+	to _q0
+
+from _q2
+	_pour_full1;
+	to _q1
+
+from _q3
+	_pour_full3;
+	to _q0
+
+from _q3
+	_pour_full2;
+	to _q1
+
+from _q3
+	_pour_full1;
+	to _q2
+
+from _q4
+	_pour_full4;
+	to _q0
+
+from _q4
+	_pour_full3;
+	to _q1
+
+from _q4
+	_pour_full2;
+	to _q2
+
+from _q4
+	_pour_full1;
+	to _q3
+
+from _q5
+	_pour_full5;
+	to _q0
+
+from _q5
+	_pour_full4;
+	to _q1
+
+from _q5
+	_pour_full3;
+	to _q2
+
+from _q5
+	_pour_full2;
+	to _q3
+
+from _q5
+	_pour_full1;
+	to _q4
+
+from _q6
+	_pour_full6;
+	to _q0
+
+from _q6
+	_pour_full5;
+	to _q1
+
+from _q6
+	_pour_full4;
+	to _q2
+
+from _q6
+	_pour_full3;
+	to _q3
+
+from _q6
+	_pour_full2;
+	to _q4
+
+from _q6
+	_pour_full1;
+	to _q5
+
+from _q7
+	_pour_full7;
+	to _q0
+
+from _q7
+	_pour_full6;
+	to _q1
+
+from _q7
+	_pour_full5;
+	to _q2
+
+from _q7
+	_pour_full4;
+	to _q3
+
+from _q7
+	_pour_full3;
+	to _q4
+
+from _q7
+	_pour_full2;
+	to _q5
+
+from _q7
+	_pour_full1;
+	to _q6
+
+from _q8
+	_pour_full8;
+	to _q0
+
+from _q8
+	_pour_full7;
+	to _q1
+
+from _q8
+	_pour_full6;
+	to _q2
+
+from _q8
+	_pour_full5;
+	to _q3
+
+from _q8
+	_pour_full4;
+	to _q4
+
+from _q8
+	_pour_full3;
+	to _q5
+
+from _q8
+	_pour_full2;
+	to _q6
+
+from _q8
+	_pour_full1;
+	to _q7
+
+from _q9
+	_pour_full9;
+	to _q0
+
+from _q9
+	_pour_full8;
+	to _q1
+
+from _q9
+	_pour_full7;
+	to _q2
+
+from _q9
+	_pour_full6;
+	to _q3
+
+from _q9
+	_pour_full5;
+	to _q4
+
+from _q9
+	_pour_full4;
+	to _q5
+
+from _q9
+	_pour_full3;
+	to _q6
+
+from _q9
+	_pour_full2;
+	to _q7
+
+from _q9
+	_pour_full1;
+	to _q8
+
+from _q10
+	_pour_full10;
+	to _q0
+
+from _q10
+	_pour_full9;
+	to _q1
+
+from _q10
+	_pour_full8;
+	to _q2
+
+from _q10
+	_pour_full7;
+	to _q3
+
+from _q10
+	_pour_full6;
+	to _q4
+
+from _q10
+	_pour_full5;
+	to _q5
+
+from _q10
+	_pour_full4;
+	to _q6
+
+from _q10
+	_pour_full3;
+	to _q7
+
+from _q10
+	_pour_full2;
+	to _q8
+
+from _q10
+	_pour_full1;
+	to _q9
+
+from _q0
+	_pour_full10;
+	to _q10
+
+from _q1
+	_pour_full9;
+	to _q10
+
+from _q2
+	_pour_full8;
+	to _q10
+
+from _q3
+	_pour_full7;
+	to _q10
+
+from _q4
+	_pour_full6;
+	to _q10
+
+from _q5
+	_pour_full5;
+	to _q10
+
+from _q6
+	_pour_full4;
+	to _q10
+
+from _q7
+	_pour_full3;
+	to _q10
+
+from _q8
+	_pour_full2;
+	to _q10
+
+from _q9
+	_pour_full1;
+	to _q10
+
+
+process _Bottle_2 [_pour_full8: in out none, _pour_full4: in out none, _pour_empty2: in out none, _pour_empty5: in out none, _pour_empty7: in out none, _pour_empty8: in out none, _pour_full3: in out none, _pour_full2: in out none, _pour_empty6: in out none, _pour_full5: in out none, _pour_full7: in out none, _pour_empty1: in out none, _pour_empty4: in out none, _pour_full1: in out none, _pour_full6: in out none, _pour_empty3: in out none] is
+states _q0, _q1, _q2, _q3, _q4, _q5, _q6, _q7, _q8
+
+init to _q0
+
+from _q1
+	_pour_empty1;
+	to _q0
+
+from _q2
+	_pour_empty2;
+	to _q0
+
+from _q3
+	_pour_empty3;
+	to _q0
+
+from _q4
+	_pour_empty4;
+	to _q0
+
+from _q5
+	_pour_empty5;
+	to _q0
+
+from _q6
+	_pour_empty6;
+	to _q0
+
+from _q7
+	_pour_empty7;
+	to _q0
+
+from _q8
+	_pour_empty8;
+	to _q0
+
+from _q0
+	_pour_empty1;
+	to _q1
+
+from _q0
+	_pour_empty2;
+	to _q2
+
+from _q0
+	_pour_empty3;
+	to _q3
+
+from _q0
+	_pour_empty4;
+	to _q4
+
+from _q0
+	_pour_empty5;
+	to _q5
+
+from _q0
+	_pour_empty6;
+	to _q6
+
+from _q0
+	_pour_empty7;
+	to _q7
+
+from _q0
+	_pour_empty8;
+	to _q8
+
+from _q1
+	_pour_empty1;
+	to _q2
+
+from _q1
+	_pour_empty2;
+	to _q3
+
+from _q1
+	_pour_empty3;
+	to _q4
+
+from _q1
+	_pour_empty4;
+	to _q5
+
+from _q1
+	_pour_empty5;
+	to _q6
+
+from _q1
+	_pour_empty6;
+	to _q7
+
+from _q1
+	_pour_empty7;
+	to _q8
+
+from _q2
+	_pour_empty1;
+	to _q3
+
+from _q2
+	_pour_empty2;
+	to _q4
+
+from _q2
+	_pour_empty3;
+	to _q5
+
+from _q2
+	_pour_empty4;
+	to _q6
+
+from _q2
+	_pour_empty5;
+	to _q7
+
+from _q2
+	_pour_empty6;
+	to _q8
+
+from _q3
+	_pour_empty1;
+	to _q4
+
+from _q3
+	_pour_empty2;
+	to _q5
+
+from _q3
+	_pour_empty3;
+	to _q6
+
+from _q3
+	_pour_empty4;
+	to _q7
+
+from _q3
+	_pour_empty5;
+	to _q8
+
+from _q4
+	_pour_empty1;
+	to _q5
+
+from _q4
+	_pour_empty2;
+	to _q6
+
+from _q4
+	_pour_empty3;
+	to _q7
+
+from _q4
+	_pour_empty4;
+	to _q8
+
+from _q5
+	_pour_empty1;
+	to _q6
+
+from _q5
+	_pour_empty2;
+	to _q7
+
+from _q5
+	_pour_empty3;
+	to _q8
+
+from _q6
+	_pour_empty1;
+	to _q7
+
+from _q6
+	_pour_empty2;
+	to _q8
+
+from _q7
+	_pour_empty1;
+	to _q8
+
+from _q1
+	_pour_full1;
+	to _q0
+
+from _q2
+	_pour_full2;
+	to _q0
+
+from _q2
+	_pour_full1;
+	to _q1
+
+from _q3
+	_pour_full3;
+	to _q0
+
+from _q3
+	_pour_full2;
+	to _q1
+
+from _q3
+	_pour_full1;
+	to _q2
+
+from _q4
+	_pour_full4;
+	to _q0
+
+from _q4
+	_pour_full3;
+	to _q1
+
+from _q4
+	_pour_full2;
+	to _q2
+
+from _q4
+	_pour_full1;
+	to _q3
+
+from _q5
+	_pour_full5;
+	to _q0
+
+from _q5
+	_pour_full4;
+	to _q1
+
+from _q5
+	_pour_full3;
+	to _q2
+
+from _q5
+	_pour_full2;
+	to _q3
+
+from _q5
+	_pour_full1;
+	to _q4
+
+from _q6
+	_pour_full6;
+	to _q0
+
+from _q6
+	_pour_full5;
+	to _q1
+
+from _q6
+	_pour_full4;
+	to _q2
+
+from _q6
+	_pour_full3;
+	to _q3
+
+from _q6
+	_pour_full2;
+	to _q4
+
+from _q6
+	_pour_full1;
+	to _q5
+
+from _q7
+	_pour_full7;
+	to _q0
+
+from _q7
+	_pour_full6;
+	to _q1
+
+from _q7
+	_pour_full5;
+	to _q2
+
+from _q7
+	_pour_full4;
+	to _q3
+
+from _q7
+	_pour_full3;
+	to _q4
+
+from _q7
+	_pour_full2;
+	to _q5
+
+from _q7
+	_pour_full1;
+	to _q6
+
+from _q8
+	_pour_full8;
+	to _q0
+
+from _q8
+	_pour_full7;
+	to _q1
+
+from _q8
+	_pour_full6;
+	to _q2
+
+from _q8
+	_pour_full5;
+	to _q3
+
+from _q8
+	_pour_full4;
+	to _q4
+
+from _q8
+	_pour_full3;
+	to _q5
+
+from _q8
+	_pour_full2;
+	to _q6
+
+from _q8
+	_pour_full1;
+	to _q7
+
+from _q0
+	_pour_full8;
+	to _q8
+
+from _q1
+	_pour_full7;
+	to _q8
+
+from _q2
+	_pour_full6;
+	to _q8
+
+from _q3
+	_pour_full5;
+	to _q8
+
+from _q4
+	_pour_full4;
+	to _q8
+
+from _q5
+	_pour_full3;
+	to _q8
+
+from _q6
+	_pour_full2;
+	to _q8
+
+from _q7
+	_pour_full1;
+	to _q8
+
+
+process _Bottle_3 [_pour_full8: in out none, _pour_full14: in out none, _pour_full4: in out none, _pour_empty2: in out none, _pour_full2: in out none, _pour_empty6: in out none, _pour_empty9: in out none, _pour_full12: in out none, _pour_empty13: in out none, _pour_full5: in out none, _pour_full13: in out none, _pour_full7: in out none, _pour_full1: in out none, _pour_empty3: in out none, _pour_empty10: in out none, _pour_empty14: in out none, _pour_empty5: in out none, _pour_empty7: in out none, _pour_empty8: in out none, _pour_full3: in out none, _pour_empty11: in out none, _pour_full10: in out none, _pour_empty1: in out none, _pour_empty4: in out none, _pour_empty12: in out none, _pour_full11: in out none, _pour_full9: in out none, _pour_full6: in out none] is
+states _q0, _q1, _q2, _q3, _q4, _q5, _q6, _q7, _q8, _q9, _q10, _q11, _q12, _q13, _q14
+
+init to _q0
+
+from _q1
+	_pour_empty1;
+	to _q0
+
+from _q2
+	_pour_empty2;
+	to _q0
+
+from _q3
+	_pour_empty3;
+	to _q0
+
+from _q4
+	_pour_empty4;
+	to _q0
+
+from _q5
+	_pour_empty5;
+	to _q0
+
+from _q6
+	_pour_empty6;
+	to _q0
+
+from _q7
+	_pour_empty7;
+	to _q0
+
+from _q8
+	_pour_empty8;
+	to _q0
+
+from _q9
+	_pour_empty9;
+	to _q0
+
+from _q10
+	_pour_empty10;
+	to _q0
+
+from _q11
+	_pour_empty11;
+	to _q0
+
+from _q12
+	_pour_empty12;
+	to _q0
+
+from _q13
+	_pour_empty13;
+	to _q0
+
+from _q14
+	_pour_empty14;
+	to _q0
+
+from _q0
+	_pour_empty1;
+	to _q1
+
+from _q0
+	_pour_empty2;
+	to _q2
+
+from _q0
+	_pour_empty3;
+	to _q3
+
+from _q0
+	_pour_empty4;
+	to _q4
+
+from _q0
+	_pour_empty5;
+	to _q5
+
+from _q0
+	_pour_empty6;
+	to _q6
+
+from _q0
+	_pour_empty7;
+	to _q7
+
+from _q0
+	_pour_empty8;
+	to _q8
+
+from _q0
+	_pour_empty9;
+	to _q9
+
+from _q0
+	_pour_empty10;
+	to _q10
+
+from _q0
+	_pour_empty11;
+	to _q11
+
+from _q0
+	_pour_empty12;
+	to _q12
+
+from _q0
+	_pour_empty13;
+	to _q13
+
+from _q0
+	_pour_empty14;
+	to _q14
+
+from _q1
+	_pour_empty1;
+	to _q2
+
+from _q1
+	_pour_empty2;
+	to _q3
+
+from _q1
+	_pour_empty3;
+	to _q4
+
+from _q1
+	_pour_empty4;
+	to _q5
+
+from _q1
+	_pour_empty5;
+	to _q6
+
+from _q1
+	_pour_empty6;
+	to _q7
+
+from _q1
+	_pour_empty7;
+	to _q8
+
+from _q1
+	_pour_empty8;
+	to _q9
+
+from _q1
+	_pour_empty9;
+	to _q10
+
+from _q1
+	_pour_empty10;
+	to _q11
+
+from _q1
+	_pour_empty11;
+	to _q12
+
+from _q1
+	_pour_empty12;
+	to _q13
+
+from _q1
+	_pour_empty13;
+	to _q14
+
+from _q2
+	_pour_empty1;
+	to _q3
+
+from _q2
+	_pour_empty2;
+	to _q4
+
+from _q2
+	_pour_empty3;
+	to _q5
+
+from _q2
+	_pour_empty4;
+	to _q6
+
+from _q2
+	_pour_empty5;
+	to _q7
+
+from _q2
+	_pour_empty6;
+	to _q8
+
+from _q2
+	_pour_empty7;
+	to _q9
+
+from _q2
+	_pour_empty8;
+	to _q10
+
+from _q2
+	_pour_empty9;
+	to _q11
+
+from _q2
+	_pour_empty10;
+	to _q12
+
+from _q2
+	_pour_empty11;
+	to _q13
+
+from _q2
+	_pour_empty12;
+	to _q14
+
+from _q3
+	_pour_empty1;
+	to _q4
+
+from _q3
+	_pour_empty2;
+	to _q5
+
+from _q3
+	_pour_empty3;
+	to _q6
+
+from _q3
+	_pour_empty4;
+	to _q7
+
+from _q3
+	_pour_empty5;
+	to _q8
+
+from _q3
+	_pour_empty6;
+	to _q9
+
+from _q3
+	_pour_empty7;
+	to _q10
+
+from _q3
+	_pour_empty8;
+	to _q11
+
+from _q3
+	_pour_empty9;
+	to _q12
+
+from _q3
+	_pour_empty10;
+	to _q13
+
+from _q3
+	_pour_empty11;
+	to _q14
+
+from _q4
+	_pour_empty1;
+	to _q5
+
+from _q4
+	_pour_empty2;
+	to _q6
+
+from _q4
+	_pour_empty3;
+	to _q7
+
+from _q4
+	_pour_empty4;
+	to _q8
+
+from _q4
+	_pour_empty5;
+	to _q9
+
+from _q4
+	_pour_empty6;
+	to _q10
+
+from _q4
+	_pour_empty7;
+	to _q11
+
+from _q4
+	_pour_empty8;
+	to _q12
+
+from _q4
+	_pour_empty9;
+	to _q13
+
+from _q4
+	_pour_empty10;
+	to _q14
+
+from _q5
+	_pour_empty1;
+	to _q6
+
+from _q5
+	_pour_empty2;
+	to _q7
+
+from _q5
+	_pour_empty3;
+	to _q8
+
+from _q5
+	_pour_empty4;
+	to _q9
+
+from _q5
+	_pour_empty5;
+	to _q10
+
+from _q5
+	_pour_empty6;
+	to _q11
+
+from _q5
+	_pour_empty7;
+	to _q12
+
+from _q5
+	_pour_empty8;
+	to _q13
+
+from _q5
+	_pour_empty9;
+	to _q14
+
+from _q6
+	_pour_empty1;
+	to _q7
+
+from _q6
+	_pour_empty2;
+	to _q8
+
+from _q6
+	_pour_empty3;
+	to _q9
+
+from _q6
+	_pour_empty4;
+	to _q10
+
+from _q6
+	_pour_empty5;
+	to _q11
+
+from _q6
+	_pour_empty6;
+	to _q12
+
+from _q6
+	_pour_empty7;
+	to _q13
+
+from _q6
+	_pour_empty8;
+	to _q14
+
+from _q7
+	_pour_empty1;
+	to _q8
+
+from _q7
+	_pour_empty2;
+	to _q9
+
+from _q7
+	_pour_empty3;
+	to _q10
+
+from _q7
+	_pour_empty4;
+	to _q11
+
+from _q7
+	_pour_empty5;
+	to _q12
+
+from _q7
+	_pour_empty6;
+	to _q13
+
+from _q7
+	_pour_empty7;
+	to _q14
+
+from _q8
+	_pour_empty1;
+	to _q9
+
+from _q8
+	_pour_empty2;
+	to _q10
+
+from _q8
+	_pour_empty3;
+	to _q11
+
+from _q8
+	_pour_empty4;
+	to _q12
+
+from _q8
+	_pour_empty5;
+	to _q13
+
+from _q8
+	_pour_empty6;
+	to _q14
+
+from _q9
+	_pour_empty1;
+	to _q10
+
+from _q9
+	_pour_empty2;
+	to _q11
+
+from _q9
+	_pour_empty3;
+	to _q12
+
+from _q9
+	_pour_empty4;
+	to _q13
+
+from _q9
+	_pour_empty5;
+	to _q14
+
+from _q10
+	_pour_empty1;
+	to _q11
+
+from _q10
+	_pour_empty2;
+	to _q12
+
+from _q10
+	_pour_empty3;
+	to _q13
+
+from _q10
+	_pour_empty4;
+	to _q14
+
+from _q11
+	_pour_empty1;
+	to _q12
+
+from _q11
+	_pour_empty2;
+	to _q13
+
+from _q11
+	_pour_empty3;
+	to _q14
+
+from _q12
+	_pour_empty1;
+	to _q13
+
+from _q12
+	_pour_empty2;
+	to _q14
+
+from _q13
+	_pour_empty1;
+	to _q14
+
+from _q1
+	_pour_full1;
+	to _q0
+
+from _q2
+	_pour_full2;
+	to _q0
+
+from _q2
+	_pour_full1;
+	to _q1
+
+from _q3
+	_pour_full3;
+	to _q0
+
+from _q3
+	_pour_full2;
+	to _q1
+
+from _q3
+	_pour_full1;
+	to _q2
+
+from _q4
+	_pour_full4;
+	to _q0
+
+from _q4
+	_pour_full3;
+	to _q1
+
+from _q4
+	_pour_full2;
+	to _q2
+
+from _q4
+	_pour_full1;
+	to _q3
+
+from _q5
+	_pour_full5;
+	to _q0
+
+from _q5
+	_pour_full4;
+	to _q1
+
+from _q5
+	_pour_full3;
+	to _q2
+
+from _q5
+	_pour_full2;
+	to _q3
+
+from _q5
+	_pour_full1;
+	to _q4
+
+from _q6
+	_pour_full6;
+	to _q0
+
+from _q6
+	_pour_full5;
+	to _q1
+
+from _q6
+	_pour_full4;
+	to _q2
+
+from _q6
+	_pour_full3;
+	to _q3
+
+from _q6
+	_pour_full2;
+	to _q4
+
+from _q6
+	_pour_full1;
+	to _q5
+
+from _q7
+	_pour_full7;
+	to _q0
+
+from _q7
+	_pour_full6;
+	to _q1
+
+from _q7
+	_pour_full5;
+	to _q2
+
+from _q7
+	_pour_full4;
+	to _q3
+
+from _q7
+	_pour_full3;
+	to _q4
+
+from _q7
+	_pour_full2;
+	to _q5
+
+from _q7
+	_pour_full1;
+	to _q6
+
+from _q8
+	_pour_full8;
+	to _q0
+
+from _q8
+	_pour_full7;
+	to _q1
+
+from _q8
+	_pour_full6;
+	to _q2
+
+from _q8
+	_pour_full5;
+	to _q3
+
+from _q8
+	_pour_full4;
+	to _q4
+
+from _q8
+	_pour_full3;
+	to _q5
+
+from _q8
+	_pour_full2;
+	to _q6
+
+from _q8
+	_pour_full1;
+	to _q7
+
+from _q9
+	_pour_full9;
+	to _q0
+
+from _q9
+	_pour_full8;
+	to _q1
+
+from _q9
+	_pour_full7;
+	to _q2
+
+from _q9
+	_pour_full6;
+	to _q3
+
+from _q9
+	_pour_full5;
+	to _q4
+
+from _q9
+	_pour_full4;
+	to _q5
+
+from _q9
+	_pour_full3;
+	to _q6
+
+from _q9
+	_pour_full2;
+	to _q7
+
+from _q9
+	_pour_full1;
+	to _q8
+
+from _q10
+	_pour_full10;
+	to _q0
+
+from _q10
+	_pour_full9;
+	to _q1
+
+from _q10
+	_pour_full8;
+	to _q2
+
+from _q10
+	_pour_full7;
+	to _q3
+
+from _q10
+	_pour_full6;
+	to _q4
+
+from _q10
+	_pour_full5;
+	to _q5
+
+from _q10
+	_pour_full4;
+	to _q6
+
+from _q10
+	_pour_full3;
+	to _q7
+
+from _q10
+	_pour_full2;
+	to _q8
+
+from _q10
+	_pour_full1;
+	to _q9
+
+from _q11
+	_pour_full11;
+	to _q0
+
+from _q11
+	_pour_full10;
+	to _q1
+
+from _q11
+	_pour_full9;
+	to _q2
+
+from _q11
+	_pour_full8;
+	to _q3
+
+from _q11
+	_pour_full7;
+	to _q4
+
+from _q11
+	_pour_full6;
+	to _q5
+
+from _q11
+	_pour_full5;
+	to _q6
+
+from _q11
+	_pour_full4;
+	to _q7
+
+from _q11
+	_pour_full3;
+	to _q8
+
+from _q11
+	_pour_full2;
+	to _q9
+
+from _q11
+	_pour_full1;
+	to _q10
+
+from _q12
+	_pour_full12;
+	to _q0
+
+from _q12
+	_pour_full11;
+	to _q1
+
+from _q12
+	_pour_full10;
+	to _q2
+
+from _q12
+	_pour_full9;
+	to _q3
+
+from _q12
+	_pour_full8;
+	to _q4
+
+from _q12
+	_pour_full7;
+	to _q5
+
+from _q12
+	_pour_full6;
+	to _q6
+
+from _q12
+	_pour_full5;
+	to _q7
+
+from _q12
+	_pour_full4;
+	to _q8
+
+from _q12
+	_pour_full3;
+	to _q9
+
+from _q12
+	_pour_full2;
+	to _q10
+
+from _q12
+	_pour_full1;
+	to _q11
+
+from _q13
+	_pour_full13;
+	to _q0
+
+from _q13
+	_pour_full12;
+	to _q1
+
+from _q13
+	_pour_full11;
+	to _q2
+
+from _q13
+	_pour_full10;
+	to _q3
+
+from _q13
+	_pour_full9;
+	to _q4
+
+from _q13
+	_pour_full8;
+	to _q5
+
+from _q13
+	_pour_full7;
+	to _q6
+
+from _q13
+	_pour_full6;
+	to _q7
+
+from _q13
+	_pour_full5;
+	to _q8
+
+from _q13
+	_pour_full4;
+	to _q9
+
+from _q13
+	_pour_full3;
+	to _q10
+
+from _q13
+	_pour_full2;
+	to _q11
+
+from _q13
+	_pour_full1;
+	to _q12
+
+from _q14
+	_pour_full14;
+	to _q0
+
+from _q14
+	_pour_full13;
+	to _q1
+
+from _q14
+	_pour_full12;
+	to _q2
+
+from _q14
+	_pour_full11;
+	to _q3
+
+from _q14
+	_pour_full10;
+	to _q4
+
+from _q14
+	_pour_full9;
+	to _q5
+
+from _q14
+	_pour_full8;
+	to _q6
+
+from _q14
+	_pour_full7;
+	to _q7
+
+from _q14
+	_pour_full6;
+	to _q8
+
+from _q14
+	_pour_full5;
+	to _q9
+
+from _q14
+	_pour_full4;
+	to _q10
+
+from _q14
+	_pour_full3;
+	to _q11
+
+from _q14
+	_pour_full2;
+	to _q12
+
+from _q14
+	_pour_full1;
+	to _q13
+
+from _q0
+	_pour_full14;
+	to _q14
+
+from _q1
+	_pour_full13;
+	to _q14
+
+from _q2
+	_pour_full12;
+	to _q14
+
+from _q3
+	_pour_full11;
+	to _q14
+
+from _q4
+	_pour_full10;
+	to _q14
+
+from _q5
+	_pour_full9;
+	to _q14
+
+from _q6
+	_pour_full8;
+	to _q14
+
+from _q7
+	_pour_full7;
+	to _q14
+
+from _q8
+	_pour_full6;
+	to _q14
+
+from _q9
+	_pour_full5;
+	to _q14
+
+from _q10
+	_pour_full4;
+	to _q14
+
+from _q11
+	_pour_full3;
+	to _q14
+
+from _q12
+	_pour_full2;
+	to _q14
+
+from _q13
+	_pour_full1;
+	to _q14
+
+
+process _Bottle_4 [_pour_full4: in out none, _pour_empty2: in out none, _pour_empty5: in out none, _pour_empty7: in out none, _pour_full3: in out none, _pour_full2: in out none, _pour_empty6: in out none, _pour_full5: in out none, _pour_full7: in out none, _pour_empty1: in out none, _pour_empty4: in out none, _pour_full1: in out none, _pour_full6: in out none, _pour_empty3: in out none] is
+states _q0, _q1, _q2, _q3, _q4, _q5, _q6, _q7
+
+init to _q0
+
+from _q1
+	_pour_empty1;
+	to _q0
+
+from _q2
+	_pour_empty2;
+	to _q0
+
+from _q3
+	_pour_empty3;
+	to _q0
+
+from _q4
+	_pour_empty4;
+	to _q0
+
+from _q5
+	_pour_empty5;
+	to _q0
+
+from _q6
+	_pour_empty6;
+	to _q0
+
+from _q7
+	_pour_empty7;
+	to _q0
+
+from _q0
+	_pour_empty1;
+	to _q1
+
+from _q0
+	_pour_empty2;
+	to _q2
+
+from _q0
+	_pour_empty3;
+	to _q3
+
+from _q0
+	_pour_empty4;
+	to _q4
+
+from _q0
+	_pour_empty5;
+	to _q5
+
+from _q0
+	_pour_empty6;
+	to _q6
+
+from _q0
+	_pour_empty7;
+	to _q7
+
+from _q1
+	_pour_empty1;
+	to _q2
+
+from _q1
+	_pour_empty2;
+	to _q3
+
+from _q1
+	_pour_empty3;
+	to _q4
+
+from _q1
+	_pour_empty4;
+	to _q5
+
+from _q1
+	_pour_empty5;
+	to _q6
+
+from _q1
+	_pour_empty6;
+	to _q7
+
+from _q2
+	_pour_empty1;
+	to _q3
+
+from _q2
+	_pour_empty2;
+	to _q4
+
+from _q2
+	_pour_empty3;
+	to _q5
+
+from _q2
+	_pour_empty4;
+	to _q6
+
+from _q2
+	_pour_empty5;
+	to _q7
+
+from _q3
+	_pour_empty1;
+	to _q4
+
+from _q3
+	_pour_empty2;
+	to _q5
+
+from _q3
+	_pour_empty3;
+	to _q6
+
+from _q3
+	_pour_empty4;
+	to _q7
+
+from _q4
+	_pour_empty1;
+	to _q5
+
+from _q4
+	_pour_empty2;
+	to _q6
+
+from _q4
+	_pour_empty3;
+	to _q7
+
+from _q5
+	_pour_empty1;
+	to _q6
+
+from _q5
+	_pour_empty2;
+	to _q7
+
+from _q6
+	_pour_empty1;
+	to _q7
+
+from _q1
+	_pour_full1;
+	to _q0
+
+from _q2
+	_pour_full2;
+	to _q0
+
+from _q2
+	_pour_full1;
+	to _q1
+
+from _q3
+	_pour_full3;
+	to _q0
+
+from _q3
+	_pour_full2;
+	to _q1
+
+from _q3
+	_pour_full1;
+	to _q2
+
+from _q4
+	_pour_full4;
+	to _q0
+
+from _q4
+	_pour_full3;
+	to _q1
+
+from _q4
+	_pour_full2;
+	to _q2
+
+from _q4
+	_pour_full1;
+	to _q3
+
+from _q5
+	_pour_full5;
+	to _q0
+
+from _q5
+	_pour_full4;
+	to _q1
+
+from _q5
+	_pour_full3;
+	to _q2
+
+from _q5
+	_pour_full2;
+	to _q3
+
+from _q5
+	_pour_full1;
+	to _q4
+
+from _q6
+	_pour_full6;
+	to _q0
+
+from _q6
+	_pour_full5;
+	to _q1
+
+from _q6
+	_pour_full4;
+	to _q2
+
+from _q6
+	_pour_full3;
+	to _q3
+
+from _q6
+	_pour_full2;
+	to _q4
+
+from _q6
+	_pour_full1;
+	to _q5
+
+from _q7
+	_pour_full7;
+	to _q0
+
+from _q7
+	_pour_full6;
+	to _q1
+
+from _q7
+	_pour_full5;
+	to _q2
+
+from _q7
+	_pour_full4;
+	to _q3
+
+from _q7
+	_pour_full3;
+	to _q4
+
+from _q7
+	_pour_full2;
+	to _q5
+
+from _q7
+	_pour_full1;
+	to _q6
+
+from _q0
+	_pour_full7;
+	to _q7
+
+from _q1
+	_pour_full6;
+	to _q7
+
+from _q2
+	_pour_full5;
+	to _q7
+
+from _q3
+	_pour_full4;
+	to _q7
+
+from _q4
+	_pour_full3;
+	to _q7
+
+from _q5
+	_pour_full2;
+	to _q7
+
+from _q6
+	_pour_full1;
+	to _q7
+
+
+process _Bottle_5 [_pour_full4: in out none, _pour_empty2: in out none, _pour_empty5: in out none, _pour_full5: in out none, _pour_empty1: in out none, _pour_empty4: in out none, _pour_full3: in out none, _pour_full1: in out none, _pour_empty3: in out none, _pour_full2: in out none] is
+states _q0, _q1, _q2, _q3, _q4, _q5
+
+init to _q0
+
+from _q1
+	_pour_empty1;
+	to _q0
+
+from _q2
+	_pour_empty2;
+	to _q0
+
+from _q3
+	_pour_empty3;
+	to _q0
+
+from _q4
+	_pour_empty4;
+	to _q0
+
+from _q5
+	_pour_empty5;
+	to _q0
+
+from _q0
+	_pour_empty1;
+	to _q1
+
+from _q0
+	_pour_empty2;
+	to _q2
+
+from _q0
+	_pour_empty3;
+	to _q3
+
+from _q0
+	_pour_empty4;
+	to _q4
+
+from _q0
+	_pour_empty5;
+	to _q5
+
+from _q1
+	_pour_empty1;
+	to _q2
+
+from _q1
+	_pour_empty2;
+	to _q3
+
+from _q1
+	_pour_empty3;
+	to _q4
+
+from _q1
+	_pour_empty4;
+	to _q5
+
+from _q2
+	_pour_empty1;
+	to _q3
+
+from _q2
+	_pour_empty2;
+	to _q4
+
+from _q2
+	_pour_empty3;
+	to _q5
+
+from _q3
+	_pour_empty1;
+	to _q4
+
+from _q3
+	_pour_empty2;
+	to _q5
+
+from _q4
+	_pour_empty1;
+	to _q5
+
+from _q1
+	_pour_full1;
+	to _q0
+
+from _q2
+	_pour_full2;
+	to _q0
+
+from _q2
+	_pour_full1;
+	to _q1
+
+from _q3
+	_pour_full3;
+	to _q0
+
+from _q3
+	_pour_full2;
+	to _q1
+
+from _q3
+	_pour_full1;
+	to _q2
+
+from _q4
+	_pour_full4;
+	to _q0
+
+from _q4
+	_pour_full3;
+	to _q1
+
+from _q4
+	_pour_full2;
+	to _q2
+
+from _q4
+	_pour_full1;
+	to _q3
+
+from _q5
+	_pour_full5;
+	to _q0
+
+from _q5
+	_pour_full4;
+	to _q1
+
+from _q5
+	_pour_full3;
+	to _q2
+
+from _q5
+	_pour_full2;
+	to _q3
+
+from _q5
+	_pour_full1;
+	to _q4
+
+from _q0
+	_pour_full5;
+	to _q5
+
+from _q1
+	_pour_full4;
+	to _q5
+
+from _q2
+	_pour_full3;
+	to _q5
+
+from _q3
+	_pour_full2;
+	to _q5
+
+from _q4
+	_pour_full1;
+	to _q5
+
+
+process _Source [_pour_full8: out none, _pour_full17: out none, _pour_full14: out none, _pour_full4: out none, _pour_full30: out none, _pour_full28: out none, _pour_full23: out none, _pour_full29: out none, _pour_full2: out none, _pour_full15: out none, _pour_full12: out none, _pour_full5: out none, _pour_full18: out none, _pour_full7: out none, _pour_full13: out none, _pour_full25: out none, _pour_full26: out none, _pour_full1: out none, _pour_full20: out none, _pour_full19: out none, _pour_full16: out none, _pour_full3: out none, _pour_full24: out none, _pour_full10: out none, _pour_full22: out none, _pour_full27: out none, _pour_full21: out none, _pour_full11: out none, _pour_full6: out none, _pour_full9: out none] is
+states _q
+
+init to _q
+
+from _q
+	_pour_full1;
+	to _q
+
+from _q
+	_pour_full2;
+	to _q
+
+from _q
+	_pour_full3;
+	to _q
+
+from _q
+	_pour_full4;
+	to _q
+
+from _q
+	_pour_full5;
+	to _q
+
+from _q
+	_pour_full6;
+	to _q
+
+from _q
+	_pour_full7;
+	to _q
+
+from _q
+	_pour_full8;
+	to _q
+
+from _q
+	_pour_full9;
+	to _q
+
+from _q
+	_pour_full10;
+	to _q
+
+from _q
+	_pour_full11;
+	to _q
+
+from _q
+	_pour_full12;
+	to _q
+
+from _q
+	_pour_full13;
+	to _q
+
+from _q
+	_pour_full14;
+	to _q
+
+from _q
+	_pour_full15;
+	to _q
+
+from _q
+	_pour_full16;
+	to _q
+
+from _q
+	_pour_full17;
+	to _q
+
+from _q
+	_pour_full18;
+	to _q
+
+from _q
+	_pour_full19;
+	to _q
+
+from _q
+	_pour_full20;
+	to _q
+
+from _q
+	_pour_full21;
+	to _q
+
+from _q
+	_pour_full22;
+	to _q
+
+from _q
+	_pour_full23;
+	to _q
+
+from _q
+	_pour_full24;
+	to _q
+
+from _q
+	_pour_full25;
+	to _q
+
+from _q
+	_pour_full26;
+	to _q
+
+from _q
+	_pour_full27;
+	to _q
+
+from _q
+	_pour_full28;
+	to _q
+
+from _q
+	_pour_full29;
+	to _q
+
+from _q
+	_pour_full30;
+	to _q
+
+
+process _Sink [_pour_empty24: in none, _pour_empty2: in none, _pour_empty21: in none, _pour_empty25: in none, _pour_empty26: in none, _pour_empty6: in none, _pour_empty9: in none, _pour_empty13: in none, _pour_empty15: in none, _pour_empty3: in none, _pour_empty10: in none, _pour_empty29: in none, _pour_empty14: in none, _pour_empty5: in none, _pour_empty7: in none, _pour_empty8: in none, _pour_empty20: in none, _pour_empty30: in none, _pour_empty16: in none, _pour_empty23: in none, _pour_empty19: in none, _pour_empty27: in none, _pour_empty18: in none, _pour_empty11: in none, _pour_empty1: in none, _pour_empty4: in none, _pour_empty17: in none, _pour_empty12: in none, _pour_empty22: in none, _pour_empty28: in none] is
+states _q
+
+init to _q
+
+from _q
+	_pour_empty1;
+	to _q
+
+from _q
+	_pour_empty2;
+	to _q
+
+from _q
+	_pour_empty3;
+	to _q
+
+from _q
+	_pour_empty4;
+	to _q
+
+from _q
+	_pour_empty5;
+	to _q
+
+from _q
+	_pour_empty6;
+	to _q
+
+from _q
+	_pour_empty7;
+	to _q
+
+from _q
+	_pour_empty8;
+	to _q
+
+from _q
+	_pour_empty9;
+	to _q
+
+from _q
+	_pour_empty10;
+	to _q
+
+from _q
+	_pour_empty11;
+	to _q
+
+from _q
+	_pour_empty12;
+	to _q
+
+from _q
+	_pour_empty13;
+	to _q
+
+from _q
+	_pour_empty14;
+	to _q
+
+from _q
+	_pour_empty15;
+	to _q
+
+from _q
+	_pour_empty16;
+	to _q
+
+from _q
+	_pour_empty17;
+	to _q
+
+from _q
+	_pour_empty18;
+	to _q
+
+from _q
+	_pour_empty19;
+	to _q
+
+from _q
+	_pour_empty20;
+	to _q
+
+from _q
+	_pour_empty21;
+	to _q
+
+from _q
+	_pour_empty22;
+	to _q
+
+from _q
+	_pour_empty23;
+	to _q
+
+from _q
+	_pour_empty24;
+	to _q
+
+from _q
+	_pour_empty25;
+	to _q
+
+from _q
+	_pour_empty26;
+	to _q
+
+from _q
+	_pour_empty27;
+	to _q
+
+from _q
+	_pour_empty28;
+	to _q
+
+from _q
+	_pour_empty29;
+	to _q
+
+from _q
+	_pour_empty30;
+	to _q
+
+
+component sys is
+port 
+	_pour_empty1: none, 
+	_pour_full1: none, 
+	_pour_empty2: none, 
+	_pour_full2: none, 
+	_pour_empty3: none, 
+	_pour_full3: none, 
+	_pour_empty4: none, 
+	_pour_full4: none, 
+	_pour_empty5: none, 
+	_pour_full5: none, 
+	_pour_empty6: none, 
+	_pour_full6: none, 
+	_pour_empty7: none, 
+	_pour_full7: none, 
+	_pour_empty8: none, 
+	_pour_full8: none, 
+	_pour_empty9: none, 
+	_pour_full9: none, 
+	_pour_empty10: none, 
+	_pour_full10: none, 
+	_pour_empty11: none, 
+	_pour_full11: none, 
+	_pour_empty12: none, 
+	_pour_full12: none, 
+	_pour_empty13: none, 
+	_pour_full13: none, 
+	_pour_empty14: none, 
+	_pour_full14: none, 
+	_pour_empty15: none, 
+	_pour_full15: none, 
+	_pour_empty16: none, 
+	_pour_full16: none, 
+	_pour_empty17: none, 
+	_pour_full17: none, 
+	_pour_empty18: none, 
+	_pour_full18: none, 
+	_pour_empty19: none, 
+	_pour_full19: none, 
+	_pour_empty20: none, 
+	_pour_full20: none, 
+	_pour_empty21: none, 
+	_pour_full21: none, 
+	_pour_empty22: none, 
+	_pour_full22: none, 
+	_pour_empty23: none, 
+	_pour_full23: none, 
+	_pour_empty24: none, 
+	_pour_full24: none, 
+	_pour_empty25: none, 
+	_pour_full25: none, 
+	_pour_empty26: none, 
+	_pour_full26: none, 
+	_pour_empty27: none, 
+	_pour_full27: none, 
+	_pour_empty28: none, 
+	_pour_full28: none, 
+	_pour_empty29: none, 
+	_pour_full29: none, 
+	_pour_empty30: none, 
+	_pour_full30: none
+
+par 
+	_Bottle_1[_pour_full8, _pour_full4, _pour_empty2, _pour_empty5, _pour_empty7, _pour_empty8, _pour_full3, _pour_full2, _pour_empty6, _pour_empty9, _pour_full5, _pour_full10, _pour_full7, _pour_empty1, _pour_empty4, _pour_full1, _pour_full9, _pour_full6, _pour_empty3, _pour_empty10] 
+	 || _Bottle_2[_pour_full8, _pour_full4, _pour_empty2, _pour_empty5, _pour_empty7, _pour_empty8, _pour_full3, _pour_full2, _pour_empty6, _pour_full5, _pour_full7, _pour_empty1, _pour_empty4, _pour_full1, _pour_full6, _pour_empty3] 
+	 || _Bottle_3[_pour_full8, _pour_full14, _pour_full4, _pour_empty2, _pour_full2, _pour_empty6, _pour_empty9, _pour_full12, _pour_empty13, _pour_full5, _pour_full13, _pour_full7, _pour_full1, _pour_empty3, _pour_empty10, _pour_empty14, _pour_empty5, _pour_empty7, _pour_empty8, _pour_full3, _pour_empty11, _pour_full10, _pour_empty1, _pour_empty4, _pour_empty12, _pour_full11, _pour_full9, _pour_full6] 
+	 || _Bottle_4[_pour_full4, _pour_empty2, _pour_empty5, _pour_empty7, _pour_full3, _pour_full2, _pour_empty6, _pour_full5, _pour_full7, _pour_empty1, _pour_empty4, _pour_full1, _pour_full6, _pour_empty3] 
+	 || _Bottle_5[_pour_full4, _pour_empty2, _pour_empty5, _pour_full5, _pour_empty1, _pour_empty4, _pour_full3, _pour_full1, _pour_empty3, _pour_full2] 
+	 || _Source[_pour_full8, _pour_full17, _pour_full14, _pour_full4, _pour_full30, _pour_full28, _pour_full23, _pour_full29, _pour_full2, _pour_full15, _pour_full12, _pour_full5, _pour_full18, _pour_full7, _pour_full13, _pour_full25, _pour_full26, _pour_full1, _pour_full20, _pour_full19, _pour_full16, _pour_full3, _pour_full24, _pour_full10, _pour_full22, _pour_full27, _pour_full21, _pour_full11, _pour_full6, _pour_full9] 
+	 || _Sink[_pour_empty24, _pour_empty2, _pour_empty21, _pour_empty25, _pour_empty26, _pour_empty6, _pour_empty9, _pour_empty13, _pour_empty15, _pour_empty3, _pour_empty10, _pour_empty29, _pour_empty14, _pour_empty5, _pour_empty7, _pour_empty8, _pour_empty20, _pour_empty30, _pour_empty16, _pour_empty23, _pour_empty19, _pour_empty27, _pour_empty18, _pour_empty11, _pour_empty1, _pour_empty4, _pour_empty17, _pour_empty12, _pour_empty22, _pour_empty28] 
+end par
+
+
+sys

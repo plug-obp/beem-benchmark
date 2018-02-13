@@ -1,0 +1,250 @@
+type byte is 0..255
+
+process _P_0 (&_locked: array 3 of byte, &_tail: byte, &_next: array 3 of byte) is
+states _NCS, _p2, _p3, _p4, _p5, _p6, _CS, _p9, _p13, _p10
+var 
+	_pred: byte 
+init to _NCS
+
+from _NCS
+	_next[0] := 255;
+	to _p2
+
+from _p2
+	_pred := _tail;
+	_tail := 0;
+	to _p3
+
+from _p3
+	case (_pred = 255) of
+	true -> null
+	end case;
+	to _CS
+
+from _p3
+	case (_pred <> 255) of
+	true -> null
+	end case;
+	to _p4
+
+from _p4
+	_locked[0] := 1;
+	to _p5
+
+from _p5
+	_next[_pred] := 0;
+	to _p6
+
+from _p6
+	case (_locked[0] = 0) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	case (_next[0] = 255) of
+	true -> null
+	end case;
+	to _p9
+
+from _CS
+	case (_next[0] <> 255) of
+	true -> null
+	end case;
+	to _p13
+
+from _p9
+	case (_tail = 0) of
+	true -> null
+	end case;
+	_tail := 255;
+	to _NCS
+
+from _p9
+	case (_tail <> 0) of
+	true -> null
+	end case;
+	to _p10
+
+from _p10
+	case (_next[0] <> 255) of
+	true -> null
+	end case;
+	to _p13
+
+from _p13
+	_locked[0] := 0;
+	to _NCS
+
+
+process _P_1 (&_locked: array 3 of byte, &_tail: byte, &_next: array 3 of byte) is
+states _NCS, _p2, _p3, _p4, _p5, _p6, _CS, _p9, _p13, _p10
+var 
+	_pred: byte 
+init to _NCS
+
+from _NCS
+	_next[1] := 255;
+	to _p2
+
+from _p2
+	_pred := _tail;
+	_tail := 1;
+	to _p3
+
+from _p3
+	case (_pred = 255) of
+	true -> null
+	end case;
+	to _CS
+
+from _p3
+	case (_pred <> 255) of
+	true -> null
+	end case;
+	to _p4
+
+from _p4
+	_locked[1] := 1;
+	to _p5
+
+from _p5
+	_next[_pred] := 1;
+	to _p6
+
+from _p6
+	case (_locked[1] = 0) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	case (_next[1] = 255) of
+	true -> null
+	end case;
+	to _p9
+
+from _CS
+	case (_next[1] <> 255) of
+	true -> null
+	end case;
+	to _p13
+
+from _p9
+	case (_tail = 1) of
+	true -> null
+	end case;
+	_tail := 255;
+	to _NCS
+
+from _p9
+	case (_tail <> 1) of
+	true -> null
+	end case;
+	to _p10
+
+from _p10
+	case (_next[1] <> 255) of
+	true -> null
+	end case;
+	to _p13
+
+from _p13
+	_locked[1] := 0;
+	to _NCS
+
+
+process _P_2 (&_locked: array 3 of byte, &_tail: byte, &_next: array 3 of byte) is
+states _NCS, _p2, _p3, _p4, _p5, _p6, _CS, _p9, _p13, _p10
+var 
+	_pred: byte 
+init to _NCS
+
+from _NCS
+	_next[2] := 255;
+	to _p2
+
+from _p2
+	_pred := _tail;
+	_tail := 2;
+	to _p3
+
+from _p3
+	case (_pred = 255) of
+	true -> null
+	end case;
+	to _CS
+
+from _p3
+	case (_pred <> 255) of
+	true -> null
+	end case;
+	to _p4
+
+from _p4
+	_locked[2] := 1;
+	to _p5
+
+from _p5
+	_next[_pred] := 2;
+	to _p6
+
+from _p6
+	case (_locked[2] = 0) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	case (_next[2] = 255) of
+	true -> null
+	end case;
+	to _p9
+
+from _CS
+	case (_next[2] <> 255) of
+	true -> null
+	end case;
+	to _p13
+
+from _p9
+	case (_tail = 2) of
+	true -> null
+	end case;
+	_tail := 255;
+	to _NCS
+
+from _p9
+	case (_tail <> 2) of
+	true -> null
+	end case;
+	to _p10
+
+from _p10
+	case (_next[2] <> 255) of
+	true -> null
+	end case;
+	to _p13
+
+from _p13
+	_locked[2] := 0;
+	to _NCS
+
+
+component sys is
+var 
+	
+	_next: array 3 of byte := [255, 255, 255], 
+	
+	_locked: array 3 of byte, 
+	
+	_tail: byte := 255
+
+par 
+	_P_0(&_locked, &_tail, &_next) 
+	 || _P_1(&_locked, &_tail, &_next) 
+	 || _P_2(&_locked, &_tail, &_next) 
+end par
+
+
+sys

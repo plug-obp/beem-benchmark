@@ -1,0 +1,336 @@
+type byte is 0..255
+
+process _Plate_0 [_new_plate: out none, _plt_belt_0: out none, _plt_press_0: out none, _plt_table_0: out none, _plt_deposit_0: out none] (&_done: byte) is
+states _new, _wait_belt, _wait_table, _wait_press, _wait_deposit
+
+init to _new
+
+from _new
+	_new_plate! 0;
+	to _wait_belt
+
+from _wait_belt
+	_plt_belt_0;
+	to _wait_table
+
+from _wait_table
+	_plt_table_0;
+	to _wait_press
+
+from _wait_press
+	_plt_press_0;
+	to _wait_deposit
+
+from _wait_deposit
+	case (_done < 5) of
+	true -> null
+	end case;
+	_plt_deposit_0;
+	_done := (_done + 1);
+	to _new
+
+
+process _Plate_1 [_new_plate: out none, _plt_table_1: out none, _plt_deposit_1: out none, _plt_belt_1: out none, _plt_press_1: out none] (&_done: byte) is
+states _new, _wait_belt, _wait_table, _wait_press, _wait_deposit
+
+init to _new
+
+from _new
+	_new_plate! 1;
+	to _wait_belt
+
+from _wait_belt
+	_plt_belt_1;
+	to _wait_table
+
+from _wait_table
+	_plt_table_1;
+	to _wait_press
+
+from _wait_press
+	_plt_press_1;
+	to _wait_deposit
+
+from _wait_deposit
+	case (_done < 5) of
+	true -> null
+	end case;
+	_plt_deposit_1;
+	_done := (_done + 1);
+	to _new
+
+
+process _Belt [_new_plate: in none, _plt_belt_0: in none, _plt_belt_1: in none, _put_table: out none, _sen: out none] is
+states _wait, _got_new, _q1, _q2
+var 
+	_k: byte 
+init to _wait
+
+from _wait
+	_new_plate? _k;
+	to _got_new
+
+from _got_new
+	_sen;
+	to _q1
+
+from _q1
+	case (_k = 0) of
+	true -> null
+	end case;
+	_plt_belt_0;
+	to _q2
+
+from _q1
+	case (_k = 1) of
+	true -> null
+	end case;
+	_plt_belt_1;
+	to _q2
+
+from _q2
+	_put_table! _k;
+	to _wait
+
+
+process _Sensor [_sen: in none, _read: out none] is
+states _q
+var 
+	_count: byte := 0 
+init to _q
+
+from _q
+	_sen;
+	_count := (_count + 1);
+	to _q
+
+from _q
+	case (_count > 0) of
+	true -> null
+	end case;
+	_read;
+	_count := (_count - 1);
+	to _q
+
+
+process _Table [_put_table: in none, _plt_table_1: in none, _plt_table_0: in none, _get_table: out none] is
+states _down_empty, _down_full, _up_empty, _up_full
+var 
+	_k: byte 
+init to _down_empty
+
+from _down_empty
+	_put_table? _k;
+	to _down_full
+
+from _down_full
+	case (_k = 0) of
+	true -> null
+	end case;
+	_plt_table_0;
+	to _up_full
+
+from _down_full
+	case (_k = 1) of
+	true -> null
+	end case;
+	_plt_table_1;
+	to _up_full
+
+from _up_full
+	_get_table! _k;
+	to _up_empty
+
+from _up_empty
+	to _down_empty
+
+
+process _Press [_put_press: in none, _plt_press_0: in none, _plt_press_1: in none, _get_press: out none] is
+states _wait, _pressing, _done
+var 
+	_k: byte 
+init to _wait
+
+from _wait
+	_put_press? _k;
+	to _pressing
+
+from _pressing
+	case (_k = 0) of
+	true -> null
+	end case;
+	_plt_press_0;
+	to _done
+
+from _pressing
+	case (_k = 1) of
+	true -> null
+	end case;
+	_plt_press_1;
+	to _done
+
+from _done
+	_get_press! _k;
+	to _wait
+
+
+process _Deposit [_plt_deposit_1: in none, _put_deposit: in none, _plt_deposit_0: in none] is
+states _wait, _loaded
+var 
+	_k: byte 
+init to _wait
+
+from _loaded
+	case (_k = 0) of
+	true -> null
+	end case;
+	_plt_deposit_0;
+	to _wait
+
+from _loaded
+	case (_k = 1) of
+	true -> null
+	end case;
+	_plt_deposit_1;
+	to _wait
+
+from _wait
+	_put_deposit? _k;
+	to _loaded
+
+
+process _Robot [_get_table: in none, _read: in none, _get_press: in none, _put_press: out none, _put_deposit: out none] is
+states _Atable, _Bpress, _wait, _Apress, _Bdeposit
+var 
+	_at_press: byte := 0, 
+	_at_table: byte := 0, 
+	_A: byte := 255, 
+	_B: byte := 255 
+init to _wait
+
+from _Atable
+	case ((_at_table = 1) and (_A = 255)) of
+	true -> null
+	end case;
+	_get_table? _A;
+	_at_table := 0;
+	to _Atable
+
+from _Atable
+	case (_A <> 255) of
+	true -> null
+	end case;
+	to _Bpress
+
+from _Bpress
+	case ((_B = 255) and (_at_press = 1)) of
+	true -> null
+	end case;
+	_get_press? _B;
+	_at_press := 0;
+	to _Bpress
+
+from _Bpress
+	case ((_A = 255) and (_at_table = 1)) of
+	true -> null
+	end case;
+	to _Atable
+
+from _Bpress
+	case (((_A <> 255) and (_at_press = 0)) or ((_B <> 255) and ((_A <> 255) or (_at_table = 0)))) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	case (((_B = 255) and (_at_press = 1)) or ((_A = 255) and (_at_table = 1))) of
+	true -> null
+	end case;
+	to _Bpress
+
+from _wait
+	case (_at_table = 0) of
+	true -> null
+	end case;
+	_read;
+	_at_table := 1;
+	to _wait
+
+from _wait
+	case (((_A <> 255) and (_at_press = 0)) or (_B <> 255)) of
+	true -> null
+	end case;
+	to _Apress
+
+from _Apress
+	case ((_A <> 255) and (_at_press = 0)) of
+	true -> null
+	end case;
+	_put_press! _A;
+	_A := 255;
+	_at_press := 1;
+	to _Apress
+
+from _Apress
+	case (_B <> 255) of
+	true -> null
+	end case;
+	to _Bdeposit
+
+from _Apress
+	case (((_A = 255) or (_at_press = 1)) and (_B = 255)) of
+	true -> null
+	end case;
+	to _wait
+
+from _Bdeposit
+	case (_B <> 255) of
+	true -> null
+	end case;
+	_put_deposit! _B;
+	_B := 255;
+	to _Bdeposit
+
+from _Bdeposit
+	case (_B = 255) of
+	true -> null
+	end case;
+	to _Apress
+
+
+component sys is
+var 
+	
+	_done: byte := 0
+
+port 
+	_plt_belt_0: none, 
+	_plt_table_0: none, 
+	_plt_press_0: none, 
+	_plt_deposit_0: none, 
+	_plt_belt_1: none, 
+	_plt_table_1: none, 
+	_plt_press_1: none, 
+	_plt_deposit_1: none, 
+	_new_plate: none, 
+	_sen: none, 
+	_read: none, 
+	_put_table: none, 
+	_get_table: none, 
+	_put_press: none, 
+	_get_press: none, 
+	_put_deposit: none
+
+par 
+	_Plate_0[_new_plate, _plt_belt_0, _plt_press_0, _plt_table_0, _plt_deposit_0] (&_done) 
+	 || _Plate_1[_new_plate, _plt_table_1, _plt_deposit_1, _plt_belt_1, _plt_press_1] (&_done) 
+	 || _Belt[_new_plate, _plt_belt_0, _plt_belt_1, _put_table, _sen] 
+	 || _Sensor[_sen, _read] 
+	 || _Table[_put_table, _plt_table_1, _plt_table_0, _get_table] 
+	 || _Press[_put_press, _plt_press_0, _plt_press_1, _get_press] 
+	 || _Deposit[_plt_deposit_1, _put_deposit, _plt_deposit_0] 
+	 || _Robot[_get_table, _read, _get_press, _put_press, _put_deposit] 
+end par
+
+
+sys

@@ -1,0 +1,697 @@
+type byte is 0..255
+
+process _Node_0 [_ch_0_out: in none, _ch_2_in: out none, _ch_0_in: out none, _ch_1_in: out none] (&_leaders_num: byte) is
+states _start, _wait, _got_msg, _ldr_msg, _ldr_to_all, _l2, _tok_msg, _reinicialize, _same, _all, _become_leader, _leader, _lost
+var 
+	_caw: byte := 0, 
+	_rec: byte := 0, 
+	_father: byte := 255, 
+	_lrec: byte := 0, 
+	_win: byte := 255, 
+	_j: byte := 0, 
+	_m: byte 
+init to _start
+
+from _start
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((0 + (0 * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _start
+
+from _start
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	_ch_0_out? _m;
+	to _got_msg
+
+from _got_msg
+	case ((_m / (10 * 10)) = 1) of
+	true -> null
+	end case;
+	to _ldr_msg
+
+from _got_msg
+	case ((_m / (10 * 10)) = 0) of
+	true -> null
+	end case;
+	to _tok_msg
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) < _caw) of
+	true -> null
+	end case;
+	_caw := ((_m % (10 * 10)) / 10);
+	_rec := 0;
+	_father := (_m % 10);
+	_j := 0;
+	to _reinicialize
+
+from _reinicialize
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((0 + (_caw * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _reinicialize
+
+from _reinicialize
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) = _caw) of
+	true -> null
+	end case;
+	_rec := (_rec + 1);
+	to _same
+
+from _same
+	case (_rec < 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _same
+	case (_rec = 1) of
+	true -> null
+	end case;
+	to _all
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) > _caw) of
+	true -> null
+	end case;
+	to _wait
+
+from _all
+	case ((_caw <> 0) and (_father = 0)) of
+	true -> null
+	end case;
+	_ch_0_in! ((0 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case ((_caw <> 0) and (_father = 1)) of
+	true -> null
+	end case;
+	_ch_1_in! ((0 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case ((_caw <> 0) and (_father = 2)) of
+	true -> null
+	end case;
+	_ch_2_in! ((0 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case (_caw = 0) of
+	true -> null
+	end case;
+	_j := 0;
+	to _become_leader
+
+from _become_leader
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((0 + (0 * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _become_leader
+
+from _become_leader
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _ldr_msg
+	case (_lrec = 0) of
+	true -> null
+	end case;
+	_j := 0;
+	to _ldr_to_all
+
+from _ldr_to_all
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((0 + (((_m % (10 * 10)) / 10) * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _ldr_to_all
+
+from _ldr_to_all
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _l2
+
+from _ldr_msg
+	case (_lrec > 0) of
+	true -> null
+	end case;
+	to _l2
+
+from _l2
+	_lrec := (_lrec + 1);
+	_win := ((_m % (10 * 10)) / 10);
+	to _wait
+
+from _wait
+	case ((_lrec = 1) and (_win = 0)) of
+	true -> null
+	end case;
+	_leaders_num := (_leaders_num + 1);
+	to _leader
+
+from _wait
+	case ((_lrec = 1) and (_win <> 0)) of
+	true -> null
+	end case;
+	to _lost
+
+
+process _Node_1 [_ch_1_out: in none, _ch_2_in: out none, _ch_0_in: out none, _ch_1_in: out none] (&_leaders_num: byte) is
+states _start, _wait, _got_msg, _ldr_msg, _ldr_to_all, _l2, _tok_msg, _reinicialize, _same, _all, _become_leader, _leader, _lost
+var 
+	_caw: byte := 1, 
+	_rec: byte := 0, 
+	_father: byte := 255, 
+	_lrec: byte := 0, 
+	_win: byte := 255, 
+	_j: byte := 0, 
+	_m: byte 
+init to _start
+
+from _start
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_0_in! ((1 + (1 * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _start
+
+from _start
+	case (_j = 1) of
+	true -> null
+	end case;
+	_ch_2_in! ((1 + (1 * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _start
+
+from _start
+	case (_j = 2) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	_ch_1_out? _m;
+	to _got_msg
+
+from _got_msg
+	case ((_m / (10 * 10)) = 1) of
+	true -> null
+	end case;
+	to _ldr_msg
+
+from _got_msg
+	case ((_m / (10 * 10)) = 0) of
+	true -> null
+	end case;
+	to _tok_msg
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) < _caw) of
+	true -> null
+	end case;
+	_caw := ((_m % (10 * 10)) / 10);
+	_rec := 0;
+	_father := (_m % 10);
+	_j := 0;
+	to _reinicialize
+
+from _reinicialize
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_0_in! ((1 + (_caw * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _reinicialize
+
+from _reinicialize
+	case (_j = 1) of
+	true -> null
+	end case;
+	_ch_2_in! ((1 + (_caw * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _reinicialize
+
+from _reinicialize
+	case (_j = 2) of
+	true -> null
+	end case;
+	to _wait
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) = _caw) of
+	true -> null
+	end case;
+	_rec := (_rec + 1);
+	to _same
+
+from _same
+	case (_rec < 2) of
+	true -> null
+	end case;
+	to _wait
+
+from _same
+	case (_rec = 2) of
+	true -> null
+	end case;
+	to _all
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) > _caw) of
+	true -> null
+	end case;
+	to _wait
+
+from _all
+	case ((_caw <> 1) and (_father = 0)) of
+	true -> null
+	end case;
+	_ch_0_in! ((1 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case ((_caw <> 1) and (_father = 1)) of
+	true -> null
+	end case;
+	_ch_1_in! ((1 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case ((_caw <> 1) and (_father = 2)) of
+	true -> null
+	end case;
+	_ch_2_in! ((1 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case (_caw = 1) of
+	true -> null
+	end case;
+	_j := 0;
+	to _become_leader
+
+from _become_leader
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_0_in! ((1 + (1 * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _become_leader
+
+from _become_leader
+	case (_j = 1) of
+	true -> null
+	end case;
+	_ch_2_in! ((1 + (1 * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _become_leader
+
+from _become_leader
+	case (_j = 2) of
+	true -> null
+	end case;
+	to _wait
+
+from _ldr_msg
+	case (_lrec = 0) of
+	true -> null
+	end case;
+	_j := 0;
+	to _ldr_to_all
+
+from _ldr_to_all
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_0_in! ((1 + (((_m % (10 * 10)) / 10) * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _ldr_to_all
+
+from _ldr_to_all
+	case (_j = 1) of
+	true -> null
+	end case;
+	_ch_2_in! ((1 + (((_m % (10 * 10)) / 10) * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _ldr_to_all
+
+from _ldr_to_all
+	case (_j = 2) of
+	true -> null
+	end case;
+	to _l2
+
+from _ldr_msg
+	case (_lrec > 0) of
+	true -> null
+	end case;
+	to _l2
+
+from _l2
+	_lrec := (_lrec + 1);
+	_win := ((_m % (10 * 10)) / 10);
+	to _wait
+
+from _wait
+	case ((_lrec = 2) and (_win = 1)) of
+	true -> null
+	end case;
+	_leaders_num := (_leaders_num + 1);
+	to _leader
+
+from _wait
+	case ((_lrec = 2) and (_win <> 1)) of
+	true -> null
+	end case;
+	to _lost
+
+
+process _Node_2 [_ch_2_out: in none, _ch_2_in: out none, _ch_0_in: out none, _ch_1_in: out none] (&_leaders_num: byte) is
+states _start, _wait, _got_msg, _ldr_msg, _ldr_to_all, _l2, _tok_msg, _reinicialize, _same, _all, _become_leader, _leader, _lost
+var 
+	_caw: byte := 2, 
+	_rec: byte := 0, 
+	_father: byte := 255, 
+	_lrec: byte := 0, 
+	_win: byte := 255, 
+	_j: byte := 0, 
+	_m: byte 
+init to _start
+
+from _start
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((2 + (2 * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _start
+
+from _start
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	_ch_2_out? _m;
+	to _got_msg
+
+from _got_msg
+	case ((_m / (10 * 10)) = 1) of
+	true -> null
+	end case;
+	to _ldr_msg
+
+from _got_msg
+	case ((_m / (10 * 10)) = 0) of
+	true -> null
+	end case;
+	to _tok_msg
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) < _caw) of
+	true -> null
+	end case;
+	_caw := ((_m % (10 * 10)) / 10);
+	_rec := 0;
+	_father := (_m % 10);
+	_j := 0;
+	to _reinicialize
+
+from _reinicialize
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((2 + (_caw * 10)) + ((0 * 10) * 10));
+	_j := (_j + 1);
+	to _reinicialize
+
+from _reinicialize
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) = _caw) of
+	true -> null
+	end case;
+	_rec := (_rec + 1);
+	to _same
+
+from _same
+	case (_rec < 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _same
+	case (_rec = 1) of
+	true -> null
+	end case;
+	to _all
+
+from _tok_msg
+	case (((_m % (10 * 10)) / 10) > _caw) of
+	true -> null
+	end case;
+	to _wait
+
+from _all
+	case ((_caw <> 2) and (_father = 0)) of
+	true -> null
+	end case;
+	_ch_0_in! ((2 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case ((_caw <> 2) and (_father = 1)) of
+	true -> null
+	end case;
+	_ch_1_in! ((2 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case ((_caw <> 2) and (_father = 2)) of
+	true -> null
+	end case;
+	_ch_2_in! ((2 + (_caw * 10)) + ((0 * 10) * 10));
+	to _wait
+
+from _all
+	case (_caw = 2) of
+	true -> null
+	end case;
+	_j := 0;
+	to _become_leader
+
+from _become_leader
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((2 + (2 * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _become_leader
+
+from _become_leader
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _wait
+
+from _ldr_msg
+	case (_lrec = 0) of
+	true -> null
+	end case;
+	_j := 0;
+	to _ldr_to_all
+
+from _ldr_to_all
+	case (_j = 0) of
+	true -> null
+	end case;
+	_ch_1_in! ((2 + (((_m % (10 * 10)) / 10) * 10)) + ((1 * 10) * 10));
+	_j := (_j + 1);
+	to _ldr_to_all
+
+from _ldr_to_all
+	case (_j = 1) of
+	true -> null
+	end case;
+	to _l2
+
+from _ldr_msg
+	case (_lrec > 0) of
+	true -> null
+	end case;
+	to _l2
+
+from _l2
+	_lrec := (_lrec + 1);
+	_win := ((_m % (10 * 10)) / 10);
+	to _wait
+
+from _wait
+	case ((_lrec = 1) and (_win = 2)) of
+	true -> null
+	end case;
+	_leaders_num := (_leaders_num + 1);
+	to _leader
+
+from _wait
+	case ((_lrec = 1) and (_win <> 2)) of
+	true -> null
+	end case;
+	to _lost
+
+
+process _channel_ch_0 [_ch_0_in: in none, _ch_0_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_0_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_0_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+process _channel_ch_1 [_ch_1_in: in none, _ch_1_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_1_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_1_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+process _channel_ch_2 [_ch_2_in: in none, _ch_2_out: out none] is
+states _q
+var 
+	_buf: array 10 of byte, 
+	_buf_act: byte := 0 
+init to _q
+
+from _q
+	case (not (_buf_act = 10)) of
+	true -> null
+	end case;
+	_ch_2_in? _buf[_buf_act];
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 0)) of
+	true -> null
+	end case;
+	_ch_2_out! _buf[0];
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := _buf[3];
+	_buf[3] := _buf[4];
+	_buf[4] := _buf[5];
+	_buf[5] := _buf[6];
+	_buf[6] := _buf[7];
+	_buf[7] := _buf[8];
+	_buf[8] := _buf[9];
+	_buf[9] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+component sys is
+var 
+	
+	_leaders_num: byte := 0
+
+port 
+	_ch_0_in: none, 
+	_ch_0_out: none, 
+	_ch_1_in: none, 
+	_ch_1_out: none, 
+	_ch_2_in: none, 
+	_ch_2_out: none
+
+par 
+	_Node_0[_ch_0_out, _ch_2_in, _ch_0_in, _ch_1_in] (&_leaders_num) 
+	 || _Node_1[_ch_1_out, _ch_2_in, _ch_0_in, _ch_1_in] (&_leaders_num) 
+	 || _Node_2[_ch_2_out, _ch_2_in, _ch_0_in, _ch_1_in] (&_leaders_num) 
+	 || _channel_ch_0[_ch_0_in, _ch_0_out] 
+	 || _channel_ch_1[_ch_1_in, _ch_1_out] 
+	 || _channel_ch_2[_ch_2_in, _ch_2_out] 
+end par
+
+
+sys

@@ -1,0 +1,436 @@
+type byte is 0..255
+
+process _User_0 (&_chan: array 2 of byte, &_partner: array 2 of byte, &_record: array 2 of byte, &_call_forward_busy: read array 2 of byte) is
+states _idle, _dialing, _calling, _busy, _q_i, _talert, _unobtainable, _oalert, _error_state, _oconnected, _oringout, _tpickup, _tconnected, _ringback
+var 
+	_dev: byte := 1, 
+	_mbit: byte 
+init to _idle
+
+from _idle
+	case (_chan[0] = 255) of
+	true -> null
+	end case;
+	_dev := 0;
+	_chan[0] := (0 + (0 * 20));
+	to _dialing
+
+from _idle
+	case (_chan[0] <> 255) of
+	true -> null
+	end case;
+	_partner[0] := (_chan[0] % 20);
+	to _q_i
+
+from _q_i
+	case ((_chan[_partner[0]] % 20) = 0) of
+	true -> null
+	end case;
+	to _talert
+
+from _q_i
+	case ((_chan[_partner[0]] % 20) <> 0) of
+	true -> null
+	end case;
+	_partner[0] := 255;
+	to _idle
+
+from _dialing
+	_dev := 1;
+	_chan[0] := 255;
+	to _idle
+
+from _dialing
+	_partner[0] := 0;
+	to _calling
+
+from _dialing
+	_partner[0] := 1;
+	to _calling
+
+from _dialing
+	_partner[0] := 2;
+	to _calling
+
+from _calling
+	case (_partner[0] = 0) of
+	true -> null
+	end case;
+	to _busy
+
+from _calling
+	case (_partner[0] = 2) of
+	true -> null
+	end case;
+	to _unobtainable
+
+from _calling
+	case (_partner[0] = 2) of
+	true -> null
+	end case;
+	to _ringback
+
+from _calling
+	case ((((_partner[0] <> 0) and (_partner[0] <> 2)) and (_chan[_partner[0]] <> 255)) and (_call_forward_busy[_partner[0]] = 255)) of
+	true -> null
+	end case;
+	_record[_partner[0]] := 0;
+	to _busy
+
+from _calling
+	case ((((_partner[0] <> 0) and (_partner[0] <> 2)) and (_chan[_partner[0]] <> 255)) and (_call_forward_busy[_partner[0]] <> 255)) of
+	true -> null
+	end case;
+	_record[_partner[0]] := 0;
+	_partner[0] := _call_forward_busy[_partner[0]];
+	to _calling
+
+from _calling
+	case (((_partner[0] <> 0) and (_partner[0] <> 2)) and (_chan[_partner[0]] = 255)) of
+	true -> null
+	end case;
+	_record[_partner[0]] := 0;
+	_chan[_partner[0]] := (0 + (0 * 20));
+	_chan[0] := (_partner[0] + (0 * 20));
+	to _oalert
+
+from _busy
+	_chan[0] := 255;
+	_partner[0] := 255;
+	_dev := 1;
+	to _idle
+
+from _oalert
+	case ((_chan[0] % 20) <> _partner[0]) of
+	true -> null
+	end case;
+	to _error_state
+
+from _oalert
+	case (((_chan[0] % 20) = _partner[0]) and ((_chan[0] / 20) = 1)) of
+	true -> null
+	end case;
+	to _oconnected
+
+from _oalert
+	case (((_chan[0] % 20) = _partner[0]) and ((_chan[0] / 20) = 0)) of
+	true -> null
+	end case;
+	to _oringout
+
+from _oconnected
+	_dev := 1;
+	_chan[0] := 255;
+	_chan[_partner[0]] := 255;
+	to _idle
+
+from _oringout
+	_dev := 1;
+	_chan[0] := 255;
+	_partner[0] := ((_partner[0] % 20) + (0 * 20));
+	to _idle
+
+from _unobtainable
+	_chan[0] := 255;
+	_partner[0] := 255;
+	_dev := 1;
+	to _idle
+
+from _ringback
+	_chan[0] := 255;
+	_partner[0] := 255;
+	_dev := 1;
+	to _idle
+
+from _ringback
+	case (_record[0] <> 255) of
+	true -> null
+	end case;
+	_partner[0] := _record[0];
+	to _calling
+
+from _talert
+	case ((_dev <> 1) or (_chan[0] = 255)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _talert
+	case ((_chan[_partner[0]] % 20) = 0) of
+	true -> null
+	end case;
+	to _tpickup
+
+from _talert
+	case ((_chan[_partner[0]] % 20) <> 0) of
+	true -> null
+	end case;
+	to _idle
+
+from _tpickup
+	case (((_chan[_partner[0]] % 20) = 0) and ((_chan[_partner[0]] / 20) = 0)) of
+	true -> null
+	end case;
+	_dev := 0;
+	_chan[_partner[0]] := (0 + (1 * 20));
+	_chan[0] := (_partner[0] + (1 * 20));
+	to _tconnected
+
+from _tpickup
+	case ((_chan[_partner[0]] = 255) or ((_chan[_partner[0]] % 20) <> 0)) of
+	true -> null
+	end case;
+	_dev := 1;
+	_partner[0] := 255;
+	_chan[0] := 255;
+	to _idle
+
+from _tconnected
+	case (((_chan[0] / 20) = 1) and (_dev = 0)) of
+	true -> null
+	end case;
+	_dev := 1;
+	to _tconnected
+
+from _tconnected
+	case (((_chan[0] / 20) = 1) and (_dev = 1)) of
+	true -> null
+	end case;
+	_dev := 0;
+	to _tconnected
+
+from _tconnected
+	case ((_chan[0] / 20) = 0) of
+	true -> null
+	end case;
+	_partner[0] := 255;
+	_chan[0] := 255;
+	to _idle
+
+
+process _User_1 (&_chan: array 2 of byte, &_partner: array 2 of byte, &_record: array 2 of byte, &_call_forward_busy: read array 2 of byte) is
+states _idle, _dialing, _calling, _busy, _q_i, _talert, _unobtainable, _oalert, _error_state, _oconnected, _oringout, _tpickup, _tconnected, _ringback
+var 
+	_dev: byte := 1, 
+	_mbit: byte 
+init to _idle
+
+from _idle
+	case (_chan[1] = 255) of
+	true -> null
+	end case;
+	_dev := 0;
+	_chan[1] := (1 + (0 * 20));
+	to _dialing
+
+from _idle
+	case (_chan[1] <> 255) of
+	true -> null
+	end case;
+	_partner[1] := (_chan[1] % 20);
+	to _q_i
+
+from _q_i
+	case ((_chan[_partner[1]] % 20) = 1) of
+	true -> null
+	end case;
+	to _talert
+
+from _q_i
+	case ((_chan[_partner[1]] % 20) <> 1) of
+	true -> null
+	end case;
+	_partner[1] := 255;
+	to _idle
+
+from _dialing
+	_dev := 1;
+	_chan[1] := 255;
+	to _idle
+
+from _dialing
+	_partner[1] := 0;
+	to _calling
+
+from _dialing
+	_partner[1] := 1;
+	to _calling
+
+from _dialing
+	_partner[1] := 2;
+	to _calling
+
+from _calling
+	case (_partner[1] = 1) of
+	true -> null
+	end case;
+	to _busy
+
+from _calling
+	case (_partner[1] = 2) of
+	true -> null
+	end case;
+	to _unobtainable
+
+from _calling
+	case (_partner[1] = 2) of
+	true -> null
+	end case;
+	to _ringback
+
+from _calling
+	case ((((_partner[1] <> 1) and (_partner[1] <> 2)) and (_chan[_partner[1]] <> 255)) and (_call_forward_busy[_partner[1]] = 255)) of
+	true -> null
+	end case;
+	_record[_partner[1]] := 1;
+	to _busy
+
+from _calling
+	case ((((_partner[1] <> 1) and (_partner[1] <> 2)) and (_chan[_partner[1]] <> 255)) and (_call_forward_busy[_partner[1]] <> 255)) of
+	true -> null
+	end case;
+	_record[_partner[1]] := 1;
+	_partner[1] := _call_forward_busy[_partner[1]];
+	to _calling
+
+from _calling
+	case (((_partner[1] <> 1) and (_partner[1] <> 2)) and (_chan[_partner[1]] = 255)) of
+	true -> null
+	end case;
+	_record[_partner[1]] := 1;
+	_chan[_partner[1]] := (1 + (0 * 20));
+	_chan[1] := (_partner[1] + (0 * 20));
+	to _oalert
+
+from _busy
+	_chan[1] := 255;
+	_partner[1] := 255;
+	_dev := 1;
+	to _idle
+
+from _oalert
+	case ((_chan[1] % 20) <> _partner[1]) of
+	true -> null
+	end case;
+	to _error_state
+
+from _oalert
+	case (((_chan[1] % 20) = _partner[1]) and ((_chan[1] / 20) = 1)) of
+	true -> null
+	end case;
+	to _oconnected
+
+from _oalert
+	case (((_chan[1] % 20) = _partner[1]) and ((_chan[1] / 20) = 0)) of
+	true -> null
+	end case;
+	to _oringout
+
+from _oconnected
+	_dev := 1;
+	_chan[1] := 255;
+	_chan[_partner[1]] := 255;
+	to _idle
+
+from _oringout
+	_dev := 1;
+	_chan[1] := 255;
+	_partner[1] := ((_partner[1] % 20) + (0 * 20));
+	to _idle
+
+from _unobtainable
+	_chan[1] := 255;
+	_partner[1] := 255;
+	_dev := 1;
+	to _idle
+
+from _ringback
+	_chan[1] := 255;
+	_partner[1] := 255;
+	_dev := 1;
+	to _idle
+
+from _ringback
+	case (_record[1] <> 255) of
+	true -> null
+	end case;
+	_partner[1] := _record[1];
+	to _calling
+
+from _talert
+	case ((_dev <> 1) or (_chan[1] = 255)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _talert
+	case ((_chan[_partner[1]] % 20) = 1) of
+	true -> null
+	end case;
+	to _tpickup
+
+from _talert
+	case ((_chan[_partner[1]] % 20) <> 1) of
+	true -> null
+	end case;
+	to _idle
+
+from _tpickup
+	case (((_chan[_partner[1]] % 20) = 1) and ((_chan[_partner[1]] / 20) = 0)) of
+	true -> null
+	end case;
+	_dev := 0;
+	_chan[_partner[1]] := (1 + (1 * 20));
+	_chan[1] := (_partner[1] + (1 * 20));
+	to _tconnected
+
+from _tpickup
+	case ((_chan[_partner[1]] = 255) or ((_chan[_partner[1]] % 20) <> 1)) of
+	true -> null
+	end case;
+	_dev := 1;
+	_partner[1] := 255;
+	_chan[1] := 255;
+	to _idle
+
+from _tconnected
+	case (((_chan[1] / 20) = 1) and (_dev = 0)) of
+	true -> null
+	end case;
+	_dev := 1;
+	to _tconnected
+
+from _tconnected
+	case (((_chan[1] / 20) = 1) and (_dev = 1)) of
+	true -> null
+	end case;
+	_dev := 0;
+	to _tconnected
+
+from _tconnected
+	case ((_chan[1] / 20) = 0) of
+	true -> null
+	end case;
+	_partner[1] := 255;
+	_chan[1] := 255;
+	to _idle
+
+
+component sys is
+var 
+	
+	_chan: array 2 of byte := [255, 255], 
+	
+	_partner: array 2 of byte := [255, 255], 
+	
+	_call_forward_busy: array 2 of byte := [1, 255], 
+	
+	_record: array 2 of byte := [255, 255]
+
+par 
+	_User_0(&_chan, &_partner, &_record, &_call_forward_busy) 
+	 || _User_1(&_chan, &_partner, &_record, &_call_forward_busy) 
+end par
+
+
+sys

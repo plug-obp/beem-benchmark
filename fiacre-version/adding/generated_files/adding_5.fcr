@@ -1,0 +1,60 @@
+type byte is 0..255
+
+process _a1 (&_x1: int, &_c: int) is
+states _Q, _R, _S
+
+init to _Q
+
+from _Q
+	case (_c < 500) of
+	true -> null
+	end case;
+	_x1 := _c;
+	to _R
+
+from _R
+	_x1 := (_x1 + _c);
+	to _S
+
+from _S
+	_c := _x1;
+	to _Q
+
+
+process _a2 (&_x2: int, &_c: int) is
+states _Q, _R, _S
+
+init to _Q
+
+from _Q
+	case (_c < 500) of
+	true -> null
+	end case;
+	_x2 := _c;
+	to _R
+
+from _R
+	_x2 := (_x2 + _c);
+	to _S
+
+from _S
+	_c := _x2;
+	to _Q
+
+
+component sys is
+var 
+	
+	_c: int := 1, 
+	
+	_x1: int, 
+	
+	_x2: int
+
+par 
+	_a1(&_x1, &_c) 
+	 || _a2(&_x2, &_c) 
+end par
+
+
+sys

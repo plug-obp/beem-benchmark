@@ -1,0 +1,270 @@
+type byte is 0..255
+
+process _Clock (&_x: byte, &_max_x_2: read byte, &_max_x_1: read byte) is
+states _S1
+
+init to _S1
+
+from _S1
+	case ((_x <= _max_x_2) and (_x <= _max_x_1)) of
+	true -> null
+	end case;
+	_x := (_x + 1);
+	to _S1
+
+
+process _Gate [_leave: in none, _appr: in none, _notempty: in none, _rem: in none, _is_empty: in none, _add: out none, _stop: out none, _hd: out none, _go: out none] is
+states _S1, _S2, _S3, _S4, _S5, _S6, _Occ, _Free, _Send
+
+init to _Free
+
+from _Free
+	_notempty;
+	to _S5
+
+from _Free
+	_is_empty;
+	to _S4
+
+from _Occ
+	_appr;
+	to _S6
+
+from _Occ
+	_leave;
+	to _S1
+
+from _S6
+	_stop;
+	to _S2
+
+from _Send
+	_go;
+	to _Occ
+
+from _S5
+	_hd;
+	to _Send
+
+from _S4
+	_appr;
+	to _S3
+
+from _S3
+	_add;
+	to _Occ
+
+from _S2
+	_add;
+	to _Occ
+
+from _S1
+	_rem;
+	to _Free
+
+
+process _IntQueue [_add: in none, _hd: in none, _notempty: out none, _rem: out none, _is_empty: out none] (&_e: array 3 of byte) is
+states _Start, _Shiftdown
+var 
+	_list: array 3 of byte, 
+	_len: byte, 
+	_i: byte 
+init to _Start
+
+from _Shiftdown
+	case (_i < _len) of
+	true -> null
+	end case;
+	_list[_i] := _list[(_i + 1)];
+	_i := (_i + 1);
+	to _Shiftdown
+
+from _Shiftdown
+	case (_len = _i) of
+	true -> null
+	end case;
+	_list[_i] := 0;
+	_i := 0;
+	to _Start
+
+from _Start
+	case (_len >= 1) of
+	true -> null
+	end case;
+	_rem;
+	_len := (_len - 1);
+	_i := 0;
+	to _Shiftdown
+
+from _Start
+	case (_len = 0) of
+	true -> null
+	end case;
+	_is_empty;
+	to _Start
+
+from _Start
+	_add;
+	_list[_len] := _e;
+	_len := (_len + 1);
+	to _Start
+
+from _Start
+	_hd;
+	_e := _list[0];
+	to _Start
+
+from _Start
+	case (_len > 0) of
+	true -> null
+	end case;
+	_notempty;
+	to _Start
+
+
+process _Train_1 [_stop: in none, _go: in none, _leave: out none, _appr: out none] (&_x: byte, &_e: array 3 of byte, &_max_x_1: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_1 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 1)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_1 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 1;
+	_x := 0;
+	_max_x_1 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 1;
+	_x := 0;
+	_max_x_1 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 5) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_1 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 1) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_1 := 15;
+	to _Start
+
+
+process _Train_2 [_stop: in none, _go: in none, _leave: out none, _appr: out none] (&_x: byte, &_e: array 3 of byte, &_max_x_2: write byte) is
+states _Safe, _Stop, _Cross, _Appr, _Start
+
+init to _Safe
+
+from _Appr
+	case (_x >= 10) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_2 := 5;
+	to _Cross
+
+from _Appr
+	case ((_x <= 10) and (_e = 2)) of
+	true -> null
+	end case;
+	_stop;
+	_x := 0;
+	_max_x_2 := 25;
+	to _Stop
+
+from _Cross
+	case (_x >= 3) of
+	true -> null
+	end case;
+	_leave;
+	_e := 2;
+	_x := 0;
+	_max_x_2 := 25;
+	to _Safe
+
+from _Safe
+	_appr;
+	_e := 2;
+	_x := 0;
+	_max_x_2 := 20;
+	to _Appr
+
+from _Start
+	case (_x >= 5) of
+	true -> null
+	end case;
+	_x := 0;
+	_max_x_2 := 5;
+	to _Cross
+
+from _Stop
+	case (_e = 2) of
+	true -> null
+	end case;
+	_go;
+	_x := 0;
+	_max_x_2 := 15;
+	to _Start
+
+
+component sys is
+var 
+	
+	_e: array 3 of byte, 
+	
+	_x: byte, 
+	
+	_max_x_1: byte, 
+	
+	_max_x_2: byte
+
+port 
+	_appr: none, 
+	_stop: none, 
+	_go: none, 
+	_leave: none, 
+	_is_empty: none, 
+	_notempty: none, 
+	_hd: none, 
+	_add: none, 
+	_rem: none
+
+par 
+	_Clock(&_x, &_max_x_2, &_max_x_1) 
+	 || _Gate[_leave, _appr, _notempty, _rem, _is_empty, _add, _stop, _hd, _go] 
+	 || _IntQueue[_add, _hd, _notempty, _rem, _is_empty] (&_e) 
+	 || _Train_1[_stop, _go, _leave, _appr] (&_x, &_e, &_max_x_1) 
+	 || _Train_2[_stop, _go, _leave, _appr] (&_x, &_e, &_max_x_2) 
+end par
+
+
+sys

@@ -1,0 +1,274 @@
+type byte is 0..255
+
+process _P_0 (&_x: byte, &_y: byte, &_b: array 3 of byte) is
+states _NCS, _CS, _q1, _q2, _q22, _p, _q3, _q4, _q5, _e1
+var 
+	_j: byte 
+init to _NCS
+
+from _NCS
+	_b[0] := 1;
+	to _q1
+
+from _q1
+	_x := 0;
+	to _q2
+
+from _q2
+	case (_y <> 255) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q22
+
+from _q22
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _NCS
+
+from _q2
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _p
+
+from _p
+	_y := 0;
+	to _q3
+
+from _q3
+	case (_x = 0) of
+	true -> null
+	end case;
+	to _CS
+
+from _q3
+	case (_x <> 0) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	_j := 0;
+	to _q4
+
+from _q4
+	case ((_j < 3) and (_b[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _q4
+
+from _q4
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _q5
+
+from _q5
+	case (_y = _x) of
+	true -> null
+	end case;
+	to _CS
+
+from _q5
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _NCS
+
+from _CS
+	_y := 255;
+	to _e1
+
+from _e1
+	_b[0] := 0;
+	to _NCS
+
+
+process _P_1 (&_x: byte, &_y: byte, &_b: array 3 of byte) is
+states _NCS, _CS, _q1, _q2, _q22, _p, _q3, _q4, _q5, _e1
+var 
+	_j: byte 
+init to _NCS
+
+from _NCS
+	_b[1] := 1;
+	to _q1
+
+from _q1
+	_x := 1;
+	to _q2
+
+from _q2
+	case (_y <> 255) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q22
+
+from _q22
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _NCS
+
+from _q2
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _p
+
+from _p
+	_y := 1;
+	to _q3
+
+from _q3
+	case (_x = 1) of
+	true -> null
+	end case;
+	to _CS
+
+from _q3
+	case (_x <> 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	_j := 0;
+	to _q4
+
+from _q4
+	case ((_j < 3) and (_b[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _q4
+
+from _q4
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _q5
+
+from _q5
+	case (_y = _x) of
+	true -> null
+	end case;
+	to _CS
+
+from _q5
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _NCS
+
+from _CS
+	_y := 255;
+	to _e1
+
+from _e1
+	_b[1] := 0;
+	to _NCS
+
+
+process _P_2 (&_x: byte, &_y: byte, &_b: array 3 of byte) is
+states _NCS, _CS, _q1, _q2, _q22, _p, _q3, _q4, _q5, _e1
+var 
+	_j: byte 
+init to _NCS
+
+from _NCS
+	_b[2] := 1;
+	to _q1
+
+from _q1
+	_x := 2;
+	to _q2
+
+from _q2
+	case (_y <> 255) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q22
+
+from _q22
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _NCS
+
+from _q2
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _p
+
+from _p
+	_y := 2;
+	to _q3
+
+from _q3
+	case (_x = 2) of
+	true -> null
+	end case;
+	to _CS
+
+from _q3
+	case (_x <> 2) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	_j := 0;
+	to _q4
+
+from _q4
+	case ((_j < 3) and (_b[_j] = 0)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _q4
+
+from _q4
+	case (_j = 3) of
+	true -> null
+	end case;
+	to _q5
+
+from _q5
+	case (_y = _x) of
+	true -> null
+	end case;
+	to _CS
+
+from _q5
+	case (_y = 255) of
+	true -> null
+	end case;
+	to _NCS
+
+from _CS
+	_y := 255;
+	to _e1
+
+from _e1
+	_b[2] := 0;
+	to _NCS
+
+
+component sys is
+var 
+	
+	_b: array 3 of byte, 
+	
+	_x: byte := 255, 
+	
+	_y: byte := 255
+
+par 
+	_P_0(&_x, &_y, &_b) 
+	 || _P_1(&_x, &_y, &_b) 
+	 || _P_2(&_x, &_y, &_b) 
+end par
+
+
+sys

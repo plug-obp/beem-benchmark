@@ -1,0 +1,260 @@
+type byte is 0..255
+
+process _P_0 (&_next: byte, &_Slot: array 6 of byte) is
+states _NCS, _p1, _p2, _p3, _CS
+var 
+	_my_place: byte 
+init to _NCS
+
+from _NCS
+	_my_place := _next;
+	_next := (_next + 1);
+	to _p1
+
+from _p1
+	case (_my_place = (6 - 1)) of
+	true -> null
+	end case;
+	_next := (_next - 6);
+	to _p2
+
+from _p1
+	case (_my_place <> (6 - 1)) of
+	true -> null
+	end case;
+	_my_place := (_my_place % 6);
+	to _p2
+
+from _p2
+	case (_Slot[_my_place] = 1) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_Slot[_my_place] := 0;
+	to _CS
+
+from _CS
+	_Slot[((_my_place + 1) % 6)] := 1;
+	to _NCS
+
+
+process _P_1 (&_next: byte, &_Slot: array 6 of byte) is
+states _NCS, _p1, _p2, _p3, _CS
+var 
+	_my_place: byte 
+init to _NCS
+
+from _NCS
+	_my_place := _next;
+	_next := (_next + 1);
+	to _p1
+
+from _p1
+	case (_my_place = (6 - 1)) of
+	true -> null
+	end case;
+	_next := (_next - 6);
+	to _p2
+
+from _p1
+	case (_my_place <> (6 - 1)) of
+	true -> null
+	end case;
+	_my_place := (_my_place % 6);
+	to _p2
+
+from _p2
+	case (_Slot[_my_place] = 1) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_Slot[_my_place] := 0;
+	to _CS
+
+from _CS
+	_Slot[((_my_place + 1) % 6)] := 1;
+	to _NCS
+
+
+process _P_2 (&_next: byte, &_Slot: array 6 of byte) is
+states _NCS, _p1, _p2, _p3, _CS
+var 
+	_my_place: byte 
+init to _NCS
+
+from _NCS
+	_my_place := _next;
+	_next := (_next + 1);
+	to _p1
+
+from _p1
+	case (_my_place = (6 - 1)) of
+	true -> null
+	end case;
+	_next := (_next - 6);
+	to _p2
+
+from _p1
+	case (_my_place <> (6 - 1)) of
+	true -> null
+	end case;
+	_my_place := (_my_place % 6);
+	to _p2
+
+from _p2
+	case (_Slot[_my_place] = 1) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_Slot[_my_place] := 0;
+	to _CS
+
+from _CS
+	_Slot[((_my_place + 1) % 6)] := 1;
+	to _NCS
+
+
+process _P_3 (&_next: byte, &_Slot: array 6 of byte) is
+states _NCS, _p1, _p2, _p3, _CS
+var 
+	_my_place: byte 
+init to _NCS
+
+from _NCS
+	_my_place := _next;
+	_next := (_next + 1);
+	to _p1
+
+from _p1
+	case (_my_place = (6 - 1)) of
+	true -> null
+	end case;
+	_next := (_next - 6);
+	to _p2
+
+from _p1
+	case (_my_place <> (6 - 1)) of
+	true -> null
+	end case;
+	_my_place := (_my_place % 6);
+	to _p2
+
+from _p2
+	case (_Slot[_my_place] = 1) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_Slot[_my_place] := 0;
+	to _CS
+
+from _CS
+	_Slot[((_my_place + 1) % 6)] := 1;
+	to _NCS
+
+
+process _P_4 (&_next: byte, &_Slot: array 6 of byte) is
+states _NCS, _p1, _p2, _p3, _CS
+var 
+	_my_place: byte 
+init to _NCS
+
+from _NCS
+	_my_place := _next;
+	_next := (_next + 1);
+	to _p1
+
+from _p1
+	case (_my_place = (6 - 1)) of
+	true -> null
+	end case;
+	_next := (_next - 6);
+	to _p2
+
+from _p1
+	case (_my_place <> (6 - 1)) of
+	true -> null
+	end case;
+	_my_place := (_my_place % 6);
+	to _p2
+
+from _p2
+	case (_Slot[_my_place] = 1) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_Slot[_my_place] := 0;
+	to _CS
+
+from _CS
+	_Slot[((_my_place + 1) % 6)] := 1;
+	to _NCS
+
+
+process _P_5 (&_next: byte, &_Slot: array 6 of byte) is
+states _NCS, _p1, _p2, _p3, _CS
+var 
+	_my_place: byte 
+init to _NCS
+
+from _NCS
+	_my_place := _next;
+	_next := (_next + 1);
+	to _p1
+
+from _p1
+	case (_my_place = (6 - 1)) of
+	true -> null
+	end case;
+	_next := (_next - 6);
+	to _p2
+
+from _p1
+	case (_my_place <> (6 - 1)) of
+	true -> null
+	end case;
+	_my_place := (_my_place % 6);
+	to _p2
+
+from _p2
+	case (_Slot[_my_place] = 1) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_Slot[_my_place] := 0;
+	to _CS
+
+from _CS
+	_Slot[((_my_place + 1) % 6)] := 1;
+	to _NCS
+
+
+component sys is
+var 
+	
+	_Slot: array 6 of byte := [1, 0, 0, 0, 0, 0, 0], 
+	
+	_next: byte := 0
+
+par 
+	_P_0(&_next, &_Slot) 
+	 || _P_1(&_next, &_Slot) 
+	 || _P_2(&_next, &_Slot) 
+	 || _P_3(&_next, &_Slot) 
+	 || _P_4(&_next, &_Slot) 
+	 || _P_5(&_next, &_Slot) 
+end par
+
+
+sys

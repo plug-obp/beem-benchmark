@@ -1,0 +1,324 @@
+type byte is 0..255
+
+process _P_0 (&_number: array 5 of byte, &_choosing: array 5 of byte) is
+states _NCS, _choose, _for_loop, _wait, _CS
+var 
+	_j: byte, 
+	_max: byte 
+init to _NCS
+
+from _NCS
+	_choosing[0] := 1;
+	_j := 0;
+	_max := 0;
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] > _max)) of
+	true -> null
+	end case;
+	_max := _number[_j];
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] <= _max)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j = 5) and (_max < 5)) of
+	true -> null
+	end case;
+	_number[0] := (_max + 1);
+	_j := 0;
+	_choosing[0] := 0;
+	to _for_loop
+
+from _for_loop
+	case ((_j < 5) and (_choosing[_j] = 0)) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	case (((_number[_j] = 0) or (_number[_j] > _number[0])) or ((_number[_j] = _number[0]) and (0 <= _j))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _for_loop
+
+from _for_loop
+	case (_j = 5) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_number[0] := 0;
+	to _NCS
+
+
+process _P_1 (&_number: array 5 of byte, &_choosing: array 5 of byte) is
+states _NCS, _choose, _for_loop, _wait, _CS
+var 
+	_j: byte, 
+	_max: byte 
+init to _NCS
+
+from _NCS
+	_choosing[1] := 1;
+	_j := 0;
+	_max := 0;
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] > _max)) of
+	true -> null
+	end case;
+	_max := _number[_j];
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] <= _max)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j = 5) and (_max < 5)) of
+	true -> null
+	end case;
+	_number[1] := (_max + 1);
+	_j := 0;
+	_choosing[1] := 0;
+	to _for_loop
+
+from _for_loop
+	case ((_j < 5) and (_choosing[_j] = 0)) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	case (((_number[_j] = 0) or (_number[_j] > _number[1])) or ((_number[_j] = _number[1]) and (1 <= _j))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _for_loop
+
+from _for_loop
+	case (_j = 5) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_number[1] := 0;
+	to _NCS
+
+
+process _P_2 (&_number: array 5 of byte, &_choosing: array 5 of byte) is
+states _NCS, _choose, _for_loop, _wait, _CS
+var 
+	_j: byte, 
+	_max: byte 
+init to _NCS
+
+from _NCS
+	_choosing[2] := 1;
+	_j := 0;
+	_max := 0;
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] > _max)) of
+	true -> null
+	end case;
+	_max := _number[_j];
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] <= _max)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j = 5) and (_max < 5)) of
+	true -> null
+	end case;
+	_number[2] := (_max + 1);
+	_j := 0;
+	_choosing[2] := 0;
+	to _for_loop
+
+from _for_loop
+	case ((_j < 5) and (_choosing[_j] = 0)) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	case (((_number[_j] = 0) or (_number[_j] > _number[2])) or ((_number[_j] = _number[2]) and (2 <= _j))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _for_loop
+
+from _for_loop
+	case (_j = 5) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_number[2] := 0;
+	to _NCS
+
+
+process _P_3 (&_number: array 5 of byte, &_choosing: array 5 of byte) is
+states _NCS, _choose, _for_loop, _wait, _CS
+var 
+	_j: byte, 
+	_max: byte 
+init to _NCS
+
+from _NCS
+	_choosing[3] := 1;
+	_j := 0;
+	_max := 0;
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] > _max)) of
+	true -> null
+	end case;
+	_max := _number[_j];
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] <= _max)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j = 5) and (_max < 5)) of
+	true -> null
+	end case;
+	_number[3] := (_max + 1);
+	_j := 0;
+	_choosing[3] := 0;
+	to _for_loop
+
+from _for_loop
+	case ((_j < 5) and (_choosing[_j] = 0)) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	case (((_number[_j] = 0) or (_number[_j] > _number[3])) or ((_number[_j] = _number[3]) and (3 <= _j))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _for_loop
+
+from _for_loop
+	case (_j = 5) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_number[3] := 0;
+	to _NCS
+
+
+process _P_4 (&_number: array 5 of byte, &_choosing: array 5 of byte) is
+states _NCS, _choose, _for_loop, _wait, _CS
+var 
+	_j: byte, 
+	_max: byte 
+init to _NCS
+
+from _NCS
+	_choosing[4] := 1;
+	_j := 0;
+	_max := 0;
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] > _max)) of
+	true -> null
+	end case;
+	_max := _number[_j];
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j < 5) and (_number[_j] <= _max)) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _choose
+
+from _choose
+	case ((_j = 5) and (_max < 5)) of
+	true -> null
+	end case;
+	_number[4] := (_max + 1);
+	_j := 0;
+	_choosing[4] := 0;
+	to _for_loop
+
+from _for_loop
+	case ((_j < 5) and (_choosing[_j] = 0)) of
+	true -> null
+	end case;
+	to _wait
+
+from _wait
+	case (((_number[_j] = 0) or (_number[_j] > _number[4])) or ((_number[_j] = _number[4]) and (4 <= _j))) of
+	true -> null
+	end case;
+	_j := (_j + 1);
+	to _for_loop
+
+from _for_loop
+	case (_j = 5) of
+	true -> null
+	end case;
+	to _CS
+
+from _CS
+	_number[4] := 0;
+	to _NCS
+
+
+component sys is
+var 
+	
+	_choosing: array 5 of byte, 
+	
+	_number: array 5 of byte
+
+par 
+	_P_0(&_number, &_choosing) 
+	 || _P_1(&_number, &_choosing) 
+	 || _P_2(&_number, &_choosing) 
+	 || _P_3(&_number, &_choosing) 
+	 || _P_4(&_number, &_choosing) 
+end par
+
+
+sys

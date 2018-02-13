@@ -1,0 +1,534 @@
+type byte is 0..255
+
+process _phil_0 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[0] = 0) of
+	true -> null
+	end case;
+	_fork[0] := 1;
+	to _one
+
+from _one
+	case (_fork[1] = 0) of
+	true -> null
+	end case;
+	_fork[1] := 1;
+	to _eat
+
+from _eat
+	_fork[0] := 0;
+	to _finish
+
+from _finish
+	_fork[1] := 0;
+	to _inside
+
+
+process _phil_1 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[1] = 0) of
+	true -> null
+	end case;
+	_fork[1] := 1;
+	to _one
+
+from _one
+	case (_fork[2] = 0) of
+	true -> null
+	end case;
+	_fork[2] := 1;
+	to _eat
+
+from _eat
+	_fork[1] := 0;
+	to _finish
+
+from _finish
+	_fork[2] := 0;
+	to _inside
+
+
+process _phil_2 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[2] = 0) of
+	true -> null
+	end case;
+	_fork[2] := 1;
+	to _one
+
+from _one
+	case (_fork[3] = 0) of
+	true -> null
+	end case;
+	_fork[3] := 1;
+	to _eat
+
+from _eat
+	_fork[2] := 0;
+	to _finish
+
+from _finish
+	_fork[3] := 0;
+	to _inside
+
+
+process _phil_3 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[3] = 0) of
+	true -> null
+	end case;
+	_fork[3] := 1;
+	to _one
+
+from _one
+	case (_fork[4] = 0) of
+	true -> null
+	end case;
+	_fork[4] := 1;
+	to _eat
+
+from _eat
+	_fork[3] := 0;
+	to _finish
+
+from _finish
+	_fork[4] := 0;
+	to _inside
+
+
+process _phil_4 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[4] = 0) of
+	true -> null
+	end case;
+	_fork[4] := 1;
+	to _one
+
+from _one
+	case (_fork[5] = 0) of
+	true -> null
+	end case;
+	_fork[5] := 1;
+	to _eat
+
+from _eat
+	_fork[4] := 0;
+	to _finish
+
+from _finish
+	_fork[5] := 0;
+	to _inside
+
+
+process _phil_5 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[5] = 0) of
+	true -> null
+	end case;
+	_fork[5] := 1;
+	to _one
+
+from _one
+	case (_fork[6] = 0) of
+	true -> null
+	end case;
+	_fork[6] := 1;
+	to _eat
+
+from _eat
+	_fork[5] := 0;
+	to _finish
+
+from _finish
+	_fork[6] := 0;
+	to _inside
+
+
+process _phil_6 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[6] = 0) of
+	true -> null
+	end case;
+	_fork[6] := 1;
+	to _one
+
+from _one
+	case (_fork[7] = 0) of
+	true -> null
+	end case;
+	_fork[7] := 1;
+	to _eat
+
+from _eat
+	_fork[6] := 0;
+	to _finish
+
+from _finish
+	_fork[7] := 0;
+	to _inside
+
+
+process _phil_7 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[7] = 0) of
+	true -> null
+	end case;
+	_fork[7] := 1;
+	to _one
+
+from _one
+	case (_fork[8] = 0) of
+	true -> null
+	end case;
+	_fork[8] := 1;
+	to _eat
+
+from _eat
+	_fork[7] := 0;
+	to _finish
+
+from _finish
+	_fork[8] := 0;
+	to _inside
+
+
+process _phil_8 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[8] = 0) of
+	true -> null
+	end case;
+	_fork[8] := 1;
+	to _one
+
+from _one
+	case (_fork[9] = 0) of
+	true -> null
+	end case;
+	_fork[9] := 1;
+	to _eat
+
+from _eat
+	_fork[8] := 0;
+	to _finish
+
+from _finish
+	_fork[9] := 0;
+	to _inside
+
+
+process _phil_9 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[9] = 0) of
+	true -> null
+	end case;
+	_fork[9] := 1;
+	to _one
+
+from _one
+	case (_fork[10] = 0) of
+	true -> null
+	end case;
+	_fork[10] := 1;
+	to _eat
+
+from _eat
+	_fork[9] := 0;
+	to _finish
+
+from _finish
+	_fork[10] := 0;
+	to _inside
+
+
+process _phil_10 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[10] = 0) of
+	true -> null
+	end case;
+	_fork[10] := 1;
+	to _one
+
+from _one
+	case (_fork[11] = 0) of
+	true -> null
+	end case;
+	_fork[11] := 1;
+	to _eat
+
+from _eat
+	_fork[10] := 0;
+	to _finish
+
+from _finish
+	_fork[11] := 0;
+	to _inside
+
+
+process _phil_11 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[11] = 0) of
+	true -> null
+	end case;
+	_fork[11] := 1;
+	to _one
+
+from _one
+	case (_fork[12] = 0) of
+	true -> null
+	end case;
+	_fork[12] := 1;
+	to _eat
+
+from _eat
+	_fork[11] := 0;
+	to _finish
+
+from _finish
+	_fork[12] := 0;
+	to _inside
+
+
+process _phil_12 (&_count: byte, &_fork: array 13 of byte) is
+states _think, _inside, _one, _eat, _finish
+
+init to _think
+
+from _think
+	case (_count < 9) of
+	true -> null
+	end case;
+	_count := (_count + 1);
+	to _inside
+
+from _inside
+	_count := (_count - 1);
+	to _think
+
+from _inside
+	case (_fork[12] = 0) of
+	true -> null
+	end case;
+	_fork[12] := 1;
+	to _one
+
+from _one
+	case (_fork[0] = 0) of
+	true -> null
+	end case;
+	_fork[0] := 1;
+	to _eat
+
+from _eat
+	_fork[12] := 0;
+	to _finish
+
+from _finish
+	_fork[0] := 0;
+	to _inside
+
+
+component sys is
+var 
+	
+	_fork: array 13 of byte, 
+	
+	_count: byte
+
+par 
+	_phil_0(&_count, &_fork) 
+	 || _phil_1(&_count, &_fork) 
+	 || _phil_2(&_count, &_fork) 
+	 || _phil_3(&_count, &_fork) 
+	 || _phil_4(&_count, &_fork) 
+	 || _phil_5(&_count, &_fork) 
+	 || _phil_6(&_count, &_fork) 
+	 || _phil_7(&_count, &_fork) 
+	 || _phil_8(&_count, &_fork) 
+	 || _phil_9(&_count, &_fork) 
+	 || _phil_10(&_count, &_fork) 
+	 || _phil_11(&_count, &_fork) 
+	 || _phil_12(&_count, &_fork) 
+end par
+
+
+sys

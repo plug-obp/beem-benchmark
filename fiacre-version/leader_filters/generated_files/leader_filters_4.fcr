@@ -1,0 +1,244 @@
+type byte is 0..255
+
+process _P_0 (&_turn: array 5 of byte, &_b: array 5 of byte, &_c: read array 5 of byte) is
+states _p1, _p2, _p3, _p4, _p5, _p6, _p7, _p8, _p9, _elected
+var 
+	_curr: byte := 0 
+init to _p1
+
+from _p1
+	_turn[_curr] := 0;
+	to _p2
+
+from _p2
+	case (_b[_curr] = 0) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_b[_curr] := 1;
+	to _p4
+
+from _p4
+	case (_turn[_curr] <> 0) of
+	true -> null
+	end case;
+	to _p5
+
+from _p5
+	to _p6
+
+from _p6
+	_b[_curr] := 0;
+	to _p7
+
+from _p4
+	case (_turn[_curr] = 0) of
+	true -> null
+	end case;
+	to _p8
+
+from _p8
+	case ((_curr > 0) and (_c[(_curr - 1)] = 0)) of
+	true -> null
+	end case;
+	to _p9
+
+from _p9
+	to _elected
+
+from _p8
+	case ((_curr = 0) or (_c[(_curr - 1)] = 1)) of
+	true -> null
+	end case;
+	_curr := (_curr + 1);
+	to _p1
+
+
+process _P_1 (&_turn: array 5 of byte, &_b: array 5 of byte, &_c: read array 5 of byte) is
+states _p1, _p2, _p3, _p4, _p5, _p6, _p7, _p8, _p9, _elected
+var 
+	_curr: byte := 0 
+init to _p1
+
+from _p1
+	_turn[_curr] := 1;
+	to _p2
+
+from _p2
+	case (_b[_curr] = 0) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_b[_curr] := 1;
+	to _p4
+
+from _p4
+	case (_turn[_curr] <> 1) of
+	true -> null
+	end case;
+	to _p5
+
+from _p5
+	to _p6
+
+from _p6
+	_b[_curr] := 0;
+	to _p7
+
+from _p4
+	case (_turn[_curr] = 1) of
+	true -> null
+	end case;
+	to _p8
+
+from _p8
+	case ((_curr > 0) and (_c[(_curr - 1)] = 0)) of
+	true -> null
+	end case;
+	to _p9
+
+from _p9
+	to _elected
+
+from _p8
+	case ((_curr = 0) or (_c[(_curr - 1)] = 1)) of
+	true -> null
+	end case;
+	_curr := (_curr + 1);
+	to _p1
+
+
+process _P_2 (&_turn: array 5 of byte, &_b: array 5 of byte, &_c: read array 5 of byte) is
+states _p1, _p2, _p3, _p4, _p5, _p6, _p7, _p8, _p9, _elected
+var 
+	_curr: byte := 0 
+init to _p1
+
+from _p1
+	_turn[_curr] := 2;
+	to _p2
+
+from _p2
+	case (_b[_curr] = 0) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_b[_curr] := 1;
+	to _p4
+
+from _p4
+	case (_turn[_curr] <> 2) of
+	true -> null
+	end case;
+	to _p5
+
+from _p5
+	to _p6
+
+from _p6
+	_b[_curr] := 0;
+	to _p7
+
+from _p4
+	case (_turn[_curr] = 2) of
+	true -> null
+	end case;
+	to _p8
+
+from _p8
+	case ((_curr > 0) and (_c[(_curr - 1)] = 0)) of
+	true -> null
+	end case;
+	to _p9
+
+from _p9
+	to _elected
+
+from _p8
+	case ((_curr = 0) or (_c[(_curr - 1)] = 1)) of
+	true -> null
+	end case;
+	_curr := (_curr + 1);
+	to _p1
+
+
+process _P_3 (&_turn: array 5 of byte, &_b: array 5 of byte, &_c: read array 5 of byte) is
+states _p1, _p2, _p3, _p4, _p5, _p6, _p7, _p8, _p9, _elected
+var 
+	_curr: byte := 0 
+init to _p1
+
+from _p1
+	_turn[_curr] := 3;
+	to _p2
+
+from _p2
+	case (_b[_curr] = 0) of
+	true -> null
+	end case;
+	to _p3
+
+from _p3
+	_b[_curr] := 1;
+	to _p4
+
+from _p4
+	case (_turn[_curr] <> 3) of
+	true -> null
+	end case;
+	to _p5
+
+from _p5
+	to _p6
+
+from _p6
+	_b[_curr] := 0;
+	to _p7
+
+from _p4
+	case (_turn[_curr] = 3) of
+	true -> null
+	end case;
+	to _p8
+
+from _p8
+	case ((_curr > 0) and (_c[(_curr - 1)] = 0)) of
+	true -> null
+	end case;
+	to _p9
+
+from _p9
+	to _elected
+
+from _p8
+	case ((_curr = 0) or (_c[(_curr - 1)] = 1)) of
+	true -> null
+	end case;
+	_curr := (_curr + 1);
+	to _p1
+
+
+component sys is
+var 
+	
+	_turn: array 5 of byte, 
+	
+	_b: array 5 of byte, 
+	
+	_c: array 5 of byte
+
+par 
+	_P_0(&_turn, &_b, &_c) 
+	 || _P_1(&_turn, &_b, &_c) 
+	 || _P_2(&_turn, &_b, &_c) 
+	 || _P_3(&_turn, &_b, &_c) 
+end par
+
+
+sys

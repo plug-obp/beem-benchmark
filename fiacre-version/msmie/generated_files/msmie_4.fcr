@@ -1,0 +1,3128 @@
+type byte is 0..255
+
+process _slave_1 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_2 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_3 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_4 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_5 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_6 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_7 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_8 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_9 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _slave_10 (&_b: array 5 of byte, &_sem: byte) is
+states _idle, _q0, _q1, _q2, _q3, _error_state
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 0;
+	to _q1
+
+from _q0
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 0;
+	to _q1
+
+from _q0
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 0;
+	to _q1
+
+from _q0
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 0;
+	to _q1
+
+from _q0
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 0;
+	to _q1
+
+from _q0
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	to _q1
+
+from _q1
+	case (_b[0] = 2) of
+	true -> null
+	end case;
+	_b[0] := 1;
+	to _q2
+
+from _q1
+	case (_b[1] = 2) of
+	true -> null
+	end case;
+	_b[1] := 1;
+	to _q2
+
+from _q1
+	case (_b[2] = 2) of
+	true -> null
+	end case;
+	_b[2] := 1;
+	to _q2
+
+from _q1
+	case (_b[3] = 2) of
+	true -> null
+	end case;
+	_b[3] := 1;
+	to _q2
+
+from _q1
+	case (_b[4] = 2) of
+	true -> null
+	end case;
+	_b[4] := 1;
+	to _q2
+
+from _q1
+	case (((((_b[0] <> 2) and (_b[1] <> 2)) and (_b[2] <> 2)) and (_b[3] <> 2)) and (_b[4] <> 2)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q2
+	case (_b[0] = 0) of
+	true -> null
+	end case;
+	_b[0] := 2;
+	to _q3
+
+from _q2
+	case (_b[1] = 0) of
+	true -> null
+	end case;
+	_b[1] := 2;
+	to _q3
+
+from _q2
+	case (_b[2] = 0) of
+	true -> null
+	end case;
+	_b[2] := 2;
+	to _q3
+
+from _q2
+	case (_b[3] = 0) of
+	true -> null
+	end case;
+	_b[3] := 2;
+	to _q3
+
+from _q2
+	case (_b[4] = 0) of
+	true -> null
+	end case;
+	_b[4] := 2;
+	to _q3
+
+from _q2
+	case (((((_b[0] <> 0) and (_b[1] <> 0)) and (_b[2] <> 0)) and (_b[3] <> 0)) and (_b[4] <> 0)) of
+	true -> null
+	end case;
+	to _error_state
+
+from _q3
+	_sem := 1;
+	to _idle
+
+
+process _master_1 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_2 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_3 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_4 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_5 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_6 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_7 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_8 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_9 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+process _master_10 (&_readers: byte, &_b: array 5 of byte, &_sem: byte, &_change_to: byte) is
+states _idle, _q0, _no_master, _master, _reading, _r0, _no_readers, _change, _r1
+
+init to _idle
+
+from _idle
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	to _q0
+
+from _q0
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[1] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[2] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[3] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (_b[4] = 3) of
+	true -> null
+	end case;
+	to _master
+
+from _q0
+	case (((((_b[0] <> 3) and (_b[1] <> 3)) and (_b[2] <> 3)) and (_b[3] <> 3)) and (_b[4] <> 3)) of
+	true -> null
+	end case;
+	to _no_master
+
+from _no_master
+	case (_b[0] = 1) of
+	true -> null
+	end case;
+	_b[0] := 3;
+	to _master
+
+from _no_master
+	case (_b[1] = 1) of
+	true -> null
+	end case;
+	_b[1] := 3;
+	to _master
+
+from _no_master
+	case (_b[2] = 1) of
+	true -> null
+	end case;
+	_b[2] := 3;
+	to _master
+
+from _no_master
+	case (_b[3] = 1) of
+	true -> null
+	end case;
+	_b[3] := 3;
+	to _master
+
+from _no_master
+	case (_b[4] = 1) of
+	true -> null
+	end case;
+	_b[4] := 3;
+	to _master
+
+from _no_master
+	case (((((_b[0] <> 1) and (_b[1] <> 1)) and (_b[2] <> 1)) and (_b[3] <> 1)) and (_b[4] <> 1)) of
+	true -> null
+	end case;
+	_sem := 1;
+	to _idle
+
+from _master
+	_readers := (_readers + 1);
+	_sem := 1;
+	to _reading
+
+from _reading
+	case (_sem = 1) of
+	true -> null
+	end case;
+	_sem := 0;
+	_readers := (_readers - 1);
+	to _r0
+
+from _r0
+	case (_readers = 0) of
+	true -> null
+	end case;
+	to _no_readers
+
+from _r0
+	case (_readers > 0) of
+	true -> null
+	end case;
+	to _r1
+
+from _no_readers
+	case (((((_b[0] = 1) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) or (_b[0] = 1)) of
+	true -> null
+	end case;
+	_change_to := 0;
+	to _change
+
+from _no_readers
+	case (((((_b[0] <> 1) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) and (_b[0] <> 1)) of
+	true -> null
+	end case;
+	_change_to := 1;
+	to _change
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _change
+	case (_b[0] = 3) of
+	true -> null
+	end case;
+	_b[0] := _change_to;
+	to _r1
+
+from _r1
+	_sem := 1;
+	to _idle
+
+
+component sys is
+var 
+	
+	_b: array 5 of byte := [0, 0, 0, 0, 2], 
+	
+	_readers: byte, 
+	
+	_sem: byte := 1, 
+	
+	_change_to: byte
+
+par 
+	_slave_1(&_b, &_sem) 
+	 || _slave_2(&_b, &_sem) 
+	 || _slave_3(&_b, &_sem) 
+	 || _slave_4(&_b, &_sem) 
+	 || _slave_5(&_b, &_sem) 
+	 || _slave_6(&_b, &_sem) 
+	 || _slave_7(&_b, &_sem) 
+	 || _slave_8(&_b, &_sem) 
+	 || _slave_9(&_b, &_sem) 
+	 || _slave_10(&_b, &_sem) 
+	 || _master_1(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_2(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_3(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_4(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_5(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_6(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_7(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_8(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_9(&_readers, &_b, &_sem, &_change_to) 
+	 || _master_10(&_readers, &_b, &_sem, &_change_to) 
+end par
+
+
+sys

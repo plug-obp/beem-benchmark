@@ -1,0 +1,456 @@
+type byte is 0..255
+
+process _Sender [_sNOTRDY1: in none, _sRDY1: in none, _sRESET1: in none, _rRESET1: out none, _rDATA1: out none, _rNODATA1: out none] is
+states _idle, _ack_reset, _reset, _advance, _N, _E, _q_i, _q_e, _q_n, _q_a, _q_error
+var 
+	_n: int := (- 1), 
+	_m: int 
+init to _idle
+
+from _idle
+	_sRESET1;
+	to _ack_reset
+
+from _idle
+	_sNOTRDY1? _m;
+	to _q_i
+
+from _idle
+	_sRDY1? _m;
+	to _q_a
+
+from _idle
+	_rRESET1;
+	to _reset
+
+from _ack_reset
+	_rRESET1;
+	_n := (- 1);
+	to _idle
+
+from _q_i
+	case (_m = ((_n + 1) % 4)) of
+	true -> null
+	end case;
+	to _idle
+
+from _q_i
+	case (_m <> ((_n + 1) % 4)) of
+	true -> null
+	end case;
+	to _q_error
+
+from _reset
+	_sNOTRDY1? _m;
+	to _reset
+
+from _reset
+	_sRDY1? _m;
+	to _reset
+
+from _reset
+	_sRESET1;
+	_n := (- 1);
+	to _idle
+
+from _q_a
+	case (_m = ((_n + 1) % 4)) of
+	true -> null
+	end case;
+	_n := ((_n + 1) % 4);
+	to _advance
+
+from _q_a
+	case (_m <> ((_n + 1) % 4)) of
+	true -> null
+	end case;
+	to _q_error
+
+from _advance
+	_rNODATA1! _n;
+	to _N
+
+from _advance
+	_rDATA1! _n;
+	to _E
+
+from _N
+	_rRESET1;
+	to _reset
+
+from _N
+	_sRESET1;
+	to _ack_reset
+
+from _N
+	_rDATA1! _n;
+	to _E
+
+from _N
+	_sRDY1? _m;
+	to _q_n
+
+from _q_n
+	case (_m = _n) of
+	true -> null
+	end case;
+	_rNODATA1! _n;
+	to _N
+
+from _q_n
+	case (_m <> _n) of
+	true -> null
+	end case;
+	to _q_error
+
+from _E
+	_rRESET1;
+	to _reset
+
+from _E
+	_sRESET1;
+	to _ack_reset
+
+from _E
+	_sNOTRDY1? _m;
+	to _q_e
+
+from _E
+	_sRDY1? _m;
+	to _q_e
+
+from _q_e
+	case (_m = _n) of
+	true -> null
+	end case;
+	_rDATA1! _n;
+	to _E
+
+from _q_e
+	case (_m = ((_n + 1) % 4)) of
+	true -> null
+	end case;
+	_n := ((_n + 1) % 4);
+	to _advance
+
+
+process _Receiver [_rDATA2: in none, _rNODATA2: in none, _rRESET2: in none, _sNOTRDY2: out none, _sRDY2: out none, _sRESET2: out none] is
+states _idle, _ack_reset, _reset, _advance, _N, _E, _q_i, _q_e, _q_n, _q_a, _q_error, _q_e2
+var 
+	_n: int, 
+	_m: int 
+init to _idle
+
+from _idle
+	_rRESET2;
+	to _ack_reset
+
+from _idle
+	_rNODATA2? _m;
+	to _q_i
+
+from _idle
+	_rDATA2? _m;
+	to _q_a
+
+from _idle
+	_sRESET2;
+	to _reset
+
+from _idle
+	_sRDY2! _n;
+	to _E
+
+from _ack_reset
+	_sRESET2;
+	_n := 0;
+	to _idle
+
+from _q_i
+	case (_m = _n) of
+	true -> null
+	end case;
+	to _idle
+
+from _q_i
+	case (_m <> _n) of
+	true -> null
+	end case;
+	to _q_error
+
+from _reset
+	_rDATA2? _m;
+	to _reset
+
+from _reset
+	_rNODATA2? _m;
+	to _reset
+
+from _reset
+	_rRESET2;
+	_n := 0;
+	to _idle
+
+from _q_a
+	case (_m = _n) of
+	true -> null
+	end case;
+	_n := ((_n + 1) % 4);
+	to _advance
+
+from _q_a
+	case (_m <> _n) of
+	true -> null
+	end case;
+	to _q_error
+
+from _advance
+	_sNOTRDY2! _n;
+	to _N
+
+from _advance
+	_sRDY2! _n;
+	to _E
+
+from _N
+	_sRESET2;
+	to _reset
+
+from _N
+	_rRESET2;
+	to _ack_reset
+
+from _N
+	_sRDY2! _n;
+	to _E
+
+from _N
+	_rDATA2? _m;
+	to _q_n
+
+from _q_n
+	case (((_m + 1) % 4) = _n) of
+	true -> null
+	end case;
+	_sNOTRDY2! _n;
+	to _N
+
+from _q_n
+	case (((_m + 1) % 4) <> _n) of
+	true -> null
+	end case;
+	to _N
+
+from _E
+	_sRESET2;
+	to _reset
+
+from _E
+	_rRESET2;
+	to _ack_reset
+
+from _E
+	_sRDY2! _n;
+	to _E
+
+from _E
+	_rDATA2? _m;
+	to _q_e
+
+from _q_e
+	case (((_m + 1) % 4) = _n) of
+	true -> null
+	end case;
+	_sRDY2! _n;
+	to _E
+
+from _q_e
+	case (_m = _n) of
+	true -> null
+	end case;
+	_n := ((_n + 1) % 4);
+	to _advance
+
+from _E
+	_rNODATA2? _m;
+	to _q_e2
+
+from _q_e2
+	case (_m = _n) of
+	true -> null
+	end case;
+	to _idle
+
+from _q_e2
+	case (_m <> _n) of
+	true -> null
+	end case;
+	to _q_error
+
+
+process _StoR [_rRESET1: in none, _rDATA1: in none, _rNODATA1: in none, _rDATA2: out none, _rNODATA2: out none, _rRESET2: out none] is
+states _q
+var 
+	_buf: array 3 of byte, 
+	_buf_act: byte := 0, 
+	_n: byte 
+init to _q
+
+from _q
+	case (not (_buf_act = 3)) of
+	true -> null
+	end case;
+	_rRESET1;
+	_buf[_buf_act] := 0;
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 3)) of
+	true -> null
+	end case;
+	_rDATA1? _n;
+	_buf[_buf_act] := (3 + (8 * _n));
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 3)) of
+	true -> null
+	end case;
+	_rNODATA1? _n;
+	_buf[_buf_act] := (4 + (8 * _n));
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case ((not (_buf_act = 0)) and (_buf[0] = 0)) of
+	true -> null
+	end case;
+	_rRESET2;
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+from _q
+	case ((not (_buf_act = 0)) and ((_buf[0] % 8) = 3)) of
+	true -> null
+	end case;
+	_rDATA2! (_buf[0] / 8);
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+from _q
+	case ((not (_buf_act = 0)) and ((_buf[0] % 8) = 4)) of
+	true -> null
+	end case;
+	_rNODATA2! (_buf[0] / 8);
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+process _RtoS [_sNOTRDY2: in none, _sRDY2: in none, _sRESET2: in none, _sNOTRDY1: out none, _sRDY1: out none, _sRESET1: out none] is
+states _q
+var 
+	_buf: array 3 of byte, 
+	_buf_act: byte := 0, 
+	_n: byte 
+init to _q
+
+from _q
+	case (not (_buf_act = 3)) of
+	true -> null
+	end case;
+	_sRESET2;
+	_buf[_buf_act] := 0;
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 3)) of
+	true -> null
+	end case;
+	_sRDY2? _n;
+	_buf[_buf_act] := (1 + (8 * _n));
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case (not (_buf_act = 3)) of
+	true -> null
+	end case;
+	_sNOTRDY2? _n;
+	_buf[_buf_act] := (2 + (8 * _n));
+	_buf_act := (_buf_act + 1);
+	to _q
+
+from _q
+	case ((not (_buf_act = 0)) and (_buf[0] = 0)) of
+	true -> null
+	end case;
+	_sRESET1;
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+from _q
+	case ((not (_buf_act = 0)) and ((_buf[0] % 8) = 1)) of
+	true -> null
+	end case;
+	_sRDY1! (_buf[0] / 8);
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+from _q
+	case ((not (_buf_act = 0)) and ((_buf[0] % 8) = 2)) of
+	true -> null
+	end case;
+	_sNOTRDY1! (_buf[0] / 8);
+	_buf[0] := _buf[1];
+	_buf[1] := _buf[2];
+	_buf[2] := 0;
+	_buf_act := (_buf_act - 1);
+	to _q
+
+
+component sys is
+port 
+	_toK: none, 
+	_fromK: none, 
+	_toL: none, 
+	_fromL: none, 
+	_sRESET1: none, 
+	_sRESET2: none, 
+	_rRESET1: none, 
+	_rRESET2: none, 
+	_sRDY1: none, 
+	_sRDY2: none, 
+	_sNOTRDY1: none, 
+	_sNOTRDY2: none, 
+	_rDATA1: none, 
+	_rDATA2: none, 
+	_rNODATA1: none, 
+	_rNODATA2: none
+
+par 
+	_Sender[_sNOTRDY1, _sRDY1, _sRESET1, _rRESET1, _rDATA1, _rNODATA1] 
+	 || _Receiver[_rDATA2, _rNODATA2, _rRESET2, _sNOTRDY2, _sRDY2, _sRESET2] 
+	 || _StoR[_rRESET1, _rDATA1, _rNODATA1, _rDATA2, _rNODATA2, _rRESET2] 
+	 || _RtoS[_sNOTRDY2, _sRDY2, _sRESET2, _sNOTRDY1, _sRDY1, _sRESET1] 
+end par
+
+
+sys

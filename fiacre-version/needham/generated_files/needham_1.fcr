@@ -1,0 +1,369 @@
+type byte is 0..255
+
+process _initiator_0 [_net_N_N_P: in none, _net_N_P_P: out none, _net_N_P: out none] is
+states _start, _wait_resp, _got_resp, _commited, _finished, _corrupted
+var 
+	_m: int, 
+	_party_nonce: int 
+init to _start
+
+from _start
+	_net_N_P_P! ((1 + (7 * 15)) + ((10 * 15) * 15));
+	to _wait_resp
+
+from _wait_resp
+	_net_N_N_P? _m;
+	to _got_resp
+
+from _got_resp
+	case (((_m % 15) = 1) and ((_m / (15 * 15)) = 7)) of
+	true -> null
+	end case;
+	_party_nonce := ((_m % (15 * 15)) / 15);
+	to _commited
+
+from _got_resp
+	case (not (((_m % 15) = 1) and ((_m / (15 * 15)) = 7))) of
+	true -> null
+	end case;
+	to _corrupted
+
+from _commited
+	_net_N_P! ((_party_nonce + (10 * 15)) + ((0 * 15) * 15));
+	to _finished
+
+
+process _responder_0 [_net_N_P_P: in none, _net_N_P: in none, _net_N_N_P: out none] is
+states _start, _got_msg, _send_reply, _wait_resp, _got_resp, _finished, _corrupted
+var 
+	_m: int, 
+	_party: int, 
+	_party_nonce: int 
+init to _start
+
+from _start
+	_net_N_P_P? _m;
+	to _got_msg
+
+from _got_msg
+	case ((_m / (15 * 15)) = 10) of
+	true -> null
+	end case;
+	_party := ((_m % (15 * 15)) / 15);
+	_party_nonce := (_m % 15);
+	to _send_reply
+
+from _got_msg
+	case (not ((_m / (15 * 15)) = 10)) of
+	true -> null
+	end case;
+	to _corrupted
+
+from _send_reply
+	_net_N_N_P! ((_party_nonce + (4 * 15)) + ((_party * 15) * 15));
+	to _wait_resp
+
+from _wait_resp
+	_net_N_P? _m;
+	to _got_resp
+
+from _got_resp
+	case (not (((_m % 15) = 4) and (((_m % (15 * 15)) / 15) = 10))) of
+	true -> null
+	end case;
+	to _corrupted
+
+from _got_resp
+	case (((_m % 15) = 4) and (((_m % (15 * 15)) / 15) = 10)) of
+	true -> null
+	end case;
+	to _finished
+
+
+process _intruder [_net_N_N_P: in out none, _net_N_P_P: in out none, _net_N_P: in out none] is
+states _q, _got3, _c1, _c2, _d1, _got2, _e1, _f1
+var 
+	_kNa: byte := 0, 
+	_kNb: byte := 0, 
+	_k_Na_Nb__A: byte := 0, 
+	_k_Na_A__B: byte := 0, 
+	_k_Nb__B: byte := 0, 
+	_m: int 
+init to _q
+
+from _q
+	_net_N_N_P? _m;
+	to _got3
+
+from _q
+	_net_N_P_P? _m;
+	to _got3
+
+from _q
+	_net_N_P? _m;
+	to _got2
+
+from _got3
+	to _q
+
+from _got3
+	case ((_m / (15 * 15)) = 1) of
+	true -> null
+	end case;
+	to _c1
+
+from _got3
+	case ((_m / (15 * 15)) <> 1) of
+	true -> null
+	end case;
+	to _d1
+
+from _c1
+	case ((_m % 15) = 1) of
+	true -> null
+	end case;
+	_kNa := 1;
+	to _c2
+
+from _c1
+	case ((_m % 15) = 4) of
+	true -> null
+	end case;
+	_kNb := 1;
+	to _c2
+
+from _c1
+	case (((_m % 15) <> 1) and ((_m % 15) <> 4)) of
+	true -> null
+	end case;
+	to _c2
+
+from _c2
+	case (((_m % 15) = 4) and (((_m % (15 * 15)) / 15) = 10)) of
+	true -> null
+	end case;
+	_k_Nb__B := 1;
+	to _q
+
+from _c2
+	case (not (((_m % 15) = 4) and (((_m % (15 * 15)) / 15) = 10))) of
+	true -> null
+	end case;
+	to _q
+
+from _d1
+	case ((((_m % 15) = 1) and (((_m % (15 * 15)) / 15) = 7)) and ((_m / (15 * 15)) = 10)) of
+	true -> null
+	end case;
+	_k_Na_A__B := 1;
+	to _q
+
+from _d1
+	case ((((_m % 15) = 1) and (((_m % (15 * 15)) / 15) = 4)) and ((_m / (15 * 15)) = 7)) of
+	true -> null
+	end case;
+	_k_Na_Nb__A := 1;
+	to _q
+
+from _d1
+	to _q
+
+from _got2
+	case (((_m % (15 * 15)) / 15) = 1) of
+	true -> null
+	end case;
+	to _e1
+
+from _got2
+	case (((_m % (15 * 15)) / 15) <> 1) of
+	true -> null
+	end case;
+	to _f1
+
+from _e1
+	case ((_m % 15) = 1) of
+	true -> null
+	end case;
+	_kNa := 1;
+	to _q
+
+from _e1
+	case ((_m % 15) = 4) of
+	true -> null
+	end case;
+	_kNb := 1;
+	to _q
+
+from _e1
+	case (((_m % 15) <> 1) and ((_m % 15) <> 4)) of
+	true -> null
+	end case;
+	to _q
+
+from _f1
+	case (((_m % 15) = 4) and (((_m % (15 * 15)) / 15) = 10)) of
+	true -> null
+	end case;
+	_k_Nb__B := 1;
+	to _q
+
+from _f1
+	case (not (((_m % 15) = 4) and (((_m % (15 * 15)) / 15) = 10))) of
+	true -> null
+	end case;
+	to _q
+
+from _q
+	_net_N_P_P! ((13 + (7 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((13 + (10 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((13 + (1 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((7 + (7 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((7 + (10 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((7 + (1 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((10 + (7 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((10 + (10 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((10 + (1 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((1 + (7 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((1 + (10 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	_net_N_P_P! ((1 + (1 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNa = 1) of
+	true -> null
+	end case;
+	_net_N_N_P! ((1 + (1 * 15)) + ((7 * 15) * 15));
+	to _q
+
+from _q
+	case (((_kNa = 1) and (_kNb = 1)) or (_k_Na_Nb__A = 1)) of
+	true -> null
+	end case;
+	_net_N_N_P! ((1 + (4 * 15)) + ((7 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNa = 1) of
+	true -> null
+	end case;
+	_net_N_N_P! ((1 + (13 * 15)) + ((7 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNa = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((1 + (7 * 15)) + ((7 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNa = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((1 + (10 * 15)) + ((7 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNa = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((1 + (1 * 15)) + ((7 * 15) * 15));
+	to _q
+
+from _q
+	case ((_kNa = 1) or (_k_Na_A__B <> 0)) of
+	true -> null
+	end case;
+	_net_N_P_P! ((1 + (7 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNa = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((1 + (10 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNa = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((1 + (1 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNb = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((4 + (7 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNb = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((4 + (10 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	case (_kNb = 1) of
+	true -> null
+	end case;
+	_net_N_P_P! ((4 + (1 * 15)) + ((10 * 15) * 15));
+	to _q
+
+from _q
+	case ((_kNb = 1) or (_k_Nb__B = 1)) of
+	true -> null
+	end case;
+	_net_N_P! ((4 + (10 * 15)) + ((0 * 15) * 15));
+	to _q
+
+
+component sys is
+port 
+	_net_N_P_P: none, 
+	_net_N_N_P: none, 
+	_net_N_P: none
+
+par 
+	_initiator_0[_net_N_N_P, _net_N_P_P, _net_N_P] 
+	 || _responder_0[_net_N_P_P, _net_N_P, _net_N_N_P] 
+	 || _intruder[_net_N_N_P, _net_N_P_P, _net_N_P] 
+end par
+
+
+sys

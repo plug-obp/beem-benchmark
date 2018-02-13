@@ -1,0 +1,705 @@
+type byte is 0..255
+
+process _Bandwidth [_release: in none, _reserve: in none, _grant: out none, _ok: out none, _no_grant: out none] (&_RT_count: byte, &_in_RT: array 7 of byte) is
+states _idle, _rel, _res, _error_st
+var 
+	_i: byte 
+init to _idle
+
+from _idle
+	_reserve? _i;
+	to _res
+
+from _res
+	case (_RT_count >= 2) of
+	true -> null
+	end case;
+	_no_grant;
+	to _idle
+
+from _res
+	case (_RT_count < 2) of
+	true -> null
+	end case;
+	_grant;
+	_RT_count := (_RT_count + 1);
+	_in_RT[_i] := 1;
+	to _idle
+
+from _idle
+	_release? _i;
+	to _rel
+
+from _rel
+	case (_in_RT[_i] = 1) of
+	true -> null
+	end case;
+	_ok;
+	_in_RT[_i] := 0;
+	_RT_count := (_RT_count - 1);
+	to _idle
+
+from _rel
+	case (_in_RT[_i] = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+
+process _Node_0 [_grant: in none, _ok: in none, _no_grant: in none, _visit_0: in none, _release: out none, _reserve: out none, _done: out none] is
+states _idle, _start, _RT_action, _NRT_action, _want_RT, _reserved, _finish, _error_st, _wait_ok
+var 
+	_rt: byte, 
+	_granted: byte := 0 
+init to _idle
+
+from _idle
+	_visit_0? _rt;
+	to _start
+
+from _start
+	case (_rt = 1) of
+	true -> null
+	end case;
+	to _RT_action
+
+from _start
+	case (_rt = 0) of
+	true -> null
+	end case;
+	to _NRT_action
+
+from _RT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+from _RT_action
+	to _finish
+
+from _RT_action
+	_release! 0;
+	_granted := 0;
+	to _wait_ok
+
+from _wait_ok
+	_ok;
+	to _finish
+
+from _NRT_action
+	to _finish
+
+from _NRT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	_reserve! 0;
+	to _want_RT
+
+from _want_RT
+	_grant;
+	to _reserved
+
+from _reserved
+	_granted := 1;
+	to _finish
+
+from _want_RT
+	_no_grant;
+	to _finish
+
+from _finish
+	_done;
+	to _idle
+
+
+process _Node_1 [_grant: in none, _ok: in none, _no_grant: in none, _visit_1: in none, _release: out none, _reserve: out none, _done: out none] is
+states _idle, _start, _RT_action, _NRT_action, _want_RT, _reserved, _finish, _error_st, _wait_ok
+var 
+	_rt: byte, 
+	_granted: byte := 0 
+init to _idle
+
+from _idle
+	_visit_1? _rt;
+	to _start
+
+from _start
+	case (_rt = 1) of
+	true -> null
+	end case;
+	to _RT_action
+
+from _start
+	case (_rt = 0) of
+	true -> null
+	end case;
+	to _NRT_action
+
+from _RT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+from _RT_action
+	to _finish
+
+from _RT_action
+	_release! 1;
+	_granted := 0;
+	to _wait_ok
+
+from _wait_ok
+	_ok;
+	to _finish
+
+from _NRT_action
+	to _finish
+
+from _NRT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	_reserve! 1;
+	to _want_RT
+
+from _want_RT
+	_grant;
+	to _reserved
+
+from _reserved
+	_granted := 1;
+	to _finish
+
+from _want_RT
+	_no_grant;
+	to _finish
+
+from _finish
+	_done;
+	to _idle
+
+
+process _Node_2 [_grant: in none, _ok: in none, _visit_2: in none, _no_grant: in none, _release: out none, _reserve: out none, _done: out none] is
+states _idle, _start, _RT_action, _NRT_action, _want_RT, _reserved, _finish, _error_st, _wait_ok
+var 
+	_rt: byte, 
+	_granted: byte := 0 
+init to _idle
+
+from _idle
+	_visit_2? _rt;
+	to _start
+
+from _start
+	case (_rt = 1) of
+	true -> null
+	end case;
+	to _RT_action
+
+from _start
+	case (_rt = 0) of
+	true -> null
+	end case;
+	to _NRT_action
+
+from _RT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+from _RT_action
+	to _finish
+
+from _RT_action
+	_release! 2;
+	_granted := 0;
+	to _wait_ok
+
+from _wait_ok
+	_ok;
+	to _finish
+
+from _NRT_action
+	to _finish
+
+from _NRT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	_reserve! 2;
+	to _want_RT
+
+from _want_RT
+	_grant;
+	to _reserved
+
+from _reserved
+	_granted := 1;
+	to _finish
+
+from _want_RT
+	_no_grant;
+	to _finish
+
+from _finish
+	_done;
+	to _idle
+
+
+process _Node_3 [_grant: in none, _ok: in none, _no_grant: in none, _visit_3: in none, _release: out none, _reserve: out none, _done: out none] is
+states _idle, _start, _RT_action, _NRT_action, _want_RT, _reserved, _finish, _error_st, _wait_ok
+var 
+	_rt: byte, 
+	_granted: byte := 0 
+init to _idle
+
+from _idle
+	_visit_3? _rt;
+	to _start
+
+from _start
+	case (_rt = 1) of
+	true -> null
+	end case;
+	to _RT_action
+
+from _start
+	case (_rt = 0) of
+	true -> null
+	end case;
+	to _NRT_action
+
+from _RT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+from _RT_action
+	to _finish
+
+from _RT_action
+	_release! 3;
+	_granted := 0;
+	to _wait_ok
+
+from _wait_ok
+	_ok;
+	to _finish
+
+from _NRT_action
+	to _finish
+
+from _NRT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	_reserve! 3;
+	to _want_RT
+
+from _want_RT
+	_grant;
+	to _reserved
+
+from _reserved
+	_granted := 1;
+	to _finish
+
+from _want_RT
+	_no_grant;
+	to _finish
+
+from _finish
+	_done;
+	to _idle
+
+
+process _Node_4 [_grant: in none, _ok: in none, _no_grant: in none, _visit_4: in none, _release: out none, _reserve: out none, _done: out none] is
+states _idle, _start, _RT_action, _NRT_action, _want_RT, _reserved, _finish, _error_st, _wait_ok
+var 
+	_rt: byte, 
+	_granted: byte := 0 
+init to _idle
+
+from _idle
+	_visit_4? _rt;
+	to _start
+
+from _start
+	case (_rt = 1) of
+	true -> null
+	end case;
+	to _RT_action
+
+from _start
+	case (_rt = 0) of
+	true -> null
+	end case;
+	to _NRT_action
+
+from _RT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+from _RT_action
+	to _finish
+
+from _RT_action
+	_release! 4;
+	_granted := 0;
+	to _wait_ok
+
+from _wait_ok
+	_ok;
+	to _finish
+
+from _NRT_action
+	to _finish
+
+from _NRT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	_reserve! 4;
+	to _want_RT
+
+from _want_RT
+	_grant;
+	to _reserved
+
+from _reserved
+	_granted := 1;
+	to _finish
+
+from _want_RT
+	_no_grant;
+	to _finish
+
+from _finish
+	_done;
+	to _idle
+
+
+process _Node_5 [_grant: in none, _ok: in none, _no_grant: in none, _visit_5: in none, _release: out none, _reserve: out none, _done: out none] is
+states _idle, _start, _RT_action, _NRT_action, _want_RT, _reserved, _finish, _error_st, _wait_ok
+var 
+	_rt: byte, 
+	_granted: byte := 0 
+init to _idle
+
+from _idle
+	_visit_5? _rt;
+	to _start
+
+from _start
+	case (_rt = 1) of
+	true -> null
+	end case;
+	to _RT_action
+
+from _start
+	case (_rt = 0) of
+	true -> null
+	end case;
+	to _NRT_action
+
+from _RT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+from _RT_action
+	to _finish
+
+from _RT_action
+	_release! 5;
+	_granted := 0;
+	to _wait_ok
+
+from _wait_ok
+	_ok;
+	to _finish
+
+from _NRT_action
+	to _finish
+
+from _NRT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	_reserve! 5;
+	to _want_RT
+
+from _want_RT
+	_grant;
+	to _reserved
+
+from _reserved
+	_granted := 1;
+	to _finish
+
+from _want_RT
+	_no_grant;
+	to _finish
+
+from _finish
+	_done;
+	to _idle
+
+
+process _Node_6 [_grant: in none, _ok: in none, _visit_6: in none, _no_grant: in none, _release: out none, _reserve: out none, _done: out none] is
+states _idle, _start, _RT_action, _NRT_action, _want_RT, _reserved, _finish, _error_st, _wait_ok
+var 
+	_rt: byte, 
+	_granted: byte := 0 
+init to _idle
+
+from _idle
+	_visit_6? _rt;
+	to _start
+
+from _start
+	case (_rt = 1) of
+	true -> null
+	end case;
+	to _RT_action
+
+from _start
+	case (_rt = 0) of
+	true -> null
+	end case;
+	to _NRT_action
+
+from _RT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	to _error_st
+
+from _RT_action
+	to _finish
+
+from _RT_action
+	_release! 6;
+	_granted := 0;
+	to _wait_ok
+
+from _wait_ok
+	_ok;
+	to _finish
+
+from _NRT_action
+	to _finish
+
+from _NRT_action
+	case (_granted = 0) of
+	true -> null
+	end case;
+	_reserve! 6;
+	to _want_RT
+
+from _want_RT
+	_grant;
+	to _reserved
+
+from _reserved
+	_granted := 1;
+	to _finish
+
+from _want_RT
+	_no_grant;
+	to _finish
+
+from _finish
+	_done;
+	to _idle
+
+
+process _Token [_done: in none, _visit_6: out none, _visit_2: out none, _visit_5: out none, _visit_1: out none, _visit_0: out none, _visit_3: out none, _visit_4: out none] (&_RT_count: read byte, &_in_RT: read array 7 of byte) is
+states _start, _RT_phase, _RT_wait, _NRT_phase, _NRT_wait, _cycle_end
+var 
+	_i: byte, 
+	_NRT_count: byte := 3, 
+	_next: byte := 0 
+init to _start
+
+from _start
+	_i := 0;
+	to _RT_phase
+
+from _RT_phase
+	case ((_i < 7) and (_in_RT[_i] = 0)) of
+	true -> null
+	end case;
+	_i := (_i + 1);
+	to _RT_phase
+
+from _RT_phase
+	case ((_i = 0) and (_in_RT[_i] = 1)) of
+	true -> null
+	end case;
+	_visit_0! 1;
+	to _RT_wait
+
+from _RT_phase
+	case ((_i = 1) and (_in_RT[_i] = 1)) of
+	true -> null
+	end case;
+	_visit_1! 1;
+	to _RT_wait
+
+from _RT_phase
+	case ((_i = 2) and (_in_RT[_i] = 1)) of
+	true -> null
+	end case;
+	_visit_2! 1;
+	to _RT_wait
+
+from _RT_phase
+	case ((_i = 3) and (_in_RT[_i] = 1)) of
+	true -> null
+	end case;
+	_visit_3! 1;
+	to _RT_wait
+
+from _RT_phase
+	case ((_i = 4) and (_in_RT[_i] = 1)) of
+	true -> null
+	end case;
+	_visit_4! 1;
+	to _RT_wait
+
+from _RT_phase
+	case ((_i = 5) and (_in_RT[_i] = 1)) of
+	true -> null
+	end case;
+	_visit_5! 1;
+	to _RT_wait
+
+from _RT_phase
+	case ((_i = 6) and (_in_RT[_i] = 1)) of
+	true -> null
+	end case;
+	_visit_6! 1;
+	to _RT_wait
+
+from _RT_wait
+	_done;
+	_i := (_i + 1);
+	to _RT_phase
+
+from _RT_phase
+	case (_i = 7) of
+	true -> null
+	end case;
+	to _NRT_phase
+
+from _NRT_phase
+	case ((_NRT_count > 0) and (_next = 0)) of
+	true -> null
+	end case;
+	_visit_0! 0;
+	to _NRT_wait
+
+from _NRT_phase
+	case ((_NRT_count > 0) and (_next = 1)) of
+	true -> null
+	end case;
+	_visit_1! 0;
+	to _NRT_wait
+
+from _NRT_phase
+	case ((_NRT_count > 0) and (_next = 2)) of
+	true -> null
+	end case;
+	_visit_2! 0;
+	to _NRT_wait
+
+from _NRT_phase
+	case ((_NRT_count > 0) and (_next = 3)) of
+	true -> null
+	end case;
+	_visit_3! 0;
+	to _NRT_wait
+
+from _NRT_phase
+	case ((_NRT_count > 0) and (_next = 4)) of
+	true -> null
+	end case;
+	_visit_4! 0;
+	to _NRT_wait
+
+from _NRT_phase
+	case ((_NRT_count > 0) and (_next = 5)) of
+	true -> null
+	end case;
+	_visit_5! 0;
+	to _NRT_wait
+
+from _NRT_phase
+	case ((_NRT_count > 0) and (_next = 6)) of
+	true -> null
+	end case;
+	_visit_6! 0;
+	to _NRT_wait
+
+from _NRT_wait
+	_done;
+	_next := ((_next + 1) % 7);
+	_NRT_count := (_NRT_count - 1);
+	to _NRT_phase
+
+from _NRT_phase
+	case (_NRT_count = 0) of
+	true -> null
+	end case;
+	to _cycle_end
+
+from _cycle_end
+	_NRT_count := (3 - _RT_count);
+	to _start
+
+
+component sys is
+var 
+	
+	_in_RT: array 7 of byte, 
+	
+	_RT_count: byte := 0
+
+port 
+	_reserve: none, 
+	_release: none, 
+	_grant: none, 
+	_no_grant: none, 
+	_done: none, 
+	_visit_0: none, 
+	_visit_1: none, 
+	_visit_2: none, 
+	_visit_3: none, 
+	_visit_4: none, 
+	_visit_5: none, 
+	_visit_6: none, 
+	_ok: none
+
+par 
+	_Bandwidth[_release, _reserve, _grant, _ok, _no_grant] (&_RT_count, &_in_RT) 
+	 || _Node_0[_grant, _ok, _no_grant, _visit_0, _release, _reserve, _done] 
+	 || _Node_1[_grant, _ok, _no_grant, _visit_1, _release, _reserve, _done] 
+	 || _Node_2[_grant, _ok, _visit_2, _no_grant, _release, _reserve, _done] 
+	 || _Node_3[_grant, _ok, _no_grant, _visit_3, _release, _reserve, _done] 
+	 || _Node_4[_grant, _ok, _no_grant, _visit_4, _release, _reserve, _done] 
+	 || _Node_5[_grant, _ok, _no_grant, _visit_5, _release, _reserve, _done] 
+	 || _Node_6[_grant, _ok, _visit_6, _no_grant, _release, _reserve, _done] 
+	 || _Token[_done, _visit_6, _visit_2, _visit_5, _visit_1, _visit_0, _visit_3, _visit_4] (&_RT_count, &_in_RT) 
+end par
+
+
+sys
