@@ -1,0 +1,552 @@
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_1.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_1.obp/java]
+adding_1.fcr; PT0.044S; 7372; 11144
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_2.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_2.obp/java]
+adding_2.fcr; PT1.189S; 836838; 1289748
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_3.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_3.obp/java]
+adding_3.fcr; PT2.868S; 1894376; 2921634
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_4.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_4.obp/java]
+adding_4.fcr; PT5.42S; 3370680; 5201282
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_5.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_5.obp/java]
+adding_5.fcr; PT9.494S; 5271456; 8135364
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_6.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/adding/generated_files/adding_6.obp/java]
+adding_6.fcr; PT14.545S; 7609684; 11746148
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_1.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_1.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 2
+	at anderson_1.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_1.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_2.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_2.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 3
+	at anderson_2.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_2.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_3.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_3.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 3
+	at anderson_3.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_3.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_4.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_4.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 4
+	at anderson_4.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_4.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_5.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_5.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 5
+	at anderson_5.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_5.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_6.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_6.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 6
+	at anderson_6.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_6.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_7.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_7.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 6
+	at anderson_7.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_7.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_8.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/anderson/generated_files/anderson_8.obp/java]
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 7
+	at anderson_8.SysConfiguration.<init>(SysConfiguration.java:23)
+	at anderson_8.SysConfiguration.createCopy(SysConfiguration.java:30)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_1.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_1.obp/java]
+bakery_1.fcr; PT0.03S; 1506; 2697
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_2.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_2.obp/java]
+bakery_2.fcr; PT0.028S; 1146; 2085
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_3.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_3.obp/java]
+bakery_3.fcr; PT0.153S; 32919; 85061
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_4.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_4.obp/java]
+bakery_4.fcr; PT0.485S; 157003; 411843
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_5.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_5.obp/java]
+bakery_5.fcr; PT28.083S; 7866401; 27018304
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_6.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_6.obp/java]
+bakery_6.fcr; PT43.975S; 11845035; 40400559
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_7.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_7.obp/java]
+bakery_7.fcr; PT1M55.306S; 29047471; 100691444
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_8.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bakery/generated_files/bakery_8.obp/java]
+Exception in thread "main" java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at bakery_8.SysConfiguration.<init>(SysConfiguration.java:21)
+	at bakery_8.SysConfiguration.createCopy(SysConfiguration.java:33)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/blocks/generated_files/blocks_2.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/blocks/generated_files/blocks_2.obp/java]
+blocks_2.fcr; PT0.087S; 7057; 18552
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/blocks/generated_files/blocks_3.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/blocks/generated_files/blocks_3.obp/java]
+blocks_3.fcr; PT3.233S; 695418; 2094753
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/blocks/generated_files/blocks_4.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/blocks/generated_files/blocks_4.obp/java]
+Exception in thread "main" java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at java.util.ArrayList.<init>(ArrayList.java:153)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:276)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bopdp/generated_files/bopdp_1.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bopdp/generated_files/bopdp_1.obp/java]
+bopdp_1.fcr; PT0.224S; 12642; 24039
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bopdp/generated_files/bopdp_2.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bopdp/generated_files/bopdp_2.obp/java]
+bopdp_2.fcr; PT0.395S; 25685; 72968
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/bopdp/generated_files/bopdp_3.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/bopdp/generated_files/bopdp_3.obp/java]
+bopdp_3.fcr; PT5.309S; 1040953; 2747408
+
+Port '_wanna_go' needs 0 argument.
+
+java.lang.RuntimeException: Port '_wanna_go' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_wanna_go' needs 0 argument.
+
+java.lang.RuntimeException: Port '_wanna_go' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_wanna_go' needs 0 argument.
+
+java.lang.RuntimeException: Port '_wanna_go' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_sNOTRDY1' needs 0 argument.
+
+java.lang.RuntimeException: Port '_sNOTRDY1' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_sNOTRDY1' needs 0 argument.
+
+java.lang.RuntimeException: Port '_sNOTRDY1' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_sNOTRDY1' needs 0 argument.
+
+java.lang.RuntimeException: Port '_sNOTRDY1' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_sNOTRDY1' needs 0 argument.
+
+java.lang.RuntimeException: Port '_sNOTRDY1' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_sNOTRDY1' needs 0 argument.
+
+java.lang.RuntimeException: Port '_sNOTRDY1' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_sNOTRDY1' needs 0 argument.
+
+java.lang.RuntimeException: Port '_sNOTRDY1' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Port '_sNOTRDY1' needs 0 argument.
+
+java.lang.RuntimeException: Port '_sNOTRDY1' needs 0 argument.
+
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:42)
+	at org.xid.basics.error.ErrorHandler$1.handleError(ErrorHandler.java:27)
+	at obp.fiacre.checker.TypeAnalyzer.addError(TypeAnalyzer.java:302)
+	at obp.fiacre.checker.TypeAnalyzer.visitReception(TypeAnalyzer.java:215)
+	at obp.fiacre.model.Reception.accept(Reception.java:131)
+	at obp.fiacre.checker.TypeAnalyzer.visitSeq(TypeAnalyzer.java:255)
+	at obp.fiacre.model.Seq.accept(Seq.java:186)
+	at obp.fiacre.checker.TypeAnalyzer.visitTransition(TypeAnalyzer.java:162)
+	at obp.fiacre.model.Transition.accept(Transition.java:87)
+	at obp.fiacre.checker.TypeAnalyzer.visitProcessDecl(TypeAnalyzer.java:119)
+	at obp.fiacre.model.ProcessDecl.accept(ProcessDecl.java:189)
+	at obp.fiacre.checker.TypeAnalyzer.analyze(TypeAnalyzer.java:85)
+	at obp.fiacre.checker.ProgramAnalyzer.analyze(ProgramAnalyzer.java:50)
+	at obp.fiacre.compiler.ProgramGenerator.generate(ProgramGenerator.java:203)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:79)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:73)
+	at obp.fiacre.compiler.FiacreCompiler.compileFiacre(FiacreCompiler.java:89)
+	at plug.language.fiacre.runtime.FiacreExplorationContext.initializeExplorationContext(FiacreExplorationContext.java:83)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:19)
+	at plug.language.fiacre.FiacreLoader.getRuntime(FiacreLoader.java:13)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:25)
+	at plug.core.ILanguageLoader.getRuntime(ILanguageLoader.java:35)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:20)
+Exception in thread "main" java.lang.NullPointerException
+	at plug.statespace.LazyProductAutomaton.lambda$initialConfigurationsIterable$0(LazyProductAutomaton.java:63)
+	at plug.explorer.AbstractExplorer.initializeExploration(AbstractExplorer.java:63)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:71)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_1.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_1.obp/java]
+cyclic_scheduler_1.fcr; PT0.263S; 4606; 20480
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_2.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_2.obp/java]
+cyclic_scheduler_2.fcr; PT0.131S; 3302; 7720
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_3.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_3.obp/java]
+cyclic_scheduler_3.fcr; PT6.738S; 229374; 1597440
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_4.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/cyclic_scheduler/generated_files/cyclic_scheduler_4.obp/java]
+cyclic_scheduler_4.fcr; PT6.738S; 473414; 1736712
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_1.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_1.obp/java]
+driving_phils_1.fcr; PT0.146S; 14889; 28595
+
+Removing variable '_i' in '_phil_0'.
+
+Removing variable '_i' in '_phil_1'.
+
+Removing variable '_i' in '_phil_2'.
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_2.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_2.obp/java]
+driving_phils_2.fcr; PT0.317S; 33173; 81854
+
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_3.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_3.obp/java]
+Exception in thread "main" java.lang.OutOfMemoryError: GC overhead limit exceeded
+	at driving_phils_3.SysConfiguration.<init>(SysConfiguration.java:54)
+	at driving_phils_3.SysConfiguration.createCopy(SysConfiguration.java:73)
+	at obp.explorer.runtime.Configuration.replaceBehaviorConfigurationByCopy(Configuration.java:51)
+	at plug.language.fiacre.runtime.FiacreRuntime.executeOneTransition(FiacreRuntime.java:273)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:223)
+	at plug.language.fiacre.runtime.FiacreRuntime.fireOneTransition(FiacreRuntime.java:22)
+	at plug.statespace.LazyProductAutomaton.fireOneTransition(LazyProductAutomaton.java:58)
+	at plug.statespace.LazyProductAutomaton$PostIterator.hasNext(LazyProductAutomaton.java:123)
+	at plug.explorer.AbstractExplorer.fire(AbstractExplorer.java:92)
+	at plug.explorer.AbstractExplorer.explorationStep(AbstractExplorer.java:84)
+	at plug.explorer.AbstractExplorer.execute(AbstractExplorer.java:74)
+	at plug.language.fiacre.FiacreExplorerMain.main(FiacreExplorerMain.java:24)
+Exec: [ecj  -1.8 -d /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_4.obp/bin -warn:none /home/teodorci/repositories/beem-benchmark/fiacre-version/driving_phils/generated_files/driving_phils_4.obp/java]
