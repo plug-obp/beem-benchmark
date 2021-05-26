@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+import sys
+import re
+import os.path
+
+remodel=re.compile('^running : (.*)', re.MULTILINE)
+recsize = re.compile('^Configuration size = ([0-9]+)', re.MULTILINE)
+reconfigs = re.compile('^END, ([0-9]+) states', re.MULTILINE)
+rediam = re.compile('diameter is ([0-9]+)', re.MULTILINE)
+rereacht = re.compile('^Exploration completed in ([0-9]+).', re.MULTILINE)
+resert = re.compile('^Serialization completed in ([0-9]+).', re.MULTILINE)
+refreet = re.compile('^Free completed in ([0-9]+).', re.MULTILINE)
+reiknown = re.compile('^Initial hashtable capacity = ([0-9]+)', re.MULTILINE)
+reifrontier = re.compile('^Initial frontier capacity = ([0-9]+)', re.MULTILINE)
+refknown = re.compile('^Final hashtable capacity = ([0-9]+)', re.MULTILINE)
+reffrontier = re.compile('^Final frontier capacity = ([0-9]+)', re.MULTILINE)
+if __name__ == "__main__":
+	if len(sys.argv) == 1:
+		print (sys.argv[0], "needs one argument")
+		sys.exit(1)
+	with open(sys.argv[1]) as theFile:
+		raw = theFile.read()
+		rawi = "srun: job 32526 queued and waiting for resources\nsrun: job 32526 has been allocated resources\nrunning : anderson.3.prop3.dve_full\nConfiguration size = 9\nInitial hashtable capacity = 1048576\nInitial frontier capacity = 1024\nEND, 255071091 states explored, the diameter is 3879 \nExploration completed in 2387120.000000 milliseconds\nSerialization completed in 293110.000000 milliseconds\nFinal hashtable capacity = 536870912\nFinal frontier capacity = 524288\nFree completed in 401940.000000 milliseconds"
+		match = remodel.search(raw)
+		if match:
+			model = match.group(1)
+			status = 'PASS'
+			csize = recsize.search(raw).group(1).strip()
+			configs = reconfigs.search(raw).group(1).strip()
+			diam = rediam.search(raw).group(1).strip()
+			reacht = rereacht.search(raw).group(1)
+			sert = resert.search(raw).group(1)
+			freet = refreet.search(raw).group(1)
+			iknown = reiknown.search(raw).group(1)
+			ifrontier = reifrontier.search(raw).group(1)
+			fknown = refknown.search(raw).group(1)
+			ffrontier = reffrontier.search(raw).group(1)
+			print (model, ';', csize, ';', status, ';', configs, ';', diam, ';', reacht, ';', sert, ';', freet, ';', iknown, ';', ifrontier, ';', fknown, ';', ffrontier)	
+		else:
+			model = os.path.basename(sys.argv[1])
+			status = 'FAIL'
+			print (model, '; ;', status)
+
